@@ -1,0 +1,24 @@
+# sidebar navigation
+
+home_page: home # filename under source/_posts/
+menu:
+  - name: 大一
+  - name: 大二
+    groupof:
+    - name: 正規語言概論
+      link: sophomore/intro-to-formal-language
+    - name: 資料庫系統概論
+      link: sophomore/intro-to-dbms
+    - name: 計算機組織
+      link: sophomore/computer-organization
+    - name: 訊號與系統
+      link: sophomore/signals-and-systems
+    - name: 音樂理論導論
+      link: sophomore/intro-to-music-theory
+    - name: 編譯器設計
+      link: sophomore/compiler-design
+  - name: 大三
+  - name: 大四
+
+lightgallery: true
+disqus_shortname: at881005

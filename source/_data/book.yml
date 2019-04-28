@@ -2,21 +2,23 @@
 
 home_page: home # filename under source/_posts/
 menu:
+  - name: 時間軸
+    link: timeline
   - name: 大一
   - name: 大二
     groupof:
     - name: 正規語言概論
-      link: sophomore/intro-to-formal-language
+      link: 1072-intro-to-formal-language
     - name: 資料庫系統概論
-      link: sophomore/intro-to-dbms
+      link: 1072-intro-to-dbms
     - name: 計算機組織
-      link: sophomore/computer-organization
+      link: 1072-computer-organization
     - name: 訊號與系統
-      link: sophomore/signals-and-systems
+      link: 1072-signals-and-systems
     - name: 音樂理論導論
-      link: sophomore/intro-to-music-theory
+      link: 1072-intro-to-music-theory
     - name: 編譯器設計
-      link: sophomore/compiler-design
+      link: 1072-compiler-design
   - name: 大三
   - name: 大四
 

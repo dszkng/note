@@ -1,6 +1,5 @@
 ---
 title: 時間軸
-type: docs
 ---
 
 # 時間軸

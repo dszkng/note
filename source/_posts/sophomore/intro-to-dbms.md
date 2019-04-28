@@ -139,34 +139,34 @@ k* = Data entry, k = search key value (用k找到k*)
 
 ### Join
 
-`$b_x = \# \, of \, block \, x$`  
-`$n_x = \# \, of \, record$`  
-`$t_T = 1 \, block \, transfer \, time$`  
-`$t_S = 1 \, block \, seek \, time$`
+$b_x = \# \, of \, block \, x$  
+$n_x = \# \, of \, record$  
+$t_T = 1 \, block \, transfer \, time$  
+$t_S = 1 \, block \, seek \, time$
 
 * **Nested-Loops Join**
     * 用多層 for 迴圈
     * Case1: Minimal memory required = 3 blocks (R, S, result)
-        * Blocks transferred: `$n_r * b_s + b_r$`
-            * Scan R tuple once: `$b_r$`
-            * Each record in R, must scan S: `$n_r * b_s$`
-        * Seeks: `$n_r + b_r$`
+        * Blocks transferred: $n_r * b_s + b_r$
+            * Scan R tuple once: $b_r$
+            * Each record in R, must scan S: $n_r * b_s$
+        * Seeks: $n_r + b_r$
     * Case2: S fits in memory
-        * Blocks transferred: `$bs + br$`
+        * Blocks transferred: $bs + br$
         * Seeks: 2 (R & S ordered)
 * **Block Nested-loops Join**
     * 將外層的結果存到 join buffer，內層的每一個 record 與整個 buffer 比，可以減少內層的迴圈數
     * Case1: Minimal memory required = 3 blocks
-        * Blocks transferred: `$b_r * b_s + b_r$`
-        * Seeks: `$b_r + b_r$`
+        * Blocks transferred: $b_r * b_s + b_r$
+        * Seeks: $b_r + b_r$
     * Case2: S fits in memory
         * cost same as such in nested-loop join
-    * Case3: M blocks (`$b_s > M - 2$`)
-        * Blocks transferred: `$b_r * (b_s / (M - 2)) + b_r$`
+    * Case3: M blocks ($b_s > M - 2$)
+        * Blocks transferred: $b_r * (b_s / (M - 2)) + b_r$
         * Seeks: 2 (R & S ordered)
 * **Index Nested-loops Join**
     * TOTAL COST:
-        * `$b_r * (t_T + t_S) + n_r * c$` (c == the cost of index access)
+        * $b_r * (t_T + t_S) + n_r * c$ (c == the cost of index access)
 * **Hash Join**
     * Case1: Smaller relation (S) fits in memory
         * for each tuple r, use the hash index on S to find tuples such that S.a = r.a

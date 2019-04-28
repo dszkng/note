@@ -246,14 +246,14 @@ Visualized detail: [https://www.slideshare.net/dattatraygandhmal/input-buffering
 
 Use **regular expressions \(REs\)** to describe programming language tokens
 
-<div>$$
+$$
 \varnothing : \{\}\\
 a : ordinary\,character\\
 \varepsilon : empty\,string\\
 R|S : R\,or\,S\\
 RS : R\,followed\,by\,S\\
 R* : concatenation\,of\,R\,zero\,or\,more\,time
-$$</div>
+$$
 
 #### Language
 
@@ -319,13 +319,13 @@ Regular expressions are not capable of describing most complete languages.
 
 They describe languages composed of sets of strings of the form :
 
-<div>$$
+$$
 S\to\alpha B\\
 where\\
 \alpha \in basic\,symbol\\
 B\,is\,a\,regular\,definition\\
 S\,is\,a\,regular\,definition\,and\,is\,not\,part\,of\,B\\
-$$</div>
+$$
 
 They **cannot** describe:
 
@@ -401,14 +401,14 @@ Recognizers which simply say "**yes**" or "**no**" about each possible input str
 
 **Definition**
 
-<div>$$
+$$
 M = (S, \Sigma, S_0, F, T)\\
 S : all\,state\,in\,the\,FA\\
 \Sigma : all\,simbols\,accepted\,by\,the\,language\\
 S_0 : Start\,state\\
 F : Accepting\,states\\
 T : All\,transitions
-$$</div>
+$$
 
 **Epsilon Moves**
 
@@ -470,9 +470,9 @@ Machine can move from state A to state B without reading input
 
 #### Thompson’s construction
 
-<div>$$
+$$
 Regular\,Expression\xrightarrow{\text{Thompson's Construction}}NFA
-$$</div>
+$$
 
 ![For expression ε](2019-04-13-12-19-26.png)
 
@@ -500,9 +500,9 @@ Suppose N\(s\) and N\(t\) are NFA's for RE s and t
 
 #### Subset Construction
 
-<div>$$
+$$
 NFA\xrightarrow{\text{Subset Construction}}DFA
-$$</div>
+$$
 
 * remove ε-transitions to get a DFA
 
@@ -657,13 +657,13 @@ b   0  a   b
 
 ### Context-Free Grammars
 
-<div>$$
+$$
 G = (T, N, S, P)\\
 T: terminals = token\,or\,\varepsilon\\
 N: nonterminals = syntactic\,variables\\
 S: start\,symbol = special\,nonterminal\\
 P: productions\,of\,the\,form = head \to body
-$$</div>
+$$
 
 More on CFGs, see: [正規語言概論](https://kaiiiz.github.io/NCTU-Coursenote/sophomore/intro-to-formal-language/)
 
@@ -729,22 +729,22 @@ unmatched-stmt → if expr then if-stmt
 
 #### 消除 left recursion
 
-> A grammar is left recursive if it has a nonterminal `$A$` such that there's a derivation `$A \overset{+}{\Rightarrow} A \alpha$` a for some string `$\alpha$`
+> A grammar is left recursive if it has a nonterminal $A$ such that there's a derivation $A \overset{+}{\Rightarrow} A \alpha$ a for some string $\alpha$
 
 Top-down parsing 無法處理 left-recursive grammars
 
 solution:
 
-由 `$A \rightarrow A \alpha \, | \, \beta$` 轉為 `$A \rightarrow \beta A'$`、`$A' \rightarrow \alpha A’ | \varepsilon$`
+由 $A \rightarrow A \alpha \, | \, \beta$ 轉為 $A \rightarrow \beta A'$、$A' \rightarrow \alpha A' | \varepsilon$
 
 > In general:
 > 
-> <div>$$
+> $$
 > A \to A \alpha_1| A \alpha_2 | ...|A \alpha_m | \beta_1 | \beta_2 | ... | \beta_n\\
 > \downarrow\\
 > A \to \beta_1 A' | \beta_2 A' | ... | \beta_n A'\\
 > A' \to \alpha_1 A' | \alpha_2 A' | ... | \alpha_m A' | \varepsilon
-> $$</div>
+> $$
 
 problem:
 
@@ -752,23 +752,23 @@ problem:
 
 > e.g. 
 > 
-> <div>$$
+> $$
 > S \to Aa \, | \, b\\
 > A \to Ac \, | \, Sd \, | \, \varepsilon\\
 > \downarrow\\
 > S \Rightarrow Aa \Rightarrow Sda
-> $$</div>
+> $$
 
 solution:
 
-假設沒有 `$A \overset{+}{\Rightarrow} A$` 及 `$A \to \varepsilon$`
+假設沒有 $A \overset{+}{\Rightarrow} A$ 及 $A \to \varepsilon$
 
-> 將所有 nonterminal 排序： `$A_1, A_2, ..., A_n$`  
+> 將所有 nonterminal 排序： $A_1, A_2, ..., A_n$  
 > for (each i from 1 to n) {  
 > 　　for (each j from 1 to i - 1) { // j < i  
-> 　　　將 `$A_i \to A_j \gamma$`、`$A_j \to \delta_1 | \delta_2 | ... | \delta_k$` 取代成 `$A_i \to \delta_1 \gamma |  \delta_2 \gamma | ... | \delta_k \gamma$`   
+> 　　　將 $A_i \to A_j \gamma$、$A_j \to \delta_1 | \delta_2 | ... | \delta_k$ 取代成 $A_i \to \delta_1 \gamma |  \delta_2 \gamma | ... | \delta_k \gamma$   
 > 　　}  
-> 　　對所有 `$A_i$` 的 productions 消除 immediate left recursion  
+> 　　對所有 $A_i$ 的 productions 消除 immediate left recursion  
 > }
 
 #### Left factoring
@@ -777,16 +777,16 @@ solution:
 
 problem:
 
-> `$A \to a \beta_1 \, | \, a \beta_2$` 在碰到 `$a$` 後不能馬上確定應該要 derive 成 `$a \beta_1$` 或是 `$a \beta_2$`
+> $A \to a \beta_1 \, | \, a \beta_2$ 在碰到 $a$ 後不能馬上確定應該要 derive 成 $a \beta_1$ 或是 $a \beta_2$
 
 solution:
 
-> <div>$$
+> $$
 > A \to a \beta_1 \, | \, a \beta_2\\
 > \downarrow\\
 > A \to a A'\\
 > A' \to \beta_1 \, | \beta_2
-> $$</div>
+> $$
 
 ### Parser
 
@@ -802,11 +802,11 @@ solution:
 > 
 > input: id + id
 > 
-> `$E \to T + T\\T \to E | -E | id$`
+> $E \to T + T\\T \to E | -E | id$
 > 
 > solution:
 > 
-> `$E \underset{lm}{\Rightarrow} T + T \underset{lm}{\Rightarrow} id + T \underset{lm}{\Rightarrow} id + id$`
+> $E \underset{lm}{\Rightarrow} T + T \underset{lm}{\Rightarrow} id + T \underset{lm}{\Rightarrow} id + id$
 
 #### Bottom-up parser (LR parser)
 
@@ -838,56 +838,56 @@ lookahead (k) 個 symbols 的 LL parser 稱為 LL(k)
 
 #### FIRST Sets
 
-<div>$$
+$$
 First(\alpha): Set \, of \, terminals \, that \, begin \, strings \,derived \, from \, \alpha \\
 \alpha \in terminals \, or \, nonterminals
-$$</div>
+$$
 
-> if `$\alpha \overset{*}{\Rightarrow} c \gamma \,$` ,then `$c \in FIRST(\alpha)$`  
-> if `$\alpha \overset{*}{\Rightarrow} \varepsilon \,$` ,then `$\varepsilon \in FIRST(\alpha)$`
+> if $\alpha \overset{*}{\Rightarrow} c \gamma \,$ ,then $c \in FIRST(\alpha)$  
+> if $\alpha \overset{*}{\Rightarrow} \varepsilon \,$ ,then $\varepsilon \in FIRST(\alpha)$
 
 #### FOLLOW Sets
 
-<div>$$Follow(A): Set \, of \, terminals \, \alpha \, that \, can \, appear \, immediately \, to \, the \, right \, of \, A \\
+$$Follow(A): Set \, of \, terminals \, \alpha \, that \, can \, appear \, immediately \, to \, the \, right \, of \, A \\
 A \in nonterminals
-$$</div>
+$$
 
-> if `$S \overset{*}{\Rightarrow} \alpha A a \beta \,$` ,then `$a \in FOLLOW(A)$`  
-> if `$A$` can be the rightmost symbol in some sentential form, then $(endmarker) `$\in FOLLOW(A)$`
+> if $S \overset{*}{\Rightarrow} \alpha A a \beta \,$ ,then $a \in FOLLOW(A)$  
+> if $A$ can be the rightmost symbol in some sentential form, then $(endmarker) $\in FOLLOW(A)$
 
 #### Why FIRST Set?
 
-<div>$$
+$$
 A \to \alpha_1 \\
 A \to \alpha_2 \\
 ... \\
 A \to \alpha_k
-$$</div>
+$$
 
-<div>$$
+$$
 current \, lookahead \, symbol \, is \, \alpha
-$$</div>
+$$
 
-* 若只有一個 `$\alpha \in FIRST(\alpha_i)$` 則選 `$A \to \alpha_i$`
-* 若滿足多個 `$FIRST(\alpha_i)$`，則這個 grammar 不是 LL(1)
+* 若只有一個 $\alpha \in FIRST(\alpha_i)$ 則選 $A \to \alpha_i$
+* 若滿足多個 $FIRST(\alpha_i)$，則這個 grammar 不是 LL(1)
 
 #### Why FOLLOW Set?
 
-<div>$$
+$$
 A \to \alpha_1 \\
 A \to \alpha_2 \\
 ... \\
 A \to \alpha_k
-$$</div>
+$$
 
-<div>$$
+$$
 current \, lookahead \, symbol \, is \, \alpha
-$$</div>
+$$
 
-* 若只有一個 i 滿足 `$\alpha \in FIRST(\alpha_i)$` 則選 `$A \to \alpha_i$`
-* 若滿足多個 `$FIRST(\alpha_i)$`，則這個 grammar 不是 LL(1)
-* 若沒有 i 滿足 `$\alpha \in FIRST(\alpha_i)$`，這個 grammar 仍為 LL(1)
-  * 因為若有任何 `$\alpha_i \overset{*}{\Rightarrow} \varepsilon$` 且 `$a \in FOLLOW(A)$` 則可以用 `$A \to \alpha_i$` 將 A 換成 `$\varepsilon$`
+* 若只有一個 i 滿足 $\alpha \in FIRST(\alpha_i)$ 則選 $A \to \alpha_i$
+* 若滿足多個 $FIRST(\alpha_i)$，則這個 grammar 不是 LL(1)
+* 若沒有 i 滿足 $\alpha \in FIRST(\alpha_i)$，這個 grammar 仍為 LL(1)
+  * 因為若有任何 $\alpha_i \overset{*}{\Rightarrow} \varepsilon$ 且 $a \in FOLLOW(A)$ 則可以用 $A \to \alpha_i$ 將 A 換成 $\varepsilon$
 
 #### LL(1) Parsing
 
@@ -900,21 +900,21 @@ looking **one** symbols ahead in the input (i.e., current input symbol)
 
 ##### Grammar 滿足條件
 
-對 `$A \to \alpha | \beta$`，LL(1) 需要滿足的條件：
+對 $A \to \alpha | \beta$，LL(1) 需要滿足的條件：
 
-1. `$\alpha, \beta$` 不能 derive 出相同的 first terminal
-2. `$\alpha, \beta$` 只有一個可以 derive 出 `$\varepsilon$`
-3. 若 `$\beta \overset{*}{\Rightarrow} \epsilon$` 則 `$\alpha$` derive 出的 first terminal 不能包含在 FOLLOW(A) 中 (因為 有兩條路：選 `$\beta$` + FOLLOW(A) 或 FIRST(`$\alpha$`))
+1. $\alpha, \beta$ 不能 derive 出相同的 first terminal
+2. $\alpha, \beta$ 只有一個可以 derive 出 $\varepsilon$
+3. 若 $\beta \overset{*}{\Rightarrow} \epsilon$ 則 $\alpha$ derive 出的 first terminal 不能包含在 FOLLOW(A) 中 (因為 有兩條路：選 $\beta$ + FOLLOW(A) 或 FIRST($\alpha$))
 
 ##### Parse 規則
 
-假設 `$a$` 是 current input symbol 或 `$\$$`(endmarker)
+假設 $a$ 是 current input symbol 或 $\$$(endmarker)
 
-若 `$A \to \alpha$` 被選擇，需要滿足：
+若 $A \to \alpha$ 被選擇，需要滿足：
 
-* `$a \in FIRST(\alpha)$` 或
-* `$\varepsilon \in FIRST(A)$` 或
-* `$a = \$$` 且 `$\$ \in FOLLOW(A)$`
+* $a \in FIRST(\alpha)$ 或
+* $\varepsilon \in FIRST(A)$ 或
+* $a = \$$ 且 $\$ \in FOLLOW(A)$
 
 ##### Predictive Parsing Table
 
@@ -922,12 +922,12 @@ M[A, a]: 對 nonterminal A 及 input symbol a 在 parsing table 存在的 produc
 
 演算法：
 
-> 對所有 `$A \to \alpha$`：
+> 對所有 $A \to \alpha$：
 > 
-> 1. 對所有 `$a \in FIRST(\alpha)$`, 將 `$A \to \alpha$` 加到 M[A, a]
-> 2. 若 `$\varepsilon \in FIRST(\alpha)$` 則：
->   1. 對所有 `$b \in FOLLOW(A)$`， 將 `$A \to \alpha$` 加到 M[A, b]
->   2. 若 `$\varepsilon \in FOLLOW(A)$`， 將 `$A \to \alpha$` 加到 M[A, $]
+> 1. 對所有 $a \in FIRST(\alpha)$, 將 $A \to \alpha$ 加到 M[A, a]
+> 2. 若 $\varepsilon \in FIRST(\alpha)$ 則：
+>   1. 對所有 $b \in FOLLOW(A)$， 將 $A \to \alpha$ 加到 M[A, b]
+>   2. 若 $\varepsilon \in FOLLOW(A)$， 將 $A \to \alpha$ 加到 M[A, $]
 > 3. 將空的位置設為 error
 
 若 parsing table 中一個 entry 有兩個 production (conflict)，表示這個 grammar 不是 LL(1) 能處理的，可能要考慮 LL(2)、LL(3)...
@@ -942,7 +942,7 @@ M[A, a]: 對 nonterminal A 及 input symbol a 在 parsing table 存在的 produc
 
 Review: [Syntax Error-Recovery Strategies](#syntax-error-recovery-strategies)
 
-若 M[A, a] 為空且 `$a \in FOLLOW(A)$` 則把 M[A, a] 設為 **synch**
+若 M[A, a] 為空且 $a \in FOLLOW(A)$ 則把 M[A, a] 設為 **synch**
 
 策略：
 
@@ -950,7 +950,7 @@ Review: [Syntax Error-Recovery Strategies](#syntax-error-recovery-strategies)
 
 * if A == Nonterminal
   * M[A, a] = {empty}: skip a (沒有 production 可做，忽略 input)
-  * M[A, a] = {synch}: pop A (因為 `$a \in FOLLOW(A)$`，所以先把 A pop 掉，下一 run a 就可以接在 A 後面了)
+  * M[A, a] = {synch}: pop A (因為 $a \in FOLLOW(A)$，所以先把 A pop 掉，下一 run a 就可以接在 A 後面了)
 * if A == terminal
   * A != a: pop A
 
@@ -971,15 +971,15 @@ Review: [Syntax Error-Recovery Strategies](#syntax-error-recovery-strategies)
 
 #### Handle Pruning
 
-<div>$$
+$$
 S \to aABe\\
 A \to Abc | b\\
 B \to d
-$$</div>
+$$
 
-<div>$$
+$$
 input: abbcde
-$$</div>
+$$
 
 | Right Sentential Form | Handle | Viable Prefix | Reducing Production |
 | --- | --- | --- | --- |
@@ -990,7 +990,7 @@ $$</div>
 
 ![](2019-04-14-23-48-24.png)
 
-Formally, 若 `$S \overset{*}{\underset{rm}{\Rightarrow}} \alpha A w \underset{rm}{\Rightarrow} \alpha \beta w$`，則 `$\alpha \beta w$` 的 **handle**: 在 `$\alpha$` 後方的位置做 production `$A \to \beta$`
+Formally, 若 $S \overset{*}{\underset{rm}{\Rightarrow}} \alpha A w \underset{rm}{\Rightarrow} \alpha \beta w$，則 $\alpha \beta w$ 的 **handle**: 在 $\alpha$ 後方的位置做 production $A \to \beta$
 
 **Viable Prefix**: handle 尾巴前的前綴
 
@@ -1008,26 +1008,26 @@ Formally, 若 `$S \overset{*}{\underset{rm}{\Rightarrow}} \alpha A w \underset{r
   * Accept: parse 成功
   * Error: call error reporting/recovery
 
-<div>$$
+$$
 E \to E + T | T\\
 T \to T * F | F\\
 F \to (E) | id
-$$</div>
+$$
 
-<div>$$
+$$
 input: id*id
-$$</div>
+$$
 
 | Stack | Input | Action |
 | --- | --- | --- |
 | $ | id * id$ | shift |
-| $id | * id$ | reduce by `$F \to id$` |
-| $F | * id$ | reduce by `$T \to F$` |
+| $id | * id$ | reduce by $F \to id$ |
+| $F | * id$ | reduce by $T \to F$ |
 | $T | * id$ | shift |
 | $T * | id$ | shift |
-| $T * id | $ | reduce by `$F \to id$` |
-| $T * F | $ | reduce by `$T \to T * F$` |
-| $T | $ | reduce by `$E \to T$` |
+| $T * id | $ | reduce by $F \to id$ |
+| $T * F | $ | reduce by $T \to T * F$ |
+| $T | $ | reduce by $E \to T$ |
 | $E | $ | accept |
 
 Compare: [LR(0) Parsing](#lr-0-parsing)
@@ -1049,76 +1049,76 @@ Compare: [LR(0) Parsing](#lr-0-parsing)
 
 ##### Definition
 
-* augmented grammar `$G'$`
-  * 將 `$G$` 的 start symbol 改為 `$S'$` 且 `$S' \to S$`
+* augmented grammar $G'$
+  * 將 $G$ 的 start symbol 改為 $S'$ 且 $S' \to S$
 * two function
   * CLOSURE
   * GOTO
-* 當 reduce 到 `$S' \to S$` 時可以 Accept
+* 當 reduce 到 $S' \to S$ 時可以 Accept
 * state 接受認得的 viable prefixes
 
 ##### LR(0) item
 
-`$A \to XYZ$` 包含 4 個 items:
+$A \to XYZ$ 包含 4 個 items:
 
-1. `$A \to \cdot XYZ$`：希望在 input 上看到 XYZ
-2. `$A \to X \cdot YZ$`：剛看到 X 希望在 input 上看到 YZ
-3. `$A \to XY \cdot Z$`：剛看到 XY 希望在 input 上看到 Z
-4. `$A \to XYZ \cdot$`：reduce XYZ to A
+1. $A \to \cdot XYZ$：希望在 input 上看到 XYZ
+2. $A \to X \cdot YZ$：剛看到 X 希望在 input 上看到 YZ
+3. $A \to XY \cdot Z$：剛看到 XY 希望在 input 上看到 Z
+4. $A \to XYZ \cdot$：reduce XYZ to A
 
-`$A \to \varepsilon$` 僅包含 `$A \to \cdot$`
+$A \to \varepsilon$ 僅包含 $A \to \cdot$
 
 item 又區分為兩類：
 
-1. Kernel items: initial item (`$S' \to \cdot S$`) 及 dot 不在最左邊的 items
-2. Nonkernel items: dot 在最左邊的 items，除了initial item (`$S' \to \cdot S$`)
+1. Kernel items: initial item ($S' \to \cdot S$) 及 dot 不在最左邊的 items
+2. Nonkernel items: dot 在最左邊的 items，除了initial item ($S' \to \cdot S$)
 
 ##### CLOSURE(I)
 
-`$I$`: grammar `$G$` 的 items set  
-`$CLOSURE(I)$`: 由 `$I$` 構成的 items set
+$I$: grammar $G$ 的 items set  
+$CLOSURE(I)$: 由 $I$ 構成的 items set
 
-意義：在同一個 `$CLOSURE(I)$` 的 items 都屬於同一個 parsing state，用其紀錄我們在過去看到什麼還有在未來期望看到什麼
+意義：在同一個 $CLOSURE(I)$ 的 items 都屬於同一個 parsing state，用其紀錄我們在過去看到什麼還有在未來期望看到什麼
 
 ##### GOTO(I, X)
 
-`$I$`: grammar `$G$` 的 items set  
-`$X$`: `$G$` 的 grammar symbol  
-`$GOTO(I, X)$`: if `$[A \to \alpha \cdot X \beta] \in I$`,then `$CLOSURE( \{ [A \to \alpha X \cdot \beta] \} ) \subseteq GOTO(I, X)$`
+$I$: grammar $G$ 的 items set  
+$X$: $G$ 的 grammar symbol  
+$GOTO(I, X)$: if $[A \to \alpha \cdot X \beta] \in I$,then $CLOSURE( \{ [A \to \alpha X \cdot \beta] \} ) \subseteq GOTO(I, X)$
 
 意義：當看到 I 期望看到的 X，將 dot 往右移到 X 右方，並對其做 CLOSURE (像是 state transition)
 
 ##### LR(0) Collection
 
-> `$C = \{ CLOSURE(\{ S' \to \cdot S \}) \}$`  
+> $C = \{ CLOSURE(\{ S' \to \cdot S \}) \}$  
 > repeat  
-> 　　for(each `$I$` in `$C$` and each grammar symbol `$X$`)  
-> 　　　　if(`$GOTO(I, X)$` is not empty and not in `$C$`)  
-> 　　　　　　add `$GOTO(I, X)$` to `$C$`  
+> 　　for(each $I$ in $C$ and each grammar symbol $X$)  
+> 　　　　if($GOTO(I, X)$ is not empty and not in $C$)  
+> 　　　　　　add $GOTO(I, X)$ to $C$  
 > until no more set of LR(0) items can be added to C
 
 #### LR(0) Parsing
 
 LR parsing without lookahead symbols
 
-* 在 State `$Ii$` 的決策：
-  * 若 `$[A \to \alpha \cdot a \beta] \in Ii$`，當看到 terminal `$a$` 時做 shift
-      * 從 `$Ii$` 走到 `$CLOSURE(\{ [A \to \alpha a \cdot \beta] \})$`
-  * 若 `$[A \to \beta \cdot] \in Ii$`，做 reduce by `$A \to \beta$`
-      * 從 `$Ii$` 走到 `$GOTO(I, A)$`,`$I$` 是在 remove `$\beta$` 後 stack 的 top
+* 在 State $Ii$ 的決策：
+  * 若 $[A \to \alpha \cdot a \beta] \in Ii$，當看到 terminal $a$ 時做 shift
+      * 從 $Ii$ 走到 $CLOSURE(\{ [A \to \alpha a \cdot \beta] \})$
+  * 若 $[A \to \beta \cdot] \in Ii$，做 reduce by $A \to \beta$
+      * 從 $Ii$ 走到 $GOTO(I, A)$,$I$ 是在 remove $\beta$ 後 stack 的 top
 
 See example in [Shift-Reduce Parsing](#shift-reduce-parsing)
 
-<div>$$
+$$
 E' \to E\\
 E \to E + T | T\\
 T \to T * F | F\\
 F \to (E) | id
-$$</div>
+$$
 
-<div>$$
+$$
 input: id*id
-$$</div>
+$$
 
 ![Parsing table](2019-04-15-02-15-34.png)
 
@@ -1140,21 +1140,21 @@ Simple LR Parsing
 
 **LR(0) + FOLLOW Set = SLR(1)** (簡稱SLR)
 
-* 在 State `$Ii$` 遇到 terminal `$a$` 的決策：
-  * 若 `$[A \to \alpha \cdot a \beta] \in Ii$`，shift
-      * 從 `$Ii$` 走到 `$CLOSURE(\{ [A \to \alpha a \cdot \beta] \})$`
-  * 若 `$[A \to \beta \cdot] \in Ii$` 且 `$a \in FOLLOW(A)$`，做 reduce by `$A \to \beta$`
-      * 從 `$Ii$` 走到 `$GOTO(I, A)$`,`$I$` 是在 remove `$\beta$` 後 stack 的 top
+* 在 State $Ii$ 遇到 terminal $a$ 的決策：
+  * 若 $[A \to \alpha \cdot a \beta] \in Ii$，shift
+      * 從 $Ii$ 走到 $CLOSURE(\{ [A \to \alpha a \cdot \beta] \})$
+  * 若 $[A \to \beta \cdot] \in Ii$ 且 $a \in FOLLOW(A)$，做 reduce by $A \to \beta$
+      * 從 $Ii$ 走到 $GOTO(I, A)$,$I$ 是在 remove $\beta$ 後 stack 的 top
 
 ##### Basic
 
 SLR parsing 之所以可以判斷要做 shift 或 reduce，是基於 LR(0) automata 識別 viable prefixes 的能力：
 
-`$S \overset{*}{\underset{rm}{\Rightarrow}} \alpha A w \underset{rm}{\Rightarrow} \alpha \beta_1 \beta_2 w$`
+$S \overset{*}{\underset{rm}{\Rightarrow}} \alpha A w \underset{rm}{\Rightarrow} \alpha \beta_1 \beta_2 w$
 
-* `$[A \to \beta_1 \cdot \beta_2]$` is **valid** for `$\alpha \beta_1$`
-  * 若 `$\beta_2 \neq \varepsilon$` 代表還沒 shift handle 進 stack，所以做 shift
-  * 若 `$\beta_2 = \varepsilon$` 代表 `$\beta_1$` 為 handle，所以做 reduce
+* $[A \to \beta_1 \cdot \beta_2]$ is **valid** for $\alpha \beta_1$
+  * 若 $\beta_2 \neq \varepsilon$ 代表還沒 shift handle 進 stack，所以做 shift
+  * 若 $\beta_2 = \varepsilon$ 代表 $\beta_1$ 為 handle，所以做 reduce
 
 ##### Model
 
@@ -1164,19 +1164,19 @@ SLR parsing 之所以可以判斷要做 shift 或 reduce，是基於 LR(0) autom
 
 ##### SLR Parsing Table
 
-* 建構 LR(0) collection `$C = \{ I_0, I_1, ... , I_n \}$` for `$G'$`  
-* `$ACTION[i, a] , a \in terminal$` 
-  * 若 `$[A \to \alpha \cdot a \beta] \in I_i$` 且 `$GOTO(I_i, a) = I_j$`
-      * `$ACTION[i, a]$` = "shift `$j$`"
-  * 若 `$[A \to \alpha \cdot] \in I_i$` 且 `$A \neq S$`
-      * `$ACTION[i, a]$` = "reduce by `$A \to \alpha$`" for all `$a \in FOLLOW(A)$`
-  * 若 `$[S' \to S \cdot] \in I_i$`
-      * `$ACTION[i, a]$` = "accept"
-* `$GOTO[i, A] , A \in nonterminal$`
-  * 若 `$GOTO[I_i, A] = I_j$`
-      * `$GOTO[i, A] = j$`
+* 建構 LR(0) collection $C = \{ I_0, I_1, ... , I_n \}$ for $G'$  
+* $ACTION[i, a] , a \in terminal$ 
+  * 若 $[A \to \alpha \cdot a \beta] \in I_i$ 且 $GOTO(I_i, a) = I_j$
+      * $ACTION[i, a]$ = "shift $j$"
+  * 若 $[A \to \alpha \cdot] \in I_i$ 且 $A \neq S$
+      * $ACTION[i, a]$ = "reduce by $A \to \alpha$" for all $a \in FOLLOW(A)$
+  * 若 $[S' \to S \cdot] \in I_i$
+      * $ACTION[i, a]$ = "accept"
+* $GOTO[i, A] , A \in nonterminal$
+  * 若 $GOTO[I_i, A] = I_j$
+      * $GOTO[i, A] = j$
 * 空的皆為 "error"
-* Initial state `$I_0$` 包含 `$[S' \to S]$`
+* Initial state $I_0$ 包含 $[S' \to S]$
 
 若 step 2 出現 conflict，則這個 grammar 不是 SLR
 

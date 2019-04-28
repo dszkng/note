@@ -17,37 +17,37 @@ ISA: Instruction set architecture (The hardware/software interface)
 
 #### Power Trends
 
-<div>$$
+$$
 Power = Capacitive \, load \times Voltage^2 \times Frequency
-$$</div>
+$$
 
 #### Integrated Circuit Cost
 
-<div>$$
+$$
 Cost \, per \, die = \frac{ Cost \, per \, wafer }{ Dies \, per \, wafer * Yield}
-$$</div>
+$$
 
-<div>$$
+$$
 Dies \, per \, wafer \approx \frac{Wafer \, area}{Die \, area}
-$$</div>
+$$
 
-<div>$$
+$$
 Yield = \frac{1}{(1 + (Defects \, per \, area * Die \, area / 2))^2}
-$$</div>
+$$
 
 ### Performance
 
 #### Relative Performance
 
-<div>$$
+$$
 Performance = \frac{1}{Execution \, Time}
-$$</div>
+$$
 
 e.g. X is n time faster than Y
 
-<div>$$
+$$
 \frac{Performance_X}{Performance_Y} = \frac{Execution \, time_Y}{Execution \, time_X} = n
-$$</div>
+$$
 
 #### Response Time and Throughput
 
@@ -70,9 +70,9 @@ $$</div>
 
 **CPU處理給定的工作所花費的時間** (Discounts I/O time, other jobs' shares)
 
-<div>$$
+$$
 CPU \, Time = Clock \, Cycles \times Clock \, Cycle \, Time = \frac{CPU \, Clock \, Cycles}{Clock \, Rate}
-$$</div>
+$$
 
 公式理解：**處理工作時走了幾個 Cycle** 乘上**每走一個 Cycle 所要花費的時間**
 
@@ -85,9 +85,9 @@ $$</div>
 
 **每執行一個指令(Instruction)，所要花費的 Cycle**
 
-<div>$$
+$$
 Clock \, Cycles = Instruction \, Count \times Cycles \, per \, Instruction
-$$</div>
+$$
 
 * Instruction Count for a program
     * Determined by program, ISA and compiler
@@ -96,27 +96,27 @@ $$</div>
 
 CPU Time 可以改寫為：
 
-<div>$$
+$$
 CPU \, Time = Instruction \, Count \times CPI \times Clock \, Cycle \, Time = \frac{Instruction \, Count \times CPI}{Clock \, Rate}
-$$</div>
+$$
 
 If different instruction classes take different numbers of cycles
 
-<div>$$
+$$
 Clock \, Cycles = \sum_{i=1}^{n} (CPI_i \times Instruction \, Count_i)
-$$</div>
+$$
 
 Weighted average CPI
 
-<div>$$
+$$
 CPI = \frac{Clock \, Cycles}{Instruction \, Count} = \sum_{i=1}^{n}(\frac{CPI_i \times Instruction \, Count_i}{Instruction \, Count})
-$$</div>
+$$
 
 #### Performance Summary
 
-<div>$$
+$$
 CPI = \frac{Instructions}{Program} \times \frac{Clock \, cycles}{Instruction} \times \frac{Seconds}{Clock \, cycle}
-$$</div>
+$$
 
 * Performance depends on
     * Algorithm: **affects IC**, possibly CPI
@@ -128,17 +128,17 @@ $$</div>
 
 Improving an aspect of a computer and expecting a proportional improvement in overall performance
 
-<div>$$
+$$
 T_{improved} = \frac{T_{affected}}{Improvement \, factor} + T_{unaffected}
-$$</div>
+$$
 
 ### MIPS
 
 Millions of Instructions Per Second
 
-<div>$$
+$$
 MIPS = \frac{Instruction \, count}{Execution \, time \times 10^6} = \frac{Instruction \, count}{\frac{Instruction \, count \times CPI}{Clock \, rate} \times 10^6} = \frac{Clock rate}{CPI \times 10^6}
-$$</div>
+$$
 
 > ps: MIPS無法拿來當作電腦效能的依據（**因為沒有考慮到 Instruction Count**）
 
@@ -198,9 +198,9 @@ example) add \$t0, \$s1, \$s2
 | 0 | 17 | 18 | 8 | 0 | 32 |
 | 000000 | 10001 | 10010 | 01000 | 00000 | 100000
 
-<div>$$
+$$
 000000|10001|10010|01000|00000|100000_2 = 02324020_{16}
-$$</div>
+$$
 
 #### I-format (Immediate)
 
@@ -210,7 +210,7 @@ $$</div>
 
 * Immediate arithmetic and load/store instructions
 * rt: Target Register
-* Constant: `$-2^{15} ~ +2^{15} - 1$`
+* Constant: $-2^{15} ~ +2^{15} - 1$
 * Address: offset added to base address in rs
 
 example) addi \$t0, \$s1, -50
@@ -221,9 +221,9 @@ example) addi \$t0, \$s1, -50
 | 8 | 17 | 8 | -50 |
 | 001000 | 10001 | 01000 | 11111111 11001110 |
 
-<div>$$
+$$
 001000|10001|01000|1111111111001110_2
-$$</div>
+$$
 
 #### J-format (Jump)
 

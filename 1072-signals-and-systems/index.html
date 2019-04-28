@@ -6,7 +6,7 @@
 
     <title>
         
-          NCTU-Coursenote
+          訊號與系統 - NCTU-Coursenote
         
     </title>
 
@@ -82,107 +82,119 @@ document.querySelectorAll('.sidebar-content a').forEach(function(item){
 
       <div class="column col-10">
         <div class="book-content">
-          
-  
+          <div class="columns">
+  <div class="column col-10">
+    <div class="book-post">
+      <h1 id="訊號與系統">訊號與系統</h1>
+<p>傅立葉轉換入門：</p>
+<p>什麼是傅立葉轉換？</p>
+<ol>
+<li><a href="https://www.youtube.com/watch?v=spUNpyF58BY" target="_blank" rel="noopener">But what is the Fourier Transform? A visual introduction.</a></li>
+</ol>
+<p>傅立葉轉換公式推導</p>
+<ol>
+<li><a href="https://www.youtube.com/watch?v=5zsTgO5p1j0" target="_blank" rel="noopener">工程數學三 7-2 傅立葉指數轉換式</a></li>
+</ol>
 
-  
-
-  
-
-  
-    <div>
-      <div class="columns">
-        <div class="column col-10">
-          <div class="book-post">
-            <h1 id="hello">Hello</h1>
-<p>NCTU-Coursenote</p>
-
-          </div>
-        </div>
-        <div class="column col-2">
-          <div class="book-toc">
-            <div class="book-tocbot">
-            </div>
-            <div class="book-tocbot-menu">
-                <a class="book-toc-expand" onclick="expand_toc()">Expand all</a>
-                <a onclick="go_top()">Back to top</a>
-                <a onclick="go_bottom()">Go to bottom</a>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
-
+    
+    <div id="disqus_thread"></div>
     <script>
-    tocbot.init({
-      tocSelector: '.book-tocbot',
-      contentSelector: '.book-post',
-      headingSelector: 'h1, h2, h3, h4, h5',
-      collapseDepth: 2,
-      orderedList: false,
-      scrollSmooth: false,
-    });
-
-    function expand_toc(){
-      var b = document.querySelector(".book-toc-expand");
-      tocbot.init({
-        tocSelector: '.book-tocbot',
-        contentSelector: '.book-post',
-        headingSelector: 'h1, h2, h3, h4, h5',
-        collapseDepth: 6,
-        orderedList: false,
-        scrollSmooth: false,
-      });
-      b.setAttribute("onclick", "collapse_toc()");
-      b.innerHTML = "Collapse all"
-    }
-
-    function collapse_toc(){
-      var b = document.querySelector(".book-toc-expand");
-      tocbot.init({
-          tocSelector: '.book-tocbot',
-          contentSelector: '.book-post',
-          headingSelector: 'h1, h2, h3, h4, h5',
-          collapseDepth: 2,
-          orderedList: false,
-          scrollSmooth: false,
-      });
-      b.setAttribute("onclick", "expand_toc()");
-      b.innerHTML = "Expand all"
-    }
-
-    function go_top() {
-      window.scrollTo(0, 0);
-    }
-
-    function go_bottom() {
-      window.scrollTo(0, document.body.scrollHeight);
-    }
-
+    (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://at881005.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
     </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 
-    
-      <script>
-        $('.book-content img').each(function () {
-          $(this).wrap("<a href='" + this.src + "'>").parent('a').addClass('gallery-item');
-        })
-        $(document).ready(function() {
-          $(".book-content").lightGallery({
-            selector: '.gallery-item'
-          });
-        });
-      </script>
-    
-  
+  </div>
+  <div class="column col-2">
+    <div class="book-toc">
+  <div class="book-tocbot">
+  </div>
+  <div class="book-tocbot-menu">
+    <a class="book-toc-expand" onclick="expand_toc()">Expand all</a>
+    <a onclick="go_top()">Back to top</a>
+    <a onclick="go_bottom()">Go to bottom</a>
+  </div>
+</div>
 
-  
+<script>
+tocbot.init({
+  tocSelector: '.book-tocbot',
+  contentSelector: '.book-post',
+  headingSelector: 'h1, h2, h3, h4, h5',
+  collapseDepth: 2,
+  orderedList: false,
+  scrollSmooth: false,
+});
 
-  
+function expand_toc(){
+  var b = document.querySelector(".book-toc-expand");
+  tocbot.init({
+    tocSelector: '.book-tocbot',
+    contentSelector: '.book-post',
+    headingSelector: 'h1, h2, h3, h4, h5',
+    collapseDepth: 6,
+    orderedList: false,
+    scrollSmooth: false,
+  });
+  b.setAttribute("onclick", "collapse_toc()");
+  b.innerHTML = "Collapse all"
+}
 
-  
+function collapse_toc(){
+  var b = document.querySelector(".book-toc-expand");
+  tocbot.init({
+    tocSelector: '.book-tocbot',
+    contentSelector: '.book-post',
+    headingSelector: 'h1, h2, h3, h4, h5',
+    collapseDepth: 2,
+    orderedList: false,
+    scrollSmooth: false,
+  });
+  b.setAttribute("onclick", "expand_toc()");
+  b.innerHTML = "Expand all"
+}
 
-  
+function go_top() {
+  window.scrollTo(0, 0);
+}
 
+function go_bottom() {
+  window.scrollTo(0, document.body.scrollHeight);
+}
+
+</script>
+  </div>
+</div>
+
+
+<script>
+  $('.book-content img').each(function () {
+      $(this).wrap("<a href='" + this.src + "'>").parent('a').addClass('gallery-item');
+  })
+  $(document).ready(function() {
+    $(".book-content").lightGallery({
+        selector: '.gallery-item'
+    });
+  });
+</script>
+
+
+<script>
+  // add figcaption under image
+  document.querySelectorAll('img').forEach(function(img){
+    if(img.getAttribute('alt')) {
+      let parent = img.parentNode;
+      let figcaption = document.createElement('figcaption');
+      figcaption.innerHTML = img.getAttribute('alt');
+      parent.appendChild(figcaption);
+    }
+  })
+</script>
         </div>
       </div>
     </div>

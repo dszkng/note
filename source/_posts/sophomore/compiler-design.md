@@ -5,8 +5,6 @@ type: docs
 
 # 編譯器設計
 
-## 課程資訊
-
 課程名稱：編譯器設計 (Complier Design)
 
 授課教師：游逸平
@@ -21,25 +19,14 @@ type: docs
 
 ### Overview
 
-<figure>
-  <img src="/NCTU-Coursenote/img/compiler/2019-04-13-01-54-12.png"  />
-  <figcaption>
-      <p>High-level View of a Compiler</p>
-  </figcaption>
-</figure>
+![High-level View of a Compiler](2019-04-13-01-54-12.png)
 
-
-<figure>
-  <img src="/NCTU-Coursenote/img/compiler/2019-04-13-01-54-45.png"  />
-  <figcaption>
-      <p>Two-pass Compiler</p>
-  </figcaption>
-</figure>
+![Two-pass Compiler](2019-04-13-01-54-45.png)
 
 * Use an **intermediate representation** \(IR\)
   * Reuse components
 
-![](/NCTU-Coursenote/img/compiler/2019-04-13-01-55-09.png)
+![](2019-04-13-01-55-09.png)
 
 ### Steps for Generating an Executable Program
 
@@ -47,7 +34,7 @@ a.c **---COMPILER---&gt;** a.s ---ASSEMBLER---&gt; a.o ---LINKER---&gt; a.out/a.
 
 ### The Structure of a Compiler
 
-![](/NCTU-Coursenote/img/compiler/2019-04-13-01-55-32.png)
+![](2019-04-13-01-55-32.png)
 
 * Symbol table
   * A data structure containing a record for each **identifier**, with fields for the **attributes**
@@ -185,12 +172,7 @@ Sometimes lexical analyzer needs to **look ahead some symbols** to decide about 
 
 Use **two-buffer scheme** to handle large lookaheads safely.
 
-<figure>
-  <img src="/NCTU-Coursenote/img/compiler/2019-04-13-01-56-05.png"  />
-  <figcaption>
-      <p>input buffer with buffer pairs</p>
-  </figcaption>
-</figure>
+![input buffer with buffer pairs](2019-04-13-01-56-05.png)
 
 * a buffer divided into two N-character halves \(e.g. N = 1024\)
 * read N chars into buffer with system read command \(v.s. using one system call per character\)
@@ -210,12 +192,7 @@ Without sentinel, we need two tests for out-of-bound for every forward
 
 We can combine the buffer-end test with the test for the current character if we **extend each buffer to hold a sentinel character at the end (eof)**.
 
-<figure>
-  <img src="/NCTU-Coursenote/img/compiler/2019-04-13-01-57-53.png"  />
-  <figcaption>
-      <p>input buffer with sentinels</p>
-  </figcaption>
-</figure>
+![input buffer with sentinels](2019-04-13-01-57-53.png)
 
 #### Comparison
 
@@ -363,7 +340,7 @@ Anything that needs to "**memorize**" "**non-constant**" amount of information *
 
 #### Chomsky Hierarchy
 
-![](/NCTU-Coursenote/img/compiler/2019-04-13-01-58-21.png)
+![](2019-04-13-01-58-21.png)
 
 * Unrestricted languages \(type 0\)
   * Turing machines
@@ -376,7 +353,7 @@ Anything that needs to "**memorize**" "**non-constant**" amount of information *
 
 ### Interaction between Scanner & Parser
 
-![](/NCTU-Coursenote/img/compiler/2019-04-13-01-58-51.png)
+![](2019-04-13-01-58-51.png)
 
 **Attributes of Tokens**
 
@@ -398,7 +375,7 @@ Anything that needs to "**memorize**" "**non-constant**" amount of information *
 
 Use **Transition Diagram**
 
-![](/NCTU-Coursenote/img/compiler/2019-04-13-01-59-17.png)
+![](2019-04-13-01-59-17.png)
 
 **Recognizes reserved words**
 
@@ -410,17 +387,17 @@ Two solutions:
   * installID\(\) : place identifier in the symbol table if it is **not already there**, and return a pointer to the symbol-table entry for the lexeme found
   * getToken\(\) : return token name \(either **id** or one of the **keyword** tokens that was initially installed in the table\)
 
-![](/NCTU-Coursenote/img/compiler/2019-04-13-01-59-35.png)
+![](2019-04-13-01-59-35.png)
 
 * Create separate transition diagrams for each keyword
 
-![](/NCTU-Coursenote/img/compiler/2019-04-13-01-59-51.png)
+![](2019-04-13-01-59-51.png)
 
 ### Finite Automata
 
 Recognizers which simply say "**yes**" or "**no**" about each possible input string
 
-![](/NCTU-Coursenote/img/compiler/2019-04-13-02-00-18.png)
+![](2019-04-13-02-00-18.png)
 
 **Definition**
 
@@ -437,18 +414,18 @@ $$</div>
 
 Machine can move from state A to state B without reading input
 
-![](/NCTU-Coursenote/img/compiler/2019-04-13-02-00-32.png)
+![](2019-04-13-02-00-32.png)
 
 **Nondeterministic Finite Automata (NFA)**
 
-![](/NCTU-Coursenote/img/compiler/2019-04-13-02-00-46.png)
+![](2019-04-13-02-00-46.png)
 
 * Can have multiple transitions for one input in a given state
 * Can have ε-moves
 
 **Deterministic Finite Automata (DFA)**
 
-![](/NCTU-Coursenote/img/compiler/2019-04-13-02-01-06.png)
+![](2019-04-13-02-01-06.png)
 
 * One transition per input per state
 * No ε-moves
@@ -467,7 +444,7 @@ Machine can move from state A to state B without reading input
 
 **Transition Table**
 
-![](/NCTU-Coursenote/img/compiler/2019-04-13-02-01-40.png)
+![](2019-04-13-02-01-40.png)
 
 | State | a | b | ε |
 | :--- | :--- | :--- | :--- |
@@ -487,14 +464,9 @@ Machine can move from state A to state B without reading input
 
 ### RE to Automata
 
-![](/NCTU-Coursenote/img/compiler/2019-04-13-12-09-18.png)
+![](2019-04-13-12-09-18.png)
 
-<figure>
-  <img src="/NCTU-Coursenote/img/compiler/2019-04-13-12-06-45.png"  />
-  <figcaption>
-      <p>High-level sketch</p>
-  </figcaption>
-</figure>
+![High-level sketch](2019-04-13-12-06-45.png)
 
 #### Thompson’s construction
 
@@ -502,48 +474,23 @@ Machine can move from state A to state B without reading input
 Regular\,Expression\xrightarrow{\text{Thompson's Construction}}NFA
 $$</div>
 
-<figure>
-  <img src="/NCTU-Coursenote/img/compiler/2019-04-13-12-19-26.png"  />
-  <figcaption>
-      <p>For expression ε</p>
-  </figcaption>
-</figure>
+![For expression ε](2019-04-13-12-19-26.png)
 
-<figure>
-  <img src="/NCTU-Coursenote/img/compiler/2019-04-13-12-19-41.png"  />
-  <figcaption>
-      <p>For any subexpression a in Σ</p>
-  </figcaption>
-</figure>
+![For any subexpression a in Σ](2019-04-13-12-19-41.png)
 
 Suppose N\(s\) and N\(t\) are NFA's for RE s and t
 
 * r = s\|t
 
-<figure>
-  <img src="/NCTU-Coursenote/img/compiler/2019-04-13-12-22-41.png"  />
-  <figcaption>
-      <p>Alternation</p>
-  </figcaption>
-</figure>
+![Alternation](2019-04-13-12-22-41.png)
 
 * r = st
 
-<figure>
-  <img src="/NCTU-Coursenote/img/compiler/2019-04-13-12-25-48.png"  />
-  <figcaption>
-      <p>Concatenation</p>
-  </figcaption>
-</figure>
+![Concatenation](2019-04-13-12-25-48.png)
 
 * r = s\*
 
-<figure>
-  <img src="/NCTU-Coursenote/img/compiler/2019-04-13-12-26-22.png"  />
-  <figcaption>
-      <p>Kleene closure</p>
-  </figcaption>
-</figure>
+![Kleene closure](2019-04-13-12-26-22.png)
 
 * Precedence of Operators
   1. Kleene closure \(\*\), ?, +
@@ -559,7 +506,7 @@ $$</div>
 
 * remove ε-transitions to get a DFA
 
-![](/NCTU-Coursenote/img/compiler/2019-04-13-12-47-26.png)
+![](2019-04-13-12-47-26.png)
 
 #### Operations on NFA States
 
@@ -601,12 +548,7 @@ $$</div>
 
 例子：
 
-<figure>
-  <img src="/NCTU-Coursenote/img/compiler/2019-04-13-13-33-06.png"  />
-  <figcaption>
-      <p>before minimize</p>
-  </figcaption>
-</figure>
+![before minimize](2019-04-13-13-33-06.png)
 
 * Final-state: {E}
 
@@ -628,21 +570,11 @@ $$</div>
   * {A,B,C},{D},{E} → {A,C},{B},{D},{E}
 * A,C go to the same states on each input
 
-<figure>
-  <img src="/NCTU-Coursenote/img/compiler/2019-04-13-13-31-33.png"  />
-  <figcaption>
-      <p>after minimize</p>
-  </figcaption>
-</figure>
+![after minimize](2019-04-13-13-31-33.png)
 
 ### Implementation of Lexical Analyzer Generator
 
-<figure>
-  <img src="/NCTU-Coursenote/img/compiler/2019-04-13-13-45-10.png"  />
-  <figcaption>
-      <p>The structure of the generated analyzer</p>
-  </figcaption>
-</figure>
+![The structure of the generated analyzer](2019-04-13-13-45-10.png)
 
 #### Ambiguity Resolution
 
@@ -651,12 +583,7 @@ $$</div>
 * match 最長的 pattern
 * 在 accept 前需要 lookahead
 
-<figure>
-  <img src="/NCTU-Coursenote/img/compiler/2019-04-13-14-00-14.png"  />
-  <figcaption>
-      <p>input: abbbbccd&#xFF0C;&#x82E5; abbbb &#x5F8C;&#x662F; ccd &#x5247; accept state 6&#xFF0C;&#x5426;&#x5247; accept state 3</p>
-  </figcaption>
-</figure>
+![input: abbbbccd&#xFF0C;&#x82E5; abbbb &#x5F8C;&#x662F; ccd &#x5247; accept state 6&#xFF0C;&#x5426;&#x5247; accept state 3](2019-04-13-14-00-14.png)
 
 ##### First match
 
@@ -680,12 +607,7 @@ Otherwise, return identifier
 
 #### Lexical Analyzer Generator: Lex
 
-<figure>
-  <img src="/NCTU-Coursenote/img/compiler/2019-04-13-14-31-53.png"  />
-  <figcaption>
-      <p>How Does Lex Work?</p>
-  </figcaption>
-</figure>
+![How Does Lex Work?](2019-04-13-14-31-53.png)
 
 當 RE 能有多個 match 情形時，考慮：
 
@@ -868,12 +790,7 @@ solution:
 
 ### Parser
 
-<figure>
-  <img src="/NCTU-Coursenote/img/compiler/2019-04-13-15-43-32.png"  />
-  <figcaption>
-      <p>Various kinds: LL(k), LR(k), SLR, LALR</p>
-  </figcaption>
-</figure>
+![Various kinds: LL(k), LR(k), SLR, LALR](2019-04-13-15-43-32.png)
 
 #### Top-down parser (LL parser)
 
@@ -904,11 +821,11 @@ solution:
 * 找 input string 的 leftmost derivation
 * 遞迴尋找 nonterminal 可能的展開，錯誤時需要 backtrack
 
-![](/NCTU-Coursenote/img/compiler/2019-04-14-17-07-27.png)
+![](2019-04-14-17-07-27.png)
 
 Predictive Parsing: 藉由 lookahead (k) 個 symbols 直接選擇正確的 production
 
-![](/NCTU-Coursenote/img/compiler/2019-04-14-17-14-04.png)
+![](2019-04-14-17-14-04.png)
 
 lookahead (k) 個 symbols 的 LL parser 稱為 LL(k)
 
@@ -917,12 +834,7 @@ lookahead (k) 個 symbols 的 LL parser 稱為 LL(k)
 * Sets of terminals
 * 用途：透過下一個 input symbol 選擇要 apply 那個 production
 
-<figure>
-  <img src="/NCTU-Coursenote/img/compiler/2019-04-14-17-48-46.png"  />
-  <figcaption>
-      <p>c in FIRST(A) and a in FOLLOW(a)</p>
-  </figcaption>
-</figure>
+![c in FIRST(A) and a in FOLLOW(a)](2019-04-14-17-48-46.png)
 
 #### FIRST Sets
 
@@ -1022,12 +934,7 @@ M[A, a]: 對 nonterminal A 及 input symbol a 在 parsing table 存在的 produc
 
 #### Nonrecursive Predictive Parsing
 
-<figure>
-  <img src="/NCTU-Coursenote/img/compiler/2019-04-14-19-56-50.png"  />
-  <figcaption>
-      <p>parsing table + stack</p>
-  </figcaption>
-</figure>
+![parsing table + stack](2019-04-14-19-56-50.png)
 
 不用 recursive 改用 stack 實做
 
@@ -1054,7 +961,7 @@ Review: [Syntax Error-Recovery Strategies](#syntax-error-recovery-strategies)
 * LR parsing: Left-to-right scan, Rightmost derivation (反向)
 * 過程像是將 input string "reduce" 回 start symbol
 
-![](/NCTU-Coursenote/img/compiler/2019-04-14-23-01-01.png)
+![](2019-04-14-23-01-01.png)
 
 * Pros
   * 比 LL parser 強大，幾乎可以描述所有程式語言
@@ -1081,9 +988,7 @@ $$</div>
 | aA**d**e | d | aAd | B → d |
 | **aABe** | aABe | aABe | S → aABe |
 
-<figure>
-  <img src="/NCTU-Coursenote/img/compiler/2019-04-14-23-48-24.png"  />
-</figure>
+![](2019-04-14-23-48-24.png)
 
 Formally, 若 `$S \overset{*}{\underset{rm}{\Rightarrow}} \alpha A w \underset{rm}{\Rightarrow} \alpha \beta w$`，則 `$\alpha \beta w$` 的 **handle**: 在 `$\alpha$` 後方的位置做 production `$A \to \beta$`
 
@@ -1093,12 +998,7 @@ Formally, 若 `$S \overset{*}{\underset{rm}{\Rightarrow}} \alpha A w \underset{r
 
 #### Shift-Reduce Parsing
 
-<figure>
-  <img src="/NCTU-Coursenote/img/compiler/2019-04-15-00-09-58.png"  />
-  <figcaption>
-      <p>Performs handle pruning with a stack</p>
-  </figcaption>
-</figure>
+![Performs handle pruning with a stack](2019-04-15-00-09-58.png)
 
 * 用 stack 持續觀察看到的 input
 * 在 stack 中的 elements 一定是 viable prefix
@@ -1220,12 +1120,7 @@ $$</div>
 input: id*id
 $$</div>
 
-<figure>
-  <img src="/NCTU-Coursenote/img/compiler/2019-04-15-02-15-34.png" style="width: 75%" />
-  <figcaption>
-      <p>Parsing table</p>
-  </figcaption>
-</figure>
+![Parsing table](2019-04-15-02-15-34.png)
 
 | Stack | Symbol | Input | Action | Transition |
 | --- | --- | --- | --- | --- |
@@ -1265,7 +1160,7 @@ SLR parsing 之所以可以判斷要做 shift 或 reduce，是基於 LR(0) autom
 
 維護兩個表 **ACTION TABLE** 及 **GOTO TABLE**
 
-![](/NCTU-Coursenote/img/compiler/2019-04-15-03-09-26.png)
+![](2019-04-15-03-09-26.png)
 
 ##### SLR Parsing Table
 
@@ -1287,12 +1182,9 @@ SLR parsing 之所以可以判斷要做 shift 或 reduce，是基於 LR(0) autom
 
 ##### Example
 
-<figure>
-  <div>
-    <img src="/NCTU-Coursenote/img/compiler/2019-04-15-02-15-34.png"/>
-    <img src="/NCTU-Coursenote/img/compiler/2019-04-15-03-54-49.png"/>
-  </div>
-</figure>
+![](2019-04-15-02-15-34.png)
+
+![](2019-04-15-03-54-49.png)
 
 | Stack | Symbol | Input | Action |
 | --- | --- | --- | --- |

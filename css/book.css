@@ -199,6 +199,16 @@ img {
       height: 100%;
       top: 0;
       left: 0; }
+  .book-post a.gallery-item:hover {
+    text-decoration: none; }
+  .book-post figcaption {
+    text-align: center;
+    font-size: 0.75rem;
+    color: #282828; }
+  .book-post img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto; }
   .book-post figure.highlight {
     margin: 24px 0;
     padding: 0;

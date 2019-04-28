@@ -114,14 +114,12 @@ document.querySelectorAll('.sidebar-content a').forEach(function(item){
   </div>
   <div class="column col-2">
     <div class="book-toc">
-      <div class="book-tocbot">
-      </div>
-      <div class="book-tocbot-menu">
-        <a class="book-toc-expand" onclick="expand_toc()">Expand all</a>
-        <a onclick="go_top()">Back to top</a>
-        <a onclick="go_bottom()">Go to bottom</a>
-      </div>
-    </div>
+  <div class="book-tocbot">
+  </div>
+  <div class="book-tocbot-menu">
+    <a class="book-toc-expand" onclick="expand_toc()">Expand all</a>
+    <a onclick="go_top()">Back to top</a>
+    <a onclick="go_bottom()">Go to bottom</a>
   </div>
 </div>
 
@@ -172,6 +170,8 @@ function go_bottom() {
 }
 
 </script>
+  </div>
+</div>
 
 
 <script>
@@ -185,6 +185,18 @@ function go_bottom() {
   });
 </script>
 
+
+<script>
+  // add figcaption under image
+  document.querySelectorAll('img').forEach(function(img){
+    if(img.getAttribute('alt')) {
+      let parent = img.parentNode;
+      let figcaption = document.createElement('figcaption');
+      figcaption.innerHTML = img.getAttribute('alt');
+      parent.appendChild(figcaption);
+    }
+  })
+</script>
         </div>
       </div>
     </div>

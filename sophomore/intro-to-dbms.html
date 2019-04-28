@@ -1,0 +1,227 @@
+<hr>
+<p>title: 資料庫系統概論<br>
+type: docs</p>
+<hr>
+<h1 id="資料庫系統概論">資料庫系統概論</h1>
+<h2 id="relation-model">Relation Model</h2>
+<ul>
+<li>Superkey:unique</li>
+<li>Candidate:minimal superkey</li>
+<li>Primary:only 1,not null candidate</li>
+<li>Foreign:primary key in another schema</li>
+</ul>
+<h2 id="sql">SQL</h2>
+<h3 id="null">NULL</h3>
+<ul>
+<li>count會數NULL,其他func不會</li>
+<li>NULL=NULL(算是重複列),除了where內</li>
+</ul>
+<h3 id="insert-update-delete">INSERT UPDATE DELETE</h3>
+<h3 id="constraint">Constraint</h3>
+<h3 id="assertion">Assertion</h3>
+<h3 id="trigger">Trigger</h3>
+<h2 id="storage">Storage</h2>
+<p>Data are stored and retrieved in units called <strong>disk blocks</strong> or <strong>pages</strong>.</p>
+<h3 id="components-of-disk">Components of disk</h3>
+<ul>
+<li>Platters(磁盤): 一片一片的</li>
+<li>Tracks(磁軌): 一片上面的一圈</li>
+<li>Sector(磁區): 一圈上面的一部分</li>
+<li>Cylinder(磁柱): 不同Platters上同個Sector</li>
+</ul>
+<h3 id="accessing-disk-page">Accessing disk page</h3>
+<p>Time to access (read/write) a disk block:</p>
+<ul>
+<li><strong>seek time</strong> (moving arms to position disk head on track) : ~20ms</li>
+<li><strong>rotational delay</strong> (waiting for block to rotate under head) : ~10ms</li>
+<li><strong>transfer time</strong> (actually moving data to/from disk surface) : ~1ms</li>
+</ul>
+<blockquote>
+<p>Key to lower I/O cost: reduce seek/rotation delays!</p>
+</blockquote>
+<p>Next block concept:</p>
+<ol>
+<li>blocks on <strong>same track</strong>, followed by</li>
+<li>blocks on <strong>same cylinder</strong>, followed by</li>
+<li>blocks on <strong>adjacent cylinder</strong></li>
+</ol>
+<h3 id="buffer-management">Buffer Management</h3>
+<p>Disk ⇄ Main Memory</p>
+<p>若請求的 page 不在 buffer pool:</p>
+<ol>
+<li>選擇一個 frame 來 replace</li>
+<li>若 frame 是 dirty(被修改過)，寫回 disk</li>
+<li>讀取 page 到 frame 中</li>
+</ol>
+<p>pin page 並 return address</p>
+<blockquote>
+<p>pin count：有人要求這個page的話++, 釋放--。=0時可以被替換</p>
+</blockquote>
+<h3 id="record-record-formats">Record: Record Formats</h3>
+<h4 id="fixed-length">Fixed length</h4>
+<p><img src="/NCTU-Coursenote/img/computer-organization/2019-04-24-01-53-23.png" alt></p>
+<ul>
+<li>Information about field types same for all records in a file; stored in system catalogs.</li>
+<li>Finding i’th field requires scan of record.</li>
+</ul>
+<h4 id="variable-length">Variable length</h4>
+<p><img src="/NCTU-Coursenote/img/computer-organization/2019-04-24-02-01-35.png" alt></p>
+<h3 id="record-page-formats">Record: Page Formats</h3>
+<h4 id="fixed-length-v2">Fixed length</h4>
+<p><img src="/NCTU-Coursenote/img/computer-organization/2019-04-24-01-53-44.png" alt></p>
+<p>Record id = &lt; page id, slot #&gt;</p>
+<h4 id="variable-length-v2">Variable length</h4>
+<p><img src="/NCTU-Coursenote/img/computer-organization/2019-04-24-02-01-47.png" alt></p>
+<h3 id="files-of-records">Files of Records</h3>
+<p>higher levels of DBMS operate on <strong>records</strong>, and <strong>files of records</strong>.</p>
+<p>FILE: A collection of pages, each containing a collection of records.</p>
+<h4 id="heap-file">Heap File</h4>
+<p>randomly ordered file, Implemented as a List</p>
+<p><img src="/NCTU-Coursenote/img/computer-organization/2019-04-24-02-14-17.png" alt></p>
+<h4 id="heap-file-using-a-page-directory">Heap File Using a Page Directory</h4>
+<p><img src="/NCTU-Coursenote/img/computer-organization/2019-04-24-02-15-56.png" alt></p>
+<h3 id="indexes">Indexes</h3>
+<p>k* = Data entry, k = search key value (用k找到k*)</p>
+<ul>
+<li>Primary index
+<ul>
+<li>Search Key 裡有 Primary Key</li>
+<li>其餘都是 Secondary index</li>
+<li>Unique index: Search key contains a candidate key</li>
+</ul>
+</li>
+<li>Clustered index
+<ul>
+<li>order of data records is close to order of data entries in the index</li>
+<li>其餘都是 Unclustered index</li>
+</ul>
+</li>
+<li>Dense index
+<ul>
+<li>An index record appears for every search key value in file</li>
+<li>其餘都是 Sparse index</li>
+<li>Every sparse index is clustered</li>
+</ul>
+</li>
+</ul>
+<h2 id="query-processing">Query Processing</h2>
+<h3 id="selection">Selection</h3>
+<ul>
+<li>Sequential Scan
+<ul>
+<li>block transferred: br</li>
+<li>seek: 1</li>
+</ul>
+</li>
+<li>Binary Search
+<ul>
+<li>block transferred: log2(br)</li>
+<li>seek: log2(br)</li>
+</ul>
+</li>
+</ul>
+<h3 id="join">Join</h3>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>b</mi><mi>x</mi></msub><mo>=</mo><mi mathvariant="normal">#</mi><mtext> </mtext><mi>o</mi><mi>f</mi><mtext> </mtext><mi>b</mi><mi>l</mi><mi>o</mi><mi>c</mi><mi>k</mi><mtext> </mtext><mi>x</mi></mrow><annotation encoding="application/x-tex">b_x = \# \, of \, block \, x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.84444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">b</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">x</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord">#</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">b</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault">c</span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">x</span></span></span></span><br>
+<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>n</mi><mi>x</mi></msub><mo>=</mo><mi mathvariant="normal">#</mi><mtext> </mtext><mi>o</mi><mi>f</mi><mtext> </mtext><mi>r</mi><mi>e</mi><mi>c</mi><mi>o</mi><mi>r</mi><mi>d</mi></mrow><annotation encoding="application/x-tex">n_x = \# \, of \, record</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">n</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">x</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord">#</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">e</span><span class="mord mathdefault">c</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">d</span></span></span></span><br>
+<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>t</mi><mi>T</mi></msub><mo>=</mo><mn>1</mn><mtext> </mtext><mi>b</mi><mi>l</mi><mi>o</mi><mi>c</mi><mi>k</mi><mtext> </mtext><mi>t</mi><mi>r</mi><mi>a</mi><mi>n</mi><mi>s</mi><mi>f</mi><mi>e</mi><mi>r</mi><mtext> </mtext><mi>t</mi><mi>i</mi><mi>m</mi><mi>e</mi></mrow><annotation encoding="application/x-tex">t_T = 1 \, block \, transfer \, time</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.76508em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">t</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.13889em;">T</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">b</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault">c</span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">t</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">a</span><span class="mord mathdefault">n</span><span class="mord mathdefault">s</span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">t</span><span class="mord mathdefault">i</span><span class="mord mathdefault">m</span><span class="mord mathdefault">e</span></span></span></span><br>
+<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>t</mi><mi>S</mi></msub><mo>=</mo><mn>1</mn><mtext> </mtext><mi>b</mi><mi>l</mi><mi>o</mi><mi>c</mi><mi>k</mi><mtext> </mtext><mi>s</mi><mi>e</mi><mi>e</mi><mi>k</mi><mtext> </mtext><mi>t</mi><mi>i</mi><mi>m</mi><mi>e</mi></mrow><annotation encoding="application/x-tex">t_S = 1 \, block \, seek \, time</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.76508em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">t</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.05764em;">S</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">b</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault">c</span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">s</span><span class="mord mathdefault">e</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">t</span><span class="mord mathdefault">i</span><span class="mord mathdefault">m</span><span class="mord mathdefault">e</span></span></span></span></p>
+<ul>
+<li><strong>Nested-Loops Join</strong>
+<ul>
+<li>用多層 for 迴圈</li>
+<li>Case1: Minimal memory required = 3 blocks (R, S, result)
+<ul>
+<li>Blocks transferred: <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>n</mi><mi>r</mi></msub><mo>∗</mo><msub><mi>b</mi><mi>s</mi></msub><mo>+</mo><msub><mi>b</mi><mi>r</mi></msub></mrow><annotation encoding="application/x-tex">n_r * b_s + b_r</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61528em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">n</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.02778em;">r</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.84444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">b</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">s</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.84444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">b</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.02778em;">r</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>
+<ul>
+<li>Scan R tuple once: <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>b</mi><mi>r</mi></msub></mrow><annotation encoding="application/x-tex">b_r</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.84444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">b</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.02778em;">r</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></li>
+<li>Each record in R, must scan S: <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>n</mi><mi>r</mi></msub><mo>∗</mo><msub><mi>b</mi><mi>s</mi></msub></mrow><annotation encoding="application/x-tex">n_r * b_s</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61528em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">n</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.02778em;">r</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.84444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">b</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">s</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></li>
+</ul>
+</li>
+<li>Seeks: <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>n</mi><mi>r</mi></msub><mo>+</mo><msub><mi>b</mi><mi>r</mi></msub></mrow><annotation encoding="application/x-tex">n_r + b_r</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.73333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">n</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.02778em;">r</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.84444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">b</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.02778em;">r</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></li>
+</ul>
+</li>
+<li>Case2: S fits in memory
+<ul>
+<li>Blocks transferred: <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>b</mi><mi>s</mi><mo>+</mo><mi>b</mi><mi>r</mi></mrow><annotation encoding="application/x-tex">bs + br</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.77777em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">b</span><span class="mord mathdefault">s</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">b</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span></span></span></span></li>
+<li>Seeks: 2 (R &amp; S ordered)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Block Nested-loops Join</strong>
+<ul>
+<li>將外層的結果存到 join buffer，內層的每一個 record 與整個 buffer 比，可以減少內層的迴圈數</li>
+<li>Case1: Minimal memory required = 3 blocks
+<ul>
+<li>Blocks transferred: <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>b</mi><mi>r</mi></msub><mo>∗</mo><msub><mi>b</mi><mi>s</mi></msub><mo>+</mo><msub><mi>b</mi><mi>r</mi></msub></mrow><annotation encoding="application/x-tex">b_r * b_s + b_r</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.84444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">b</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.02778em;">r</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.84444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">b</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">s</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.84444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">b</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.02778em;">r</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></li>
+<li>Seeks: <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>b</mi><mi>r</mi></msub><mo>+</mo><msub><mi>b</mi><mi>r</mi></msub></mrow><annotation encoding="application/x-tex">b_r + b_r</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.84444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">b</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.02778em;">r</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.84444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">b</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.02778em;">r</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></li>
+</ul>
+</li>
+<li>Case2: S fits in memory
+<ul>
+<li>cost same as such in nested-loop join</li>
+</ul>
+</li>
+<li>Case3: M blocks (<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>b</mi><mi>s</mi></msub><mo>&gt;</mo><mi>M</mi><mo>−</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">b_s &gt; M - 2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.84444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">b</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">s</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.76666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">M</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span></span></span></span>)
+<ul>
+<li>Blocks transferred: <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>b</mi><mi>r</mi></msub><mo>∗</mo><mo>(</mo><msub><mi>b</mi><mi>s</mi></msub><mi mathvariant="normal">/</mi><mo>(</mo><mi>M</mi><mo>−</mo><mn>2</mn><mo>)</mo><mo>)</mo><mo>+</mo><msub><mi>b</mi><mi>r</mi></msub></mrow><annotation encoding="application/x-tex">b_r * (b_s / (M - 2)) + b_r</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.84444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">b</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.02778em;">r</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">b</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">s</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord">/</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.10903em;">M</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">2</span><span class="mclose">)</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.84444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">b</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.02778em;">r</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></li>
+<li>Seeks: 2 (R &amp; S ordered)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Index Nested-loops Join</strong>
+<ul>
+<li>TOTAL COST:
+<ul>
+<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>b</mi><mi>r</mi></msub><mo>∗</mo><mo>(</mo><msub><mi>t</mi><mi>T</mi></msub><mo>+</mo><msub><mi>t</mi><mi>S</mi></msub><mo>)</mo><mo>+</mo><msub><mi>n</mi><mi>r</mi></msub><mo>∗</mo><mi>c</mi></mrow><annotation encoding="application/x-tex">b_r * (t_T + t_S) + n_r * c</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.84444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">b</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.02778em;">r</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">t</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.13889em;">T</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault">t</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.05764em;">S</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.61528em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">n</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.02778em;">r</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">c</span></span></span></span> (c == the cost of index access)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Hash Join</strong>
+<ul>
+<li>Case1: Smaller relation (S) fits in memory
+<ul>
+<li>for each tuple r, use the hash index on S to find tuples such that S.a = r.a</li>
+<li>cost same as such in nested-loop join</li>
+</ul>
+</li>
+<li>Case2: Smaller relation (S) does NOT fit in memory
+<ul>
+<li>Phase 1: Partition the relation R&amp;S into disk using one hash func<br>
+(Each S partition must fits in memory)</li>
+<li>Phase 2: Read Si into memory, and build a hash index on it(another hash func)<br>
+Read Ri, use the hash index to find matches</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="b-tree">B+ tree</h3>
+<ul>
+<li>order = d, n = # of entries
+<ul>
+<li>root: 1 &lt;= n &lt;= 2d</li>
+<li>internal &amp; leaf: d &lt;= n &lt;= 2d</li>
+</ul>
+</li>
+<li>all left child &lt; K, right child &gt;= K</li>
+<li>if overflow, internal node is pushed up, leaf node is copied up</li>
+</ul>
+<h2 id="index-structure">Index Structure</h2>
+<h2 id="er-model">ER Model</h2>
+<ul>
+<li>strong entity
+<ul>
+<li>具有key attribute的entity</li>
+<li>可獨立存在</li>
+</ul>
+</li>
+<li>weak entity
+<ul>
+<li>不具有key attribute的entity</li>
+<li>無法獨立存在的entity,需依附在其他entity才可存在的entity</li>
+</ul>
+</li>
+</ul>

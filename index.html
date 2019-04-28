@@ -62,7 +62,7 @@
         
             <ul class="book-nav-book"><li><span>大一</span></li></ul>
         
-            <ul class="book-nav-book"><li><span>大二</span><ul class="book-nav-book"><li><a href="/NCTU-Coursenote/sophomore/intro-to-formal-language">正規語言概論</a></li></ul><ul class="book-nav-book"><li><a href="/NCTU-Coursenote/sophomore/intro-to-dbms">資料庫系統概論</a></li></ul><ul class="book-nav-book"><li><a href="/NCTU-Coursenote/sophomore/computer-organization">計算機組織</a></li></ul><ul class="book-nav-book"><li><a href="/NCTU-Coursenote/sophomore/signals-and-systems">訊號與系統</a></li></ul><ul class="book-nav-book"><li><a href="/NCTU-Coursenote/sophomore/intro-to-music-theory">音樂理論導論</a></li></ul><ul class="book-nav-book"><li><a href="/NCTU-Coursenote/sophomore/compiler-design">編譯器設計</a></li></ul></li></ul>
+            <ul class="book-nav-book"><li><span>大二</span><ul class="book-nav-book"><li><a href="/NCTU-Coursenote/2019/sophomore/intro-to-formal-language">正規語言概論</a></li></ul><ul class="book-nav-book"><li><a href="/NCTU-Coursenote/2019/sophomore/intro-to-dbms">資料庫系統概論</a></li></ul><ul class="book-nav-book"><li><a href="/NCTU-Coursenote/2019/sophomore/computer-organization">計算機組織</a></li></ul><ul class="book-nav-book"><li><a href="/NCTU-Coursenote/2019/sophomore/signals-and-systems">訊號與系統</a></li></ul><ul class="book-nav-book"><li><a href="/NCTU-Coursenote/2019/sophomore/intro-to-music-theory">音樂理論導論</a></li></ul><ul class="book-nav-book"><li><a href="/NCTU-Coursenote/2019/sophomore/compiler-design">編譯器設計</a></li></ul></li></ul>
         
             <ul class="book-nav-book"><li><span>大三</span></li></ul>
         
@@ -85,90 +85,6 @@ document.querySelectorAll('.sidebar-content a').forEach(function(item){
           
   
 
-  
-    <div>
-      <div class="columns">
-        <div class="column col-10">
-          <div class="book-post">
-            <h1 id="hello">Hello</h1>
-<p>NCTU-Coursenote</p>
-
-          </div>
-        </div>
-        <div class="column col-2">
-          <div class="book-toc">
-            <div class="book-tocbot">
-            </div>
-            <div class="book-tocbot-menu">
-                <a class="book-toc-expand" onclick="expand_toc()">Expand all</a>
-                <a onclick="go_top()">Back to top</a>
-                <a onclick="go_bottom()">Go to bottom</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <script>
-    tocbot.init({
-      tocSelector: '.book-tocbot',
-      contentSelector: '.book-post',
-      headingSelector: 'h1, h2, h3, h4, h5',
-      collapseDepth: 2,
-      orderedList: false,
-      scrollSmooth: false,
-    });
-
-    function expand_toc(){
-      var b = document.querySelector(".book-toc-expand");
-      tocbot.init({
-        tocSelector: '.book-tocbot',
-        contentSelector: '.book-post',
-        headingSelector: 'h1, h2, h3, h4, h5',
-        collapseDepth: 6,
-        orderedList: false,
-        scrollSmooth: false,
-      });
-      b.setAttribute("onclick", "collapse_toc()");
-      b.innerHTML = "Collapse all"
-    }
-
-    function collapse_toc(){
-      var b = document.querySelector(".book-toc-expand");
-      tocbot.init({
-          tocSelector: '.book-tocbot',
-          contentSelector: '.book-post',
-          headingSelector: 'h1, h2, h3, h4, h5',
-          collapseDepth: 2,
-          orderedList: false,
-          scrollSmooth: false,
-      });
-      b.setAttribute("onclick", "expand_toc()");
-      b.innerHTML = "Expand all"
-    }
-
-    function go_top() {
-      window.scrollTo(0, 0);
-    }
-
-    function go_bottom() {
-      window.scrollTo(0, document.body.scrollHeight);
-    }
-
-    </script>
-
-    
-      <script>
-        $('.book-content img').each(function () {
-          $(this).wrap("<a href='" + this.src + "'>").parent('a').addClass('gallery-item');
-        })
-        $(document).ready(function() {
-          $(".book-content").lightGallery({
-            selector: '.gallery-item'
-          });
-        });
-      </script>
-    
   
 
   

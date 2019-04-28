@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+
+    <title>
+        
+          正規語言概論 - NCTU-Coursenote
+        
+    </title>
+
+    <!-- Spectre.css framework (v0.5.8) -->
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-exp.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-icons.min.css">
+
+    <!-- Noto Sans TC -->
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet">
+
+    <!-- theme css & js -->
+    <link rel="stylesheet" href="/NCTU-Coursenote/css/spectre_custom.css">
+    <link rel="stylesheet" href="/NCTU-Coursenote/css/book.css">
+    <script src="/NCTU-Coursenote/js/book.js"></script>
+
+    <!-- tocbot -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css">
+
+    <!-- highlight.js -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <!-- lightgallery.js -->
+    
+      <script src="https://code.jquery.com/jquery-3.4.0.min.js" integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.12/css/lightgallery.min.css">
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.12/js/lightgallery-all.min.js"></script>
+    
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+</head>
+
+<body>
+
+<div class="container">
+  <div class="book-container">
+    <div class="columns">
+      
+      <div class="column col-2 book-nav">
+        <h4 class="site-meta">
+    <a href="/NCTU-Coursenote/">NCTU-Coursenote</a>
+</h4>
+
+
+
+<div class="sidebar-content">
+    
+        
+            <ul class="book-nav-book"><li><span>大一</span></li></ul>
+        
+            <ul class="book-nav-book"><li><span>大二</span><ul class="book-nav-book"><li><a href="/NCTU-Coursenote/sophomore/intro-to-formal-language">正規語言概論</a></li></ul><ul class="book-nav-book"><li><a href="/NCTU-Coursenote/sophomore/intro-to-dbms">資料庫系統概論</a></li></ul><ul class="book-nav-book"><li><a href="/NCTU-Coursenote/sophomore/computer-organization">計算機組織</a></li></ul><ul class="book-nav-book"><li><a href="/NCTU-Coursenote/sophomore/signals-and-systems">訊號與系統</a></li></ul><ul class="book-nav-book"><li><a href="/NCTU-Coursenote/sophomore/intro-to-music-theory">音樂理論導論</a></li></ul><ul class="book-nav-book"><li><a href="/NCTU-Coursenote/sophomore/compiler-design">編譯器設計</a></li></ul></li></ul>
+        
+            <ul class="book-nav-book"><li><span>大三</span></li></ul>
+        
+            <ul class="book-nav-book"><li><span>大四</span></li></ul>
+        
+    
+</div>
+
+<script>
+document.querySelectorAll('.sidebar-content a').forEach(function(item){ 
+    if(item.href === window.location.href || item.href === window.location.href.slice(0, -1)) {
+        item.className = "book-nav-current"
+    }
+})
+</script>
+      </div>
+
+      <div class="column col-10">
+        <div class="book-content">
+          <div class="columns">
+  <div class="column col-10">
+    <div class="book-post">
+      <h1 id="正規語言概論">正規語言概論</h1>
+<h2 id="regular-grammars">Regular Grammars</h2>
+<h3 id="定義">定義</h3>
+<h4 id="grammar">Grammar</h4>
+<div>$$
+G = (V, T, S, P)\\
+V: Variables \, (nonterminals)\\
+T: Terminal \, symbols\\
+S: Start \, symbols\\
+P: Productions
+$$</div>
+<h5 id="regular-grammars-v2">Regular Grammars</h5>
+<p>Linear Grammar: A grammar which <strong>at most one variable can occur on the right side of any production</strong>, without restriction on the position of this variable.</p>
+<blockquote>
+<p>All Regular Grammars are Linear Grammars but all Linear Grammars are not Regular Grammars.</p>
+</blockquote>
+<p>A grammar <code>$G = (V, T, S, P)$</code> is said to be</p>
+<ul>
+<li>right-linear: if all productions are of the form <code>$A \to xB, A \to x$</code> where <code>$A, B \in V, x \in T^*$</code></li>
+<li>left-linear: if all productions are of the form <code>$A \to Bx, A \to x$</code> where <code>$A, B \in V, x \in T^*$</code></li>
+</ul>
+<h4 id="dfa">DFA</h4>
+<p>Deterministic Finite Accepters</p>
+<div>$$
+M = (Q, \Sigma, \delta, q_0, F)\\
+Q: Internal \, states\\
+\Sigma: Input \, alphabets\\
+\delta: Transition \, functions\\
+q_0 \in Q: Initial \, state\\
+F \subseteq Q: Set \, of \, finite \, set
+$$</div>
+<p>Transition function: <code>$Q \times \Sigma \to Q$</code>、<code>$\delta(q_i, w) = q_j$</code></p>
+<p>Extended transition function: <code>$Q \times \Sigma^* \to Q$</code>、<code>$\delta^*(q_i, w) = q_j$</code></p>
+<h4 id="nfa">NFA</h4>
+<p>Nondeterministic Finite Accepters</p>
+<div>$$
+M = (Q, \Sigma, \delta, q_0, F)\\
+Q: Internal \, states\\
+\Sigma: Input \, alphabets\\
+\delta: Transition \, functions\\
+q_0 \in Q: Initial \, state\\
+F \subseteq Q: Set \, of \, finite \, set
+$$</div>
+<p>Transition function: <code>$Q \times ( \Sigma \cup { \lambda } ) \to 2^Q$</code></p>
+<p>Extended transition function: <code>$\delta^*(q_i, w) = Q_j$</code></p>
+<p><code>$Q_j$</code>: The set of all possible states the automation may be in</p>
+<h4 id="re">RE</h4>
+<p>Terminal conditions:</p>
+<ol>
+<li><code>$\varnothing$</code>: RE denoting empty set</li>
+<li><code>$\lambda$</code>: RE denoting <code>$\{ \lambda \}$</code></li>
+<li><code>$\forall a \in \Sigma$</code>: RE denoting <code>$\{a\}$</code></li>
+</ol>
+<p>If <code>$r_1, r_2$</code> are RE, then</p>
+<ol>
+<li><code>$L(r_1 + r_2) = L(r_1) \cup L(r_2)$</code></li>
+<li><code>$L(r_1 \cdot r_2) = L(r_1)L(r_2)$</code></li>
+<li><code>$L((r_1)) = L(r_1)$</code></li>
+<li><code>$L({r_1}^*) = (L(r_1))^*$</code></li>
+</ol>
+<h4 id="language">Language</h4>
+<h5 id="l-dfa">L(DFA)</h5>
+<p>The language accepted by a DFA is the set of all strings on <code>$\Sigma$</code> accepted by <code>$M$</code></p>
+<div>$$
+L( M ) = \{ w \in \Sigma^*: \delta^*(q_0, w) \in F \}
+$$</div>
+<h5 id="l-nfa">L(NFA)</h5>
+<p>The language consists of all string <code>$w$</code> for which there is a walk labeled <code>$w$</code> from initial vertex to some final vertex.</p>
+<div>$$
+L( M ) = \{ w \in \Sigma^*: \delta^*(q_0, w) \cap F \neq \varnothing \}
+$$</div>
+<h5 id="regular-languages">Regular Languages</h5>
+<p>The language <code>$L$</code> is called “regular” if and only if there exists some DFA(<code>$M$</code>) such that <code>$L = L(M)$</code></p>
+<p>遇到問題：Show language <code>$L$</code> is regular：找 <code>$L$</code> 的 DFA</p>
+<p>完備性：</p>
+<p>A language <code>$L$</code> is regular if and only if there exists a regular grammar <code>$G$</code> such that <code>$L = L(G)$</code></p>
+<h3 id="定理">定理</h3>
+<h4 id="finite-automata">Finite Automata</h4>
+<h5 id="dfa-nfa">DFA = NFA</h5>
+<p>Convert NFA to DFA: <a href="https://en.wikipedia.org/wiki/Powerset_construction" target="_blank" rel="noopener">Powerset construction</a></p>
+<h4 id="re-v2">RE</h4>
+<h5 id="re-to-rl">RE to RL</h5>
+<p>Let <code>$r$</code> be a RE. Then there exists some NFA that accepts <code>$L(r)$</code>. Consequently, <code>$L(r)$</code> is a RL.</p>
+<h4 id="language-v2">Language</h4>
+<h5 id="l-r">L(r)</h5>
+<p>Let <code>$L$</code> be a regular language. Then there exists a regular expression <code>$r$</code> such that <code>$L = L(r)$</code></p>
+<h5 id="rl-to-re">RL to RE</h5>
+<p>Convert NFA to GTG.</p>
+<p>過程待補</p>
+<p>generalized transition graphs (GTG): a transition graph whose edges are labeled with RE.</p>
+<h5 id="rl-to-rg">RL to RG</h5>
+<p>If <code>$L$</code> is a regular language on the alphabet <code>$\Sigma$</code>. Then there exists a right-linear grammar <code>$G = (V, T, S, P)$</code> such that <code>$L = L(G)$</code></p>
+<h4 id="grammar-v2">Grammar</h4>
+<h5 id="rg-to-rl">RG to RL</h5>
+<p>Let <code>$G = (V, T, S, P)$</code> be a right-linear grammar. Then <code>$L(G)$</code> is a regular language.</p>
+<h3 id="性質">性質</h3>
+<h4 id="grammar-v3">Grammar</h4>
+<ul>
+<li>若 <code>$L(G_1) = L(G_2)$</code> 則 <code>$G_1$</code> 與 <code>$G_2$</code> 相等</li>
+</ul>
+<h4 id="re-v3">RE</h4>
+<h5 id="precedence">Precedence</h5>
+<p>star-closure &gt; concatenation &gt; union</p>
+<h4 id="closure-properties-of-rl">Closure properties of RL</h4>
+<p>If <code>$L_1, L_2$</code> are regular languages, then so are <code>$L_1 \cup L_2, L_1 \cap L_2, L_1L_2, \overline{L_1}, {L_1}^*$</code></p>
+<h3 id="基本問題">基本問題</h3>
+<h4 id="w-是否存在在-l-中">w 是否存在在 L 中</h4>
+<p>Given a standard representation of any regular language <code>$L$</code> on <code>$\Sigma$</code> and any <code>$w \in \Sigma^*$</code>, there exists an algorithm for determining whether or not <code>$w$</code> is in <code>$L$</code>.</p>
+<blockquote>
+<p><code>$L \to DFA \to Test \, w$</code></p>
+</blockquote>
+<p>standard representation of regular language: finite automation / regular expression / regular grammar</p>
+<h4 id="l-是否為空">L 是否為空</h4>
+<p>There exists an algorithm for determining whether a RL is empty / finite / infinite</p>
+<blockquote>
+<p>empty: dfa has path from S &gt; F</p>
+<p>infinite: S &gt; F has cycle</p>
+</blockquote>
+<h4 id="l-是否相等">L 是否相等</h4>
+<p>Given two regular languages <code>$L_1, L_2$</code>, there exists an algorithm to determine whether or not <code>$L_1 = L_2$</code></p>
+<blockquote>
+<p><code>$L_3 = ( L_1 \cap \overline{L_2} ) \cup ( \overline{L_1} \cap L_2 )$</code></p>
+<p>By closure properties, <code>$L_3$</code> is regular, we can find a dfa <code>$M$</code> that accepts <code>$L_3$</code></p>
+<p><code>$if \, L_3 = \varnothing \to L_1 = L_2$</code></p>
+</blockquote>
+<h3 id="判斷-nonregular-languages">判斷 Nonregular Languages</h3>
+<h4 id="pigeonhole-principle">Pigeonhole principle</h4>
+<p>待補</p>
+<h4 id="pumping-lemma">Pumping Lemma</h4>
+<p>Using pigeonhole principle in another form.</p>
+<ol>
+<li>Pick <code>$m$</code></li>
+<li>Given <code>$m$</code>, we pick a string <code>$w \in L, |w| \geq m$</code></li>
+<li>Decomposition <code>$w$</code> to <code>$xyz$</code>, <code>$|xy| \leq m, |y| \geq 1$</code></li>
+<li>Pick <code>$i$</code>, get <code>$w_i$</code>. If <code>$w_i \notin L$</code>, <code>$L$</code> is not regular</li>
+</ol>
+<hr>
+<h2 id="context-free-grammars">Context-Free Grammars</h2>
+<h3 id="定義-v2">定義</h3>
+<p>A grammar <code>$G = (V, T, S, P)$</code> is said to be context-free if all production in <code>$P$</code> has the form <code>$A \to x$</code>, where <code>$A \in V, x \in (V \cup T)^*$</code>(A 可以被任意 x 取代，不考慮上下文)</p>
+<p>A language <code>$L$</code> is said to be context-free if and only if there is a context-free grammar <code>$G$</code> such that <code>$L = L(G)$</code></p>
+<h3 id="derivation">Derivation</h3>
+<ul>
+<li>leftmost: leftmost variable in the sentential form is replaced</li>
+<li>rightmost: rightmost variable in the sentential form is replaced</li>
+</ul>
+<hr>
+<h2 id="midterm-key">Midterm Key</h2>
+<p>Given two DFA’s <code>$M_1$</code> and <code>$M_2$</code></p>
+<ol>
+<li>Construct an NFA accepting <code>$L(M_1) \cup L(M_2)$</code></li>
+<li>Construct an NFA accepting <code>$\overline{L(M_1)}$</code></li>
+<li>Construct an NFA accepting <code>$L(M_1) \cap L(M_2)$</code></li>
+<li>design an algorithm to determine if <code>$L(M_1) = L(M_2)$</code> (Thm 4.7)</li>
+</ol>
+<p>Show language L is not regular</p>
+<p>Find CFG for language L</p>
+<p>Convert grammar G to Chomsky normal form</p>
+<p>Describe CKY parsing algorithm for CFG, explan the complexity <code>$O(|w|^3)$</code></p>
+
+    </div>
+    
+    <div id="disqus_thread"></div>
+    <script>
+    (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://at881005.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  </div>
+  <div class="column col-2">
+    <div class="book-toc">
+      <div class="book-tocbot">
+      </div>
+      <div class="book-tocbot-menu">
+        <a class="book-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+tocbot.init({
+  tocSelector: '.book-tocbot',
+  contentSelector: '.book-post',
+  headingSelector: 'h1, h2, h3, h4, h5',
+  collapseDepth: 2,
+  orderedList: false,
+  scrollSmooth: false,
+});
+
+function expand_toc(){
+  var b = document.querySelector(".book-toc-expand");
+  tocbot.init({
+    tocSelector: '.book-tocbot',
+    contentSelector: '.book-post',
+    headingSelector: 'h1, h2, h3, h4, h5',
+    collapseDepth: 6,
+    orderedList: false,
+    scrollSmooth: false,
+  });
+  b.setAttribute("onclick", "collapse_toc()");
+  b.innerHTML = "Collapse all"
+}
+
+function collapse_toc(){
+  var b = document.querySelector(".book-toc-expand");
+  tocbot.init({
+    tocSelector: '.book-tocbot',
+    contentSelector: '.book-post',
+    headingSelector: 'h1, h2, h3, h4, h5',
+    collapseDepth: 2,
+    orderedList: false,
+    scrollSmooth: false,
+  });
+  b.setAttribute("onclick", "expand_toc()");
+  b.innerHTML = "Expand all"
+}
+
+function go_top() {
+  window.scrollTo(0, 0);
+}
+
+function go_bottom() {
+  window.scrollTo(0, document.body.scrollHeight);
+}
+
+</script>
+
+
+<script>
+  $('.book-content img').each(function () {
+      $(this).wrap("<a href='" + this.src + "'>").parent('a').addClass('gallery-item');
+  })
+  $(document).ready(function() {
+    $(".book-content").lightGallery({
+        selector: '.gallery-item'
+    });
+  });
+</script>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+
+    <title>
+        
+          計算機概論與程式設計 - NCTU-Coursenote
+        
+    </title>
+
+    <!-- Spectre.css framework (v0.5.8) -->
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-exp.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-icons.min.css">
+
+    <!-- Noto Sans TC -->
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet">
+
+    <!-- theme css & js -->
+    <link rel="stylesheet" href="/NCTU-Coursenote/css/spectre_custom.css">
+    <link rel="stylesheet" href="/NCTU-Coursenote/css/book.css">
+    <script src="/NCTU-Coursenote/js/book.js"></script>
+
+    <!-- tocbot -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css">
+
+    <!-- highlight.js -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <!-- lightgallery.js -->
+    
+      <script src="https://code.jquery.com/jquery-3.4.0.min.js" integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.12/css/lightgallery.min.css">
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.12/js/lightgallery-all.min.js"></script>
+    
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+</head>
+
+<body>
+
+<div class="container">
+  <div class="book-container">
+    <div class="columns">
+      
+      <div class="column col-2 book-nav">
+        <h4 class="site-meta">
+    <a href="/NCTU-Coursenote/">NCTU-Coursenote</a>
+</h4>
+
+
+
+<div class="sidebar-content">
+    
+        
+            <ul class="book-nav-book"><li><span>大一</span></li></ul>
+        
+            <ul class="book-nav-book"><li><span>大二</span><ul class="book-nav-book"><li><a href="/NCTU-Coursenote/sophomore/intro-to-formal-language">正規語言概論</a></li></ul><ul class="book-nav-book"><li><a href="/NCTU-Coursenote/sophomore/intro-to-dbms">資料庫系統概論</a></li></ul><ul class="book-nav-book"><li><a href="/NCTU-Coursenote/sophomore/computer-organization">計算機組織</a></li></ul><ul class="book-nav-book"><li><a href="/NCTU-Coursenote/sophomore/signals-and-systems">訊號與系統</a></li></ul><ul class="book-nav-book"><li><a href="/NCTU-Coursenote/sophomore/intro-to-music-theory">音樂理論導論</a></li></ul><ul class="book-nav-book"><li><a href="/NCTU-Coursenote/sophomore/compiler-design">編譯器設計</a></li></ul></li></ul>
+        
+            <ul class="book-nav-book"><li><span>大三</span></li></ul>
+        
+            <ul class="book-nav-book"><li><span>大四</span></li></ul>
+        
+    
+</div>
+
+<script>
+document.querySelectorAll('.sidebar-content a').forEach(function(item){ 
+    if(item.href === window.location.href || item.href === window.location.href.slice(0, -1)) {
+        item.className = "book-nav-current"
+    }
+})
+</script>
+      </div>
+
+      <div class="column col-10">
+        <div class="book-content">
+          <div class="columns">
+  <div class="column col-10">
+    <div class="book-post">
+      <h1 id="計算機概論與程式設計">計算機概論與程式設計</h1>
+<p>待補</p>
+
+    </div>
+    
+    <div id="disqus_thread"></div>
+    <script>
+    (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://at881005.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  </div>
+  <div class="column col-2">
+    <div class="book-toc">
+      <div class="book-tocbot">
+      </div>
+      <div class="book-tocbot-menu">
+        <a class="book-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+tocbot.init({
+  tocSelector: '.book-tocbot',
+  contentSelector: '.book-post',
+  headingSelector: 'h1, h2, h3, h4, h5',
+  collapseDepth: 2,
+  orderedList: false,
+  scrollSmooth: false,
+});
+
+function expand_toc(){
+  var b = document.querySelector(".book-toc-expand");
+  tocbot.init({
+    tocSelector: '.book-tocbot',
+    contentSelector: '.book-post',
+    headingSelector: 'h1, h2, h3, h4, h5',
+    collapseDepth: 6,
+    orderedList: false,
+    scrollSmooth: false,
+  });
+  b.setAttribute("onclick", "collapse_toc()");
+  b.innerHTML = "Collapse all"
+}
+
+function collapse_toc(){
+  var b = document.querySelector(".book-toc-expand");
+  tocbot.init({
+    tocSelector: '.book-tocbot',
+    contentSelector: '.book-post',
+    headingSelector: 'h1, h2, h3, h4, h5',
+    collapseDepth: 2,
+    orderedList: false,
+    scrollSmooth: false,
+  });
+  b.setAttribute("onclick", "expand_toc()");
+  b.innerHTML = "Expand all"
+}
+
+function go_top() {
+  window.scrollTo(0, 0);
+}
+
+function go_bottom() {
+  window.scrollTo(0, document.body.scrollHeight);
+}
+
+</script>
+
+
+<script>
+  $('.book-content img').each(function () {
+      $(this).wrap("<a href='" + this.src + "'>").parent('a').addClass('gallery-item');
+  })
+  $(document).ready(function() {
+    $(".book-content").lightGallery({
+        selector: '.gallery-item'
+    });
+  });
+</script>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

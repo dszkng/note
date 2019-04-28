@@ -9,7 +9,7 @@ type: docs
 
 ### Abstractions architecture
 
-![](/NCTU-Coursenote/img/computer-organization/2019-04-17-21-22-13.png)
+![](2019-04-17-21-22-13.png)
 
 ISA: Instruction set architecture (The hardware/software interface)
 
@@ -59,7 +59,7 @@ $$</div>
 
 #### CPU Clocking
 
-![](/NCTU-Coursenote/img/computer-organization/2019-04-17-21-33-51.png)
+![](2019-04-17-21-33-51.png)
 
 * Clock period: duration of a clock cycle（一個 Cycle 花費的時間）
     * e.g., 250ps = 0.25ns = 250×10 –12 s
@@ -237,31 +237,31 @@ $$</div>
 
 運算元是常數,且包裝在指令內部
 
-![](/NCTU-Coursenote/img/computer-organization/2019-04-18-02-14-12.png)
+![](2019-04-18-02-14-12.png)
 
 #### Register Addressing
 
 運算元是暫存器
 
-![](/NCTU-Coursenote/img/computer-organization/2019-04-18-02-11-37.png)
+![](2019-04-18-02-11-37.png)
 
 #### Base Addressing
 
 運算元存放在記憶體中,而位址本身是暫存器和指令中常數的和
 
-![](/NCTU-Coursenote/img/computer-organization/2019-04-18-02-12-16.png)
+![](2019-04-18-02-12-16.png)
 
 #### PC-relative Addressing
 
 位址是 PC 和指令中常數的加總
 
-![](/NCTU-Coursenote/img/computer-organization/2019-04-18-02-13-43.png)
+![](2019-04-18-02-13-43.png)
 
 #### Pseduodirect Addressing
 
 跳躍位址是指令的 26 位元再加上 PC 較高的位元
 
-![](/NCTU-Coursenote/img/computer-organization/2019-04-18-02-13-19.png)
+![](2019-04-18-02-13-19.png)
 
 ### Branch Addressing
 
@@ -275,13 +275,13 @@ See: [ISA 2.4 MIPS: Addresses in branches and jumps](https://www.youtube.com/wat
 
 由於所有指令在記憶體中都是 4bytes 對齊的（一定都是 4 的倍數），最後 2 個 bit 沒有必要存，所以都是 0
 
-![](/NCTU-Coursenote/img/computer-organization/2019-04-18-02-03-58.png)
+![](2019-04-18-02-03-58.png)
 
 #### Unconditional Branch
 
 直接 jump 到指定的 Address 上
 
-![](/NCTU-Coursenote/img/computer-organization/2019-04-18-02-05-12.png)
+![](2019-04-18-02-05-12.png)
 
 ### Procedure Call
 

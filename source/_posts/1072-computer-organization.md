@@ -357,4 +357,19 @@ lw, sw, beq, r-type
 
 ALU_ctrl = ALUOp + Instruction[5:0]
 
-# Buttom
+### p37
+
+最理想:
+一個cycle執行完一個指令
+5個 stage 同時執行不同指令
+
+### p42
+
+因為 hazard 碰到很多問題
+
+1. Structure hazards: 硬體架構，大家都要用但只有一份resouse，要用就要排隊
+2. Data hazard: 前一個指令算完時還讀不到 (前一個指令第5個stage才存，但我第2個stage就要)
+3. Control hazard: 下一個clock cycle不知道要執行甚麼指令
+
+### p44
+

@@ -1,26 +1,5 @@
 home_page: home.md # filename under /source/_posts/
-menu:
-  - name: 首頁
-    link: /
-  - name: 時間軸
-    link: timeline
-  - name: 大一
-  - name: 大二
-    groupof:
-    - name: 正規語言概論
-      link: 1072-intro-to-formal-language
-    - name: 資料庫系統概論
-      link: 1072-intro-to-dbms
-    - name: 計算機組織
-      link: 1072-computer-organization
-    - name: 訊號與系統
-      link: 1072-signals-and-systems
-    - name: 音樂理論導論
-      link: 1072-intro-to-music-theory
-    - name: 編譯器設計
-      link: 1072-compiler-design
-  - name: 大三
-  - name: 大四
+menu_page: menu.md # filename under /source/_posts/
 
-lightgallery: true
+lightgallery: false
 disqus_shortname: at881005

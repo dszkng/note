@@ -55,9 +55,9 @@ divides program text into **"words"** or **"tokens"**
 if (b == 0) a = b;
 ```
 
-| lexeme | if | \( | b | == | 0 | \) | a | = | b | ; |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| token | KWif | \( | ID | == | NUM | \) | ID | = | ID | SEMI |
+| lexeme | if   | \(  | b   | ==  | 0   | \)  | a   | =   | b   | ;    |
+| ------ | ---- | --- | --- | --- | --- | --- | --- | --- | --- | ---- |
+| token  | KWif | \(  | ID  | ==  | NUM | \)  | ID  | =   | ID  | SEMI |
 
 ### Syntax Analysis (Parsing)
 
@@ -140,9 +140,9 @@ STF id1, R1
 if (b == 0) a = b;
 ```
 
-| lexeme | if | \( | b | == | 0 | \) | a | = | b | ; |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| token | KWif | \( | ID | == | NUM | \) | ID | = | ID | SEMI |
+| lexeme | if   | \(  | b   | ==  | 0   | \)  | a   | =   | b   | ;    |
+| ------ | ---- | --- | --- | --- | --- | --- | --- | --- | --- | ---- |
+| token  | KWif | \(  | ID  | ==  | NUM | \)  | ID  | =   | ID  | SEMI |
 
 * Transform multi-character input stream to token stream
 * Reduce length of program representation \(remove spaces\)
@@ -258,13 +258,13 @@ $$
 
 A regular expression R describes a **set of strings** of characters denoted **L\(R\)**, also called a **regular set**
 
-| Regular Expression, R | Strings in L\(R\) |
-| :--- | :--- |
-| a | "a" |
-| ab | "ab" |
-| a\|b | "a", "b" |
-| \(ab\)\* | "", "ab", "abab", ... |
-| \(a\|ε\)b | "ab", "b" |
+| Regular Expression, R | Strings in L\(R\)     |
+| --------------------- | --------------------- |
+| a                     | "a"                   |
+| ab                    | "ab"                  |
+| a\|b                  | "a", "b"              |
+| \(ab\)\*              | "", "ab", "abab", ... |
+| \(a\|ε\)b             | "ab", "b"             |
 
 Suppose **r** and **s** are RE denoting **L\(r\)** and **L\(s\)**
 
@@ -275,26 +275,26 @@ Suppose **r** and **s** are RE denoting **L\(r\)** and **L\(s\)**
 
 #### Algebraic Laws for REs
 
-| LAW | DESCRIPTION |
-| :--- | :--- |
-| r\|s = s\|r | \| is commutative |
-| r\|\(s\|t\) = \(r\|s\)\|t | \| is associative |
-| r\(st\) = \(rs\)t | concatenation is associative |
-| r\(s\|t\) = rs\|rt; \(s\|t\)r = sr\|tr | concatenation distributes over \| |
-| εr = rε = r | ε is the identity for concatenation |
-| r\* = \(r\|ε\) | ε is contained in \* |
-| r\*\* = r | \* is idempotent \(冪等\) |
+| LAW                                    | DESCRIPTION                         |
+| -------------------------------------- | ----------------------------------- |
+| r\|s = s\|r                            | \| is commutative                   |
+| r\|\(s\|t\) = \(r\|s\)\|t              | \| is associative                   |
+| r\(st\) = \(rs\)t                      | concatenation is associative        |
+| r\(s\|t\) = rs\|rt; \(s\|t\)r = sr\|tr | concatenation distributes over \|   |
+| εr = rε = r                            | ε is the identity for concatenation |
+| r\* = \(r\|ε\)                         | ε is contained in \*                |
+| r\*\* = r                              | \* is idempotent \(冪等\)           |
 
 #### Extensions of REs
 
-| REs | DESCRIPTION | ALIAS |
-| :--- | :--- | :--- |
-| R+ | one or more strings of R | R\(R\*\) |
-| R? | optional R | R\|ε |
-| \[abcd\] | one of listed characters | \(a\|b\|c\|d\) |
-| \[a-z\] | one character from this range | \(a\|b\|c\|d...\|z\) |
-| \[^ab\] | anything but one of the listed chars |  |
-| \[^a-z\] | one character not from this range |  |
+| REs      | DESCRIPTION                          | ALIAS                |
+| -------- | ------------------------------------ | -------------------- |
+| R+       | one or more strings of R             | R\(R\*\)             |
+| R?       | optional R                           | R\|ε                 |
+| \[abcd\] | one of listed characters             | \(a\|b\|c\|d\)       |
+| \[a-z\]  | one character from this range        | \(a\|b\|c\|d...\|z\) |
+| \[^ab\]  | anything but one of the listed chars |                      |
+| \[^a-z\] | one character not from this range    |                      |
 
 #### Regular Definitions
 
@@ -356,19 +356,19 @@ Anything that needs to "**memorize**" "**non-constant**" amount of information *
 
 **Attributes of Tokens**
 
-| Lexemes | Token Name | Attribute Value |
-| :--- | :--- | :--- |
-| if | if | - |
-| then | then | - |
-| else | else | - |
-| id | id | Pointer to table entry |
-| number | number | Pointer to table entry \(or the value of the number\) |
-| &lt; | relop | LT |
-| &lt;= | relop | LE |
-| = | relop | EQ |
-| &lt;&gt; | relop | NE |
-| &gt; | relop | GT |
-| &gt;= | relop | GE |
+| Lexemes  | Token Name | Attribute Value                                       |
+| -------- | ---------- | ----------------------------------------------------- |
+| if       | if         | -                                                     |
+| then     | then       | -                                                     |
+| else     | else       | -                                                     |
+| id       | id         | Pointer to table entry                                |
+| number   | number     | Pointer to table entry \(or the value of the number\) |
+| &lt;     | relop      | LT                                                    |
+| &lt;=    | relop      | LE                                                    |
+| =        | relop      | EQ                                                    |
+| &lt;&gt; | relop      | NE                                                    |
+| &gt;     | relop      | GT                                                    |
+| &gt;=    | relop      | GE                                                    |
 
 ### Implementation of Lexical Analysis
 
@@ -445,12 +445,12 @@ Machine can move from state A to state B without reading input
 
 ![](2019-04-13-02-01-40.png)
 
-| State | a | b | ε |
-| :--- | :--- | :--- | :--- |
-| 0 | {0, 1} | {0} | ∅ |
-| 1 | ∅ | {2} | ∅ |
-| 2 | ∅ | {3} | ∅ |
-| 3 | ∅ | ∅ | ∅ |
+| State | a      | b   | ε   |
+| ----- | ------ | --- | --- |
+| 0     | {0, 1} | {0} | ∅   |
+| 1     | ∅      | {2} | ∅   |
+| 2     | ∅      | {3} | ∅   |
+| 3     | ∅      | ∅   | ∅   |
 
 * Columns are input symbols
 * Rows are current states
@@ -625,9 +625,9 @@ if (b == 0) a = b;
 
 Lexical Analyzer or Scanner:
 
-| lexeme | if | \( | b | == | 0 | \) | a | = | b | ; |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| token | KWif | \( | ID | == | NUM | \) | ID | = | ID | SEMI |
+| lexeme | if   | \(  | b   | ==  | 0   | \)  | a   | =   | b   | ;    |
+| ------ | ---- | --- | --- | --- | --- | --- | --- | --- | --- | ---- |
+| token  | KWif | \(  | ID  | ==  | NUM | \)  | ID  | =   | ID  | SEMI |
 
 Syntax Analyzer or Parser:
 
@@ -981,11 +981,11 @@ input: abbcde
 $$
 
 | Right Sentential Form | Handle | Viable Prefix | Reducing Production |
-| --- | --- | --- | --- |
-| a**b**bcde | b | ab | A → b |
-| a**Abc**de | Abc | aAbc | A → Abc |
-| aA**d**e | d | aAd | B → d |
-| **aABe** | aABe | aABe | S → aABe |
+| --------------------- | ------ | ------------- | ------------------- |
+| a**b**bcde            | b      | ab            | A → b               |
+| a**Abc**de            | Abc    | aAbc          | A → Abc             |
+| aA**d**e              | d      | aAd           | B → d               |
+| **aABe**              | aABe   | aABe          | S → aABe            |
 
 ![](2019-04-14-23-48-24.png)
 
@@ -1017,17 +1017,17 @@ $$
 input: id*id
 $$
 
-| Stack | Input | Action |
-| --- | --- | --- |
-| $ | id * id$ | shift |
-| $id | * id$ | reduce by $F \to id$ |
-| $F | * id$ | reduce by $T \to F$ |
-| $T | * id$ | shift |
-| $T * | id$ | shift |
-| $T * id | $ | reduce by $F \to id$ |
-| $T * F | $ | reduce by $T \to T * F$ |
-| $T | $ | reduce by $E \to T$ |
-| $E | $ | accept |
+| Stack   | Input    | Action                  |
+| ------- | -------- | ----------------------- |
+| $       | id * id$ | shift                   |
+| $id     | * id$    | reduce by $F \to id$    |
+| $F      | * id$    | reduce by $T \to F$     |
+| $T      | * id$    | shift                   |
+| $T *    | id$      | shift                   |
+| $T * id | $        | reduce by $F \to id$    |
+| $T * F  | $        | reduce by $T \to T * F$ |
+| $T      | $        | reduce by $E \to T$     |
+| $E      | $        | accept                  |
 
 Compare: [LR(0) Parsing](#lr-0-parsing)
 
@@ -1121,17 +1121,17 @@ $$
 
 ![Parsing table](2019-04-15-02-15-34.png)
 
-| Stack | Symbol | Input | Action | Transition |
-| --- | --- | --- | --- | --- |
-| 0 | $ | id * id$ | shift to 5 | I0 → I5 |
-| 0 5 | $id | * id$ | reduce by F → id | I5 → GOTO(I0, F) -- I3 | 
-| 0 3 | $F | * id$ | reduce by T → F | I3 → GOTO(I0, T) -- I2 |
-| 0 2 | $T | * id$ | shift to 7 | I2 → I7 |
-| 0 2 7 | $T * | id$ | shift to 5 | I7 → I5 |
-| 0 2 7 5 | $T * id | $ | reduce by F → id | I5 → GOTO(I7, F) -- I10 |
-| 0 2 7 10 | $T * F | $ | reduce by T → T * F | I10 → GOTO(I0, T) -- I2 |
-| 0 2 | $T | $ | reduce by E → T | I2 → GOTO(0, E) -- I1 |
-| 0 1 | $E | $ | accept | 
+| Stack    | Symbol  | Input    | Action              | Transition              |
+| -------- | ------- | -------- | ------------------- | ----------------------- |
+| 0        | $       | id * id$ | shift to 5          | I0 → I5                 |
+| 0 5      | $id     | * id$    | reduce by F → id    | I5 → GOTO(I0, F) -- I3  |
+| 0 3      | $F      | * id$    | reduce by T → F     | I3 → GOTO(I0, T) -- I2  |
+| 0 2      | $T      | * id$    | shift to 7          | I2 → I7                 |
+| 0 2 7    | $T *    | id$      | shift to 5          | I7 → I5                 |
+| 0 2 7 5  | $T * id | $        | reduce by F → id    | I5 → GOTO(I7, F) -- I10 |
+| 0 2 7 10 | $T * F  | $        | reduce by T → T * F | I10 → GOTO(I0, T) -- I2 |
+| 0 2      | $T      | $        | reduce by E → T     | I2 → GOTO(0, E) -- I1   |
+| 0 1      | $E      | $        | accept              |
 
 #### SLR Parsing
 
@@ -1185,22 +1185,22 @@ $S \overset{*}{\underset{rm}{\Rightarrow}} \alpha A w \underset{rm}{\Rightarrow}
 
 ![](2019-04-15-03-54-49.png)
 
-| Stack | Symbol | Input | Action |
-| --- | --- | --- | --- |
-| 0 | $ | id * id + id$ | s5
-| 0  | $id | * id + id$ | r6
-| 0 3 | $F | * id + id$ | r4
-| 0 2 | $T | * id + id$ | s7
-| 0 2 7 | $T * | id + id$ | s5
-| 0 2 7 5 | $T * id | + id$ | r6
-| 0 2 7 10 | $T * F | + id$ | r3
-| 0 2 | $T | + id$ | r2
-| 0 1 | $E | + id$ | s6
-| 0 1 6 | $E + | id$ | s5
-| 0 1 6 5 | $E + id | $ | r6
-| 0 1 6 3 | $E + F | $ | r4
-| 0 1 6 9 | $E + T | $ | r1
-| 0 1 | $E | $ | acc
+| Stack    | Symbol  | Input         | Action |
+| -------- | ------- | ------------- | ------ |
+| 0        | $       | id * id + id$ | s5     |
+| 0        | $id     | * id + id$    | r6     |
+| 0 3      | $F      | * id + id$    | r4     |
+| 0 2      | $T      | * id + id$    | s7     |
+| 0 2 7    | $T *    | id + id$      | s5     |
+| 0 2 7 5  | $T * id | + id$         | r6     |
+| 0 2 7 10 | $T * F  | + id$         | r3     |
+| 0 2      | $T      | + id$         | r2     |
+| 0 1      | $E      | + id$         | s6     |
+| 0 1 6    | $E +    | id$           | s5     |
+| 0 1 6 5  | $E + id | $             | r6     |
+| 0 1 6 3  | $E + F  | $             | r4     |
+| 0 1 6 9  | $E + T  | $             | r1     |
+| 0 1      | $E      | $             | acc    |
 
 ##### Conflicts
 

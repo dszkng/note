@@ -7,5 +7,6 @@
 	"settings": {
 		"pasteImage.path": "${projectRoot}/source/_posts/1072-computer-organization",
 		"pasteImage.insertPattern": "${imageSyntaxPrefix}${currentFileName}${imageSyntaxSuffix}",
+		"editor.minimap.enabled": false,
 	}
 }

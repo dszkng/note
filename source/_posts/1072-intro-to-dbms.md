@@ -71,26 +71,26 @@ pin page 並 return address
 
 #### Fixed length
 
-![](/NCTU-Coursenote/img/computer-organization/2019-04-24-01-53-23.png)
+![](2019-04-24-01-53-23.png)
 
 * Information about field types same for all records in a file; stored in system catalogs.
 * Finding i’th field requires scan of record.
 
 #### Variable length
 
-![](/NCTU-Coursenote/img/computer-organization/2019-04-24-02-01-35.png)
+![](2019-04-24-02-01-35.png)
 
 ### Record: Page Formats
 
 #### Fixed length
 
-![](/NCTU-Coursenote/img/computer-organization/2019-04-24-01-53-44.png)
+![](2019-04-24-01-53-44.png)
 
 Record id = \< page id, slot #>
 
 #### Variable length
 
-![](/NCTU-Coursenote/img/computer-organization/2019-04-24-02-01-47.png)
+![](2019-04-24-02-01-47.png)
 
 ### Files of Records
 
@@ -102,11 +102,11 @@ FILE: A collection of pages, each containing a collection of records.
 
 randomly ordered file, Implemented as a List
 
-![](/NCTU-Coursenote/img/computer-organization/2019-04-24-02-14-17.png)
+![](2019-04-24-02-14-17.png)
 
 #### Heap File Using a Page Directory
 
-![](/NCTU-Coursenote/img/computer-organization/2019-04-24-02-15-56.png)
+![](2019-04-24-02-15-56.png)
 
 ### Indexes
 

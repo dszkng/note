@@ -154,32 +154,32 @@ $$
 
 ### Register Usage
 
-| Register Number | Conventional Name | Usage
-| --- | --- | --- 
-| \$0 | \$zero | Hard-wired to 0
-| \$1 | \$at | Reserved for pseudo-instructions
-| \$2 - \$3 | \$v0, \$v1 | Return values from functions
-| \$4 - \$7 | \$a0 - \$a3 | Arguments to functions - not preserved by subprograms
-| **\$8 - \$15** | **\$t0 - \$t7** | Temporary data, not preserved by subprograms
-| **\$16 - \$23** | **\$s0 - \$s7** | Saved registers, preserved by subprograms
-| **\$24 - \$25** | **\$t8 - \$t9** | More temporary registers, not preserved by subprograms
-| \$26 - \$27 | \$k0 - \$k1 | Reserved for kernel. Do not use.
-| \$28 | \$gp | Global Area Pointer (base of global data segment)
-| **\$29** | **\$sp** | Stack Pointer
-| **\$30** | **\$fp** | Frame Pointer
-| **\$31** | **\$ra** | Return Address
-| \$f0 - \$f3 | - | Floating point return values
-| \$f4 - \$f10 | - | Temporary registers, not preserved by subprograms
-| \$f12 - \$f14 | - | First two arguments to subprograms, not preserved by subprograms
-| \$f16 - \$f18 | - | More temporary registers, not preserved by subprograms
-| \$f20 - \$f31 | - | Saved registers, preserved by subprograms
+| Register Number | Conventional Name | Usage                                                            |
+| --------------- | ----------------- | ---------------------------------------------------------------- |
+| \$0             | \$zero            | Hard-wired to 0                                                  |
+| \$1             | \$at              | Reserved for pseudo-instructions                                 |
+| \$2 - \$3       | \$v0, \$v1        | Return values from functions                                     |
+| \$4 - \$7       | \$a0 - \$a3       | Arguments to functions - not preserved by subprograms            |
+| **\$8 - \$15**  | **\$t0 - \$t7**   | Temporary data, not preserved by subprograms                     |
+| **\$16 - \$23** | **\$s0 - \$s7**   | Saved registers, preserved by subprograms                        |
+| **\$24 - \$25** | **\$t8 - \$t9**   | More temporary registers, not preserved by subprograms           |
+| \$26 - \$27     | \$k0 - \$k1       | Reserved for kernel. Do not use.                                 |
+| \$28            | \$gp              | Global Area Pointer (base of global data segment)                |
+| **\$29**        | **\$sp**          | Stack Pointer                                                    |
+| **\$30**        | **\$fp**          | Frame Pointer                                                    |
+| **\$31**        | **\$ra**          | Return Address                                                   |
+| \$f0 - \$f3     | -                 | Floating point return values                                     |
+| \$f4 - \$f10    | -                 | Temporary registers, not preserved by subprograms                |
+| \$f12 - \$f14   | -                 | First two arguments to subprograms, not preserved by subprograms |
+| \$f16 - \$f18   | -                 | More temporary registers, not preserved by subprograms           |
+| \$f20 - \$f31   | -                 | Saved registers, preserved by subprograms                        |
 
 ### Format
 
 #### R-format (Register)
 
-| op | rs | rt | rd | shamt | funct |
-| --- | --- | --- | --- | --- | --- |
+| op     | rs     | rt     | rd     | shamt  | funct  |
+| ------ | ------ | ------ | ------ | ------ | ------ |
 | 6 bits | 5 bits | 5 bits | 5 bits | 5 bits | 6 bits |
 
 * op: operation code (opcode)
@@ -191,11 +191,11 @@ $$
 
 example) add \$t0, \$s1, \$s2
 
-| op | rs | rt | rd | shamt | funct |
-| --- | --- | --- | --- | --- | --- |
-| special | $s1 | $s2 | $t0 | 0 | add |
-| 0 | 17 | 18 | 8 | 0 | 32 |
-| 000000 | 10001 | 10010 | 01000 | 00000 | 100000
+| op      | rs    | rt    | rd    | shamt | funct  |
+| ------- | ----- | ----- | ----- | ----- | ------ |
+| special | $s1   | $s2   | $t0   | 0     | add    |
+| 0       | 17    | 18    | 8     | 0     | 32     |
+| 000000  | 10001 | 10010 | 01000 | 00000 | 100000 |
 
 $$
 000000|10001|10010|01000|00000|100000_2 = 02324020_{16}
@@ -203,9 +203,9 @@ $$
 
 #### I-format (Immediate)
 
-| op | rs | rt | constant or address |
-| --- | --- | --- | --- |
-| 6 bits | 5 bits | 5 bits | 16 bits |
+| op     | rs     | rt     | constant or address |
+| ------ | ------ | ------ | ------------------- |
+| 6 bits | 5 bits | 5 bits | 16 bits             |
 
 * Immediate arithmetic and load/store instructions
 * rt: Target Register
@@ -214,11 +214,11 @@ $$
 
 example) addi \$t0, \$s1, -50
 
-| op | rs | rt | constant or address |
-| --- | --- | --- | --- |
-| 8 | \$s1 | \$t0 | -50 |
-| 8 | 17 | 8 | -50 |
-| 001000 | 10001 | 01000 | 11111111 11001110 |
+| op     | rs    | rt    | constant or address |
+| ------ | ----- | ----- | ------------------- |
+| 8      | \$s1  | \$t0  | -50                 |
+| 8      | 17    | 8     | -50                 |
+| 001000 | 10001 | 01000 | 11111111 11001110   |
 
 $$
 001000|10001|01000|1111111111001110_2
@@ -226,8 +226,8 @@ $$
 
 #### J-format (Jump)
 
-| op | address |
-| --- | --- |
+| op     | address |
+| ------ | ------- |
 | 6 bits | 26 bits |
 
 ### Addressing

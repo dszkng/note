@@ -4,17 +4,17 @@ disqus: false
 
 # 首頁
 
-welcome :)
+Welcome to [NCTU-Coursenote](https://github.com/kaiiiz/NCTU-Coursenote)
 
 ## 關於本站
 
-[NCTU-Coursenote](https://github.com/kaiiiz/NCTU-Coursenote) 是我大學修課期間在課堂或課後所統整的一些筆記，筆記內容主要是上課內容輔上一些我自己的理解，若有錯誤還請多多留言指正。
+因為本人太健忘，如果不寫下來大概考完試後很快又忘了，於是在深刻檢討後創立了本站，主要內容是我在課堂或課後所統整的一些筆記，多半是上課的資料還有再輔上一些我自己的理解，若有錯誤還請多多留言指正。:)
 
-本站使用 hexo 做網頁生成及部署。Hexo 是一個擴展性高的靜態網頁生成器，支援渲染 markdown 還有許多豐富的外掛。hexo 有完整的文件，想學習的請參考 hexo 的[官方文件](https://hexo.io/zh-tw/docs/)
+本站使用 hexo 做網頁生成及部署。Hexo 是一個擴展性高的靜態網頁生成器，支援渲染 markdown 還有許多豐富的外掛。hexo 有完整的文件，想玩玩看的話請參考 hexo 的[官方文件](https://hexo.io/zh-tw/docs/)。
 
 ## 維護
 
-* 若網頁有什麼問題歡迎到 [hexo-theme-book](https://github.com/kaiiiz/hexo-theme-book) 中開 issue
+* 若網頁有什麼問題或有想要什麼功能，歡迎到 [hexo-theme-book](https://github.com/kaiiiz/hexo-theme-book) 中開 issue
 * 文章內容理解錯誤或是想補充的的歡迎留言或是發 pull request 到 [NCTU-Coursenote](https://github.com/kaiiiz/NCTU-Coursenote)
 
 ## 時間軸

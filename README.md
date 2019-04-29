@@ -1,7 +1,3 @@
----
-disqus: false
----
-
 # 首頁
 
 welcome :)
@@ -16,8 +12,3 @@ welcome :)
 
 * 若網頁有什麼問題歡迎到 [hexo-theme-book](https://github.com/kaiiiz/hexo-theme-book) 中開 issue
 * 文章內容理解錯誤或是想補充的的歡迎留言或是發 pull request 到 [NCTU-Coursenote](https://github.com/kaiiiz/NCTU-Coursenote)
-
-## 時間軸
-
-* 2019/04/28 — 因為擴充性問題，從 hugo 轉至 hexo，並自製了一個主題以符合做筆記的需求 ([hexo-theme-book](https://github.com/kaiiiz/hexo-theme-book))
-* 2019/04/12 — 本站成立

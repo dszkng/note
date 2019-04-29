@@ -1,5 +1,4 @@
 * [首頁](/NCTU-Coursenote)
-* [時間軸](/NCTU-Coursenote/timeline)
 * 大一
 * 大二
   * [正規語言概論](/NCTU-Coursenote/1072-intro-to-formal-language)

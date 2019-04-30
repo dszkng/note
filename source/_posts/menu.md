@@ -10,4 +10,8 @@
 * 大三
 * 大四
 * 網路相關
-  * [VLAN/VTP](/NCTU-Coursenote/network-associate/vlan+vtp)
+  * [LAN Design](/NCTU-Coursenote/network-associate/landesign)
+  * Layer 2
+    * [VLAN](/NCTU-Coursenote/network-associate/layer2/vlan)
+    * [VTP](/NCTU-Coursenote/network-associate/layer2/vtp)
+    * [STP](/NCTU-Coursenote/network-associate/layer2/stp)

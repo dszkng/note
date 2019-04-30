@@ -5,7 +5,8 @@
 		}
 	],
 	"settings": {
-		"pasteImage.path": "${projectRoot}/source/_posts/1072-signals-and-systems",
+		// "pasteImage.path": "${projectRoot}/source/_posts/1072-signals-and-systems",
+		"pasteImage.path": "${projectRoot}/source/_posts/network-associate/vlan&vtp",
 		"pasteImage.insertPattern": "${imageSyntaxPrefix}${imageFileName}${imageSyntaxSuffix}",
 		"editor.minimap.enabled": false,
 	}

@@ -10,15 +10,13 @@
 
 ![](2019-04-30-23-33-51.png)
 
-## VLAN Trunking
+## Trunk link
 
 現在考慮一個問題：如果要在不同 Switch 中用相同的 VLAN 怎麼辦？在兩個 Switch 相連的 Interface 上要設定什麼 VLAN？
 
-為了解決這個問題，便需要使用 VLAN Trunking 協定。<mark>這個協定透過在傳送的訊框中加上 VLAN 標頭 (包含VLAN ID)</mark>，讓 Trunk 接收端的 Switch 能夠知道訊框是來自哪個 VLAN，這時接收端的 Switch 就能將訊框轉送到相應的 VLAN 中。
+為了解決這個問題，便需要使用 Trunk link。目前主流的網路傳輸標準有 Cisco 制定的 ISL，及 IEEE 802.1Q。<mark>這些標準的原理是透過在傳送的訊框中加上 VLAN 標頭 (包含VLAN ID)</mark>，讓 Trunk 接收端的 Switch 能夠知道訊框是來自哪個 VLAN，這時接收端的 Switch 就能將訊框轉送到相應的 VLAN 中。
 
 ![](2019-04-30-23-41-25.png)
-
-Trunking 協定主流的有 Cisco 制定的 ISL，及 IEEE 802.1Q
 
 ### ISL (Inter-Switch Link)
 

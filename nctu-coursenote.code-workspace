@@ -6,7 +6,7 @@
 	],
 	"settings": {
 		// "pasteImage.path": "${projectRoot}/source/_posts/1072-signals-and-systems",
-		"pasteImage.path": "${projectRoot}/source/_posts/network-associate/layer2/vtp",
+		"pasteImage.path": "${projectRoot}/source/_posts/network-associate/layer2/stp",
 		"pasteImage.insertPattern": "${imageSyntaxPrefix}${imageFileName}${imageSyntaxSuffix}",
 		"editor.minimap.enabled": false,
 	}

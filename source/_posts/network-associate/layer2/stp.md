@@ -26,7 +26,7 @@ Bob 傳送了一個廣播訊框，SW3 > SW2 > SW1 > SW3
 
 `0200.3333.3333 Gi0/2 VLAN1`
 
-如此會導致訊框永遠到不到 Bob 的位置
+錯誤的資訊會導致訊框永遠到不到 Bob 的位置
 
 ### 傳送多個重複的訊框
 
@@ -47,27 +47,20 @@ STP 藉由把每一個橋接/交換埠變成 **轉送狀態**(forwarding state) 
 
 ![](2019-05-01-02-45-05.png)
 
-### 運作原理
+### 一些名詞
 
-1. STP 選出一台 Root Switch，並<mark>將 Root Switch 上的 Port 都變成轉送狀態</mark>
-2. <mark>每台 Non-Root Switch 會將自己與 Root Switch 成本最小的 Port 進入轉送狀態</mark>，此介面稱為Switch的 **根埠**(Root Port, RP)
-3. 不同的 Switch 可以連到相同的 LAN 區段，這些<mark>連到相同的 LAN 區段的 Switch 中，從本身到 Root Switch 間成本最低的 Switch 會是轉送狀態</mark>。在每個 LAN 區段上，成本最低的 Switch 稱之為 **委任交換器**(designated Switch)，它們連接到 LAN 區段上的 Port 稱之為 **委任埠**(designated port, DP)
+| 名詞              | 說明                                                          |
+| ----------------- | ------------------------------------------------------------- |
+| Root Switch       | BID 最小的設備                                                |
+| Root Port         | 從這個 Port 出去會走向 Root Switch，並且是所需成本最小的 Port |
+| Designated Switch | 有 Designated Port 的 Switch                                  |
+| Designated Port   | 其他設備進入這個 Port 後將有一條 Cost 最小的路徑              |
 
-> Root Switch 上所有 Port 都是 DP
+#### Switch ID, Hello BPDU
 
-| Port 特徵                  | STP 狀態 | 說明                                             |
-| -------------------------- | -------- | ------------------------------------------------ |
-| Root Switch 的所有 Port    | 轉送     | Root Switch 永遠是 Designated Switch             |
-| 每個 Non-root Switch 的 RP | 轉送     | Non-root Switch 到達 Root Switch 成本最小的 Port |
-| 每個 LAN 下的 DP           | 轉送     | 主要轉送來自 Root Switch 的 BPDU 封包            |
-| 其餘 Port                  | 封鎖     | 不會轉送任何訊框                                 |
+每台 Switch 的橋接器ID(Bridge ID, BID) 是獨一無二的 8 位元組數值，包含 2 位元組的優先權欄及 6 位元組的系統ID(MAC Address)
 
-
-#### 0. Switch ID, Hello BPDU
-
-每台 Switch 的橋接器ID(Switch ID, BID) 是獨一無二的 8 位元組數值，包含 2 位元組的優先權欄及 6 位元組的系統ID(MAC Address)
-
-STP 定義的訊息稱為**橋接協定資料單元**(Switch protocol data unit, BPDU)，是橋接器或Switch互相交換訊息用的。一般最常見的訊息稱為 <mark>Hello BPDU</mark>，其中包含：
+STP 定義的訊息稱為**橋接協定資料單元**(Bridge protocol data unit, BPDU)，是橋接器或Switch互相交換訊息用的。一般最常見的訊息稱為 <mark>Hello BPDU</mark>，其中包含：
 
 | 欄位                     | 說明                                           |
 | ------------------------ | ---------------------------------------------- |
@@ -75,6 +68,19 @@ STP 定義的訊息稱為**橋接協定資料單元**(Switch protocol data unit,
 | 傳送端的 BID             | 傳送 Hello 的 Switch 自己的 BID                |
 | 到 Root Switch 的成本    | 自己到 Root Switch 間的 STP 成本               |
 | Root Switch 上的計時器值 | 包含 Hello計時器、MaxAge計時器、轉送延遲計時器 |
+
+### 擴展樹演算法
+
+1. 選舉 Root Switch
+2. Non-root Switch 選出 Root Port
+3. 選出 Designated Port
+
+| Port 特徵                  | STP 狀態 | 說明                                                           |
+| -------------------------- | -------- | -------------------------------------------------------------- |
+| Root Switch 的所有 Port    | 轉送     | Root Switch 上的所有 Port 都為 DP                              |
+| 每個 Non-root Switch 的 RP | 轉送     | Non-root Switch 到達 Root Switch 成本最小的 Port               |
+| 每個網段下的 DP            | 轉送     | 在網段中轉送成本最低的 Switch 即為這個網段的 Designated Switch |
+| 其餘 Port                  | 封鎖     | 不會轉送任何訊框                                               |
 
 
 #### 1. 選舉 Root Switch
@@ -105,7 +111,7 @@ SW3 挑選 gi0/1 作為 RP、SW2 挑選 gi0/2 作為 RP：
 
 #### 3. 選出 Designated Port
 
-每個 LAN 區段上的 DP 指的是負責將最低成本的 Hello 通告到區段的一種 Port。事實上，所有連接到同一個區段的 Switch 間，<mark>到達 Root Switch 成本最低的 Port</mark> 就是這個區段的 Designated Port，若通告成本不分勝負，STP 會挑選 BID 較小的交換器。
+所有連接到同一個網段的 Switch 間，<mark>到達 Root Switch 成本最低的 Port</mark> 就是這個區段的 Designated Port，若通告成本不分勝負，STP 會挑選 BID 較小的交換器。
 
 SW2 及 SW3 到達 Root Switch 的成本分別為 4 與 5，因此 SW2 的 gi0/1 就是這個區段上的委任埠：
 
@@ -162,7 +168,7 @@ SW1, SW3 間的連線斷了，SW3 在自己的 gi0/1 無法收到 Hello，於是
 
 ![](2019-05-01-03-36-27.png)
 
-### 擴展樹狀態
+### IEEE 802.1d STP 狀態統整
 
 下表整理出擴展樹的各種介面狀態：
 
@@ -217,7 +223,9 @@ RSTP 縮短收斂的等待時間
 * MaxAge = 3 * Hello 間隔時間
 * 刪除聆聽及學習的轉送延遲時間
 
-### RSTP連結型和邊緣型
+### 一些名詞
+
+#### RSTP 連結型和邊緣型
 
 RSTP 將實體連接類型描述成以下三種：
 
@@ -231,17 +239,7 @@ RSTP 將 Switch 之間的乙太網路稱為**連結**(link)，到終端使用者
 
 <mark>RSTP 只能為**點對點連接型**與**邊緣型**的連接減少收斂時間，無法改善共享式連結型的收斂速度</mark>。
 
-### RSTP 埠狀態
-
-| 狀態 | STP狀態(802.1d) | RSTP狀態(802.1w) | 轉送訊框 |
-| ---- | --------------- | ---------------- | -------- |
-| 啟用 | 封鎖            | 丟棄             | 否       |
-| 啟用 | 聆聽            | 丟棄             | 否       |
-| 啟用 | 學習            | 學習             | 否       |
-| 啟用 | 轉送            | 轉送             | 是       |
-| 停用 | 停用            | 丟棄             | 否       |
-
-### RSTP 埠角色
+#### RSTP 埠角色
 
 | RSTP角色 | STP角色 | 定義                                                    |
 | -------- | ------- | ------------------------------------------------------- |
@@ -259,7 +257,17 @@ RSTP 將 Switch 之間的乙太網路稱為**連結**(link)，到終端使用者
 
 ![](2019-05-01-03-55-19.png)
 
-### RSTP 收斂
+#### RSTP 埠狀態
+
+| 狀態 | STP狀態(802.1d) | RSTP狀態(802.1w) | 轉送訊框 |
+| ---- | --------------- | ---------------- | -------- |
+| 啟用 | 封鎖            | 丟棄             | 否       |
+| 啟用 | 聆聽            | 丟棄             | 否       |
+| 啟用 | 學習            | 學習             | 否       |
+| 啟用 | 轉送            | 轉送             | 是       |
+| 停用 | 停用            | 丟棄             | 否       |
+
+### RSTP 擴展樹演算法
 
 穩定狀態下：
 
@@ -321,7 +329,7 @@ IEEE 後來制定了**多重擴展樹**(Multiple Spanning Tree)
 ### 影響 STP 拓樸的設定
 
 * BID 會影響到 Root Switch 的選擇及 Non-Root Switch RP 的選擇
-* 每個介面(per-VLAN)到達 Root Switch 的 STP 成本，會影響到每個 LAN 區段上 DP 的選擇
+* 每個介面(per-VLAN)到達 Root Switch 的 STP 成本，會影響到每個網段上 DP 的選擇
 
 #### 優先權與系統ID延伸
 

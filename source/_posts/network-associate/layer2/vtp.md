@@ -41,15 +41,15 @@ VTP 有三種訊息類型：
 3. **通告要求**(advertisement request)
    * 新 Trunk 上來時，主動要求
 
+## VTP 領域
+
+VTP Domain 可以區分不同 Switch 的群組，讓彼此設定獨立不互相干擾。
+
 ## VTP 運作條件
 
 1. Switch 間必須啟用 VLAN Trunking
 2. VTP domain name 是否相同
 3. 若設定密碼，那麼兩台交換器都要設定 VTP 密碼，且大小寫必須相符 (密碼在傳輸時有加密)
-
-## VTP 領域
-
-VTP Domain 可以區分不同 Switch 的群組，讓彼此設定獨立不互相干擾。
 
 ## VLAN 設定存在哪?
 

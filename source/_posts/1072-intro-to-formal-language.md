@@ -232,20 +232,31 @@ A language $L$ is said to be context-free if and only if there is a context-free
 
 ---
 
-## Midterm Key
+## 10.1
 
-Given two DFA's $M_1$ and $M_2$
+什麼問題電腦不能解決
 
-1. Construct an NFA accepting $L(M_1) \cup L(M_2)$
-2. Construct an NFA accepting $\overline{L(M_1)}$
-3. Construct an NFA accepting $L(M_1) \cap L(M_2)$
-4. design an algorithm to determine if $L(M_1) = L(M_2)$ (Thm 4.7)
+一個問題就是一個 Language，所有問題就是 Language 的數目 ($2^{\Sigma^*}$)
 
-Show language L is not regular
+$$
+L \subset \Sigma^* \\
+x \in \Sigma^* \\
+\Sigma^* = \{ \lambda, 0, 1, 00, 01... \}
+$$
 
-Find CFG for language L
+兩類 automata equivalent $L(M_1) = L(M_2)$
 
-Convert grammar G to Chomsky normal form
+### p3
 
-Describe CKY parsing algorithm for CFG, explan the complexity $O(|w|^3)$
+用 simulation 證明
+
+### p5
+
+Stay: 不動
+
+$\hat{M}$ 標準 turing machine
+
+### p7
+
+多訂一些 transition function，訂完就 equivalent 了
 

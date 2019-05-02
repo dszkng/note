@@ -373,3 +373,105 @@ ALU_ctrl = ALUOp + Instruction[5:0]
 
 ### p44
 
+bubble: no opertation
+panelty: 願景:一個cycle完成一個指令 第一個指令做完 > no operation > no operation > 第二個指令執行完畢 : 50%的使用率
+
+### p45
+
+forwarding: 只要拿到值就開始算，不用等存到 reg 再讀出來
+
+### p46
+
+Load & R-type
+
+lw 在第四個 stage 結束後才讀出來
+
+ex 後是 mem address 不是 data，不能直接拉 ex 後那條
+
+### p47
+
+左 lw 與 add 相鄰，中間要 no operation > 多了兩個 clock cycle
+
+reorder 指令，讓 lw 與 add 間隔兩個 cycle
+
+### p48
+
+beq 下一個 Instruction fetch 不確定要執行甚麼指令
+
+### p49
+
+branch 結果知道後才知道要跳還是不要跳
+
+### p50
+
+猜!
+
+### p51
+
+上: 猜不要跳，猜對了
+下: 猜不要跳，猜錯了，lw 在 pipeline instruction fetch，但不應該被執行，加一些硬體的設定直接 flush 掉，讓 lw 後面都變成 no operation，跳到or繼續執行
+
+### p52
+
+不是亂猜
+
+static:
+每次都猜跳
+
+dynamic:
+你上次猜對還猜錯，猜對了繼續猜同樣的，猜錯了跟個性有關，猜錯一次就換，猜錯多次才換
+
+### p53
+
+increse instruction throughput
+一個時間點每個stage執行不同指令
+每個instruction有相同的latency
+
+### p54
+
+由右往左的常有 hazard 問題
+
+![](2019-05-02-14-26-23.png)
+
+### p55
+
+一條線有3個值 > 加 pipeline register
+
+保持指令資訊
+
+### p56
+
+single-clock-cycle: 分析單一 operation
+muli-cycle pipline diagram: 分析各 operation 關係
+
+### p61
+
+第 i + 3 個 write register，不是第 i 個的 write register 
+
+### p62
+
+把 write register pack 起來，一起走
+
+### p69
+
+為甚麼不把 RegDst 搬到前面，可以少掉 5 bit?
+MUX 需要 input selection (RegDst) ，由control unit 產生，如果放在第二個 stage RegDst 還沒產生
+
+### p70
+
+回去 trace 一遍
+
+### p71
+
+control signal 分類: WB, M, EX
+
+用過的就丟了
+
+### p72
+
+RegWrt 要滿足打包的原則，所以會被 pack 到 pipeline regiter
+
+### p74
+
+什麼時候可以解決 hazard?
+

@@ -4,6 +4,10 @@
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="UTF-8">
 
+    
+      <link rel="icon" href="/NCTU-Coursenote/shell.png">
+    
+
     <title>
         
           正規語言概論 - NCTU-Coursenote
@@ -39,6 +43,7 @@
       <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.12/js/lightgallery-all.min.js"></script>
     
     
+    <!-- katex -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 </head>
 
@@ -47,34 +52,47 @@
 <div class="container">
   <div class="book-container">
     <div class="columns">
-      
-      <div class="column col-2 book-nav">
-        <h4 class="site-meta">
+      <div class="column col-2 book-sidebar">
+          <h4 class="site-meta">
     <a href="/NCTU-Coursenote/">NCTU-Coursenote</a>
 </h4>
 
-
-
 <div class="sidebar-content">
-    
-        
-            <ul class="book-nav-book"><li><a href="/NCTU-Coursenote/timeline">時間軸</a></li></ul>
-        
-            <ul class="book-nav-book"><li><span>大一</span></li></ul>
-        
-            <ul class="book-nav-book"><li><span>大二</span><ul class="book-nav-book"><li><a href="/NCTU-Coursenote/1072-intro-to-formal-language">正規語言概論</a></li></ul><ul class="book-nav-book"><li><a href="/NCTU-Coursenote/1072-intro-to-dbms">資料庫系統概論</a></li></ul><ul class="book-nav-book"><li><a href="/NCTU-Coursenote/1072-computer-organization">計算機組織</a></li></ul><ul class="book-nav-book"><li><a href="/NCTU-Coursenote/1072-signals-and-systems">訊號與系統</a></li></ul><ul class="book-nav-book"><li><a href="/NCTU-Coursenote/1072-intro-to-music-theory">音樂理論導論</a></li></ul><ul class="book-nav-book"><li><a href="/NCTU-Coursenote/1072-compiler-design">編譯器設計</a></li></ul></li></ul>
-        
-            <ul class="book-nav-book"><li><span>大三</span></li></ul>
-        
-            <ul class="book-nav-book"><li><span>大四</span></li></ul>
-        
-    
+    <ul>
+<li><a href="/NCTU-Coursenote">首頁</a></li>
+<li>大一</li>
+<li>大二
+<ul>
+<li><a href="/NCTU-Coursenote/1072-intro-to-formal-language">正規語言概論</a></li>
+<li><a href="/NCTU-Coursenote/1072-intro-to-dbms">資料庫系統概論</a></li>
+<li><a href="/NCTU-Coursenote/1072-computer-organization">計算機組織</a></li>
+<li><a href="/NCTU-Coursenote/1072-signals-and-systems">訊號與系統</a></li>
+<li><a href="/NCTU-Coursenote/1072-intro-to-music-theory">音樂理論導論</a></li>
+<li><a href="/NCTU-Coursenote/1072-compiler-design">編譯器設計</a></li>
+</ul>
+</li>
+<li>大三</li>
+<li>大四</li>
+<li>網路相關
+<ul>
+<li><a href="/NCTU-Coursenote/network-associate/landesign">LAN Design</a></li>
+<li>Layer 2
+<ul>
+<li><a href="/NCTU-Coursenote/network-associate/layer2/vlan">VLAN</a></li>
+<li><a href="/NCTU-Coursenote/network-associate/layer2/vtp">VTP</a></li>
+<li><a href="/NCTU-Coursenote/network-associate/layer2/stp">STP</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
 </div>
 
 <script>
 document.querySelectorAll('.sidebar-content a').forEach(function(item){ 
     if(item.href === window.location.href || item.href === window.location.href.slice(0, -1)) {
-        item.className = "book-nav-current"
+        item.className = "book-sidebar-current"
     }
 })
 </script>
@@ -227,21 +245,25 @@ F \subseteq Q: Set \, of \, finite \, set
 <li>rightmost: rightmost variable in the sentential form is replaced</li>
 </ul>
 <hr>
-<h2 id="midterm-key">Midterm Key</h2>
-<p>Given two DFA’s <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>M</mi><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">M_1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.10903em;">M</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.10903em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> and <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>M</mi><mn>2</mn></msub></mrow><annotation encoding="application/x-tex">M_2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.10903em;">M</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.10903em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></p>
-<ol>
-<li>Construct an NFA accepting <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>L</mi><mo>(</mo><msub><mi>M</mi><mn>1</mn></msub><mo>)</mo><mo>∪</mo><mi>L</mi><mo>(</mo><msub><mi>M</mi><mn>2</mn></msub><mo>)</mo></mrow><annotation encoding="application/x-tex">L(M_1) \cup L(M_2)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">L</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.10903em;">M</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.10903em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∪</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">L</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.10903em;">M</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.10903em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></li>
-<li>Construct an NFA accepting <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mover accent="true"><mrow><mi>L</mi><mo>(</mo><msub><mi>M</mi><mn>1</mn></msub><mo>)</mo></mrow><mo stretchy="true">‾</mo></mover></mrow><annotation encoding="application/x-tex">\overline{L(M_1)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.2000000000000002em;vertical-align:-0.25em;"></span><span class="mord overline"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9500000000000001em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault">L</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.10903em;">M</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.10903em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span><span style="top:-3.87em;"><span class="pstrut" style="height:3em;"></span><span class="overline-line" style="border-bottom-width:0.04em;"></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.25em;"><span></span></span></span></span></span></span></span></span></li>
-<li>Construct an NFA accepting <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>L</mi><mo>(</mo><msub><mi>M</mi><mn>1</mn></msub><mo>)</mo><mo>∩</mo><mi>L</mi><mo>(</mo><msub><mi>M</mi><mn>2</mn></msub><mo>)</mo></mrow><annotation encoding="application/x-tex">L(M_1) \cap L(M_2)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">L</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.10903em;">M</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.10903em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∩</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">L</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.10903em;">M</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.10903em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></li>
-<li>design an algorithm to determine if <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>L</mi><mo>(</mo><msub><mi>M</mi><mn>1</mn></msub><mo>)</mo><mo>=</mo><mi>L</mi><mo>(</mo><msub><mi>M</mi><mn>2</mn></msub><mo>)</mo></mrow><annotation encoding="application/x-tex">L(M_1) = L(M_2)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">L</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.10903em;">M</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.10903em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">L</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.10903em;">M</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.10903em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span> (Thm 4.7)</li>
-</ol>
-<p>Show language L is not regular</p>
-<p>Find CFG for language L</p>
-<p>Convert grammar G to Chomsky normal form</p>
-<p>Describe CKY parsing algorithm for CFG, explan the complexity <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo>(</mo><mi mathvariant="normal">∣</mi><mi>w</mi><msup><mi mathvariant="normal">∣</mi><mn>3</mn></msup><mo>)</mo></mrow><annotation encoding="application/x-tex">O(|w|^3)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">∣</span><span class="mord mathdefault" style="margin-right:0.02691em;">w</span><span class="mord"><span class="mord">∣</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></p>
+<h2 id="10-1">10.1</h2>
+<p>什麼問題電腦不能解決</p>
+<p>一個問題就是一個 Language，所有問題就是 Language 的數目 (<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mn>2</mn><msup><mi mathvariant="normal">Σ</mi><mo>∗</mo></msup></msup></mrow><annotation encoding="application/x-tex">2^{\Sigma^*}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8973399999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8973399999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mtight">Σ</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7633428571428571em;"><span style="top:-2.931em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mbin mtight">∗</span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span>)</p>
+<p class="katex-block"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>L</mi><mo>⊂</mo><msup><mi mathvariant="normal">Σ</mi><mo>∗</mo></msup><mspace linebreak="newline"></mspace><mi>x</mi><mo>∈</mo><msup><mi mathvariant="normal">Σ</mi><mo>∗</mo></msup><mspace linebreak="newline"></mspace><msup><mi mathvariant="normal">Σ</mi><mo>∗</mo></msup><mo>=</mo><mo>{</mo><mi>λ</mi><mo separator="true">,</mo><mn>0</mn><mo separator="true">,</mo><mn>1</mn><mo separator="true">,</mo><mn>00</mn><mo separator="true">,</mo><mn>01...</mn><mo>}</mo></mrow><annotation encoding="application/x-tex">L \subset \Sigma^* \\
+x \in \Sigma^* \\
+\Sigma^* = \{ \lambda, 0, 1, 00, 01... \}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72243em;vertical-align:-0.0391em;"></span><span class="mord mathdefault">L</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">⊂</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.738696em;vertical-align:0em;"></span><span class="mord"><span class="mord">Σ</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.738696em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mbin mtight">∗</span></span></span></span></span></span></span></span></span><span class="mspace newline"></span><span class="base"><span class="strut" style="height:0.5782em;vertical-align:-0.0391em;"></span><span class="mord mathdefault">x</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.738696em;vertical-align:0em;"></span><span class="mord"><span class="mord">Σ</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.738696em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mbin mtight">∗</span></span></span></span></span></span></span></span></span><span class="mspace newline"></span><span class="base"><span class="strut" style="height:0.738696em;vertical-align:0em;"></span><span class="mord"><span class="mord">Σ</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.738696em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mbin mtight">∗</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">{</span><span class="mord mathdefault">λ</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">0</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">0</span><span class="mord">1</span><span class="mord">.</span><span class="mord">.</span><span class="mord">.</span><span class="mclose">}</span></span></span></span></span></p>
+<p>兩類 automata equivalent <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>L</mi><mo>(</mo><msub><mi>M</mi><mn>1</mn></msub><mo>)</mo><mo>=</mo><mi>L</mi><mo>(</mo><msub><mi>M</mi><mn>2</mn></msub><mo>)</mo></mrow><annotation encoding="application/x-tex">L(M_1) = L(M_2)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">L</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.10903em;">M</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.10903em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">L</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.10903em;">M</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.10903em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></p>
+<h3 id="p3">p3</h3>
+<p>用 simulation 證明</p>
+<h3 id="p5">p5</h3>
+<p>Stay: 不動</p>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mover accent="true"><mi>M</mi><mo>^</mo></mover></mrow><annotation encoding="application/x-tex">\hat{M}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9467699999999999em;vertical-align:0em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.9467699999999999em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.10903em;">M</span></span></span><span style="top:-3.25233em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.16666em;">^</span></span></span></span></span></span></span></span></span> 標準 turing machine</p>
+<h3 id="p7">p7</h3>
+<p>多訂一些 transition function，訂完就 equivalent 了</p>
 
     </div>
     
+      
     <div id="disqus_thread"></div>
     <script>
     (function() { // DON'T EDIT BELOW THIS LINE
@@ -253,6 +275,7 @@ F \subseteq Q: Set \, of \, finite \, set
     </script>
     <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 
+    
   </div>
   <div class="column col-2">
     <div class="book-toc">
@@ -316,29 +339,21 @@ function go_bottom() {
 </div>
 
 
-<script>
-  $('.book-content img').each(function () {
-      $(this).wrap("<a href='" + this.src + "'>").parent('a').addClass('gallery-item');
-  })
-  $(document).ready(function() {
-    $(".book-content").lightGallery({
-        selector: '.gallery-item'
+  
+  <script>
+    $('.book-content img').each(function () {
+        $(this).wrap("<a href='" + this.src + "'>").parent('a').addClass('gallery-item');
+    })
+    $(document).ready(function() {
+      $(".book-content").lightGallery({
+          selector: '.gallery-item'
+      });
     });
-  });
-</script>
+  </script>
 
 
-<script>
-  // add figcaption under image
-  document.querySelectorAll('img').forEach(function(img){
-    if(img.getAttribute('alt')) {
-      let parent = img.parentNode;
-      let figcaption = document.createElement('figcaption');
-      figcaption.innerHTML = img.getAttribute('alt');
-      parent.appendChild(figcaption);
-    }
-  })
-</script>
+
+<script src="/NCTU-Coursenote/js/book-post.js"></script>
         </div>
       </div>
     </div>

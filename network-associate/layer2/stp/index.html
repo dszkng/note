@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+
+    
+      <link rel="icon" href="/NCTU-Coursenote/shell.png">
+    
+
+    <title>
+        
+          NCTU-Coursenote
+        
+    </title>
+
+    <!-- Spectre.css framework (v0.5.8) -->
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-exp.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-icons.min.css">
+
+    <!-- Noto Sans TC -->
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet">
+
+    <!-- theme css & js -->
+    <link rel="stylesheet" href="/NCTU-Coursenote/css/spectre_custom.css">
+    <link rel="stylesheet" href="/NCTU-Coursenote/css/book.css">
+    <script src="/NCTU-Coursenote/js/book.js"></script>
+
+    <!-- tocbot -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css">
+
+    <!-- highlight.js -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <!-- lightgallery.js -->
+    
+      <script src="https://code.jquery.com/jquery-3.4.0.min.js" integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.12/css/lightgallery.min.css">
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.12/js/lightgallery-all.min.js"></script>
+    
+    
+    <!-- katex -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+</head>
+
+<body>
+
+<div class="container">
+  <div class="book-container">
+    <div class="columns">
+      <div class="column col-2 book-sidebar">
+          <h4 class="site-meta">
+    <a href="/NCTU-Coursenote/">NCTU-Coursenote</a>
+</h4>
+
+<div class="sidebar-content">
+    <ul>
+<li><a href="/NCTU-Coursenote">首頁</a></li>
+<li>大一</li>
+<li>大二
+<ul>
+<li><a href="/NCTU-Coursenote/1072-intro-to-formal-language">正規語言概論</a></li>
+<li><a href="/NCTU-Coursenote/1072-intro-to-dbms">資料庫系統概論</a></li>
+<li><a href="/NCTU-Coursenote/1072-computer-organization">計算機組織</a></li>
+<li><a href="/NCTU-Coursenote/1072-signals-and-systems">訊號與系統</a></li>
+<li><a href="/NCTU-Coursenote/1072-intro-to-music-theory">音樂理論導論</a></li>
+<li><a href="/NCTU-Coursenote/1072-compiler-design">編譯器設計</a></li>
+</ul>
+</li>
+<li>大三</li>
+<li>大四</li>
+<li>網路相關
+<ul>
+<li><a href="/NCTU-Coursenote/network-associate/landesign">LAN Design</a></li>
+<li>Layer 2
+<ul>
+<li><a href="/NCTU-Coursenote/network-associate/layer2/vlan">VLAN</a></li>
+<li><a href="/NCTU-Coursenote/network-associate/layer2/vtp">VTP</a></li>
+<li><a href="/NCTU-Coursenote/network-associate/layer2/stp">STP</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</div>
+
+<script>
+document.querySelectorAll('.sidebar-content a').forEach(function(item){ 
+    if(item.href === window.location.href || item.href === window.location.href.slice(0, -1)) {
+        item.className = "book-sidebar-current"
+    }
+})
+</script>
+      </div>
+
+      <div class="column col-10">
+        <div class="book-content">
+          <div class="columns">
+  <div class="column col-10">
+    <div class="book-post">
+      <h1 id="stp-spanning-tree-protocol">STP (Spanning Tree Protocol)</h1>
+<p>啟用 STP 後，Switch 會將自己的一些 port 封鎖起來，使得任何一對 LAN 區段間只存在一條 active 的路徑，不必擔心 loop 造成的問題。</p>
+<h2 id="不使用stp會造成的問題">不使用STP會造成的問題</h2>
+<table>
+<thead>
+<tr>
+<th>問題</th>
+<th>說明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>廣播風暴</td>
+<td>訊框在相同的鏈路上重複傳送，消耗頻寬</td>
+</tr>
+<tr>
+<td>MAC Table 不穩定</td>
+<td>不正確的資訊導致 Switch 不斷更新 MAC Table，使得訊框形成迴圈，並導致訊框送錯位置</td>
+</tr>
+<tr>
+<td>傳送多個重複的訊框</td>
+<td>同一個訊框的副本產生迴圈，令目的地主機混淆</td>
+</tr>
+</tbody>
+</table>
+<h3 id="廣播風暴">廣播風暴</h3>
+<p><img src="2019-05-01-02-35-02.png" alt></p>
+<p>Bob 傳送了一個廣播訊框，SW3 &gt; SW2 &gt; SW1 &gt; SW3</p>
+<h3 id="mac表不穩定">MAC表不穩定</h3>
+<p>假設 SW3 一開始的 MAC Table 紀錄了這條資訊：</p>
+<p><code>0200.3333.3333 Fa0/13 VLAN1</code></p>
+<p>當 SW1 再轉送到 SW3 時，因為來源 MAC Address 為 <code>0200.3333.3333</code>，於是 MAC Table 就更新成：</p>
+<p><code>0200.3333.3333 Gi0/2 VLAN1</code></p>
+<p>錯誤的資訊會導致訊框永遠到不到 Bob 的位置</p>
+<h3 id="傳送多個重複的訊框">傳送多個重複的訊框</h3>
+<p>假設沒有一台 Switch 認得 Larry 的 MAC Address，這時 Bob 傳送了一個訊框給 Larry：</p>
+<ol>
+<li>SW3 不認識 Larry 的 MAC Address</li>
+<li>傳送副本給 SW1, SW2（泛洪）</li>
+<li>SW1, SW2 同樣不認識 Larry，做泛洪</li>
+<li>Larry 收到了多個訊框的副本，有可能導致應用程式錯誤</li>
+</ol>
+<h2 id="擴展樹通訊協定-ieee-802-1d">擴展樹通訊協定(IEEE 802.1d)</h2>
+<p>IEEE 802.1d 為第一個公開的 STP 標準。</p>
+<h3 id="用途">用途</h3>
+<p>STP 藉由把每一個橋接/交換埠變成 <strong>轉送狀態</strong>(forwarding state) 或 <strong>封鎖狀態</strong>(blocking state) 來防止迴圈。</p>
+<p><img src="2019-05-01-02-45-05.png" alt></p>
+<h3 id="一些名詞">一些名詞</h3>
+<table>
+<thead>
+<tr>
+<th>名詞</th>
+<th>說明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Root Switch</td>
+<td>BID 最小的設備</td>
+</tr>
+<tr>
+<td>Root Port</td>
+<td>從這個 Port 出去會走向 Root Switch，並且是所需成本最小的 Port</td>
+</tr>
+<tr>
+<td>Designated Switch</td>
+<td>有 Designated Port 的 Switch</td>
+</tr>
+<tr>
+<td>Designated Port</td>
+<td>其他設備進入這個 Port 後將有一條 Cost 最小的路徑</td>
+</tr>
+</tbody>
+</table>
+<h4 id="switch-id-hello-bpdu">Switch ID, Hello BPDU</h4>
+<p>每台 Switch 的橋接器ID(Bridge ID, BID) 是獨一無二的 8 位元組數值，包含 2 位元組的優先權欄及 6 位元組的系統ID(MAC Address)</p>
+<p>STP 定義的訊息稱為<strong>橋接協定資料單元</strong>(Bridge protocol data unit, BPDU)，是橋接器或Switch互相交換訊息用的。一般最常見的訊息稱為 <mark>Hello BPDU</mark>，其中包含：</p>
+<table>
+<thead>
+<tr>
+<th>欄位</th>
+<th>說明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Root 的 BID</td>
+<td>傳送 Hello 的 Switch 所相信的 Root 的 BID</td>
+</tr>
+<tr>
+<td>傳送端的 BID</td>
+<td>傳送 Hello 的 Switch 自己的 BID</td>
+</tr>
+<tr>
+<td>到 Root Switch 的成本</td>
+<td>自己到 Root Switch 間的 STP 成本</td>
+</tr>
+<tr>
+<td>Root Switch 上的計時器值</td>
+<td>包含 Hello計時器、MaxAge計時器、轉送延遲計時器</td>
+</tr>
+</tbody>
+</table>
+<h3 id="擴展樹演算法">擴展樹演算法</h3>
+<ol>
+<li>選舉 Root Switch</li>
+<li>Non-root Switch 選出 Root Port</li>
+<li>選出 Designated Port</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>Port 特徵</th>
+<th>STP 狀態</th>
+<th>說明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Root Switch 的所有 Port</td>
+<td>轉送</td>
+<td>Root Switch 上的所有 Port 都為 DP</td>
+</tr>
+<tr>
+<td>每個 Non-root Switch 的 RP</td>
+<td>轉送</td>
+<td>Non-root Switch 到達 Root Switch 成本最小的 Port</td>
+</tr>
+<tr>
+<td>每個網段下的 DP</td>
+<td>轉送</td>
+<td>在網段中轉送成本最低的 Switch 即為這個網段的 Designated Switch</td>
+</tr>
+<tr>
+<td>其餘 Port</td>
+<td>封鎖</td>
+<td>不會轉送任何訊框</td>
+</tr>
+</tbody>
+</table>
+<h4 id="1-選舉-root-switch">1. 選舉 Root Switch</h4>
+<p><mark>根據 BID 來選出</mark>：Root Switch 是一台 BID 數值最小的 Switch。</p>
+<blockquote>
+<p>BID：優先權 + MAC Address，先比 Priority 再比 MAC Address</p>
+</blockquote>
+<p>選舉過程一開始，所有的 Switch 都會發出 Hello BPDU 來聲稱自己是 Root Switch，如果 Switch 聽到有比自己更低的 BID 之 Hello (Superior Hello)，Switch 就會停止宣稱自己是 Root Switch，並開始轉送 Superior Hello。</p>
+<p>SW2 收到 SW1 的 Hello，轉送它：</p>
+<p><img src="2019-05-01-03-08-06.png" alt></p>
+<p>選舉結束後，只有 Root Switch 會繼續發送 Hello BPDU，其他 Switch 收到 Hello 後會更新傳送端的 BID 以及成本，並從其他介面傳送出去</p>
+<p><img src="2019-05-01-03-08-24.png" alt></p>
+<h4 id="2-選出-root-port">2. 選出 Root Port</h4>
+<p>Root Port 是指到達 Root Switch 之成本最低的 Port。</p>
+<p>計算成本的方式是<mark>把 <strong>STP成本</strong>(介面成本) 和 <strong>Hello裡所列的成本</strong> 相加</mark>在一起。</p>
+<p>SW3 挑選 gi0/1 作為 RP、SW2 挑選 gi0/2 作為 RP：</p>
+<p><img src="2019-05-01-03-12-42.png" alt></p>
+<h4 id="3-選出-designated-port">3. 選出 Designated Port</h4>
+<p>所有連接到同一個網段的 Switch 間，<mark>到達 Root Switch 成本最低的 Port</mark> 就是這個區段的 Designated Port，若通告成本不分勝負，STP 會挑選 BID 較小的交換器。</p>
+<p>SW2 及 SW3 到達 Root Switch 的成本分別為 4 與 5，因此 SW2 的 gi0/1 就是這個區段上的委任埠：</p>
+<p><img src="2019-05-01-03-08-24.png" alt></p>
+<p>目前各 Port 的狀態：</p>
+<table>
+<thead>
+<tr>
+<th>Port</th>
+<th>狀態</th>
+<th>理由</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SW1, Gi0/1</td>
+<td>轉送</td>
+<td>Root Switch</td>
+</tr>
+<tr>
+<td>SW1, Gi0/2</td>
+<td>轉送</td>
+<td>Root Switch</td>
+</tr>
+<tr>
+<td>SW2, Gi0/1</td>
+<td>轉送</td>
+<td>SW3 的 DP</td>
+</tr>
+<tr>
+<td>SW2, Gi0/2</td>
+<td>轉送</td>
+<td>RP</td>
+</tr>
+<tr>
+<td>SW3, Gi0/1</td>
+<td>轉送</td>
+<td>RP</td>
+</tr>
+<tr>
+<td>SW3, Gi0/2</td>
+<td>封鎖</td>
+<td>非 RP、DP</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ieee-規定的埠成本值">IEEE 規定的埠成本值</h3>
+<p>IEEE 沒有料到乙太網路會成長到 10Gbps，故重新修訂新的成本值</p>
+<table>
+<thead>
+<tr>
+<th>乙太網路速度</th>
+<th>原始</th>
+<th>修訂</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>10 Mbps</td>
+<td>100</td>
+<td>100</td>
+</tr>
+<tr>
+<td>100 Mbps</td>
+<td>10</td>
+<td>19</td>
+</tr>
+<tr>
+<td>1 Gbps</td>
+<td>1</td>
+<td>4</td>
+</tr>
+<tr>
+<td>10 Gbps</td>
+<td>1</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+<h3 id="stp-收斂時間">STP 收斂時間</h3>
+<table>
+<thead>
+<tr>
+<th>計時器</th>
+<th>預設值</th>
+<th>說明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Hello</td>
+<td>2s</td>
+<td>Root Switch 每次建立 Hello 的間隔</td>
+</tr>
+<tr>
+<td>MaxAge</td>
+<td>10*Hello</td>
+<td>每台 Switch 停止收到 Hello 後，等待多久才改變拓樸</td>
+</tr>
+<tr>
+<td>轉送延遲</td>
+<td>15s</td>
+<td>當介面從封鎖變成轉送時所需的時間</td>
+</tr>
+</tbody>
+</table>
+<p>當 STP 收斂時，不能馬上從封鎖轉至轉送狀態，因為可能會造成短暫的LOOP，所以必須先經過兩個步驟：</p>
+<ol>
+<li>聆聽：等待舊的 MAC Address Table 過期，避免 loop</li>
+<li>學習：依然不轉送訊息，但開始學習新的 MAC Address</li>
+</ol>
+<p>從封鎖到聆聽，聆聽到學習，學習到轉送，所經過的時間，稱作轉送延遲</p>
+<p>STP收斂時間：MaxAge + 聆聽轉送延遲 + 學習轉送延遲：50s</p>
+<h3 id="維護及更新stp">維護及更新STP</h3>
+<ol>
+<li>Root Switch 會建立成本為 0 的 BPDU，並從所有介面送出</li>
+<li>Non-Root Switch 在自己的 Root Port 收到 Hello 時，會把自己的 BID 列入 Hello 裡的 BID 欄位，並計算到達根交換器的成本。之後才將 Hello 從所有 Designated Port 轉送出去</li>
+<li>持續進行1, 2，直到發生改變為止</li>
+</ol>
+<p>若交換器沒有在 MaxAge 的設定時間內收到 Hello BPDU，交換器就會採取變更 STP 拓樸來做出反應</p>
+<p>SW1, SW3 間的連線斷了，SW3 在自己的 gi0/1 無法收到 Hello，於是 SW3 會對 STP 的拓樸做出反應：</p>
+<p><img src="2019-05-01-03-36-27.png" alt></p>
+<h3 id="ieee-802-1d-stp-狀態統整">IEEE 802.1d STP 狀態統整</h3>
+<p>下表整理出擴展樹的各種介面狀態：</p>
+<table>
+<thead>
+<tr>
+<th>狀態</th>
+<th>轉送訊框</th>
+<th>是否學習MAC</th>
+<th>過度還是穩定</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>封鎖</td>
+<td>否</td>
+<td>否</td>
+<td>穩定</td>
+</tr>
+<tr>
+<td>聆聽</td>
+<td>否</td>
+<td>否</td>
+<td>過度</td>
+</tr>
+<tr>
+<td>學習</td>
+<td>否</td>
+<td>是</td>
+<td>過度</td>
+</tr>
+<tr>
+<td>轉送</td>
+<td>是</td>
+<td>是</td>
+<td>穩定</td>
+</tr>
+<tr>
+<td>停用</td>
+<td>否</td>
+<td>否</td>
+<td>穩定</td>
+</tr>
+</tbody>
+</table>
+<h3 id="stp-選用功能">STP 選用功能</h3>
+<h4 id="etherchannel">EtherChannel</h4>
+<p>減少 STP 收斂時間最理想的方式就是避開收斂。</p>
+<p>在一對相同的交換器之間，EtherChannel 結合了多條平行且速度相同的鏈路組成一條邏輯的鏈路。若其中一條鏈路不通，在至少有一條鏈路是 up 的情況下，STP 不會進行收斂。</p>
+<p><img src="2019-05-01-03-43-15.png" alt></p>
+<h4 id="portfast">PortFast</h4>
+<ul>
+<li>允許該埠忽略聆聽及學習狀態，立即成為轉送狀態，並跳過有關STP的選舉。</li>
+<li>確定這個埠沒有連接到其他橋接器、交換器上，才可啟用PortFast</li>
+<li>適合用在<strong>終端使用者</strong>連接上</li>
+</ul>
+<h4 id="stp安全性">STP安全性</h4>
+<ul>
+<li>攻擊者可以將 STP priority 低的設備接到網路上，藉此拿到 LAN 裡的大量資料流</li>
+<li>BPDU Guard
+<ul>
+<li>把會收到 BPDU 的 port 停用</li>
+<li>適用於 port 確定沒有存取其他 switch</li>
+<li>經常與 portfast 合用，減少 portfast 的風險</li>
+</ul>
+</li>
+<li>Root Guard
+<ul>
+<li>解決惡意 switch 成為 Root Switch</li>
+<li>如果收到鄰居的 BID 更低時，在收到 Superior BPDU 的期間忽略他的 BPDU，並且關掉這個 port，直到 Superior BPDU 不再出現</li>
+</ul>
+</li>
+</ul>
+<h2 id="高速擴展樹通訊協定-ieee-802-1w">高速擴展樹通訊協定(IEEE 802.1w)</h2>
+<p>用途：加快網路收斂的速度</p>
+<p>RSTP 與 STP：</p>
+<ul>
+<li>相同的方法 select root</li>
+<li>相同的方法找 RP</li>
+<li>相同的方法找 DP</li>
+<li>一樣 port 狀態：轉送與丟棄(封鎖)</li>
+</ul>
+<p>RSTP 縮短收斂的等待時間</p>
+<ul>
+<li>MaxAge = 3 * Hello 間隔時間</li>
+<li>刪除聆聽及學習的轉送延遲時間</li>
+</ul>
+<h3 id="一些名詞-v2">一些名詞</h3>
+<h4 id="rstp-連結型和邊緣型">RSTP 連結型和邊緣型</h4>
+<p>RSTP 將實體連接類型描述成以下三種：</p>
+<ul>
+<li>點對點連接型</li>
+<li>共享式連接型</li>
+<li>邊緣型</li>
+</ul>
+<p><img src="2019-05-01-03-51-30.png" alt></p>
+<p>RSTP 將 Switch 之間的乙太網路稱為<strong>連結</strong>(link)，到終端使用者設備的乙太網路稱為<strong>邊緣</strong>(edge)</p>
+<p><mark>RSTP 只能為<strong>點對點連接型</strong>與<strong>邊緣型</strong>的連接減少收斂時間，無法改善共享式連結型的收斂速度</mark>。</p>
+<h4 id="rstp-埠角色">RSTP 埠角色</h4>
+<table>
+<thead>
+<tr>
+<th>RSTP角色</th>
+<th>STP角色</th>
+<th>定義</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>根埠</td>
+<td>根埠</td>
+<td>收到最佳 BPDU 的 Port</td>
+</tr>
+<tr>
+<td>委任埠</td>
+<td>委任埠</td>
+<td>在連接相同區段的所有 Port 中，「通告」最佳 BPDU 的 Port</td>
+</tr>
+<tr>
+<td>替代埠</td>
+<td>-</td>
+<td>收到次佳 BPDU 的 Port</td>
+</tr>
+<tr>
+<td>備用埠</td>
+<td>-</td>
+<td>在相同區段的非委任埠</td>
+</tr>
+<tr>
+<td>停用</td>
+<td>-</td>
+<td>手動關閉的埠</td>
+</tr>
+</tbody>
+</table>
+<p>除了 DP, RP 之外，添加了三種角色：</p>
+<ul>
+<li>替代埠(alternate port)：Switch 目前 RP 的最佳替代角色。</li>
+<li>備用埠(backup port)：同一台 Switch 中，兩條線路連到相同的區段(碰撞領域)，其中一個會是 DP ，其他的會是 BP</li>
+<li>停用埠(disabled port)</li>
+</ul>
+<p><img src="2019-05-01-03-55-19.png" alt></p>
+<h4 id="rstp-埠狀態">RSTP 埠狀態</h4>
+<table>
+<thead>
+<tr>
+<th>狀態</th>
+<th>STP狀態(802.1d)</th>
+<th>RSTP狀態(802.1w)</th>
+<th>轉送訊框</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>啟用</td>
+<td>封鎖</td>
+<td>丟棄</td>
+<td>否</td>
+</tr>
+<tr>
+<td>啟用</td>
+<td>聆聽</td>
+<td>丟棄</td>
+<td>否</td>
+</tr>
+<tr>
+<td>啟用</td>
+<td>學習</td>
+<td>學習</td>
+<td>否</td>
+</tr>
+<tr>
+<td>啟用</td>
+<td>轉送</td>
+<td>轉送</td>
+<td>是</td>
+</tr>
+<tr>
+<td>停用</td>
+<td>停用</td>
+<td>丟棄</td>
+<td>否</td>
+</tr>
+</tbody>
+</table>
+<h3 id="rstp-擴展樹演算法">RSTP 擴展樹演算法</h3>
+<p>穩定狀態下：</p>
+<ul>
+<li>每台 Switch 都會產生 Hello BPDU，不只是改變及轉送來自 Root Switch 的 Hello</li>
+<li>在穩定狀態下，最後結果都一樣：Switch 會持續聆聽相同的 Hello，並保留 STP 拓樸</li>
+</ul>
+<p>介面改變時：</p>
+<ul>
+<li>邊緣型
+<ul>
+<li>像是 PortFast，立刻進入轉送狀態</li>
+</ul>
+</li>
+<li>共享式連結型
+<ul>
+<li>不重要</li>
+</ul>
+</li>
+<li>點對點連結型
+<ul>
+<li>減低 MaxAge 時間</li>
+<li>移除不重要聆聽狀態</li>
+<li>主動觀察</li>
+</ul>
+</li>
+</ul>
+<h3 id="rstp-範例">RSTP 範例</h3>
+<p>工程師為了網路備援，於是接上 SW1 與 SW4，此時會產生 RSTP 收斂：</p>
+<p><img src="2019-05-01-04-00-00.png" alt></p>
+<ul>
+<li>SW4 與 SW1 的 Port 會變成 RP
+<ul>
+<li>SW4 暫時封鎖其他所有連結型的埠，防止迴圈</li>
+<li>在新的 RP 上，使用RSTP的 <strong>提案</strong>(proposal) 與 <strong>協議</strong>(agreement) 訊息來和它的鄰居 SW1 進行協商</li>
+<li>協商結果為立即進入轉送狀態</li>
+</ul>
+</li>
+</ul>
+<p><img src="2019-05-01-04-00-26.png" alt></p>
+<ul>
+<li>SW4 和 SW3 重複 SW1 和 SW4 之前做過的相同程序
+<ul>
+<li>SW4 會轉送新的 Root 的 BPDU 給 SW3</li>
+<li>SW3 目前聆聽兩種 BPDU</li>
+<li>根據新的 BPDU 改變自己的 RP</li>
+</ul>
+</li>
+<li>SW3 和 SW2 重複相同程序，完成收斂</li>
+</ul>
+<p><img src="2019-05-01-04-00-47.png" alt></p>
+<h2 id="stp-的設定">STP 的設定</h2>
+<h3 id="多重-stp-執行個體">多重 STP 執行個體</h3>
+<p>Cisco 交換器預設使用 IEEE 802.1d 並搭配 Per-VLAN Spanning Tree Plus (PVST+)</p>
+<ul>
+<li>為每個 VLAN 建立各種不同的 STP Instance</li>
+<li>可以在不同 VLAN 下改變 STP 參數，做到 load balence 的效果</li>
+</ul>
+<p><img src="2019-05-01-04-03-21.png" alt></p>
+<p>RPVST</p>
+<ul>
+<li>PVST 的 RSTP 版本</li>
+</ul>
+<p>IEEE 後來制定了<strong>多重擴展樹</strong>(Multiple Spanning Tree)</p>
+<ul>
+<li>MIST 允許同時定義多個 RSTP Instance</li>
+<li>每一個 VLAN 都和一個特定的 Instance 有關</li>
+</ul>
+<h3 id="影響-stp-拓樸的設定">影響 STP 拓樸的設定</h3>
+<ul>
+<li>BID 會影響到 Root Switch 的選擇及 Non-Root Switch RP 的選擇</li>
+<li>每個介面(per-VLAN)到達 Root Switch 的 STP 成本，會影響到每個網段上 DP 的選擇</li>
+</ul>
+<h4 id="優先權與系統id延伸">優先權與系統ID延伸</h4>
+<p>Cisco 採用比 IEEE BID 更複雜的格式，將優先權分為兩個部分</p>
+<p><img src="2019-05-01-05-07-24.png" alt></p>
+<p>為了替 per-VLAN STP 的 instance 建立 Switch 的 BID，Switch 必須使用 4096 倍數的基底優先權(base priority)</p>
+<ul>
+<li>轉換為 2 進制時，後面 12 位元都為 0</li>
+<li>之後會將優先權與VLAN ID相加，後12位元將填上VLAN ID</li>
+</ul>
+<h2 id="stp-故障排除">STP 故障排除</h2>
+<ul>
+<li>找到 Root Switch</li>
+<li>找出每個 Switch 的 RP 及從 RP 到 Root Switch 的 cost
+<ul>
+<li>算出每條路徑的 cost</li>
+</ul>
+</li>
+<li>對每個區段找出 DP 以及該 DP 在此區段上通告的 cost
+<ul>
+<li>擁有到達 Root Switch 成本最小的 Port 即是該區段的DP</li>
+<li>如果平手，則 BID 最低的交換器勝出</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+    
+      
+    <div id="disqus_thread"></div>
+    <script>
+    (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://at881005.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+    
+  </div>
+  <div class="column col-2">
+    <div class="book-toc">
+  <div class="book-tocbot">
+  </div>
+  <div class="book-tocbot-menu">
+    <a class="book-toc-expand" onclick="expand_toc()">Expand all</a>
+    <a onclick="go_top()">Back to top</a>
+    <a onclick="go_bottom()">Go to bottom</a>
+  </div>
+</div>
+
+<script>
+tocbot.init({
+  tocSelector: '.book-tocbot',
+  contentSelector: '.book-post',
+  headingSelector: 'h1, h2, h3, h4, h5',
+  collapseDepth: 2,
+  orderedList: false,
+  scrollSmooth: false,
+});
+
+function expand_toc(){
+  var b = document.querySelector(".book-toc-expand");
+  tocbot.init({
+    tocSelector: '.book-tocbot',
+    contentSelector: '.book-post',
+    headingSelector: 'h1, h2, h3, h4, h5',
+    collapseDepth: 6,
+    orderedList: false,
+    scrollSmooth: false,
+  });
+  b.setAttribute("onclick", "collapse_toc()");
+  b.innerHTML = "Collapse all"
+}
+
+function collapse_toc(){
+  var b = document.querySelector(".book-toc-expand");
+  tocbot.init({
+    tocSelector: '.book-tocbot',
+    contentSelector: '.book-post',
+    headingSelector: 'h1, h2, h3, h4, h5',
+    collapseDepth: 2,
+    orderedList: false,
+    scrollSmooth: false,
+  });
+  b.setAttribute("onclick", "expand_toc()");
+  b.innerHTML = "Expand all"
+}
+
+function go_top() {
+  window.scrollTo(0, 0);
+}
+
+function go_bottom() {
+  window.scrollTo(0, document.body.scrollHeight);
+}
+
+</script>
+  </div>
+</div>
+
+
+  
+  <script>
+    $('.book-content img').each(function () {
+        $(this).wrap("<a href='" + this.src + "'>").parent('a').addClass('gallery-item');
+    })
+    $(document).ready(function() {
+      $(".book-content").lightGallery({
+          selector: '.gallery-item'
+      });
+    });
+  </script>
+
+
+
+<script src="/NCTU-Coursenote/js/book-post.js"></script>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

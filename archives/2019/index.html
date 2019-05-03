@@ -4,6 +4,10 @@
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="UTF-8">
 
+    
+      <link rel="icon" href="/NCTU-Coursenote/shell.png">
+    
+
     <title>
         
           NCTU-Coursenote
@@ -39,6 +43,7 @@
       <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.12/js/lightgallery-all.min.js"></script>
     
     
+    <!-- katex -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 </head>
 
@@ -47,34 +52,47 @@
 <div class="container">
   <div class="book-container">
     <div class="columns">
-      
-      <div class="column col-2 book-nav">
-        <h4 class="site-meta">
+      <div class="column col-2 book-sidebar">
+          <h4 class="site-meta">
     <a href="/NCTU-Coursenote/">NCTU-Coursenote</a>
 </h4>
 
-
-
 <div class="sidebar-content">
-    
-        
-            <ul class="book-nav-book"><li><a href="/NCTU-Coursenote/timeline">時間軸</a></li></ul>
-        
-            <ul class="book-nav-book"><li><span>大一</span></li></ul>
-        
-            <ul class="book-nav-book"><li><span>大二</span><ul class="book-nav-book"><li><a href="/NCTU-Coursenote/1072-intro-to-formal-language">正規語言概論</a></li></ul><ul class="book-nav-book"><li><a href="/NCTU-Coursenote/1072-intro-to-dbms">資料庫系統概論</a></li></ul><ul class="book-nav-book"><li><a href="/NCTU-Coursenote/1072-computer-organization">計算機組織</a></li></ul><ul class="book-nav-book"><li><a href="/NCTU-Coursenote/1072-signals-and-systems">訊號與系統</a></li></ul><ul class="book-nav-book"><li><a href="/NCTU-Coursenote/1072-intro-to-music-theory">音樂理論導論</a></li></ul><ul class="book-nav-book"><li><a href="/NCTU-Coursenote/1072-compiler-design">編譯器設計</a></li></ul></li></ul>
-        
-            <ul class="book-nav-book"><li><span>大三</span></li></ul>
-        
-            <ul class="book-nav-book"><li><span>大四</span></li></ul>
-        
-    
+    <ul>
+<li><a href="/NCTU-Coursenote">首頁</a></li>
+<li>大一</li>
+<li>大二
+<ul>
+<li><a href="/NCTU-Coursenote/1072-intro-to-formal-language">正規語言概論</a></li>
+<li><a href="/NCTU-Coursenote/1072-intro-to-dbms">資料庫系統概論</a></li>
+<li><a href="/NCTU-Coursenote/1072-computer-organization">計算機組織</a></li>
+<li><a href="/NCTU-Coursenote/1072-signals-and-systems">訊號與系統</a></li>
+<li><a href="/NCTU-Coursenote/1072-intro-to-music-theory">音樂理論導論</a></li>
+<li><a href="/NCTU-Coursenote/1072-compiler-design">編譯器設計</a></li>
+</ul>
+</li>
+<li>大三</li>
+<li>大四</li>
+<li>網路相關
+<ul>
+<li><a href="/NCTU-Coursenote/network-associate/landesign">LAN Design</a></li>
+<li>Layer 2
+<ul>
+<li><a href="/NCTU-Coursenote/network-associate/layer2/vlan">VLAN</a></li>
+<li><a href="/NCTU-Coursenote/network-associate/layer2/vtp">VTP</a></li>
+<li><a href="/NCTU-Coursenote/network-associate/layer2/stp">STP</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
 </div>
 
 <script>
 document.querySelectorAll('.sidebar-content a').forEach(function(item){ 
     if(item.href === window.location.href || item.href === window.location.href.slice(0, -1)) {
-        item.className = "book-nav-current"
+        item.className = "book-sidebar-current"
     }
 })
 </script>
@@ -98,21 +116,77 @@ document.querySelectorAll('.sidebar-content a').forEach(function(item){
           <ul class="archive-list-item">
           
               <li>
-                <span>2019-04-28</span>
+                <span>2019-05-03</span>
+                <a href="/NCTU-Coursenote/1072-computer-organization/">
+                  計算機組織
+                </a>
+              </li>
+          
+              <li>
+                <span>2019-05-03</span>
+                <a href="/NCTU-Coursenote/1072-compiler-design/">
+                  編譯器設計
+                </a>
+              </li>
+          
+              <li>
+                <span>2019-05-02</span>
+                <a href="/NCTU-Coursenote/network-associate/layer2/vtp/">
+                  Untitled
+                </a>
+              </li>
+          
+              <li>
+                <span>2019-05-02</span>
+                <a href="/NCTU-Coursenote/network-associate/layer2/vlan/">
+                  Untitled
+                </a>
+              </li>
+          
+              <li>
+                <span>2019-05-02</span>
+                <a href="/NCTU-Coursenote/network-associate/layer2/stp/">
+                  Untitled
+                </a>
+              </li>
+          
+              <li>
+                <span>2019-05-02</span>
+                <a href="/NCTU-Coursenote/network-associate/landesign/">
+                  Untitled
+                </a>
+              </li>
+          
+              <li>
+                <span>2019-05-02</span>
+                <a href="/NCTU-Coursenote/menu/">
+                  Untitled
+                </a>
+              </li>
+          
+              <li>
+                <span>2019-05-02</span>
                 <a href="/NCTU-Coursenote/home/">
                   Untitled
                 </a>
               </li>
           
               <li>
-                <span>2019-04-28</span>
-                <a href="/NCTU-Coursenote/timeline/">
-                  時間軸
+                <span>2019-05-02</span>
+                <a href="/NCTU-Coursenote/1072-signals-and-systems/">
+                  訊號與系統
                 </a>
               </li>
           
               <li>
-                <span>2019-04-28</span>
+                <span>2019-05-02</span>
+                <a href="/NCTU-Coursenote/1072-intro-to-formal-language/">
+                  正規語言概論
+                </a>
+              </li>
+          
+              <li>
+                <span>2019-05-02</span>
                 <a href="/NCTU-Coursenote/1072-intro-to-dbms/">
                   資料庫系統概論
                 </a>
@@ -122,34 +196,6 @@ document.querySelectorAll('.sidebar-content a').forEach(function(item){
                 <span>2019-04-28</span>
                 <a href="/NCTU-Coursenote/1072-intro-to-music-theory/">
                   音樂理論導論
-                </a>
-              </li>
-          
-              <li>
-                <span>2019-04-28</span>
-                <a href="/NCTU-Coursenote/1072-signals-and-systems/">
-                  訊號與系統
-                </a>
-              </li>
-          
-              <li>
-                <span>2019-04-28</span>
-                <a href="/NCTU-Coursenote/1072-compiler-design/">
-                  編譯器設計
-                </a>
-              </li>
-          
-              <li>
-                <span>2019-04-28</span>
-                <a href="/NCTU-Coursenote/1072-computer-organization/">
-                  計算機組織
-                </a>
-              </li>
-          
-              <li>
-                <span>2019-04-28</span>
-                <a href="/NCTU-Coursenote/1072-intro-to-formal-language/">
-                  正規語言概論
                 </a>
               </li>
           

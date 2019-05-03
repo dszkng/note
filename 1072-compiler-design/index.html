@@ -4,6 +4,10 @@
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="UTF-8">
 
+    
+      <link rel="icon" href="/NCTU-Coursenote/shell.png">
+    
+
     <title>
         
           編譯器設計 - NCTU-Coursenote
@@ -39,6 +43,7 @@
       <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.12/js/lightgallery-all.min.js"></script>
     
     
+    <!-- katex -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 </head>
 
@@ -47,34 +52,47 @@
 <div class="container">
   <div class="book-container">
     <div class="columns">
-      
-      <div class="column col-2 book-nav">
-        <h4 class="site-meta">
+      <div class="column col-2 book-sidebar">
+          <h4 class="site-meta">
     <a href="/NCTU-Coursenote/">NCTU-Coursenote</a>
 </h4>
 
-
-
 <div class="sidebar-content">
-    
-        
-            <ul class="book-nav-book"><li><a href="/NCTU-Coursenote/timeline">時間軸</a></li></ul>
-        
-            <ul class="book-nav-book"><li><span>大一</span></li></ul>
-        
-            <ul class="book-nav-book"><li><span>大二</span><ul class="book-nav-book"><li><a href="/NCTU-Coursenote/1072-intro-to-formal-language">正規語言概論</a></li></ul><ul class="book-nav-book"><li><a href="/NCTU-Coursenote/1072-intro-to-dbms">資料庫系統概論</a></li></ul><ul class="book-nav-book"><li><a href="/NCTU-Coursenote/1072-computer-organization">計算機組織</a></li></ul><ul class="book-nav-book"><li><a href="/NCTU-Coursenote/1072-signals-and-systems">訊號與系統</a></li></ul><ul class="book-nav-book"><li><a href="/NCTU-Coursenote/1072-intro-to-music-theory">音樂理論導論</a></li></ul><ul class="book-nav-book"><li><a href="/NCTU-Coursenote/1072-compiler-design">編譯器設計</a></li></ul></li></ul>
-        
-            <ul class="book-nav-book"><li><span>大三</span></li></ul>
-        
-            <ul class="book-nav-book"><li><span>大四</span></li></ul>
-        
-    
+    <ul>
+<li><a href="/NCTU-Coursenote">首頁</a></li>
+<li>大一</li>
+<li>大二
+<ul>
+<li><a href="/NCTU-Coursenote/1072-intro-to-formal-language">正規語言概論</a></li>
+<li><a href="/NCTU-Coursenote/1072-intro-to-dbms">資料庫系統概論</a></li>
+<li><a href="/NCTU-Coursenote/1072-computer-organization">計算機組織</a></li>
+<li><a href="/NCTU-Coursenote/1072-signals-and-systems">訊號與系統</a></li>
+<li><a href="/NCTU-Coursenote/1072-intro-to-music-theory">音樂理論導論</a></li>
+<li><a href="/NCTU-Coursenote/1072-compiler-design">編譯器設計</a></li>
+</ul>
+</li>
+<li>大三</li>
+<li>大四</li>
+<li>網路相關
+<ul>
+<li><a href="/NCTU-Coursenote/network-associate/landesign">LAN Design</a></li>
+<li>Layer 2
+<ul>
+<li><a href="/NCTU-Coursenote/network-associate/layer2/vlan">VLAN</a></li>
+<li><a href="/NCTU-Coursenote/network-associate/layer2/vtp">VTP</a></li>
+<li><a href="/NCTU-Coursenote/network-associate/layer2/stp">STP</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
 </div>
 
 <script>
 document.querySelectorAll('.sidebar-content a').forEach(function(item){ 
     if(item.href === window.location.href || item.href === window.location.href.slice(0, -1)) {
-        item.className = "book-nav-current"
+        item.className = "book-sidebar-current"
     }
 })
 </script>
@@ -136,32 +154,32 @@ document.querySelectorAll('.sidebar-content a').forEach(function(item){
 <table>
 <thead>
 <tr>
-<th style="text-align:left">lexeme</th>
-<th style="text-align:left">if</th>
-<th style="text-align:left">(</th>
-<th style="text-align:left">b</th>
-<th style="text-align:left">==</th>
-<th style="text-align:left">0</th>
-<th style="text-align:left">)</th>
-<th style="text-align:left">a</th>
-<th style="text-align:left">=</th>
-<th style="text-align:left">b</th>
-<th style="text-align:left">;</th>
+<th>lexeme</th>
+<th>if</th>
+<th>(</th>
+<th>b</th>
+<th>==</th>
+<th>0</th>
+<th>)</th>
+<th>a</th>
+<th>=</th>
+<th>b</th>
+<th>;</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left">token</td>
-<td style="text-align:left">KWif</td>
-<td style="text-align:left">(</td>
-<td style="text-align:left">ID</td>
-<td style="text-align:left">==</td>
-<td style="text-align:left">NUM</td>
-<td style="text-align:left">)</td>
-<td style="text-align:left">ID</td>
-<td style="text-align:left">=</td>
-<td style="text-align:left">ID</td>
-<td style="text-align:left">SEMI</td>
+<td>token</td>
+<td>KWif</td>
+<td>(</td>
+<td>ID</td>
+<td>==</td>
+<td>NUM</td>
+<td>)</td>
+<td>ID</td>
+<td>=</td>
+<td>ID</td>
+<td>SEMI</td>
 </tr>
 </tbody>
 </table>
@@ -200,32 +218,32 @@ document.querySelectorAll('.sidebar-content a').forEach(function(item){
 <table>
 <thead>
 <tr>
-<th style="text-align:left">lexeme</th>
-<th style="text-align:left">if</th>
-<th style="text-align:left">(</th>
-<th style="text-align:left">b</th>
-<th style="text-align:left">==</th>
-<th style="text-align:left">0</th>
-<th style="text-align:left">)</th>
-<th style="text-align:left">a</th>
-<th style="text-align:left">=</th>
-<th style="text-align:left">b</th>
-<th style="text-align:left">;</th>
+<th>lexeme</th>
+<th>if</th>
+<th>(</th>
+<th>b</th>
+<th>==</th>
+<th>0</th>
+<th>)</th>
+<th>a</th>
+<th>=</th>
+<th>b</th>
+<th>;</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left">token</td>
-<td style="text-align:left">KWif</td>
-<td style="text-align:left">(</td>
-<td style="text-align:left">ID</td>
-<td style="text-align:left">==</td>
-<td style="text-align:left">NUM</td>
-<td style="text-align:left">)</td>
-<td style="text-align:left">ID</td>
-<td style="text-align:left">=</td>
-<td style="text-align:left">ID</td>
-<td style="text-align:left">SEMI</td>
+<td>token</td>
+<td>KWif</td>
+<td>(</td>
+<td>ID</td>
+<td>==</td>
+<td>NUM</td>
+<td>)</td>
+<td>ID</td>
+<td>=</td>
+<td>ID</td>
+<td>SEMI</td>
 </tr>
 </tbody>
 </table>
@@ -305,30 +323,30 @@ R* : concatenation\,of\,R\,zero\,or\,more\,time
 <table>
 <thead>
 <tr>
-<th style="text-align:left">Regular Expression, R</th>
-<th style="text-align:left">Strings in L(R)</th>
+<th>Regular Expression, R</th>
+<th>Strings in L(R)</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left">a</td>
-<td style="text-align:left">“a”</td>
+<td>a</td>
+<td>“a”</td>
 </tr>
 <tr>
-<td style="text-align:left">ab</td>
-<td style="text-align:left">“ab”</td>
+<td>ab</td>
+<td>“ab”</td>
 </tr>
 <tr>
-<td style="text-align:left">a|b</td>
-<td style="text-align:left">“a”, “b”</td>
+<td>a|b</td>
+<td>“a”, “b”</td>
 </tr>
 <tr>
-<td style="text-align:left">(ab)*</td>
-<td style="text-align:left">“”, “ab”, “abab”, …</td>
+<td>(ab)*</td>
+<td>“”, “ab”, “abab”, …</td>
 </tr>
 <tr>
-<td style="text-align:left">(a|ε)b</td>
-<td style="text-align:left">“ab”, “b”</td>
+<td>(a|ε)b</td>
+<td>“ab”, “b”</td>
 </tr>
 </tbody>
 </table>
@@ -343,38 +361,38 @@ R* : concatenation\,of\,R\,zero\,or\,more\,time
 <table>
 <thead>
 <tr>
-<th style="text-align:left">LAW</th>
-<th style="text-align:left">DESCRIPTION</th>
+<th>LAW</th>
+<th>DESCRIPTION</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left">r|s = s|r</td>
-<td style="text-align:left">| is commutative</td>
+<td>r|s = s|r</td>
+<td>| is commutative</td>
 </tr>
 <tr>
-<td style="text-align:left">r|(s|t) = (r|s)|t</td>
-<td style="text-align:left">| is associative</td>
+<td>r|(s|t) = (r|s)|t</td>
+<td>| is associative</td>
 </tr>
 <tr>
-<td style="text-align:left">r(st) = (rs)t</td>
-<td style="text-align:left">concatenation is associative</td>
+<td>r(st) = (rs)t</td>
+<td>concatenation is associative</td>
 </tr>
 <tr>
-<td style="text-align:left">r(s|t) = rs|rt; (s|t)r = sr|tr</td>
-<td style="text-align:left">concatenation distributes over |</td>
+<td>r(s|t) = rs|rt; (s|t)r = sr|tr</td>
+<td>concatenation distributes over |</td>
 </tr>
 <tr>
-<td style="text-align:left">εr = rε = r</td>
-<td style="text-align:left">ε is the identity for concatenation</td>
+<td>εr = rε = r</td>
+<td>ε is the identity for concatenation</td>
 </tr>
 <tr>
-<td style="text-align:left">r* = (r|ε)</td>
-<td style="text-align:left">ε is contained in *</td>
+<td>r* = (r|ε)</td>
+<td>ε is contained in *</td>
 </tr>
 <tr>
-<td style="text-align:left">r** = r</td>
-<td style="text-align:left">* is idempotent (冪等)</td>
+<td>r** = r</td>
+<td>* is idempotent (冪等)</td>
 </tr>
 </tbody>
 </table>
@@ -382,41 +400,41 @@ R* : concatenation\,of\,R\,zero\,or\,more\,time
 <table>
 <thead>
 <tr>
-<th style="text-align:left">REs</th>
-<th style="text-align:left">DESCRIPTION</th>
-<th style="text-align:left">ALIAS</th>
+<th>REs</th>
+<th>DESCRIPTION</th>
+<th>ALIAS</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left">R+</td>
-<td style="text-align:left">one or more strings of R</td>
-<td style="text-align:left">R(R*)</td>
+<td>R+</td>
+<td>one or more strings of R</td>
+<td>R(R*)</td>
 </tr>
 <tr>
-<td style="text-align:left">R?</td>
-<td style="text-align:left">optional R</td>
-<td style="text-align:left">R|ε</td>
+<td>R?</td>
+<td>optional R</td>
+<td>R|ε</td>
 </tr>
 <tr>
-<td style="text-align:left">[abcd]</td>
-<td style="text-align:left">one of listed characters</td>
-<td style="text-align:left">(a|b|c|d)</td>
+<td>[abcd]</td>
+<td>one of listed characters</td>
+<td>(a|b|c|d)</td>
 </tr>
 <tr>
-<td style="text-align:left">[a-z]</td>
-<td style="text-align:left">one character from this range</td>
-<td style="text-align:left">(a|b|c|d…|z)</td>
+<td>[a-z]</td>
+<td>one character from this range</td>
+<td>(a|b|c|d…|z)</td>
 </tr>
 <tr>
-<td style="text-align:left">[^ab]</td>
-<td style="text-align:left">anything but one of the listed chars</td>
-<td style="text-align:left"></td>
+<td>[^ab]</td>
+<td>anything but one of the listed chars</td>
+<td></td>
 </tr>
 <tr>
-<td style="text-align:left">[^a-z]</td>
-<td style="text-align:left">one character not from this range</td>
-<td style="text-align:left"></td>
+<td>[^a-z]</td>
+<td>one character not from this range</td>
+<td></td>
 </tr>
 </tbody>
 </table>
@@ -482,66 +500,66 @@ S\,is\,a\,regular\,definition\,and\,is\,not\,part\,of\,B\\
 <table>
 <thead>
 <tr>
-<th style="text-align:left">Lexemes</th>
-<th style="text-align:left">Token Name</th>
-<th style="text-align:left">Attribute Value</th>
+<th>Lexemes</th>
+<th>Token Name</th>
+<th>Attribute Value</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left">if</td>
-<td style="text-align:left">if</td>
-<td style="text-align:left">-</td>
+<td>if</td>
+<td>if</td>
+<td>-</td>
 </tr>
 <tr>
-<td style="text-align:left">then</td>
-<td style="text-align:left">then</td>
-<td style="text-align:left">-</td>
+<td>then</td>
+<td>then</td>
+<td>-</td>
 </tr>
 <tr>
-<td style="text-align:left">else</td>
-<td style="text-align:left">else</td>
-<td style="text-align:left">-</td>
+<td>else</td>
+<td>else</td>
+<td>-</td>
 </tr>
 <tr>
-<td style="text-align:left">id</td>
-<td style="text-align:left">id</td>
-<td style="text-align:left">Pointer to table entry</td>
+<td>id</td>
+<td>id</td>
+<td>Pointer to table entry</td>
 </tr>
 <tr>
-<td style="text-align:left">number</td>
-<td style="text-align:left">number</td>
-<td style="text-align:left">Pointer to table entry (or the value of the number)</td>
+<td>number</td>
+<td>number</td>
+<td>Pointer to table entry (or the value of the number)</td>
 </tr>
 <tr>
-<td style="text-align:left">&lt;</td>
-<td style="text-align:left">relop</td>
-<td style="text-align:left">LT</td>
+<td>&lt;</td>
+<td>relop</td>
+<td>LT</td>
 </tr>
 <tr>
-<td style="text-align:left">&lt;=</td>
-<td style="text-align:left">relop</td>
-<td style="text-align:left">LE</td>
+<td>&lt;=</td>
+<td>relop</td>
+<td>LE</td>
 </tr>
 <tr>
-<td style="text-align:left">=</td>
-<td style="text-align:left">relop</td>
-<td style="text-align:left">EQ</td>
+<td>=</td>
+<td>relop</td>
+<td>EQ</td>
 </tr>
 <tr>
-<td style="text-align:left">&lt;&gt;</td>
-<td style="text-align:left">relop</td>
-<td style="text-align:left">NE</td>
+<td>&lt;&gt;</td>
+<td>relop</td>
+<td>NE</td>
 </tr>
 <tr>
-<td style="text-align:left">&gt;</td>
-<td style="text-align:left">relop</td>
-<td style="text-align:left">GT</td>
+<td>&gt;</td>
+<td>relop</td>
+<td>GT</td>
 </tr>
 <tr>
-<td style="text-align:left">&gt;=</td>
-<td style="text-align:left">relop</td>
-<td style="text-align:left">GE</td>
+<td>&gt;=</td>
+<td>relop</td>
+<td>GE</td>
 </tr>
 </tbody>
 </table>
@@ -616,36 +634,36 @@ T : All\,transitions
 <table>
 <thead>
 <tr>
-<th style="text-align:left">State</th>
-<th style="text-align:left">a</th>
-<th style="text-align:left">b</th>
-<th style="text-align:left">ε</th>
+<th>State</th>
+<th>a</th>
+<th>b</th>
+<th>ε</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left">0</td>
-<td style="text-align:left">{0, 1}</td>
-<td style="text-align:left">{0}</td>
-<td style="text-align:left">∅</td>
+<td>0</td>
+<td>{0, 1}</td>
+<td>{0}</td>
+<td>∅</td>
 </tr>
 <tr>
-<td style="text-align:left">1</td>
-<td style="text-align:left">∅</td>
-<td style="text-align:left">{2}</td>
-<td style="text-align:left">∅</td>
+<td>1</td>
+<td>∅</td>
+<td>{2}</td>
+<td>∅</td>
 </tr>
 <tr>
-<td style="text-align:left">2</td>
-<td style="text-align:left">∅</td>
-<td style="text-align:left">{3}</td>
-<td style="text-align:left">∅</td>
+<td>2</td>
+<td>∅</td>
+<td>{3}</td>
+<td>∅</td>
 </tr>
 <tr>
-<td style="text-align:left">3</td>
-<td style="text-align:left">∅</td>
-<td style="text-align:left">∅</td>
-<td style="text-align:left">∅</td>
+<td>3</td>
+<td>∅</td>
+<td>∅</td>
+<td>∅</td>
 </tr>
 </tbody>
 </table>
@@ -861,32 +879,32 @@ treat IF a identifier: IF (I, J) = 3 …</p>
 <table>
 <thead>
 <tr>
-<th style="text-align:left">lexeme</th>
-<th style="text-align:left">if</th>
-<th style="text-align:left">(</th>
-<th style="text-align:left">b</th>
-<th style="text-align:left">==</th>
-<th style="text-align:left">0</th>
-<th style="text-align:left">)</th>
-<th style="text-align:left">a</th>
-<th style="text-align:left">=</th>
-<th style="text-align:left">b</th>
-<th style="text-align:left">;</th>
+<th>lexeme</th>
+<th>if</th>
+<th>(</th>
+<th>b</th>
+<th>==</th>
+<th>0</th>
+<th>)</th>
+<th>a</th>
+<th>=</th>
+<th>b</th>
+<th>;</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left">token</td>
-<td style="text-align:left">KWif</td>
-<td style="text-align:left">(</td>
-<td style="text-align:left">ID</td>
-<td style="text-align:left">==</td>
-<td style="text-align:left">NUM</td>
-<td style="text-align:left">)</td>
-<td style="text-align:left">ID</td>
-<td style="text-align:left">=</td>
-<td style="text-align:left">ID</td>
-<td style="text-align:left">SEMI</td>
+<td>token</td>
+<td>KWif</td>
+<td>(</td>
+<td>ID</td>
+<td>==</td>
+<td>NUM</td>
+<td>)</td>
+<td>ID</td>
+<td>=</td>
+<td>ID</td>
+<td>SEMI</td>
 </tr>
 </tbody>
 </table>
@@ -1623,10 +1641,118 @@ F \to (E) | id
 <li>reduce/reduce conflict: state 不知道該用哪個 reduce</li>
 <li>若 grammar G 的 SLR parsing table 有 conflict，則 G 非 SLR Grammar</li>
 </ul>
-<h3 id="bottom">bottom</h3>
+<h2 id="ir">IR</h2>
+<h3 id="p14">p14</h3>
+<p>呼叫P的結果當作呼叫F的parameter</p>
+<h3 id="p16">p16</h3>
+<p>y 的 R-value assign 給 x</p>
+<p>a = b 等號右手邊在乎的是 R-value 左手邊在乎的是 L-value</p>
+<h3 id="p17">p17</h3>
+<p>i * 8: 算 offset</p>
+<h3 id="p18">p18</h3>
+<p>如果 IR 沒有分 level，且一開始 IR 就很接近 machine code，一些 high-level 的 Info 就會丟失(ex. loop…) &gt; Optimize 會有困難</p>
+<h3 id="p19">p19</h3>
+<p>triple: 不需要 dst，存在 OP 的位置</p>
+<h3 id="p20">p20</h3>
+<p>左上還未優化的 IR</p>
+<p>左下圍它的 syntax tree</p>
+<p>triple 直接把值存在 OP 不用 Tmp</p>
+<h3 id="p21">p21</h3>
+<p>quadruple 可能比較適合做 optimization</p>
+<p>e.g. instruction reorder (較慢的先做) 任意調</p>
+<p>triple 對調指令時連存放的地方都要改，麻煩 &gt;&gt; 使用 indirect triple</p>
+<h3 id="p22">p22</h3>
+<p>維護一個 array of pointer，指向原本的 triple</p>
+<h3 id="p23">p23</h3>
+<p>每一個變數或temp只會被assign一次</p>
+<p>左邊:</p>
+<p>read after write: flow dependence 妳寫完的東西我要讀<br>
+write after read: anti dependenae，妳讀完後我要寫 (因為用了相同的名字才有dependence)<br>
+write after write (?output dependence)</p>
+<p>dependence 減少比較容易 optimization</p>
+<p>fi function 接收兩個值得其中一個值</p>
+<h3 id="p25">p25</h3>
+<p>型別檢查</p>
+<p>data 再 memory 怎麼擺放，存相對的位置</p>
+<h3 id="p27">p27</h3>
+<p>prgram 的 layout 由 compiler 決定 (右邊)</p>
+<p>static: 再 runtime 之前可以決定且部會變化的變數 (全域或static的區域變數)</p>
+<p>function push 到 stack，區域變數存在其中，位置隨 runtime 改變</p>
+<p>heap: dynamic data (e.g. malloc) 可以增減，有memory manager 負責維護那些空間是空的</p>
+<h3 id="p28">p28</h3>
+<p>2 個 ( 3 個 int 的 array ) 的 array</p>
+<h3 id="p30">p30</h3>
+<p>s x t: 兩個 type expression 兩歌argument分別是s和t的型別</p>
+<p>動態型別仍要做型別檢查 (引入 type variables)</p>
+<h3 id="p32">p32</h3>
+<p>structurally equivalent: 結構一樣就一樣</p>
+<p>e.g. int A[10], int B[10]: array of 10 int</p>
+<p>name equivalent: 名字一樣才一樣 (?)</p>
+<p>e.g. typedef int dollars: int, dollar 不同 type</p>
+<h3 id="p33">p33</h3>
+<p>看到資訊保留到 symbol table 中，不需要產生 IR 來說明這個 declaration</p>
+<h3 id="p34">p34</h3>
+<p>這個名字再 storage 的 Layout</p>
+<p>型別也代表了寬度</p>
+<h3 id="p35">p35</h3>
+<p>symbol table 也存了擺放位置的資訊</p>
+<blockquote>
+<p>java bytecode 不需要考慮 memory 擺放的問題 (?)</p>
+</blockquote>
+<h3 id="p36">p36</h3>
+<p>擺放的位置可能需要被 4, 8 整除 &gt;&gt; alignment</p>
+<p>e.g. 起始位置不能被 4 整除，可能需要 2 個 op 才能 access &gt;&gt; 加上 padding</p>
+<h3 id="p37">p37</h3>
+<p>存位置的目的? 為了將來 load data 到 reg 或 store data</p>
+<h3 id="p38">p38</h3>
+<p>計算 type expression 及 type 寬度 &gt;&gt; 透過撰寫 SDT</p>
+<ul>
+<li>當看到 Int reduce 回 B 時，知道 type:int, 寬度:4</li>
+<li>遞迴到右下的 C</li>
+<li>reduce 回 C: array(3, int), w:12</li>
+<li>reduce 回 C: array(2, array(3, int)), w:24</li>
+<li>reduce 回 T</li>
+</ul>
+<h3 id="p39">p39</h3>
+<p>看到新的 compound stmt，push 一張新的 symbol table 到 stack</p>
+<h3 id="p40">p40</h3>
+<p>new 出一張新的 symbol table，進入裏頭的 symbol table 時先處理完外面的 symbol table，進入後歸零 offset</p>
+<h3 id="p41">p41</h3>
+<blockquote>
+<p>Summary: 當看到變數宣告就把變數家道 symbol table，存 type, offset</p>
+</blockquote>
+<p>Heap 裏頭的擺放不是由 compiler 管理，e.g. malloc 就交給 malloc 的 library 管理</p>
+<h3 id="p43">p43</h3>
+<ol>
+<li>先執行 E 的 IR 存到 E 的 address</li>
+</ol>
+<h3 id="p44">p44</h3>
+<ol>
+<li>-E reduce 回 E &gt; t1</li>
+<li>E + E reduce 回 E &gt; t2</li>
+<li>id = E reduce 回 S &gt; a = t2</li>
+</ol>
+<h3 id="p48">p48</h3>
+<p>算陣列的 Address 位置</p>
+<h3 id="p49">p49</h3>
+<p>L.array: 是放在symbol table的哪個entry<br>
+L.type: subarray的型別<br>
+L.addr: temp, 計算offset是多少</p>
+<h3 id="p52">p52</h3>
+<p>使用者寫的與預期的是否一致</p>
+<p>一個健全的 type system 可以在 compile time 就檢查完 type error</p>
+<p>c 不是 strongly type language</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">union</span> flexType &#123;</span><br><span class="line">    <span class="keyword">int</span> intElement;</span><br><span class="line">    <span class="keyword">float</span> floatElement;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">union</span> flexType element;</span><br><span class="line"><span class="keyword">float</span> x;</span><br><span class="line"></span><br><span class="line">element.ineElement = <span class="number">27</span>;</span><br><span class="line">x = element.floatElement; \\ element 存 <span class="keyword">int</span> 但以 <span class="keyword">float</span> 看待它 (讀出來不是 <span class="number">27</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="p53">p53</h3>
+<p>type synthesis: static-typed<br>
+type inference: dynamic-typed</p>
+<h3 id="p55">p55</h3>
+<p>型別轉換</p>
+<h3 id="p57">p57</h3>
 
     </div>
     
+      
     <div id="disqus_thread"></div>
     <script>
     (function() { // DON'T EDIT BELOW THIS LINE
@@ -1638,6 +1764,7 @@ F \to (E) | id
     </script>
     <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 
+    
   </div>
   <div class="column col-2">
     <div class="book-toc">
@@ -1701,29 +1828,21 @@ function go_bottom() {
 </div>
 
 
-<script>
-  $('.book-content img').each(function () {
-      $(this).wrap("<a href='" + this.src + "'>").parent('a').addClass('gallery-item');
-  })
-  $(document).ready(function() {
-    $(".book-content").lightGallery({
-        selector: '.gallery-item'
+  
+  <script>
+    $('.book-content img').each(function () {
+        $(this).wrap("<a href='" + this.src + "'>").parent('a').addClass('gallery-item');
+    })
+    $(document).ready(function() {
+      $(".book-content").lightGallery({
+          selector: '.gallery-item'
+      });
     });
-  });
-</script>
+  </script>
 
 
-<script>
-  // add figcaption under image
-  document.querySelectorAll('img').forEach(function(img){
-    if(img.getAttribute('alt')) {
-      let parent = img.parentNode;
-      let figcaption = document.createElement('figcaption');
-      figcaption.innerHTML = img.getAttribute('alt');
-      parent.appendChild(figcaption);
-    }
-  })
-</script>
+
+<script src="/NCTU-Coursenote/js/book-post.js"></script>
         </div>
       </div>
     </div>

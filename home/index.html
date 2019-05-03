@@ -4,6 +4,10 @@
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="UTF-8">
 
+    
+      <link rel="icon" href="/NCTU-Coursenote/shell.png">
+    
+
     <title>
         
           NCTU-Coursenote
@@ -39,6 +43,7 @@
       <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.12/js/lightgallery-all.min.js"></script>
     
     
+    <!-- katex -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 </head>
 
@@ -47,34 +52,47 @@
 <div class="container">
   <div class="book-container">
     <div class="columns">
-      
-      <div class="column col-2 book-nav">
-        <h4 class="site-meta">
+      <div class="column col-2 book-sidebar">
+          <h4 class="site-meta">
     <a href="/NCTU-Coursenote/">NCTU-Coursenote</a>
 </h4>
 
-
-
 <div class="sidebar-content">
-    
-        
-            <ul class="book-nav-book"><li><a href="/NCTU-Coursenote/timeline">時間軸</a></li></ul>
-        
-            <ul class="book-nav-book"><li><span>大一</span></li></ul>
-        
-            <ul class="book-nav-book"><li><span>大二</span><ul class="book-nav-book"><li><a href="/NCTU-Coursenote/1072-intro-to-formal-language">正規語言概論</a></li></ul><ul class="book-nav-book"><li><a href="/NCTU-Coursenote/1072-intro-to-dbms">資料庫系統概論</a></li></ul><ul class="book-nav-book"><li><a href="/NCTU-Coursenote/1072-computer-organization">計算機組織</a></li></ul><ul class="book-nav-book"><li><a href="/NCTU-Coursenote/1072-signals-and-systems">訊號與系統</a></li></ul><ul class="book-nav-book"><li><a href="/NCTU-Coursenote/1072-intro-to-music-theory">音樂理論導論</a></li></ul><ul class="book-nav-book"><li><a href="/NCTU-Coursenote/1072-compiler-design">編譯器設計</a></li></ul></li></ul>
-        
-            <ul class="book-nav-book"><li><span>大三</span></li></ul>
-        
-            <ul class="book-nav-book"><li><span>大四</span></li></ul>
-        
-    
+    <ul>
+<li><a href="/NCTU-Coursenote">首頁</a></li>
+<li>大一</li>
+<li>大二
+<ul>
+<li><a href="/NCTU-Coursenote/1072-intro-to-formal-language">正規語言概論</a></li>
+<li><a href="/NCTU-Coursenote/1072-intro-to-dbms">資料庫系統概論</a></li>
+<li><a href="/NCTU-Coursenote/1072-computer-organization">計算機組織</a></li>
+<li><a href="/NCTU-Coursenote/1072-signals-and-systems">訊號與系統</a></li>
+<li><a href="/NCTU-Coursenote/1072-intro-to-music-theory">音樂理論導論</a></li>
+<li><a href="/NCTU-Coursenote/1072-compiler-design">編譯器設計</a></li>
+</ul>
+</li>
+<li>大三</li>
+<li>大四</li>
+<li>網路相關
+<ul>
+<li><a href="/NCTU-Coursenote/network-associate/landesign">LAN Design</a></li>
+<li>Layer 2
+<ul>
+<li><a href="/NCTU-Coursenote/network-associate/layer2/vlan">VLAN</a></li>
+<li><a href="/NCTU-Coursenote/network-associate/layer2/vtp">VTP</a></li>
+<li><a href="/NCTU-Coursenote/network-associate/layer2/stp">STP</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
 </div>
 
 <script>
 document.querySelectorAll('.sidebar-content a').forEach(function(item){ 
     if(item.href === window.location.href || item.href === window.location.href.slice(0, -1)) {
-        item.className = "book-nav-current"
+        item.className = "book-sidebar-current"
     }
 })
 </script>
@@ -85,22 +103,24 @@ document.querySelectorAll('.sidebar-content a').forEach(function(item){
           <div class="columns">
   <div class="column col-10">
     <div class="book-post">
-      <h1 id="hello">Hello</h1>
-<p>NCTU-Coursenote</p>
+      <h1 id="首頁">首頁</h1>
+<p>Welcome to <a href="https://github.com/kaiiiz/NCTU-Coursenote" target="_blank" rel="noopener">NCTU-Coursenote</a></p>
+<h2 id="關於本站">關於本站</h2>
+<p>本站的主要內容是我在課堂或課後所統整的一些筆記，多半是上課的資料還有再輔上一些我自己的理解，若有錯誤還請多多留言指正 😃</p>
+<p>本站使用 <a href="https://hexo.io/zh-tw/" target="_blank" rel="noopener">hexo</a> 做網頁生成及部署。hexo 是一個擴展性高的靜態網頁生成器，支援渲染 markdown 還有許多豐富的外掛。hexo 有完整的文件，想玩玩看的話請參考 hexo 的<a href="https://hexo.io/zh-tw/docs/" target="_blank" rel="noopener">官方文件</a>。</p>
+<h2 id="維護">維護</h2>
+<ul>
+<li>若網頁有什麼問題或有想要什麼功能，歡迎到 <a href="https://github.com/kaiiiz/hexo-theme-book" target="_blank" rel="noopener">hexo-theme-book</a> 中開 issue</li>
+<li>文章內容理解錯誤或是想補充的的歡迎留言或是發 pull request 到 <a href="https://github.com/kaiiiz/NCTU-Coursenote" target="_blank" rel="noopener">NCTU-Coursenote</a></li>
+</ul>
+<h2 id="時間軸">時間軸</h2>
+<ul>
+<li>2019/04/28 — 因為擴充性問題，從 hugo 轉至 hexo，並自製了一個主題以符合做筆記的需求 (<a href="https://github.com/kaiiiz/hexo-theme-book" target="_blank" rel="noopener">hexo-theme-book</a>)</li>
+<li>2019/04/12 — 本站成立</li>
+</ul>
 
     </div>
     
-    <div id="disqus_thread"></div>
-    <script>
-    (function() { // DON'T EDIT BELOW THIS LINE
-    var d = document, s = d.createElement('script');
-    s.src = 'https://at881005.disqus.com/embed.js';
-    s.setAttribute('data-timestamp', +new Date());
-    (d.head || d.body).appendChild(s);
-    })();
-    </script>
-    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-
   </div>
   <div class="column col-2">
     <div class="book-toc">
@@ -164,29 +184,21 @@ function go_bottom() {
 </div>
 
 
-<script>
-  $('.book-content img').each(function () {
-      $(this).wrap("<a href='" + this.src + "'>").parent('a').addClass('gallery-item');
-  })
-  $(document).ready(function() {
-    $(".book-content").lightGallery({
-        selector: '.gallery-item'
+  
+  <script>
+    $('.book-content img').each(function () {
+        $(this).wrap("<a href='" + this.src + "'>").parent('a').addClass('gallery-item');
+    })
+    $(document).ready(function() {
+      $(".book-content").lightGallery({
+          selector: '.gallery-item'
+      });
     });
-  });
-</script>
+  </script>
 
 
-<script>
-  // add figcaption under image
-  document.querySelectorAll('img').forEach(function(img){
-    if(img.getAttribute('alt')) {
-      let parent = img.parentNode;
-      let figcaption = document.createElement('figcaption');
-      figcaption.innerHTML = img.getAttribute('alt');
-      parent.appendChild(figcaption);
-    }
-  })
-</script>
+
+<script src="/NCTU-Coursenote/js/book-post.js"></script>
         </div>
       </div>
     </div>

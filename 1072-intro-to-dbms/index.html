@@ -4,6 +4,10 @@
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="UTF-8">
 
+    
+      <link rel="icon" href="/NCTU-Coursenote/shell.png">
+    
+
     <title>
         
           資料庫系統概論 - NCTU-Coursenote
@@ -39,6 +43,7 @@
       <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.12/js/lightgallery-all.min.js"></script>
     
     
+    <!-- katex -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 </head>
 
@@ -47,34 +52,47 @@
 <div class="container">
   <div class="book-container">
     <div class="columns">
-      
-      <div class="column col-2 book-nav">
-        <h4 class="site-meta">
+      <div class="column col-2 book-sidebar">
+          <h4 class="site-meta">
     <a href="/NCTU-Coursenote/">NCTU-Coursenote</a>
 </h4>
 
-
-
 <div class="sidebar-content">
-    
-        
-            <ul class="book-nav-book"><li><a href="/NCTU-Coursenote/timeline">時間軸</a></li></ul>
-        
-            <ul class="book-nav-book"><li><span>大一</span></li></ul>
-        
-            <ul class="book-nav-book"><li><span>大二</span><ul class="book-nav-book"><li><a href="/NCTU-Coursenote/1072-intro-to-formal-language">正規語言概論</a></li></ul><ul class="book-nav-book"><li><a href="/NCTU-Coursenote/1072-intro-to-dbms">資料庫系統概論</a></li></ul><ul class="book-nav-book"><li><a href="/NCTU-Coursenote/1072-computer-organization">計算機組織</a></li></ul><ul class="book-nav-book"><li><a href="/NCTU-Coursenote/1072-signals-and-systems">訊號與系統</a></li></ul><ul class="book-nav-book"><li><a href="/NCTU-Coursenote/1072-intro-to-music-theory">音樂理論導論</a></li></ul><ul class="book-nav-book"><li><a href="/NCTU-Coursenote/1072-compiler-design">編譯器設計</a></li></ul></li></ul>
-        
-            <ul class="book-nav-book"><li><span>大三</span></li></ul>
-        
-            <ul class="book-nav-book"><li><span>大四</span></li></ul>
-        
-    
+    <ul>
+<li><a href="/NCTU-Coursenote">首頁</a></li>
+<li>大一</li>
+<li>大二
+<ul>
+<li><a href="/NCTU-Coursenote/1072-intro-to-formal-language">正規語言概論</a></li>
+<li><a href="/NCTU-Coursenote/1072-intro-to-dbms">資料庫系統概論</a></li>
+<li><a href="/NCTU-Coursenote/1072-computer-organization">計算機組織</a></li>
+<li><a href="/NCTU-Coursenote/1072-signals-and-systems">訊號與系統</a></li>
+<li><a href="/NCTU-Coursenote/1072-intro-to-music-theory">音樂理論導論</a></li>
+<li><a href="/NCTU-Coursenote/1072-compiler-design">編譯器設計</a></li>
+</ul>
+</li>
+<li>大三</li>
+<li>大四</li>
+<li>網路相關
+<ul>
+<li><a href="/NCTU-Coursenote/network-associate/landesign">LAN Design</a></li>
+<li>Layer 2
+<ul>
+<li><a href="/NCTU-Coursenote/network-associate/layer2/vlan">VLAN</a></li>
+<li><a href="/NCTU-Coursenote/network-associate/layer2/vtp">VTP</a></li>
+<li><a href="/NCTU-Coursenote/network-associate/layer2/stp">STP</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
 </div>
 
 <script>
 document.querySelectorAll('.sidebar-content a').forEach(function(item){ 
     if(item.href === window.location.href || item.href === window.location.href.slice(0, -1)) {
-        item.className = "book-nav-current"
+        item.className = "book-sidebar-current"
     }
 })
 </script>
@@ -142,27 +160,27 @@ document.querySelectorAll('.sidebar-content a').forEach(function(item){
 </blockquote>
 <h3 id="record-record-formats">Record: Record Formats</h3>
 <h4 id="fixed-length">Fixed length</h4>
-<p><img src="/NCTU-Coursenote/img/computer-organization/2019-04-24-01-53-23.png" alt></p>
+<p><img src="2019-04-24-01-53-23.png" alt></p>
 <ul>
 <li>Information about field types same for all records in a file; stored in system catalogs.</li>
 <li>Finding i’th field requires scan of record.</li>
 </ul>
 <h4 id="variable-length">Variable length</h4>
-<p><img src="/NCTU-Coursenote/img/computer-organization/2019-04-24-02-01-35.png" alt></p>
+<p><img src="2019-04-24-02-01-35.png" alt></p>
 <h3 id="record-page-formats">Record: Page Formats</h3>
 <h4 id="fixed-length-v2">Fixed length</h4>
-<p><img src="/NCTU-Coursenote/img/computer-organization/2019-04-24-01-53-44.png" alt></p>
+<p><img src="2019-04-24-01-53-44.png" alt></p>
 <p>Record id = &lt; page id, slot #&gt;</p>
 <h4 id="variable-length-v2">Variable length</h4>
-<p><img src="/NCTU-Coursenote/img/computer-organization/2019-04-24-02-01-47.png" alt></p>
+<p><img src="2019-04-24-02-01-47.png" alt></p>
 <h3 id="files-of-records">Files of Records</h3>
 <p>higher levels of DBMS operate on <strong>records</strong>, and <strong>files of records</strong>.</p>
 <p>FILE: A collection of pages, each containing a collection of records.</p>
 <h4 id="heap-file">Heap File</h4>
 <p>randomly ordered file, Implemented as a List</p>
-<p><img src="/NCTU-Coursenote/img/computer-organization/2019-04-24-02-14-17.png" alt></p>
+<p><img src="2019-04-24-02-14-17.png" alt></p>
 <h4 id="heap-file-using-a-page-directory">Heap File Using a Page Directory</h4>
-<p><img src="/NCTU-Coursenote/img/computer-organization/2019-04-24-02-15-56.png" alt></p>
+<p><img src="2019-04-24-02-15-56.png" alt></p>
 <h3 id="indexes">Indexes</h3>
 <p>k* = Data entry, k = search key value (用k找到k*)</p>
 <ul>
@@ -311,6 +329,7 @@ Read Ri, use the hash index to find matches</li>
 
     </div>
     
+      
     <div id="disqus_thread"></div>
     <script>
     (function() { // DON'T EDIT BELOW THIS LINE
@@ -322,6 +341,7 @@ Read Ri, use the hash index to find matches</li>
     </script>
     <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 
+    
   </div>
   <div class="column col-2">
     <div class="book-toc">
@@ -385,29 +405,21 @@ function go_bottom() {
 </div>
 
 
-<script>
-  $('.book-content img').each(function () {
-      $(this).wrap("<a href='" + this.src + "'>").parent('a').addClass('gallery-item');
-  })
-  $(document).ready(function() {
-    $(".book-content").lightGallery({
-        selector: '.gallery-item'
+  
+  <script>
+    $('.book-content img').each(function () {
+        $(this).wrap("<a href='" + this.src + "'>").parent('a').addClass('gallery-item');
+    })
+    $(document).ready(function() {
+      $(".book-content").lightGallery({
+          selector: '.gallery-item'
+      });
     });
-  });
-</script>
+  </script>
 
 
-<script>
-  // add figcaption under image
-  document.querySelectorAll('img').forEach(function(img){
-    if(img.getAttribute('alt')) {
-      let parent = img.parentNode;
-      let figcaption = document.createElement('figcaption');
-      figcaption.innerHTML = img.getAttribute('alt');
-      parent.appendChild(figcaption);
-    }
-  })
-</script>
+
+<script src="/NCTU-Coursenote/js/book-post.js"></script>
         </div>
       </div>
     </div>

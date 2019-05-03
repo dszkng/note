@@ -19,69 +19,6 @@ img {
   max-width: 100%;
   max-height: 100%; }
 
-.book-nav .site-meta {
-  margin: 0.5rem 0 0.875rem 0; }
-  .book-nav .site-meta a {
-    color: #2f2f2f; }
-  .book-nav .site-meta a:hover {
-    color: #2f2f2f; }
-
-.book-nav ul {
-  list-style: none; }
-
-.book-nav .book-nav-blog, .book-nav .book-nav-book {
-  margin: 0; }
-
-.book-nav .book-nav-book ul {
-  margin: 0.5rem; }
-
-.book-nav a {
-  color: #2f2f2f; }
-
-.book-nav a:hover {
-  color: gray; }
-
-.book-nav .book-nav-current {
-  color: #004ed0; }
-
-.list-group {
-  margin-top: 0.5rem; }
-  .list-group .list-group-content {
-    width: 150px; }
-    .list-group .list-group-content h6 {
-      font-weight: bold;
-      padding-top: 0.625rem;
-      padding-bottom: 0.375rem;
-      margin: 0; }
-    .list-group .list-group-content div {
-      padding-bottom: 0.25rem;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap; }
-
-.list-group-title {
-  background-color: white;
-  border: 2px solid #2f2f2f;
-  border-radius: 50%;
-  content: "";
-  display: block;
-  height: .4rem;
-  left: -1.05rem;
-  position: absolute;
-  top: .9rem;
-  width: .4rem; }
-
-.list-group-item {
-  position: relative; }
-  .list-group-item ::before {
-    background: #ddd;
-    content: "";
-    height: 100%;
-    left: -18px;
-    position: absolute;
-    top: 1.3rem;
-    width: 1.2px; }
-
 .book-container {
   height: 100%;
   padding: 1rem 100px;
@@ -94,7 +31,8 @@ img {
   color: #6d6d6d; }
 
 .book-content {
-  margin-top: 0.5rem; }
+  margin-top: 0.5rem;
+  margin-left: 0.5rem; }
 
 .home-post-title h3 {
   font-size: 1rem;
@@ -103,36 +41,6 @@ img {
 .home-post-excerpt {
   font-size: 14px;
   color: #858585; }
-
-.home-post {
-  max-width: 40rem;
-  margin-bottom: 2rem; }
-  .home-post a {
-    color: #2f2f2f; }
-  .home-post a:hover {
-    color: #004ed0; }
-
-.home-post-meta {
-  font-size: 0.7rem;
-  border-bottom: 1px solid #ddd;
-  padding-bottom: 0.625rem;
-  margin: 0.75rem 0; }
-
-.archive-list-item {
-  list-style: none;
-  margin: 0; }
-  .archive-list-item a {
-    color: #004ed0;
-    margin-left: 0.5rem; }
-
-.category-list-item a {
-  color: #004ed0; }
-
-.category-list-item ol, .category-list-item ul {
-  margin-top: 0; }
-
-.tag-list-item a {
-  color: #004ed0; }
 
 .book-post {
   max-width: 95%; }
@@ -170,17 +78,16 @@ img {
     border: 0.5px solid #ddd;
     background-color: #ddd;
     margin: 1rem 0; }
-  .book-post dl, .book-post ol, .book-post ul {
-    list-style: disc;
-    margin: 0 0 0 1rem; }
-  .book-post table {
-    width: 100%;
+  .book-post .table-wrapper {
     max-width: 100%;
-    margin: 1.5rem 0; }
-    .book-post table th, .book-post table td {
-      padding: 0.75rem;
-      border-top: 1px solid #ddd;
-      text-align: left; }
+    margin: 1.5rem 0;
+    overflow: auto; }
+    .book-post .table-wrapper table {
+      width: 100%; }
+      .book-post .table-wrapper table th, .book-post .table-wrapper table td {
+        padding: 0.75rem;
+        border-top: 1px solid #ddd;
+        text-align: left; }
   .book-post li {
     margin-top: .4rem;
     margin-bottom: .4rem; }
@@ -355,6 +262,28 @@ img {
     .book-toc .book-tocbot-menu a:hover {
       color: gray; }
 
+.book-sidebar .site-meta {
+  margin: 0.5rem 0 0.875rem 0; }
+  .book-sidebar .site-meta a {
+    color: #2f2f2f; }
+  .book-sidebar .site-meta a:hover {
+    color: #2f2f2f; }
+
+.book-sidebar .sidebar-content ul {
+  list-style: none;
+  margin-left: 0; }
+  .book-sidebar .sidebar-content ul ul {
+    margin: 0 0 0 .5rem; }
+
+.book-sidebar a {
+  color: #2f2f2f; }
+
+.book-sidebar a:hover {
+  color: gray; }
+
+.book-sidebar .book-sidebar-current {
+  color: #004ed0; }
+
 #disqus_thread {
   margin: 50px 0; }
 
@@ -363,17 +292,3 @@ img {
 
 .left {
   text-align: left; }
-
-.pager {
-  text-align: center;
-  margin: 2rem; }
-  .pager a, .pager span {
-    color: #004ed0;
-    padding: 0.25rem 0.375rem;
-    margin: 0 2px; }
-  .pager a:hover {
-    color: #6d6d6d; }
-  .pager .current {
-    color: white;
-    background-color: #004ed0;
-    font-weight: bold; }

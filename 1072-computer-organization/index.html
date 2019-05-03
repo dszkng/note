@@ -4,6 +4,10 @@
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="UTF-8">
 
+    
+      <link rel="icon" href="/NCTU-Coursenote/shell.png">
+    
+
     <title>
         
           計算機組織 - NCTU-Coursenote
@@ -39,6 +43,7 @@
       <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.12/js/lightgallery-all.min.js"></script>
     
     
+    <!-- katex -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 </head>
 
@@ -47,34 +52,47 @@
 <div class="container">
   <div class="book-container">
     <div class="columns">
-      
-      <div class="column col-2 book-nav">
-        <h4 class="site-meta">
+      <div class="column col-2 book-sidebar">
+          <h4 class="site-meta">
     <a href="/NCTU-Coursenote/">NCTU-Coursenote</a>
 </h4>
 
-
-
 <div class="sidebar-content">
-    
-        
-            <ul class="book-nav-book"><li><a href="/NCTU-Coursenote/timeline">時間軸</a></li></ul>
-        
-            <ul class="book-nav-book"><li><span>大一</span></li></ul>
-        
-            <ul class="book-nav-book"><li><span>大二</span><ul class="book-nav-book"><li><a href="/NCTU-Coursenote/1072-intro-to-formal-language">正規語言概論</a></li></ul><ul class="book-nav-book"><li><a href="/NCTU-Coursenote/1072-intro-to-dbms">資料庫系統概論</a></li></ul><ul class="book-nav-book"><li><a href="/NCTU-Coursenote/1072-computer-organization">計算機組織</a></li></ul><ul class="book-nav-book"><li><a href="/NCTU-Coursenote/1072-signals-and-systems">訊號與系統</a></li></ul><ul class="book-nav-book"><li><a href="/NCTU-Coursenote/1072-intro-to-music-theory">音樂理論導論</a></li></ul><ul class="book-nav-book"><li><a href="/NCTU-Coursenote/1072-compiler-design">編譯器設計</a></li></ul></li></ul>
-        
-            <ul class="book-nav-book"><li><span>大三</span></li></ul>
-        
-            <ul class="book-nav-book"><li><span>大四</span></li></ul>
-        
-    
+    <ul>
+<li><a href="/NCTU-Coursenote">首頁</a></li>
+<li>大一</li>
+<li>大二
+<ul>
+<li><a href="/NCTU-Coursenote/1072-intro-to-formal-language">正規語言概論</a></li>
+<li><a href="/NCTU-Coursenote/1072-intro-to-dbms">資料庫系統概論</a></li>
+<li><a href="/NCTU-Coursenote/1072-computer-organization">計算機組織</a></li>
+<li><a href="/NCTU-Coursenote/1072-signals-and-systems">訊號與系統</a></li>
+<li><a href="/NCTU-Coursenote/1072-intro-to-music-theory">音樂理論導論</a></li>
+<li><a href="/NCTU-Coursenote/1072-compiler-design">編譯器設計</a></li>
+</ul>
+</li>
+<li>大三</li>
+<li>大四</li>
+<li>網路相關
+<ul>
+<li><a href="/NCTU-Coursenote/network-associate/landesign">LAN Design</a></li>
+<li>Layer 2
+<ul>
+<li><a href="/NCTU-Coursenote/network-associate/layer2/vlan">VLAN</a></li>
+<li><a href="/NCTU-Coursenote/network-associate/layer2/vtp">VTP</a></li>
+<li><a href="/NCTU-Coursenote/network-associate/layer2/stp">STP</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
 </div>
 
 <script>
 document.querySelectorAll('.sidebar-content a').forEach(function(item){ 
     if(item.href === window.location.href || item.href === window.location.href.slice(0, -1)) {
-        item.className = "book-nav-current"
+        item.className = "book-sidebar-current"
     }
 })
 </script>
@@ -86,7 +104,7 @@ document.querySelectorAll('.sidebar-content a').forEach(function(item){
   <div class="column col-10">
     <div class="book-post">
       <h1 id="計算機組織">計算機組織</h1>
-<h2 id="1-computer-abstractions-and-technology">1. Computer Abstractions and Technology</h2>
+<h2 id="computer-abstractions-and-technology">Computer Abstractions and Technology</h2>
 <h3 id="abstractions-architecture">Abstractions architecture</h3>
 <p><img src="2019-04-17-21-22-13.png" alt></p>
 <p>ISA: Instruction set architecture (The hardware/software interface)</p>
@@ -199,7 +217,7 @@ document.querySelectorAll('.sidebar-content a').forEach(function(item){
 <blockquote>
 <p>ps: MIPS無法拿來當作電腦效能的依據（<strong>因為沒有考慮到 Instruction Count</strong>）</p>
 </blockquote>
-<h2 id="2-instructions-language-of-the-computer">2. Instructions: Language of the Computer</h2>
+<h2 id="instructions-language-of-the-computer">Instructions: Language of the Computer</h2>
 <p>以下皆以 MIPS Instruction Set 為例子</p>
 <h3 id="design-principle">Design Principle</h3>
 <ol>
@@ -499,7 +517,7 @@ document.querySelectorAll('.sidebar-content a').forEach(function(item){
 <ul>
 <li><a href="https://www.youtube.com/watch?v=QPpTBjf4Yrk" target="_blank" rel="noopener">計算機組織 Chapter 2.10 Synchronization - Load link &amp; Store conditional instructions - 朱宗賢老師</a></li>
 </ul>
-<h2 id="3-arithmetic-for-computers">3. Arithmetic for Computers</h2>
+<h2 id="arithmetic-for-computers">Arithmetic for Computers</h2>
 <h3 id="multiplication">Multiplication</h3>
 <ul>
 <li><a href="https://www.youtube.com/watch?v=IeRm--sokdg" target="_blank" rel="noopener">12. Implementing Multiplication</a></li>
@@ -516,25 +534,924 @@ document.querySelectorAll('.sidebar-content a').forEach(function(item){
 <p>待補</p>
 <h4 id="ieee-754">IEEE 754</h4>
 <p><a href="https://www.youtube.com/watch?v=oaf4v4wOuGI" target="_blank" rel="noopener">Computer Science Concepts: IEEE 754 - Learn Freely</a></p>
-<h2 id="ch4">Ch4</h2>
-<h3 id="p26">p26</h3>
-<p>Store:</p>
-<p>RegWrite - 0<br>
-ALUSrc - 1 (引進constant)<br>
-MemWrite - 1<br>
-MemRead - 0<br>
-MemtoReg - don’t care</p>
+<h2 id="the-processor">The Processor</h2>
+<h3 id="cpu-overview">CPU Overview</h3>
+<p><img src="2019-05-02-23-18-16.png" alt></p>
+<p>因為不能把很多線接在一起，所以需要 MUX，還需要有 Control Unit 來控制 MUX：</p>
+<p><img src="2019-05-02-23-14-52.png" alt></p>
+<h3 id="instruction-fetch">Instruction Fetch</h3>
+<p><img src="2019-05-02-23-26-42.png" alt></p>
+<ul>
+<li>PC: 32-bits register</li>
+<li>每次執行完指令後將 PC + 4 (1 個 instruction 4 bytes)</li>
+</ul>
+<h3 id="instructions-datapath">Instructions Datapath</h3>
+<h4 id="r-format">R-Format</h4>
+<table>
+<thead>
+<tr>
+<th>6bits</th>
+<th>5bits</th>
+<th>5bits</th>
+<th>5bits</th>
+<th>5bits</th>
+<th>6bits</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>op</td>
+<td>rs</td>
+<td>rt</td>
+<td>rd</td>
+<td>shamt</td>
+<td>funct</td>
+</tr>
+</tbody>
+</table>
+<p><img src="2019-05-02-23-31-53.png" alt></p>
+<ul>
+<li>讀 2 個 input: Read Register 1, 2</li>
+<li>進 ALU 做運算</li>
+<li>把算出來的結果存到 Write Register</li>
+</ul>
+<h4 id="i-format">I-Format</h4>
+<table>
+<thead>
+<tr>
+<th>6bits</th>
+<th>5bits</th>
+<th>5bits</th>
+<th>16bits</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>op</td>
+<td>rs</td>
+<td>rt</td>
+<td>immediate</td>
+</tr>
+</tbody>
+</table>
+<h5 id="load-store">Load/Store</h5>
+<p><img src="2019-05-02-23-34-01.png" alt></p>
+<ul>
+<li>Sign-extend (以 ALU 實做) 用作將 Address 做 16-bits 的 offset (I-type 的後 16-bits 要轉成 32-bits)</li>
+<li>Load: 讀 Memory 的資料然後更新 Register</li>
+<li>Store: 將 Register 的資料寫到 Memory</li>
+</ul>
+<h5 id="branch">Branch</h5>
+<p><a href="#conditional-branch">Conditional Branch</a></p>
+<p><img src="2019-05-02-23-51-53.png" alt></p>
+<ul>
+<li>讀 2 個 Register</li>
+<li>比較兩個 Register (用 ALU 的 Substract 還有 Check Zero output)</li>
+<li>算 Target Address
+<ul>
+<li>Sign-extended</li>
+<li>左 shift 2-bits (因為一個 word 4-bits)</li>
+<li>加上 PC + 4</li>
+</ul>
+</li>
+</ul>
+<h4 id="j-format">J-Format</h4>
+<table>
+<thead>
+<tr>
+<th>6bits</th>
+<th>26bits</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>op</td>
+<td>target address</td>
+</tr>
+</tbody>
+</table>
+<p><a href="#unconditional-branch">Unconditional branch</a></p>
+<ul>
+<li>舊 PC 的前 4-bits</li>
+<li>26-bits jump address</li>
+<li>00</li>
+</ul>
+<h4 id="組合在一起">組合在一起</h4>
+<p><img src="2019-05-03-00-34-27.png" alt></p>
+<h3 id="control-unit">Control Unit</h3>
+<h4 id="alu-control">ALU Control</h4>
+<table>
+<thead>
+<tr>
+<th>ALU control</th>
+<th>Function</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0000</td>
+<td>AND</td>
+</tr>
+<tr>
+<td>0001</td>
+<td>OR</td>
+</tr>
+<tr>
+<td>0010</td>
+<td>add</td>
+</tr>
+<tr>
+<td>0110</td>
+<td>subtract</td>
+</tr>
+<tr>
+<td>0111</td>
+<td>set-on-less-than</td>
+</tr>
+<tr>
+<td>1100</td>
+<td>NOR</td>
+</tr>
+</tbody>
+</table>
+<p>分析一下 Instruction 需要 ALU 做什麼事：</p>
+<ul>
+<li>分 4 類
+<ul>
+<li>Load/Store: add</li>
+<li>Branch: substract</li>
+<li>R-type: depend on funct-field</li>
+</ul>
+</li>
+<li>讀到 10 要再讀 funct field (由 <a href="#second-level-control">second level</a> 產生出 ALU signal)</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>opcode</th>
+<th>ALUOp</th>
+<th>Operation</th>
+<th>funct</th>
+<th>ALU function</th>
+<th>ALU control</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>lw</td>
+<td>00</td>
+<td>load word</td>
+<td>XXXXXX</td>
+<td>add</td>
+<td>0010</td>
+</tr>
+<tr>
+<td>sw</td>
+<td>00</td>
+<td>store word</td>
+<td>XXXXXX</td>
+<td>add</td>
+<td>0010</td>
+</tr>
+<tr>
+<td>beq</td>
+<td>01</td>
+<td>branch equal</td>
+<td>XXXXXX</td>
+<td>subtract</td>
+<td>0110</td>
+</tr>
+<tr>
+<td>R-type</td>
+<td>10</td>
+<td>add</td>
+<td>100000</td>
+<td>add</td>
+<td>0010</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>subtract</td>
+<td>100010</td>
+<td>subtract</td>
+<td>0110</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>AND</td>
+<td>100100</td>
+<td>AND</td>
+<td>0000</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>OR</td>
+<td>100101</td>
+<td>OR</td>
+<td>0001</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>set-on-less-than</td>
+<td>101010</td>
+<td>set-on-less-than</td>
+<td>0111</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>25:21: always read</li>
+<li>20:16: 除了 load 都為 read</li>
+<li>R-type 的 rd, Load 的 rt: write</li>
+<li>address: sign-extended, add</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Instruction</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:11</th>
+<th>10:6</th>
+<th>5:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>R-type</td>
+<td>0</td>
+<td>rs</td>
+<td>rt</td>
+<td>rd</td>
+<td>shamt</td>
+<td>funct</td>
+</tr>
+<tr>
+<td>Load/Store</td>
+<td>35/43</td>
+<td>rs</td>
+<td>rt</td>
+<td></td>
+<td>address</td>
+<td></td>
+</tr>
+<tr>
+<td>Branch</td>
+<td>4</td>
+<td>rs</td>
+<td>rt</td>
+<td></td>
+<td>address</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h4 id="r-type">R-type</h4>
+<p><img src="2019-05-03-11-08-03.png" alt></p>
+<h4 id="load">Load</h4>
+<p><img src="2019-05-03-11-08-49.png" alt></p>
+<h4 id="branch-on-equal">Branch-on-Equal</h4>
+<p><img src="2019-05-03-11-09-40.png" alt></p>
+<h4 id="jump">Jump</h4>
+<p><img src="2019-05-03-11-24-55.png" alt></p>
+<h4 id="control-unit-settings">Control Unit Settings</h4>
+<table>
+<thead>
+<tr>
+<th>Instruction</th>
+<th style="text-align:center">RegDst</th>
+<th style="text-align:center">ALUSrc</th>
+<th style="text-align:center">MemToReg</th>
+<th style="text-align:center">RegWrite</th>
+<th style="text-align:center">MemRead</th>
+<th style="text-align:center">MemWrite</th>
+<th style="text-align:center">Branch</th>
+<th style="text-align:center">ALUOp1</th>
+<th style="text-align:center">ALUOp0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>R-format</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+</tr>
+<tr>
+<td>lw</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+</tr>
+<tr>
+<td>sw</td>
+<td style="text-align:center">x</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">x</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+</tr>
+<tr>
+<td>beq</td>
+<td style="text-align:center">x</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">x</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+</tr>
+</tbody>
+</table>
+<h4 id="first-level-control">First-Level Control</h4>
+<p>把 Input 的 op 和 Output 的 Control Signal 找出關係：</p>
+<table>
+<thead>
+<tr>
+<th>Input or output</th>
+<th>Signal name</th>
+<th>R-format</th>
+<th>lw</th>
+<th>sw</th>
+<th>beq</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Inputs</td>
+<td>Op5</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td></td>
+<td>Op4</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td></td>
+<td>Op3</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td></td>
+<td>Op2</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td></td>
+<td>Op1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td></td>
+<td>Op0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Outputs</td>
+<td>RegDst</td>
+<td>1</td>
+<td>0</td>
+<td>X</td>
+<td>X</td>
+</tr>
+<tr>
+<td></td>
+<td>ALUSrc</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td></td>
+<td>MemtoReg</td>
+<td>0</td>
+<td>1</td>
+<td>X</td>
+<td>X</td>
+</tr>
+<tr>
+<td></td>
+<td>RegWrite</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td></td>
+<td>MemRead</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td></td>
+<td>MemWrite</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td></td>
+<td>Branch</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td></td>
+<td>ALUOp1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td></td>
+<td>ALUOp2</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p><img src="2019-05-03-12-16-50.png" alt></p>
+<h4 id="second-level-control">Second-Level Control</h4>
+<p>將 <a href="#alu-control">ALU Control</a> 的表格：</p>
+<table>
+<thead>
+<tr>
+<th>opcode</th>
+<th>ALUOp</th>
+<th>Operation</th>
+<th>funct</th>
+<th>ALU function</th>
+<th>ALU control</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>lw</td>
+<td>00</td>
+<td>load word</td>
+<td>XXXXXX</td>
+<td>add</td>
+<td>0010</td>
+</tr>
+<tr>
+<td>sw</td>
+<td>00</td>
+<td>store word</td>
+<td>XXXXXX</td>
+<td>add</td>
+<td>0010</td>
+</tr>
+<tr>
+<td>beq</td>
+<td>01</td>
+<td>branch equal</td>
+<td>XXXXXX</td>
+<td>subtract</td>
+<td>0110</td>
+</tr>
+<tr>
+<td>R-type</td>
+<td>10</td>
+<td>add</td>
+<td>100000</td>
+<td>add</td>
+<td>0010</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>subtract</td>
+<td>100010</td>
+<td>subtract</td>
+<td>0110</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>AND</td>
+<td>100100</td>
+<td>AND</td>
+<td>0000</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>OR</td>
+<td>100101</td>
+<td>OR</td>
+<td>0001</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>set-on-less-than</td>
+<td>101010</td>
+<td>set-on-less-than</td>
+<td>0111</td>
+</tr>
+</tbody>
+</table>
+<p>整理一下：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">ALUOp1</th>
+<th style="text-align:center">ALUOp0</th>
+<th style="text-align:center">F5</th>
+<th style="text-align:center">F4</th>
+<th style="text-align:center">F3</th>
+<th style="text-align:center">F2</th>
+<th style="text-align:center">F1</th>
+<th style="text-align:center">F0</th>
+<th style="text-align:center">ALU control</th>
+<th style="text-align:center">Operation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">0010</td>
+<td style="text-align:center">lw/sw</td>
+</tr>
+<tr>
+<td style="text-align:center">X</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">0110</td>
+<td style="text-align:center">beq</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0010</td>
+<td style="text-align:center">add</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0110</td>
+<td style="text-align:center">sub</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0000</td>
+<td style="text-align:center">AND</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0001</td>
+<td style="text-align:center">OR</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0111</td>
+<td style="text-align:center">slt</td>
+</tr>
+</tbody>
+</table>
+<p>分析 ALU Control 各 bit 的算式，可以發現有些地方結合後其實就是 Don’t care：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">ALUOp1</th>
+<th style="text-align:center">ALUOp0</th>
+<th style="text-align:center">F5</th>
+<th style="text-align:center">F4</th>
+<th style="text-align:center">F3</th>
+<th style="text-align:center">F2</th>
+<th style="text-align:center">F1</th>
+<th style="text-align:center">F0</th>
+<th style="text-align:center">ALU control</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">X</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">0<mark>1</mark>10</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center"><mark>0</mark></td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0<mark>1</mark>10</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center"><mark>1</mark></td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0<mark>1</mark>11</td>
+</tr>
+</tbody>
+</table>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>A</mi><mi>L</mi><mi>U</mi><mi>c</mi><mi>t</mi><mi>r</mi><mn>2</mn><mo>=</mo><mi>A</mi><mi>L</mi><mi>U</mi><mi>o</mi><mi>p</mi><mn>0</mn><mo>+</mo><mi>A</mi><mi>L</mi><mi>U</mi><mi>o</mi><mi>p</mi><mn>1</mn><mo>⋅</mo><mi>f</mi><mi>u</mi><mi>n</mi><mi>c</mi><msup><mn>2</mn><mo mathvariant="normal">′</mo></msup><mo>⋅</mo><mi>f</mi><mi>u</mi><mi>n</mi><mi>c</mi><mn>1</mn><mo>⋅</mo><mi>f</mi><mi>u</mi><mi>n</mi><mi>c</mi><msup><mn>0</mn><mo mathvariant="normal">′</mo></msup></mrow><annotation encoding="application/x-tex">ALUctr2 = ALUop0 + ALUop1 \cdot func2&#x27; \cdot func1 \cdot func0&#x27;</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault">A</span><span class="mord mathdefault">L</span><span class="mord mathdefault" style="margin-right:0.10903em;">U</span><span class="mord mathdefault">c</span><span class="mord mathdefault">t</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord">2</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8777699999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">A</span><span class="mord mathdefault">L</span><span class="mord mathdefault" style="margin-right:0.10903em;">U</span><span class="mord mathdefault">o</span><span class="mord mathdefault">p</span><span class="mord">0</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8777699999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">A</span><span class="mord mathdefault">L</span><span class="mord mathdefault" style="margin-right:0.10903em;">U</span><span class="mord mathdefault">o</span><span class="mord mathdefault">p</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.946332em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mord mathdefault">u</span><span class="mord mathdefault">n</span><span class="mord mathdefault">c</span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mord mathdefault">u</span><span class="mord mathdefault">n</span><span class="mord mathdefault">c</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.946332em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mord mathdefault">u</span><span class="mord mathdefault">n</span><span class="mord mathdefault">c</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span></span></span></span></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">ALUOp1</th>
+<th style="text-align:center">ALUOp0</th>
+<th style="text-align:center">F5</th>
+<th style="text-align:center">F4</th>
+<th style="text-align:center">F3</th>
+<th style="text-align:center">F2</th>
+<th style="text-align:center">F1</th>
+<th style="text-align:center">F0</th>
+<th style="text-align:center">ALU control</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center"><mark>0</mark></td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">00<mark>1</mark>0</td>
+</tr>
+<tr>
+<td style="text-align:center">X</td>
+<td style="text-align:center"><mark>1</mark></td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">01<mark>1</mark>0</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center"><mark>0</mark></td>
+<td style="text-align:center">0</td>
+<td style="text-align:center"><mark>0</mark></td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">00<mark>1</mark>0</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center"><mark>0</mark></td>
+<td style="text-align:center">0</td>
+<td style="text-align:center"><mark>1</mark></td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">01<mark>1</mark>0</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center"><mark>1</mark></td>
+<td style="text-align:center">0</td>
+<td style="text-align:center"><mark>1</mark></td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">01<mark>1</mark>1</td>
+</tr>
+</tbody>
+</table>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>A</mi><mi>L</mi><mi>U</mi><mi>c</mi><mi>t</mi><mi>r</mi><mn>1</mn><mo>=</mo><mi>A</mi><mi>L</mi><mi>U</mi><mi>o</mi><mi>p</mi><msup><mn>1</mn><mo mathvariant="normal">′</mo></msup><mo>+</mo><mi>A</mi><mi>L</mi><mi>U</mi><mi>o</mi><mi>p</mi><mn>1</mn><mo>⋅</mo><mi>f</mi><mi>u</mi><mi>n</mi><mi>c</mi><msup><mn>2</mn><mo mathvariant="normal">′</mo></msup><mo>⋅</mo><mi>f</mi><mi>u</mi><mi>n</mi><mi>c</mi><msup><mn>0</mn><mo mathvariant="normal">′</mo></msup></mrow><annotation encoding="application/x-tex">ALUctr1 = ALUop1&#x27; + ALUop1 \cdot func2&#x27; \cdot func0&#x27;</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault">A</span><span class="mord mathdefault">L</span><span class="mord mathdefault" style="margin-right:0.10903em;">U</span><span class="mord mathdefault">c</span><span class="mord mathdefault">t</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.946332em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">A</span><span class="mord mathdefault">L</span><span class="mord mathdefault" style="margin-right:0.10903em;">U</span><span class="mord mathdefault">o</span><span class="mord mathdefault">p</span><span class="mord"><span class="mord">1</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8777699999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">A</span><span class="mord mathdefault">L</span><span class="mord mathdefault" style="margin-right:0.10903em;">U</span><span class="mord mathdefault">o</span><span class="mord mathdefault">p</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.946332em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mord mathdefault">u</span><span class="mord mathdefault">n</span><span class="mord mathdefault">c</span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.946332em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mord mathdefault">u</span><span class="mord mathdefault">n</span><span class="mord mathdefault">c</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span></span></span></span></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">ALUOp1</th>
+<th style="text-align:center">ALUOp0</th>
+<th style="text-align:center">F5</th>
+<th style="text-align:center">F4</th>
+<th style="text-align:center">F3</th>
+<th style="text-align:center">F2</th>
+<th style="text-align:center">F1</th>
+<th style="text-align:center">F0</th>
+<th style="text-align:center">ALU control</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">000<mark>1</mark></td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">011<mark>1</mark></td>
+</tr>
+</tbody>
+</table>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>A</mi><mi>L</mi><mi>U</mi><mi>c</mi><mi>t</mi><mi>r</mi><mn>0</mn><mo>=</mo><mi>A</mi><mi>L</mi><mi>U</mi><mi>o</mi><mi>p</mi><mn>1</mn><mo>⋅</mo><mi>f</mi><mi>u</mi><mi>n</mi><mi>c</mi><msup><mn>3</mn><mo mathvariant="normal">′</mo></msup><mo>⋅</mo><mi>f</mi><mi>u</mi><mi>n</mi><mi>c</mi><mn>2</mn><mo>⋅</mo><mi>f</mi><mi>u</mi><mi>n</mi><mi>c</mi><msup><mn>1</mn><mo mathvariant="normal">′</mo></msup><mo>⋅</mo><mi>f</mi><mi>u</mi><mi>n</mi><mi>c</mi><mn>0</mn><mo>+</mo><mi>A</mi><mi>L</mi><mi>U</mi><mi>o</mi><mi>p</mi><mn>1</mn><mo>⋅</mo><mi>f</mi><mi>u</mi><mi>n</mi><mi>c</mi><mn>3</mn><mo>⋅</mo><mi>f</mi><mi>u</mi><mi>n</mi><mi>c</mi><msup><mn>2</mn><mo mathvariant="normal">′</mo></msup><mo>⋅</mo><mi>f</mi><mi>u</mi><mi>n</mi><mi>c</mi><mn>1</mn><mo>⋅</mo><mi>f</mi><mi>u</mi><mi>n</mi><mi>c</mi><msup><mn>0</mn><mo mathvariant="normal">′</mo></msup></mrow><annotation encoding="application/x-tex">ALUctr0 = ALUop1 \cdot func3&#x27; \cdot func2 \cdot func1&#x27; \cdot func0 + ALUop1 \cdot func3 \cdot func2&#x27; \cdot func1 \cdot func0&#x27;</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault">A</span><span class="mord mathdefault">L</span><span class="mord mathdefault" style="margin-right:0.10903em;">U</span><span class="mord mathdefault">c</span><span class="mord mathdefault">t</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord">0</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8777699999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">A</span><span class="mord mathdefault">L</span><span class="mord mathdefault" style="margin-right:0.10903em;">U</span><span class="mord mathdefault">o</span><span class="mord mathdefault">p</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.946332em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mord mathdefault">u</span><span class="mord mathdefault">n</span><span class="mord mathdefault">c</span><span class="mord"><span class="mord">3</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mord mathdefault">u</span><span class="mord mathdefault">n</span><span class="mord mathdefault">c</span><span class="mord">2</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.946332em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mord mathdefault">u</span><span class="mord mathdefault">n</span><span class="mord mathdefault">c</span><span class="mord"><span class="mord">1</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mord mathdefault">u</span><span class="mord mathdefault">n</span><span class="mord mathdefault">c</span><span class="mord">0</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8777699999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">A</span><span class="mord mathdefault">L</span><span class="mord mathdefault" style="margin-right:0.10903em;">U</span><span class="mord mathdefault">o</span><span class="mord mathdefault">p</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mord mathdefault">u</span><span class="mord mathdefault">n</span><span class="mord mathdefault">c</span><span class="mord">3</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.946332em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mord mathdefault">u</span><span class="mord mathdefault">n</span><span class="mord mathdefault">c</span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mord mathdefault">u</span><span class="mord mathdefault">n</span><span class="mord mathdefault">c</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.946332em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mord mathdefault">u</span><span class="mord mathdefault">n</span><span class="mord mathdefault">c</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span></span></span></span></p>
+<p><img src="2019-05-03-12-36-54.png" alt></p>
+<h3 id="performance-v2">Performance</h3>
+<ul>
+<li>Critical path: load instruction
+<ul>
+<li><strong>Instruction memory <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>→</mo></mrow><annotation encoding="application/x-tex">\to</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">→</span></span></span></span> register file <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>→</mo></mrow><annotation encoding="application/x-tex">\to</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">→</span></span></span></span> ALU <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>→</mo></mrow><annotation encoding="application/x-tex">\to</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">→</span></span></span></span> data memory <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>→</mo></mrow><annotation encoding="application/x-tex">\to</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">→</span></span></span></span> register file</strong></li>
+</ul>
+</li>
+<li>Violates design principle: Making the common case fast</li>
+</ul>
+<h3 id="p37">p37</h3>
+<p>最理想:<br>
+一個cycle執行完一個指令<br>
+5個 stage 同時執行不同指令</p>
+<h3 id="p42">p42</h3>
+<p>因為 hazard 碰到很多問題</p>
+<ol>
+<li>Structure hazards: 硬體架構，大家都要用但只有一份resouse，要用就要排隊</li>
+<li>Data hazard: 前一個指令算完時還讀不到 (前一個指令第5個stage才存，但我第2個stage就要)</li>
+<li>Control hazard: 下一個clock cycle不知道要執行甚麼指令</li>
+</ol>
+<h3 id="p44">p44</h3>
+<p>bubble: no opertation<br>
+panelty: 願景:一個cycle完成一個指令 第一個指令做完 &gt; no operation &gt; no operation &gt; 第二個指令執行完畢 : 50%的使用率</p>
+<h3 id="p45">p45</h3>
+<p>forwarding: 只要拿到值就開始算，不用等存到 reg 再讀出來</p>
+<h3 id="p46">p46</h3>
+<p>Load &amp; R-type</p>
+<p>lw 在第四個 stage 結束後才讀出來</p>
+<p>ex 後是 mem address 不是 data，不能直接拉 ex 後那條</p>
+<h3 id="p47">p47</h3>
+<p>左 lw 與 add 相鄰，中間要 no operation &gt; 多了兩個 clock cycle</p>
+<p>reorder 指令，讓 lw 與 add 間隔兩個 cycle</p>
+<h3 id="p48">p48</h3>
+<p>beq 下一個 Instruction fetch 不確定要執行甚麼指令</p>
+<h3 id="p49">p49</h3>
+<p>branch 結果知道後才知道要跳還是不要跳</p>
+<h3 id="p50">p50</h3>
+<p>猜!</p>
+<h3 id="p51">p51</h3>
+<p>上: 猜不要跳，猜對了<br>
+下: 猜不要跳，猜錯了，lw 在 pipeline instruction fetch，但不應該被執行，加一些硬體的設定直接 flush 掉，讓 lw 後面都變成 no operation，跳到or繼續執行</p>
 <h3 id="p52">p52</h3>
-<p>分 4 類<br>
-lw, sw, beq, r-type<br>
-由 second level gen 出 ALU signal<br>
-(讀 10 要再讀 funct field)</p>
-<h3 id="p59">p59</h3>
-<p>ALU_ctrl = ALUOp + Instruction[5:0]</p>
-<h1 id="buttom">Buttom</h1>
+<p>不是亂猜</p>
+<p>static:<br>
+每次都猜跳</p>
+<p>dynamic:<br>
+你上次猜對還猜錯，猜對了繼續猜同樣的，猜錯了跟個性有關，猜錯一次就換，猜錯多次才換</p>
+<h3 id="p53">p53</h3>
+<p>increse instruction throughput<br>
+一個時間點每個stage執行不同指令<br>
+每個instruction有相同的latency</p>
+<h3 id="p54">p54</h3>
+<p>由右往左的常有 hazard 問題</p>
+<p><img src="2019-05-02-14-26-23.png" alt></p>
+<h3 id="p55">p55</h3>
+<p>一條線有3個值 &gt; 加 pipeline register</p>
+<p>保持指令資訊</p>
+<h3 id="p56">p56</h3>
+<p>single-clock-cycle: 分析單一 operation<br>
+muli-cycle pipline diagram: 分析各 operation 關係</p>
+<h3 id="p61">p61</h3>
+<p>第 i + 3 個 write register，不是第 i 個的 write register</p>
+<h3 id="p62">p62</h3>
+<p>把 write register pack 起來，一起走</p>
+<h3 id="p69">p69</h3>
+<p>為甚麼不把 RegDst 搬到前面，可以少掉 5 bit?<br>
+MUX 需要 input selection (RegDst) ，由control unit 產生，如果放在第二個 stage RegDst 還沒產生</p>
+<h3 id="p70">p70</h3>
+<p>回去 trace 一遍</p>
+<h3 id="p71">p71</h3>
+<p>control signal 分類: WB, M, EX</p>
+<p>用過的就丟了</p>
+<h3 id="p72">p72</h3>
+<p>RegWrt 要滿足打包的原則，所以會被 pack 到 pipeline regiter</p>
+<h3 id="p74">p74</h3>
+<p>什麼時候可以解決 hazard?</p>
 
     </div>
     
+      
     <div id="disqus_thread"></div>
     <script>
     (function() { // DON'T EDIT BELOW THIS LINE
@@ -546,6 +1463,7 @@ lw, sw, beq, r-type<br>
     </script>
     <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 
+    
   </div>
   <div class="column col-2">
     <div class="book-toc">
@@ -609,29 +1527,21 @@ function go_bottom() {
 </div>
 
 
-<script>
-  $('.book-content img').each(function () {
-      $(this).wrap("<a href='" + this.src + "'>").parent('a').addClass('gallery-item');
-  })
-  $(document).ready(function() {
-    $(".book-content").lightGallery({
-        selector: '.gallery-item'
+  
+  <script>
+    $('.book-content img').each(function () {
+        $(this).wrap("<a href='" + this.src + "'>").parent('a').addClass('gallery-item');
+    })
+    $(document).ready(function() {
+      $(".book-content").lightGallery({
+          selector: '.gallery-item'
+      });
     });
-  });
-</script>
+  </script>
 
 
-<script>
-  // add figcaption under image
-  document.querySelectorAll('img').forEach(function(img){
-    if(img.getAttribute('alt')) {
-      let parent = img.parentNode;
-      let figcaption = document.createElement('figcaption');
-      figcaption.innerHTML = img.getAttribute('alt');
-      parent.appendChild(figcaption);
-    }
-  })
-</script>
+
+<script src="/NCTU-Coursenote/js/book-post.js"></script>
         </div>
       </div>
     </div>

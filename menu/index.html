@@ -100,111 +100,131 @@ document.querySelectorAll('.sidebar-content a').forEach(function(item){
 
       <div class="column col-10">
         <div class="book-content">
-          <div class="book-archive">
-  <!-- Title -->
-  
-    <h2>Archives</h2>
-  
+          <div class="columns">
+  <div class="column col-10">
+    <div class="book-post">
+      <ul>
+<li><a href="/NCTU-Coursenote">首頁</a></li>
+<li>大一</li>
+<li>大二
+<ul>
+<li><a href="/NCTU-Coursenote/1072-intro-to-formal-language">正規語言概論</a></li>
+<li><a href="/NCTU-Coursenote/1072-intro-to-dbms">資料庫系統概論</a></li>
+<li><a href="/NCTU-Coursenote/1072-computer-organization">計算機組織</a></li>
+<li><a href="/NCTU-Coursenote/1072-signals-and-systems">訊號與系統</a></li>
+<li><a href="/NCTU-Coursenote/1072-intro-to-music-theory">音樂理論導論</a></li>
+<li><a href="/NCTU-Coursenote/1072-compiler-design">編譯器設計</a></li>
+</ul>
+</li>
+<li>大三</li>
+<li>大四</li>
+<li>網路相關
+<ul>
+<li><a href="/NCTU-Coursenote/network-associate/landesign">LAN Design</a></li>
+<li>Layer 2
+<ul>
+<li><a href="/NCTU-Coursenote/network-associate/layer2/vlan">VLAN</a></li>
+<li><a href="/NCTU-Coursenote/network-associate/layer2/vtp">VTP</a></li>
+<li><a href="/NCTU-Coursenote/network-associate/layer2/stp">STP</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 
-  
-    <!-- Split post by year -->
+    </div>
     
-  
+      
+    <div id="disqus_thread"></div>
+    <script>
+    (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://at881005.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 
-  
-      <div class="book-archive-years">
-          <ul class="archive-list-item">
-          
-              <li>
-                <span>2019-05-03</span>
-                <a href="/NCTU-Coursenote/1072-computer-organization/">
-                  計算機組織
-                </a>
-              </li>
-          
-              <li>
-                <span>2019-05-03</span>
-                <a href="/NCTU-Coursenote/1072-compiler-design/">
-                  編譯器設計
-                </a>
-              </li>
-          
-              <li>
-                <span>2019-05-02</span>
-                <a href="/NCTU-Coursenote/network-associate/layer2/vtp/">
-                  Untitled
-                </a>
-              </li>
-          
-              <li>
-                <span>2019-05-02</span>
-                <a href="/NCTU-Coursenote/network-associate/layer2/vlan/">
-                  Untitled
-                </a>
-              </li>
-          
-              <li>
-                <span>2019-05-02</span>
-                <a href="/NCTU-Coursenote/network-associate/layer2/stp/">
-                  Untitled
-                </a>
-              </li>
-          
-              <li>
-                <span>2019-05-02</span>
-                <a href="/NCTU-Coursenote/network-associate/landesign/">
-                  Untitled
-                </a>
-              </li>
-          
-              <li>
-                <span>2019-05-02</span>
-                <a href="/NCTU-Coursenote/menu/">
-                  Untitled
-                </a>
-              </li>
-          
-              <li>
-                <span>2019-05-02</span>
-                <a href="/NCTU-Coursenote/home/">
-                  Untitled
-                </a>
-              </li>
-          
-              <li>
-                <span>2019-05-02</span>
-                <a href="/NCTU-Coursenote/1072-signals-and-systems/">
-                  訊號與系統
-                </a>
-              </li>
-          
-              <li>
-                <span>2019-05-02</span>
-                <a href="/NCTU-Coursenote/1072-intro-to-formal-language/">
-                  正規語言概論
-                </a>
-              </li>
-          
-              <li>
-                <span>2019-05-02</span>
-                <a href="/NCTU-Coursenote/1072-intro-to-dbms/">
-                  資料庫系統概論
-                </a>
-              </li>
-          
-              <li>
-                <span>2019-04-28</span>
-                <a href="/NCTU-Coursenote/1072-intro-to-music-theory/">
-                  音樂理論導論
-                </a>
-              </li>
-          
-          </ul>
-      </div>
-  
-
-  
+    
+  </div>
+  <div class="column col-2">
+    <div class="book-toc">
+  <div class="book-tocbot">
+  </div>
+  <div class="book-tocbot-menu">
+    <a class="book-toc-expand" onclick="expand_toc()">Expand all</a>
+    <a onclick="go_top()">Back to top</a>
+    <a onclick="go_bottom()">Go to bottom</a>
+  </div>
 </div>
+
+<script>
+tocbot.init({
+  tocSelector: '.book-tocbot',
+  contentSelector: '.book-post',
+  headingSelector: 'h1, h2, h3, h4, h5',
+  collapseDepth: 2,
+  orderedList: false,
+  scrollSmooth: false,
+});
+
+function expand_toc(){
+  var b = document.querySelector(".book-toc-expand");
+  tocbot.init({
+    tocSelector: '.book-tocbot',
+    contentSelector: '.book-post',
+    headingSelector: 'h1, h2, h3, h4, h5',
+    collapseDepth: 6,
+    orderedList: false,
+    scrollSmooth: false,
+  });
+  b.setAttribute("onclick", "collapse_toc()");
+  b.innerHTML = "Collapse all"
+}
+
+function collapse_toc(){
+  var b = document.querySelector(".book-toc-expand");
+  tocbot.init({
+    tocSelector: '.book-tocbot',
+    contentSelector: '.book-post',
+    headingSelector: 'h1, h2, h3, h4, h5',
+    collapseDepth: 2,
+    orderedList: false,
+    scrollSmooth: false,
+  });
+  b.setAttribute("onclick", "expand_toc()");
+  b.innerHTML = "Expand all"
+}
+
+function go_top() {
+  window.scrollTo(0, 0);
+}
+
+function go_bottom() {
+  window.scrollTo(0, document.body.scrollHeight);
+}
+
+</script>
+  </div>
+</div>
+
+
+  
+  <script>
+    $('.book-content img').each(function () {
+        $(this).wrap("<a href='" + this.src + "'>").parent('a').addClass('gallery-item');
+    })
+    $(document).ready(function() {
+      $(".book-content").lightGallery({
+          selector: '.gallery-item'
+      });
+    });
+  </script>
+
+
+
+<script src="/NCTU-Coursenote/js/book-post.js"></script>
         </div>
       </div>
     </div>

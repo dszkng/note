@@ -1362,3 +1362,45 @@ Heap 裏頭的擺放不是由 compiler 管理，e.g. malloc 就交給 malloc 的
 2. E + E reduce 回 E > t2
 3. id = E reduce 回 S > a = t2
 
+### p48
+
+算陣列的 Address 位置
+
+### p49
+
+L.array: 是放在symbol table的哪個entry
+L.type: subarray的型別
+L.addr: temp, 計算offset是多少
+
+### p52
+
+使用者寫的與預期的是否一致
+
+一個健全的 type system 可以在 compile time 就檢查完 type error
+
+c 不是 strongly type language
+
+```c
+union flexType {
+    int intElement;
+    float floatElement;
+};
+
+union flexType element;
+float x;
+
+element.ineElement = 27;
+x = element.floatElement; \\ element 存 int 但以 float 看待它 (讀出來不是 27)
+```
+
+### p53
+
+type synthesis: static-typed
+type inference: dynamic-typed
+
+### p55
+
+型別轉換
+
+### p57
+

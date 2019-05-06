@@ -1284,15 +1284,15 @@ semantic action 會在 term 被 derived 後執行
 
 再以上面 SDD 的例子來說，SDT 會長成這個樣子：
 
-$
-expr \to expr_1 + term \, { print('+') } \\
-expr \to expr_1 - term \, { print('-') } \\
-expr \to term \\
-term \to 0 \, { print('0') } \\
-term \to 1 \, { print('1') } \\
-... \\
-term \to 9 \, { print('9') } \\
-$
+> $
+> expr \to expr_1 + term \, { print('+') } \\
+> expr \to expr_1 - term \, { print('-') } \\
+> expr \to term \\
+> term \to 0 \, { print('0') } \\
+> term \to 1 \, { print('1') } \\
+> ... \\
+> term \to 9 \, { print('9') } \\
+> $
 
 就可以指定要在什麼時候執行 semantic action 了
 

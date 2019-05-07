@@ -85,7 +85,7 @@ Q: 求 $x(t) = cos(w_0t)$ 的 FT 表示法？
 $$
 cos(w_0t) \xleftrightarrow{FS; w_0} \chi[k] = \begin{cases}
     \frac{1}{2}, k = \pm 1 \\
-    0, k \neq \pm 1
+    0, k ~\cancel{=}~ \pm 1
 \end{cases}
 $$
 
@@ -99,7 +99,7 @@ $$
 
 ###### 2. unit impulse train
 
-Q. 求 $p(t) = \sum^\infin_{n = -\infin} \delta(t - nT)$
+Q. 求 $p(t) = \sum^\infin_{n = -\infin} \delta(t - nT)$ 的 FT 表示法？
 
 $p(t)$ 為週期性且基頻 $w_0 = 2\pi / T$
 
@@ -169,7 +169,7 @@ $$ x(t) \xleftrightarrow{FT} X(jw) = 2\pi \sum^\infin_{k=-\infin} \chi[k] \delta
 
 其中 $\chi[k]$ 是 FS 係數，將上式帶入 convolution 的式子中：
 
-$$ y(t)=x(t)*h(t) \xleftrightarrow{FT} Y(jw) = 2\pi \sum^\infin_{k=-\infin} \chi[k] \delta(w - kw_0)H(jw) $$
+$$ y(t)=\underbrace{x(t)}_{\text{periodic}} * \underbrace{h(t)}_{\text{nonperiodic}} \xleftrightarrow{FT} Y(jw) = 2\pi \sum^\infin_{k=-\infin} \chi[k] \delta(w - kw_0)H(jw) $$
 
 根據 Dirac delta function 的性質：
 
@@ -177,7 +177,7 @@ $$ y(t)=x(t)*h(t) \xleftrightarrow{FT} Y(jw) = 2\pi \sum^\infin_{k=-\infin} H(j\
 
 ![](2019-05-06-23-52-23.png)
 
-上圖表示出了 $\chi(jw)$ 與 $H(jw)$ 相乘的情形，$Y(jw)$ 的形式對應於一個週期訊號。因此，$y(t)$ 是一個與 $x(t)$ 有相同週期的週期訊號。
+上圖表示出了 $\chi(jw)$ 與 $H(jw)$ 相乘的情形，$Y(jw)$ 的形式 (nonperiodic, discrete) 對應於一個週期訊號 (continuous, periodic)。因此，$y(t)$ 是一個與 $x(t)$ 有相同週期的週期訊號 ($\because \omega_0$ 相同)。
 
 ### 週期與非週期訊號的乘積
 
@@ -243,14 +243,14 @@ complex sinusoids:
 
 在之前就已經知道，對任意 discrete-time signal $x[n]$ 做 DTFT：$\chi(e^{j\Omega}) = \sum_{n = - \infin}^{\infin}x[n]e^{-j\Omega n}$
 
-##### 取樣
+##### 取樣、代換
 
 每隔 $T_s$ 時間間隔去取樣 continuous 的訊號，假設 $x[n]$ 等於取樣過後的 $x(t)$:
 
 * $x(nT_s) = x[n] \Rightarrow t = nT_s$
 * $e^{j\Omega n} = e^{jwt} \Rightarrow e^{j\Omega n} = e^{jwT_sn} \Rightarrow \Omega = wT_s$
 
-將 $\Omega = w T_s$ 帶入公式：$\chi(e^{j\Omega})|_{\Omega = w T_s} = \sum_{n = - \infin}^{\infin}x[n]e^{-j w T_s n}$，我們稱這個頻域的訊號叫<mark>過度訊號</mark>：$\chi_{\delta}(jw)$
+將 $\Omega = w T_s$ 代入公式：$\chi(e^{j\Omega})|_{\Omega = w T_s} = \sum_{n = - \infin}^{\infin}x[n]e^{-j w T_s n}$，我們稱這個頻域的訊號叫<mark>過度訊號</mark>：$\chi_{\delta}(jw)$
 
 ##### FT
 
@@ -267,17 +267,19 @@ $$
 \delta (t - t_0) \xleftrightarrow{FT} e^{-j w t_0} 
 $$
 
-上面的 $T_s n$ 可以看成一個 time shift $t_0$，於是就可以得到：
+上面的 $T_s n$ 可以看成一個 time shift，於是就可以得到：
 
 $$
 x_\delta(t) = \sum_{n = - \infin}^{\infin} x[n] \delta (t - n T_s)
 $$
 
-觀察 delta function 後可以發現，$x_\delta(t)$ 就是 continuous-time 的 $x[n]$ 表示法，在非 $nT_s$ 的地方都為 0，而它的 fourier transform pair 是：
+觀察 delta function 後可以發現，$x_\delta(t)$ 就是 continuous-time 的 $x[n]$ 表示法，在非 $nT_s$ 的地方都為 0，總結以上：
 
 $$
-\chi_\delta (j\omega) = \sum_{n = - \infin}^{\infin}x[n]e^{-j w T_s n}
+x_\delta(t) = \sum_{n = - \infin}^{\infin} x[n] \delta (t - n T_s) \xleftrightarrow{FT} \chi_\delta (j\omega) = \sum_{n = - \infin}^{\infin}x[n]e^{-j w T_s n}
 $$
+
+其中 $x_\delta(t)$ 是 continuous-time signal (來自$x[n]$)，$x_\delta(t)$ 在 FT 後得到的結果 $\chi_\delta(jw)$ 是對應到 $x[n]$ 在 DTFT 後得到的 $\chi(e^{j\Omega})$
 
 ##### 圖例
 
@@ -439,7 +441,7 @@ $w_m = 10 \pi \Rightarrow w_s > 2 w_m \Rightarrow 2 \pi / T_s > 20 \pi \Rightarr
 
 #### Ideal Reconstruction
 
-![考慮從 discrete signal 還原回 continuous signal](2019-05-07-01-34-22.png)
+![考慮如何從 discrete signal 還原回 continuous signal](2019-05-07-01-34-22.png)
 
 ##### Frequency domain
 
@@ -476,10 +478,10 @@ $$
 \Rightarrow x(t) = \sum^\infin_{n = -\infin} x[n] h_r(t - nT_s)
 $$
 
-$H_r(jw)$ 在時域為 sinc function：
+$H_r(jw)$ 在時域為 sinc function (對 $H_r(jw)$ 做 IFT)：
 
 $$
-h_r(t) = \frac{T_s sin (\frac{w_s}{2} t)}{\pi t}
+h_r(t) = \frac{sin(\frac{w_s}{2} t)}{\frac{w_s}{2} t} = \frac{sin(\pi \frac{t}{T_s})}{\pi \frac{t}{T_s}} = sinc(\frac{t}{T_s}) = sinc(\frac{w_s t}{2 \pi})
 $$
 
 帶入上式：

@@ -111,7 +111,7 @@ SW3 挑選 gi0/1 作為 RP、SW2 挑選 gi0/2 作為 RP：
 
 #### 3. 選出 Designated Port
 
-所有連接到同一個網段的 Switch 間，<mark>到達 Root Switch 成本最低的 Port</mark> 就是這個區段的 Designated Port，若通告成本不分勝負，STP 會挑選 BID 較小的交換器。
+Root Port 對面一定為 Designated Port，如果一條鏈路中沒有 Root Port (像是下圖中的 SW2 Gi0/1 及 SW3 Gi0/2)，則選擇<mark>到達 Root Switch 成本最低的 Port</mark>，若通告成本不分勝負，STP 會挑選 BID 較小的交換器。
 
 SW2 及 SW3 到達 Root Switch 的成本分別為 4 與 5，因此 SW2 的 gi0/1 就是這個區段上的委任埠：
 

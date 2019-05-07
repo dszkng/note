@@ -4,7 +4,7 @@ title: 計算機組織
 
 # 計算機組織
 
-## 1. Computer Abstractions and Technology
+## Computer Abstractions and Technology
 
 ### Abstractions architecture
 
@@ -141,7 +141,7 @@ $$
 
 > ps: MIPS無法拿來當作電腦效能的依據（**因為沒有考慮到 Instruction Count**）
 
-## 2. Instructions: Language of the Computer
+## Instructions: Language of the Computer
 
 以下皆以 MIPS Instruction Set 為例子
 
@@ -310,7 +310,7 @@ See:
 
 * [計算機組織 Chapter 2.10 Synchronization - Load link & Store conditional instructions - 朱宗賢老師](https://www.youtube.com/watch?v=QPpTBjf4Yrk)
 
-## 3. Arithmetic for Computers
+## Arithmetic for Computers
 
 ### Multiplication
 
@@ -334,28 +334,233 @@ See:
 
 [Computer Science Concepts: IEEE 754 - Learn Freely](https://www.youtube.com/watch?v=oaf4v4wOuGI)
 
-## Ch4
+## The Processor
 
-### p26
+### CPU Overview
 
-Store:
+![](2019-05-02-23-18-16.png)
 
-RegWrite - 0
-ALUSrc - 1 (引進constant)
-MemWrite - 1
-MemRead - 0
-MemtoReg - don't care
+因為不能把很多線接在一起，所以需要 MUX，還需要有 Control Unit 來控制 MUX：
 
-### p52
+![](2019-05-02-23-14-52.png)
 
-分 4 類
-lw, sw, beq, r-type
-由 second level gen 出 ALU signal
-(讀 10 要再讀 funct field)
+### Instruction Fetch
 
-### p59
+![](2019-05-02-23-26-42.png)
 
-ALU_ctrl = ALUOp + Instruction[5:0]
+* PC: 32-bits register
+* 每次執行完指令後將 PC + 4 (1 個 instruction 4 bytes)
+
+### Instructions Datapath
+
+#### R-Format
+
+| 6bits | 5bits | 5bits | 5bits | 5bits | 6bits |
+| ----- | ----- | ----- | ----- | ----- | ----- |
+| op    | rs    | rt    | rd    | shamt | funct |
+
+![](2019-05-02-23-31-53.png)
+
+* 讀 2 個 input: Read Register 1, 2
+* 進 ALU 做運算
+* 把算出來的結果存到 Write Register
+
+#### I-Format
+
+| 6bits | 5bits | 5bits | 16bits    |
+| ----- | ----- | ----- | --------- |
+| op    | rs    | rt    | immediate |
+
+##### Load/Store
+
+![](2019-05-02-23-34-01.png)
+
+* Sign-extend (以 ALU 實做) 用作將 Address 做 16-bits 的 offset (I-type 的後 16-bits 要轉成 32-bits)
+* Load: 讀 Memory 的資料然後更新 Register
+* Store: 將 Register 的資料寫到 Memory
+
+##### Branch
+
+[Conditional Branch](#conditional-branch)
+
+![](2019-05-02-23-51-53.png)
+
+* 讀 2 個 Register
+* 比較兩個 Register (用 ALU 的 Substract 還有 Check Zero output)
+* 算 Target Address
+  * Sign-extended
+  * 左 shift 2-bits (因為一個 word 4-bits)
+  * 加上 PC + 4
+
+#### J-Format
+
+| 6bits | 26bits         |
+| ----- | -------------- |
+| op    | target address |
+
+[Unconditional branch](#unconditional-branch)
+
+* 舊 PC 的前 4-bits
+* 26-bits jump address
+* 00
+
+#### 組合在一起
+
+![](2019-05-03-00-34-27.png)
+
+### Control Unit
+
+#### ALU Control
+
+| ALU control | Function         |
+| ----------- | ---------------- |
+| 0000        | AND              |
+| 0001        | OR               |
+| 0010        | add              |
+| 0110        | subtract         |
+| 0111        | set-on-less-than |
+| 1100        | NOR              |
+
+分析一下 Instruction 需要 ALU 做什麼事：
+
+* 分 4 類
+  * Load/Store: add
+  * Branch: substract
+  * R-type: depend on funct-field
+* 讀到 10 要再讀 funct field (由 [second level](#second-level-control) 產生出 ALU signal)
+
+| opcode | ALUOp | Operation        | funct  | ALU function     | ALU control |
+| ------ | ----- | ---------------- | ------ | ---------------- | ----------- |
+| lw     | 00    | load word        | XXXXXX | add              | 0010        |
+| sw     | 00    | store word       | XXXXXX | add              | 0010        |
+| beq    | 01    | branch equal     | XXXXXX | subtract         | 0110        |
+| R-type | 10    | add              | 100000 | add              | 0010        |
+|        |       | subtract         | 100010 | subtract         | 0110        |
+|        |       | AND              | 100100 | AND              | 0000        |
+|        |       | OR               | 100101 | OR               | 0001        |
+|        |       | set-on-less-than | 101010 | set-on-less-than | 0111        |
+
+* 25:21: always read
+* 20:16: 除了 load 都為 read
+* R-type 的 rd, Load 的 rt: write
+* address: sign-extended, add
+
+| Instruction | 31:26 | 25:21 | 20:16 | 15:11 | 10:6    | 5:0   |
+| ----------- | ----- | ----- | ----- | ----- | ------- | ----- |
+| R-type      | 0     | rs    | rt    | rd    | shamt   | funct |
+| Load/Store  | 35/43 | rs    | rt    |       | address |       |
+| Branch      | 4     | rs    | rt    |       | address |       |
+
+#### R-type
+
+![](2019-05-03-11-08-03.png)
+
+#### Load
+
+![](2019-05-03-11-08-49.png)
+
+#### Branch-on-Equal
+
+![](2019-05-03-11-09-40.png)
+
+#### Jump
+
+![](2019-05-03-11-24-55.png)
+
+#### Control Unit Settings
+
+| Instruction | RegDst | ALUSrc | MemToReg | RegWrite | MemRead | MemWrite | Branch | ALUOp1 | ALUOp0 |
+| ----------- | :----: | :----: | :------: | :------: | :-----: | :------: | :----: | :----: | :----: |
+| R-format    |   1    |   0    |    0     |    1     |    0    |    0     |   0    |   1    |   0    |
+| lw          |   0    |   1    |    1     |    1     |    1    |    0     |   0    |   0    |   0    |
+| sw          |   x    |   1    |    x     |    0     |    0    |    1     |   0    |   0    |   0    |
+| beq         |   x    |   0    |    x     |    0     |    0    |    0     |   1    |   0    |   1    |
+
+#### First-Level Control
+
+把 Input 的 op 和 Output 的 Control Signal 找出關係：
+
+| Input or output | Signal name | R-format | lw  | sw  | beq |
+| --------------- | ----------- | -------- | --- | --- | --- |
+| Inputs          | Op5         | 0        | 1   | 1   | 0   |
+|                 | Op4         | 0        | 0   | 0   | 0   |
+|                 | Op3         | 0        | 0   | 1   | 0   |
+|                 | Op2         | 0        | 0   | 0   | 1   |
+|                 | Op1         | 0        | 1   | 1   | 0   |
+|                 | Op0         | 0        | 1   | 1   | 0   |
+| Outputs         | RegDst      | 1        | 0   | X   | X   |
+|                 | ALUSrc      | 0        | 1   | 1   | 0   |
+|                 | MemtoReg    | 0        | 1   | X   | X   |
+|                 | RegWrite    | 1        | 1   | 0   | 0   |
+|                 | MemRead     | 0        | 1   | 0   | 0   |
+|                 | MemWrite    | 0        | 0   | 1   | 0   |
+|                 | Branch      | 0        | 0   | 0   | 1   |
+|                 | ALUOp1      | 1        | 0   | 0   | 0   |
+|                 | ALUOp2      | 0        | 0   | 0   | 1   |
+
+![](2019-05-03-12-16-50.png)
+
+#### Second-Level Control
+
+將 [ALU Control](#alu-control) 的表格：
+
+| opcode | ALUOp | Operation        | funct  | ALU function     | ALU control |
+| ------ | ----- | ---------------- | ------ | ---------------- | ----------- |
+| lw     | 00    | load word        | XXXXXX | add              | 0010        |
+| sw     | 00    | store word       | XXXXXX | add              | 0010        |
+| beq    | 01    | branch equal     | XXXXXX | subtract         | 0110        |
+| R-type | 10    | add              | 100000 | add              | 0010        |
+|        |       | subtract         | 100010 | subtract         | 0110        |
+|        |       | AND              | 100100 | AND              | 0000        |
+|        |       | OR               | 100101 | OR               | 0001        |
+|        |       | set-on-less-than | 101010 | set-on-less-than | 0111        |
+
+整理一下：
+
+| ALUOp1 | ALUOp0 |  F5   |  F4   |  F3   |  F2   |  F1   |  F0   | ALU control | Operation |
+| :----: | :----: | :---: | :---: | :---: | :---: | :---: | :---: | :---------: | :-------: |
+|   0    |   0    |   X   |   X   |   X   |   X   |   X   |   X   |    0010     |   lw/sw   |
+|   X    |   1    |   X   |   X   |   X   |   X   |   X   |   X   |    0110     |    beq    |
+|   1    |   X    |   X   |   X   |   0   |   0   |   0   |   0   |    0010     |    add    |
+|   1    |   X    |   X   |   X   |   0   |   0   |   1   |   0   |    0110     |    sub    |
+|   1    |   X    |   X   |   X   |   0   |   1   |   0   |   0   |    0000     |    AND    |
+|   1    |   X    |   X   |   X   |   0   |   1   |   0   |   1   |    0001     |    OR     |
+|   1    |   X    |   X   |   X   |   1   |   0   |   1   |   0   |    0111     |    slt    |
+
+分析 ALU Control 各 bit 的算式，可以發現有些地方結合後其實就是 Don't care：
+
+| ALUOp1 | ALUOp0 |  F5   |  F4   |       F3       |  F2   |  F1   |  F0   |    ALU control    |
+| :----: | :----: | :---: | :---: | :------------: | :---: | :---: | :---: | :---------------: |
+|   X    |   1    |   X   |   X   |       X        |   X   |   X   |   X   | 0<mark>1</mark>10 |
+|   1    |   X    |   X   |   X   | <mark>0</mark> |   0   |   1   |   0   | 0<mark>1</mark>10 |
+|   1    |   X    |   X   |   X   | <mark>1</mark> |   0   |   1   |   0   | 0<mark>1</mark>11 |
+
+$ALUctr2 = ALUop0 + ALUop1 \cdot func2' \cdot func1 \cdot func0'$
+
+| ALUOp1 |     ALUOp0     |  F5   |  F4   |       F3       |  F2   |       F1       |  F0   |    ALU control    |
+| :----: | :------------: | :---: | :---: | :------------: | :---: | :------------: | :---: | :---------------: |
+|   0    | <mark>0</mark> |   X   |   X   |       X        |   X   |       X        |   X   | 00<mark>1</mark>0 |
+|   X    | <mark>1</mark> |   X   |   X   |       X        |   X   |       X        |   X   | 01<mark>1</mark>0 |
+|   1    |       X        |   X   |   X   | <mark>0</mark> |   0   | <mark>0</mark> |   0   | 00<mark>1</mark>0 |
+|   1    |       X        |   X   |   X   | <mark>0</mark> |   0   | <mark>1</mark> |   0   | 01<mark>1</mark>0 |
+|   1    |       X        |   X   |   X   | <mark>1</mark> |   0   | <mark>1</mark> |   0   | 01<mark>1</mark>1 |
+
+$ALUctr1 = ALUop1' + ALUop1 \cdot func2' \cdot func0'$
+
+| ALUOp1 | ALUOp0 |  F5   |  F4   |  F3   |  F2   |  F1   |  F0   |    ALU control    |
+| :----: | :----: | :---: | :---: | :---: | :---: | :---: | :---: | :---------------: |
+|   1    |   X    |   X   |   X   |   0   |   1   |   0   |   1   | 000<mark>1</mark> |
+|   1    |   X    |   X   |   X   |   1   |   0   |   1   |   0   | 011<mark>1</mark> |
+
+$ALUctr0 = ALUop1 \cdot func3' \cdot func2 \cdot func1' \cdot func0 + ALUop1 \cdot func3 \cdot func2' \cdot func1 \cdot func0'$
+
+![](2019-05-03-12-36-54.png)
+
+### Performance
+
+* Critical path: load instruction
+  * **Instruction memory $\to$ register file $\to$ ALU $\to$ data memory $\to$ register file**
+* Violates design principle: Making the common case fast
 
 ### p37
 

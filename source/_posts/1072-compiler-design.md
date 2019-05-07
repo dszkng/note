@@ -1404,3 +1404,75 @@ type inference: dynamic-typed
 
 ### p57
 
+### p59
+
+function overloaded
+
+### p60
+
+adhoc polymorphic
+
+$\forall \alpha list(\alpha) \to integer$
+
+### p61
+
+推導type expression
+
+用 type inference rule (for 動態型別語言)
+
+### p62
+
+3) boolean condition + 2個type variables
+
+### p63
+
+unify: 要把 type variable 取代成實際的 variable
+
+$E1(E2)$ 
+
+### p64
+
+$S(t)$ t 的 instance，把 t 實體化
+
+sub: type expression 做實體化
+某一個 sub 是兩個 Type expression 的 unifier
+
+### p65
+
+### p66
+
+給 2 個 node 判斷能不能 unify
+
+### p67
+
+編號: unique number
+
+檢查1.9可不可以被unify
+
+### p71
+
+control flow statement
+
+### p77
+
+fall through 簡化 goto
+
+### p83
+
+可不可以一邊parsing的過程產生右邊的IR?
+
+### p84
+
+backpatching
+
+jump 與 target 做 match
+
+先產生goto，taget先不要填，等address知道後再填
+
+### p85
+
+不用 Inherit attribute
+
+truelist，一堆goto，當b是true會執行的goto
+falselist，...，當b是false會執行的goto
+

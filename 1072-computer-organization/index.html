@@ -1381,73 +1381,311 @@ document.querySelectorAll('.sidebar-content a').forEach(function(item){
 </li>
 <li>Violates design principle: Making the common case fast</li>
 </ul>
-<h3 id="p37">p37</h3>
-<p>最理想:<br>
-一個cycle執行完一個指令<br>
-5個 stage 同時執行不同指令</p>
-<h3 id="p42">p42</h3>
-<p>因為 hazard 碰到很多問題</p>
+<h3 id="pipeline">Pipeline</h3>
+<p>Parallelism improves performance.</p>
+<p><img src="2019-05-08-19-23-57.png" alt></p>
+<h4 id="mips-pipeline">MIPS Pipeline</h4>
+<p>5個 stage 同時執行不同指令</p>
+<ul>
+<li>IF: Instruction fetch from memory</li>
+<li>ID: Instruction decode &amp; register read</li>
+<li>EX: Execute operation or calculate address</li>
+<li>MEM: Access memory operand</li>
+<li>WB: Write result back to register</li>
+</ul>
+<p>最理想: 一個 cycle 執行完一個指令</p>
+<p><img src="2019-05-09-01-04-36.png" alt="Single-cycle (Tc = 800ps) vs Pipelined (Tc = 200ps)"></p>
+<p>MIPS ISA designed for pipelining:</p>
+<ul>
+<li>所有 instruction 都為 32-bits
+<ul>
+<li>較容易在一個 cycle 中做 fetch 及 decode</li>
+<li>c.f. x86: 1- to 17-byte instructions</li>
+</ul>
+</li>
+<li>Instruction formats 少
+<ul>
+<li>較容易在一個 step 中做 decode 及 read registers</li>
+</ul>
+</li>
+<li>Load/store addressing
+<ul>
+<li>calculate address in <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mn>3</mn><mrow><mi>r</mi><mi>d</mi></mrow></msup></mrow><annotation encoding="application/x-tex">3^{rd}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.849108em;vertical-align:0em;"></span><span class="mord"><span class="mord">3</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.849108em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.02778em;">r</span><span class="mord mathdefault mtight">d</span></span></span></span></span></span></span></span></span></span></span></span> stage</li>
+<li>access memory in <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mn>4</mn><mrow><mi>t</mi><mi>h</mi></mrow></msup></mrow><annotation encoding="application/x-tex">4^{th}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.849108em;vertical-align:0em;"></span><span class="mord"><span class="mord">4</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.849108em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">t</span><span class="mord mathdefault mtight">h</span></span></span></span></span></span></span></span></span></span></span></span> stage</li>
+</ul>
+</li>
+<li>Alignment of memory operands
+<ul>
+<li>Memory access 只需要 1 個 cycle</li>
+</ul>
+</li>
+</ul>
+<h4 id="performance-v3">Performance</h4>
+<p>若所有 stage 都花費同樣時間，則</p>
+<p class="katex-block"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mtext>Time between instructions</mtext><mtext>pipelined</mtext></msub><mo>=</mo><mfrac><msub><mtext>Time between instructions</mtext><mtext>nonpipelined</mtext></msub><mtext>Number of stage</mtext></mfrac></mrow><annotation encoding="application/x-tex">\text{Time between instructions}_{\text{pipelined}} = \frac{ \text{Time between instructions}_{\text{nonpipelined}} }{ \text{Number of stage} } 
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.980548em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord text"><span class="mord">Time between instructions</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361079999999999em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord mtight">pipelined</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.25188em;vertical-align:-0.8804400000000001em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.37144em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord text"><span class="mord">Number of stage</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord text"><span class="mord">Time between instructions</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361079999999999em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord mtight">nonpipelined</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.8804400000000001em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+<p>能 speed up 的原因是因為 <a href="#response-time-and-throughput">throughput</a> 上升，latency (time for each instruction) 不變</p>
+<h4 id="hazards">Hazards</h4>
 <ol>
-<li>Structure hazards: 硬體架構，大家都要用但只有一份resouse，要用就要排隊</li>
-<li>Data hazard: 前一個指令算完時還讀不到 (前一個指令第5個stage才存，但我第2個stage就要)</li>
-<li>Control hazard: 下一個clock cycle不知道要執行甚麼指令</li>
+<li><mark>Structure hazards</mark>: 硬體架構，大家都要用但只有一份resouse，要用就要排隊</li>
+<li><mark>Data hazard</mark>: 前一個指令算完時還讀不到 (前一個指令第5個stage才存，但我第2個stage就要)</li>
+<li><mark>Control hazard</mark>: 下一個clock cycle不知道要執行甚麼指令</li>
 </ol>
-<h3 id="p44">p44</h3>
-<p>bubble: no opertation<br>
-panelty: 願景:一個cycle完成一個指令 第一個指令做完 &gt; no operation &gt; no operation &gt; 第二個指令執行完畢 : 50%的使用率</p>
-<h3 id="p45">p45</h3>
-<p>forwarding: 只要拿到值就開始算，不用等存到 reg 再讀出來</p>
-<h3 id="p46">p46</h3>
-<p>Load &amp; R-type</p>
-<p>lw 在第四個 stage 結束後才讀出來</p>
-<p>ex 後是 mem address 不是 data，不能直接拉 ex 後那條</p>
-<h3 id="p47">p47</h3>
-<p>左 lw 與 add 相鄰，中間要 no operation &gt; 多了兩個 clock cycle</p>
-<p>reorder 指令，讓 lw 與 add 間隔兩個 cycle</p>
-<h3 id="p48">p48</h3>
-<p>beq 下一個 Instruction fetch 不確定要執行甚麼指令</p>
-<h3 id="p49">p49</h3>
-<p>branch 結果知道後才知道要跳還是不要跳</p>
-<h3 id="p50">p50</h3>
-<p>猜!</p>
-<h3 id="p51">p51</h3>
-<p>上: 猜不要跳，猜對了<br>
-下: 猜不要跳，猜錯了，lw 在 pipeline instruction fetch，但不應該被執行，加一些硬體的設定直接 flush 掉，讓 lw 後面都變成 no operation，跳到or繼續執行</p>
-<h3 id="p52">p52</h3>
-<p>不是亂猜</p>
-<p>static:<br>
-每次都猜跳</p>
-<p>dynamic:<br>
-你上次猜對還猜錯，猜對了繼續猜同樣的，猜錯了跟個性有關，猜錯一次就換，猜錯多次才換</p>
-<h3 id="p53">p53</h3>
-<p>increse instruction throughput<br>
-一個時間點每個stage執行不同指令<br>
-每個instruction有相同的latency</p>
-<h3 id="p54">p54</h3>
-<p>由右往左的常有 hazard 問題</p>
-<p><img src="2019-05-02-14-26-23.png" alt></p>
-<h3 id="p55">p55</h3>
-<p>一條線有3個值 &gt; 加 pipeline register</p>
-<p>保持指令資訊</p>
-<h3 id="p56">p56</h3>
-<p>single-clock-cycle: 分析單一 operation<br>
-muli-cycle pipline diagram: 分析各 operation 關係</p>
-<h3 id="p61">p61</h3>
-<p>第 i + 3 個 write register，不是第 i 個的 write register</p>
-<h3 id="p62">p62</h3>
-<p>把 write register pack 起來，一起走</p>
-<h3 id="p69">p69</h3>
-<p>為甚麼不把 RegDst 搬到前面，可以少掉 5 bit?<br>
-MUX 需要 input selection (RegDst) ，由control unit 產生，如果放在第二個 stage RegDst 還沒產生</p>
-<h3 id="p70">p70</h3>
-<p>回去 trace 一遍</p>
-<h3 id="p71">p71</h3>
-<p>control signal 分類: WB, M, EX</p>
-<p>用過的就丟了</p>
-<h3 id="p72">p72</h3>
+<h4 id="summary">Summary</h4>
+<ul>
+<li>pipeline 增加 throughput
+<ul>
+<li>一個時間點每個 stage 執行不同指令</li>
+<li>每個 instruction 有相同的 latency</li>
+</ul>
+</li>
+<li>performance 被 hazard 限制</li>
+<li>ISA 影響 pipeline 實做的複雜度</li>
+</ul>
+<h3 id="pipeline-datapath">Pipeline Datapath</h3>
+<p><img src="2019-05-08-23-53-11.png" alt="由右往左的 dataflow 常有 hazard 問題"></p>
+<p>同一條線要怎麼 keep 3 個值？加上 <mark>pipeline register</mark>！以保持指令資訊</p>
+<p><img src="2019-05-08-23-54-38.png" alt></p>
+<h3 id="pipeline-register">Pipeline Register</h3>
+<p><img src="2019-05-09-00-03-48.png" alt></p>
+<p><img src="2019-05-09-00-03-59.png" alt></p>
+<p><img src="2019-05-09-00-04-13.png" alt></p>
+<p><img src="2019-05-09-00-04-26.png" alt></p>
+<p><img src="2019-05-09-00-05-52.png" alt></p>
+<p>寫入的是第 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi><mo>+</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">i + 3</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.74285em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">i</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">3</span></span></span></span> 個 write register，不是第 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span></span></span></span> 個的 write register！</p>
+<p><img src="2019-05-09-00-07-09.png" alt></p>
+<p><strong>Solution</strong>: <mark>把 write register pack 起來</mark>，帶著一起走</p>
+<h3 id="pipeline-operation">Pipeline Operation</h3>
+<ul>
+<li>single-clock-cycle pipeline diagram: 分析一個 cycle 的 pipeline usage</li>
+<li>muli-cycle pipline diagram: 分析各 operation 在不同 cycle 的 resource usage</li>
+</ul>
+<h4 id="single-cycle-diagram">Single-Cycle diagram</h4>
+<p>pipeline 在某個 cycle 的運作情形</p>
+<p><img src="2019-05-09-00-10-41.png" alt></p>
+<h4 id="multi-cycle-diagram">Multi-Cycle Diagram</h4>
+<p>showing resource usage</p>
+<p><img src="2019-05-09-00-09-25.png" alt></p>
+<h3 id="pipeline-control">Pipeline Control</h3>
+<p><img src="2019-05-09-00-20-43.png" alt></p>
+<blockquote>
+<p>Q: 為甚麼不把 RegDst 搬到前面，可以少用 5-bits?<br>
+A: MUX 需要 input selection (RegDst) ，由 control unit 產生，如果放在第二個 stage RegDst 還沒產生</p>
+</blockquote>
+<p>Control values 基本上與 <a href="#alu-control">Single Cycle CPU - ALU Control</a> 沒有什麼區別</p>
+<table>
+<thead>
+<tr>
+<th>opcode</th>
+<th>ALUOp</th>
+<th>Operation</th>
+<th>funct</th>
+<th>ALU function</th>
+<th>ALU control</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>lw</td>
+<td>00</td>
+<td>load word</td>
+<td>XXXXXX</td>
+<td>add</td>
+<td>0010</td>
+</tr>
+<tr>
+<td>sw</td>
+<td>00</td>
+<td>store word</td>
+<td>XXXXXX</td>
+<td>add</td>
+<td>0010</td>
+</tr>
+<tr>
+<td>beq</td>
+<td>01</td>
+<td>branch equal</td>
+<td>XXXXXX</td>
+<td>subtract</td>
+<td>0110</td>
+</tr>
+<tr>
+<td>R-type</td>
+<td>10</td>
+<td>add</td>
+<td>100000</td>
+<td>add</td>
+<td>0010</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>subtract</td>
+<td>100010</td>
+<td>subtract</td>
+<td>0110</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>AND</td>
+<td>100100</td>
+<td>AND</td>
+<td>0000</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>OR</td>
+<td>100101</td>
+<td>OR</td>
+<td>0001</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>set-on-less-than</td>
+<td>101010</td>
+<td>set-on-less-than</td>
+<td>0111</td>
+</tr>
+</tbody>
+</table>
+<p>Recall: <a href="#control-unit-settings">Single Cycle CPU - Control Unit Settings</a>，將不同 stage 的 control signal 整理一下：</p>
+<table>
+<thead>
+<tr>
+<th>Stage</th>
+<th>Instruction</th>
+<th>R-format</th>
+<th>lw</th>
+<th>sw</th>
+<th>beq</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>EX stage</td>
+<td>RegDst</td>
+<td>1</td>
+<td>0</td>
+<td>x</td>
+<td>x</td>
+</tr>
+<tr>
+<td></td>
+<td>ALUOp1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td></td>
+<td>ALUOp0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td></td>
+<td>ALUSrc</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>M stage</td>
+<td>Branch</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td></td>
+<td>MemRead</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td></td>
+<td>MemWrite</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>WB stage</td>
+<td>RegWrite</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td></td>
+<td>MemToReg</td>
+<td>0</td>
+<td>1</td>
+<td>x</td>
+<td>x</td>
+</tr>
+</tbody>
+</table>
+<p>用到的就可以不要了，沒用到的繼續傳下去</p>
+<p><img src="2019-05-09-00-35-32.png" alt></p>
 <p>RegWrt 要滿足打包的原則，所以會被 pack 到 pipeline regiter</p>
-<h3 id="p74">p74</h3>
-<p>什麼時候可以解決 hazard?</p>
+<p><img src="2019-05-09-00-40-36.png" alt></p>
+<h3 id="pipeline-hazards">Pipeline Hazards</h3>
+<h4 id="data-hazards">Data Hazards</h4>
+<ul>
+<li><strong>Solution.1</strong> <mark>bubble(no opertation)</mark>
+<ul>
+<li>panelty: 50%的使用率 (第一個指令做完 &gt; no operation &gt; no operation &gt; 第二個指令執行完畢)</li>
+</ul>
+</li>
+</ul>
+<p><img src="2019-05-08-23-11-26.png" alt></p>
+<ul>
+<li><strong>Solution.2</strong>: <mark>forwarding(bypassing)</mark>
+<ul>
+<li>只要拿到值就開始算，不用等存到 reg 再讀出來</li>
+</ul>
+</li>
+</ul>
+<p><img src="2019-05-08-23-12-35.png" alt></p>
+<h5 id="example">Example</h5>
+<p><img src="2019-05-09-00-48-16.png" alt></p>
+<p>sub 在 cycle 5 才將資料寫回 register，用紅線的 forwarding 解決</p>
+<h4 id="load-use-data-hazard">Load-Use Data Hazard</h4>
+<p><img src="2019-05-08-23-17-49.png" alt></p>
+<ul>
+<li>Load &amp; R-type</li>
+<li>lw 在第四個 stage 結束後才將 data 讀出來</li>
+<li>EX 後是 memory address 不是 data，不能直接拉 EX 後那條</li>
+</ul>
+<p><strong>Solution</strong>: <mark>reorder code</mark>，讓 lw 與 add 間隔兩個 cycle</p>
+<h5 id="example-v2">Example</h5>
+<p><img src="2019-05-08-23-20-54.png" alt></p>
+<h4 id="control-hazards">Control Hazards</h4>
+<p>beq 下一個 Instruction fetch 不確定要執行甚麼指令，不知道該跳還是不要跳 (depend on branch 的結果)</p>
+<p><img src="2019-05-08-23-22-43.png" alt></p>
+<p><strong>Solution</strong>: <mark>猜!</mark></p>
+<p><img src="2019-05-08-23-24-23.png" alt></p>
+<p>猜不要跳，猜對了</p>
+<p><img src="2019-05-08-23-34-02.png" alt></p>
+<p>猜不要跳，lw 正要 pipeline instruction fetch (但不應該被執行)，然後發現猜錯了，於是讓 lw 後面都變成 no operation (這邊加上一些硬體的設定直接 flush 掉)，接著跳到 or 繼續執行</p>
+<p>有兩種猜的方法：</p>
+<ul>
+<li>Static branch prediction: 每次都猜一樣的</li>
+<li>Dynamic branch prediction: 上次猜對還猜錯，猜對了繼續猜同樣的，猜錯了跟個性有關，有猜錯一次就換的，也猜錯多次才換的</li>
+</ul>
 
     </div>
     

@@ -562,121 +562,198 @@ $ALUctr0 = ALUop1 \cdot func3' \cdot func2 \cdot func1' \cdot func0 + ALUop1 \cd
   * **Instruction memory $\to$ register file $\to$ ALU $\to$ data memory $\to$ register file**
 * Violates design principle: Making the common case fast
 
-### p37
+### Pipeline
 
-最理想:
-一個cycle執行完一個指令
+Parallelism improves performance.
+
+![](2019-05-08-19-23-57.png)
+
+#### MIPS Pipeline
+
 5個 stage 同時執行不同指令
 
-### p42
+* IF: Instruction fetch from memory
+* ID: Instruction decode & register read
+* EX: Execute operation or calculate address
+* MEM: Access memory operand
+* WB: Write result back to register
 
-因為 hazard 碰到很多問題
+最理想: 一個 cycle 執行完一個指令
 
-1. Structure hazards: 硬體架構，大家都要用但只有一份resouse，要用就要排隊
-2. Data hazard: 前一個指令算完時還讀不到 (前一個指令第5個stage才存，但我第2個stage就要)
-3. Control hazard: 下一個clock cycle不知道要執行甚麼指令
+![Single-cycle (Tc = 800ps) vs Pipelined (Tc = 200ps)](2019-05-09-01-04-36.png)
 
-### p44
+MIPS ISA designed for pipelining:
 
-bubble: no opertation
-panelty: 願景:一個cycle完成一個指令 第一個指令做完 > no operation > no operation > 第二個指令執行完畢 : 50%的使用率
+* 所有 instruction 都為 32-bits
+  * 較容易在一個 cycle 中做 fetch 及 decode
+  * c.f. x86: 1- to 17-byte instructions
+* Instruction formats 少
+  * 較容易在一個 step 中做 decode 及 read registers
+* Load/store addressing
+  * calculate address in $3^{rd}$ stage
+  * access memory in $4^{th}$ stage
+* Alignment of memory operands
+  * Memory access 只需要 1 個 cycle
 
-### p45
+#### Performance
 
-forwarding: 只要拿到值就開始算，不用等存到 reg 再讀出來
+若所有 stage 都花費同樣時間，則
 
-### p46
+$$ \text{Time between instructions}_{\text{pipelined}} = \frac{ \text{Time between instructions}_{\text{nonpipelined}} }{ \text{Number of stage} } $$
 
-Load & R-type
+能 speed up 的原因是因為 [throughput](#response-time-and-throughput) 上升，latency (time for each instruction) 不變
 
-lw 在第四個 stage 結束後才讀出來
+#### Hazards
 
-ex 後是 mem address 不是 data，不能直接拉 ex 後那條
+1. <mark>Structure hazards</mark>: 硬體架構，大家都要用但只有一份resouse，要用就要排隊
+2. <mark>Data hazard</mark>: 前一個指令算完時還讀不到 (前一個指令第5個stage才存，但我第2個stage就要)
+3. <mark>Control hazard</mark>: 下一個clock cycle不知道要執行甚麼指令
 
-### p47
+#### Summary
 
-左 lw 與 add 相鄰，中間要 no operation > 多了兩個 clock cycle
+* pipeline 增加 throughput
+  * 一個時間點每個 stage 執行不同指令
+  * 每個 instruction 有相同的 latency
+* performance 被 hazard 限制
+* ISA 影響 pipeline 實做的複雜度
 
-reorder 指令，讓 lw 與 add 間隔兩個 cycle
+### Pipeline Datapath
 
-### p48
+![由右往左的 dataflow 常有 hazard 問題](2019-05-08-23-53-11.png)
 
-beq 下一個 Instruction fetch 不確定要執行甚麼指令
+同一條線要怎麼 keep 3 個值？加上 <mark>pipeline register</mark>！以保持指令資訊
 
-### p49
+![](2019-05-08-23-54-38.png)
 
-branch 結果知道後才知道要跳還是不要跳
+### Pipeline Register
 
-### p50
+![](2019-05-09-00-03-48.png)
 
-猜!
+![](2019-05-09-00-03-59.png)
 
-### p51
+![](2019-05-09-00-04-13.png)
 
-上: 猜不要跳，猜對了
-下: 猜不要跳，猜錯了，lw 在 pipeline instruction fetch，但不應該被執行，加一些硬體的設定直接 flush 掉，讓 lw 後面都變成 no operation，跳到or繼續執行
+![](2019-05-09-00-04-26.png)
 
-### p52
+![](2019-05-09-00-05-52.png)
 
-不是亂猜
+寫入的是第 $i + 3$ 個 write register，不是第 $i$ 個的 write register！
 
-static:
-每次都猜跳
+![](2019-05-09-00-07-09.png)
 
-dynamic:
-你上次猜對還猜錯，猜對了繼續猜同樣的，猜錯了跟個性有關，猜錯一次就換，猜錯多次才換
+**Solution**: <mark>把 write register pack 起來</mark>，帶著一起走
 
-### p53
+### Pipeline Operation
 
-increse instruction throughput
-一個時間點每個stage執行不同指令
-每個instruction有相同的latency
+* single-clock-cycle pipeline diagram: 分析一個 cycle 的 pipeline usage
+* muli-cycle pipline diagram: 分析各 operation 在不同 cycle 的 resource usage
 
-### p54
+#### Single-Cycle diagram
 
-由右往左的常有 hazard 問題
+pipeline 在某個 cycle 的運作情形
 
-![](2019-05-02-14-26-23.png)
+![](2019-05-09-00-10-41.png)
 
-### p55
+#### Multi-Cycle Diagram
 
-一條線有3個值 > 加 pipeline register
+showing resource usage
 
-保持指令資訊
+![](2019-05-09-00-09-25.png)
 
-### p56
+### Pipeline Control
 
-single-clock-cycle: 分析單一 operation
-muli-cycle pipline diagram: 分析各 operation 關係
+![](2019-05-09-00-20-43.png)
 
-### p61
+> Q: 為甚麼不把 RegDst 搬到前面，可以少用 5-bits?
+> A: MUX 需要 input selection (RegDst) ，由 control unit 產生，如果放在第二個 stage RegDst 還沒產生
 
-第 i + 3 個 write register，不是第 i 個的 write register 
+Control values 基本上與 [Single Cycle CPU - ALU Control](#alu-control) 沒有什麼區別
 
-### p62
+| opcode | ALUOp | Operation        | funct  | ALU function     | ALU control |
+| ------ | ----- | ---------------- | ------ | ---------------- | ----------- |
+| lw     | 00    | load word        | XXXXXX | add              | 0010        |
+| sw     | 00    | store word       | XXXXXX | add              | 0010        |
+| beq    | 01    | branch equal     | XXXXXX | subtract         | 0110        |
+| R-type | 10    | add              | 100000 | add              | 0010        |
+|        |       | subtract         | 100010 | subtract         | 0110        |
+|        |       | AND              | 100100 | AND              | 0000        |
+|        |       | OR               | 100101 | OR               | 0001        |
+|        |       | set-on-less-than | 101010 | set-on-less-than | 0111        |
 
-把 write register pack 起來，一起走
+Recall: [Single Cycle CPU - Control Unit Settings](#control-unit-settings)，將不同 stage 的 control signal 整理一下：
 
-### p69
+| Stage    | Instruction | R-format | lw  | sw  | beq |
+| -------- | ----------- | -------- | --- | --- | --- |
+| EX stage | RegDst      | 1        | 0   | x   | x   |
+|          | ALUOp1      | 1        | 0   | 0   | 0   |
+|          | ALUOp0      | 0        | 0   | 0   | 1   |
+|          | ALUSrc      | 0        | 1   | 1   | 0   |
+| M stage  | Branch      | 0        | 0   | 0   | 1   |
+|          | MemRead     | 0        | 1   | 0   | 0   |
+|          | MemWrite    | 0        | 0   | 1   | 0   |
+| WB stage | RegWrite    | 1        | 1   | 0   | 0   |
+|          | MemToReg    | 0        | 1   | x   | x   |
 
-為甚麼不把 RegDst 搬到前面，可以少掉 5 bit?
-MUX 需要 input selection (RegDst) ，由control unit 產生，如果放在第二個 stage RegDst 還沒產生
+用到的就可以不要了，沒用到的繼續傳下去
 
-### p70
-
-回去 trace 一遍
-
-### p71
-
-control signal 分類: WB, M, EX
-
-用過的就丟了
-
-### p72
+![](2019-05-09-00-35-32.png)
 
 RegWrt 要滿足打包的原則，所以會被 pack 到 pipeline regiter
 
-### p74
+![](2019-05-09-00-40-36.png)
 
-什麼時候可以解決 hazard?
 
+### Pipeline Hazards
+
+#### Data Hazards
+
+* **Solution.1** <mark>bubble(no opertation)</mark>
+  * panelty: 50%的使用率 (第一個指令做完 > no operation > no operation > 第二個指令執行完畢)
+
+![](2019-05-08-23-11-26.png)
+
+* **Solution.2**: <mark>forwarding(bypassing)</mark>
+  * 只要拿到值就開始算，不用等存到 reg 再讀出來
+
+![](2019-05-08-23-12-35.png)
+
+##### Example
+
+![](2019-05-09-00-48-16.png)
+
+sub 在 cycle 5 才將資料寫回 register，用紅線的 forwarding 解決
+
+#### Load-Use Data Hazard
+
+![](2019-05-08-23-17-49.png)
+
+* Load & R-type
+* lw 在第四個 stage 結束後才將 data 讀出來
+* EX 後是 memory address 不是 data，不能直接拉 EX 後那條
+
+**Solution**: <mark>reorder code</mark>，讓 lw 與 add 間隔兩個 cycle
+
+##### Example
+
+![](2019-05-08-23-20-54.png)
+
+#### Control Hazards
+
+beq 下一個 Instruction fetch 不確定要執行甚麼指令，不知道該跳還是不要跳 (depend on branch 的結果)
+
+![](2019-05-08-23-22-43.png)
+
+**Solution**: <mark>猜!</mark>
+
+![](2019-05-08-23-24-23.png)
+
+猜不要跳，猜對了
+
+![](2019-05-08-23-34-02.png)
+
+猜不要跳，lw 正要 pipeline instruction fetch (但不應該被執行)，然後發現猜錯了，於是讓 lw 後面都變成 no operation (這邊加上一些硬體的設定直接 flush 掉)，接著跳到 or 繼續執行
+
+有兩種猜的方法：
+
+* Static branch prediction: 每次都猜一樣的
+* Dynamic branch prediction: 上次猜對還猜錯，猜對了繼續猜同樣的，猜錯了跟個性有關，有猜錯一次就換的，也猜錯多次才換的

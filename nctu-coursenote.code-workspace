@@ -5,8 +5,8 @@
 		}
 	],
 	"settings": {
-		"pasteImage.path": "${projectRoot}/source/_posts/1072-signals-and-systems",
-		// "pasteImage.path": "${projectRoot}/source/_posts/1072-computer-organization",
+		// "pasteImage.path": "${projectRoot}/source/_posts/1072-signals-and-systems",
+		"pasteImage.path": "${projectRoot}/source/_posts/1072-computer-organization",
 		// "pasteImage.path": "${projectRoot}/source/_posts/1072-compiler-design",
 		// "pasteImage.path": "${projectRoot}/source/_posts/1072-intro-to-formal-language",
 		// "pasteImage.path": "${projectRoot}/source/_posts/network-associate/layer2/stp",

@@ -260,3 +260,9 @@ $\hat{M}$ 標準 turing machine
 
 多訂一些 transition function，訂完就 equivalent 了
 
+## 10.5
+
+### p2
+
+碰到 ] 強制往左，碰到 [ 強制往右 > bounded
+

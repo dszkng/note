@@ -757,3 +757,60 @@ beq 下一個 Instruction fetch 不確定要執行甚麼指令，不知道該跳
 
 * Static branch prediction: 每次都猜一樣的
 * Dynamic branch prediction: 上次猜對還猜錯，猜對了繼續猜同樣的，猜錯了跟個性有關，有猜錯一次就換的，也猜錯多次才換的
+
+### p83
+
+偵測 load/use hazard
+
+### p84
+
+第2個指令被decode兩次
+第3個指令被fetch兩次
+
+### p85
+
+and become nop: stall 一個 cycle
+or 不需要 forward，直接讀
+
+### p86
+
+進到 cycle 3: detect load/sw hazards
+
+IF/ID 紀錄第二個指令，PC只到第三個指令
+
+第三個指令(or)再cc3讀一次cc4又讀一次
+第二個指令再cc3 decode依次cc4又 decode 依次
+
+### p87
+
+hazard detect unit
+
+control 在發現 hazard 時全部灌 0
+PCWrite = 0，不讓 PC + 4 寫進 PC
+IF/IDWrite = 0，不讓 instruction 寫入
+
+### p89
+
+正確的指令在第5個 cycle 進來，前面全部 flush 掉(不keep)
+
+### p90
+
+提早發現 branch 跳錯，搬到第2個stage
+
+* 加 target address adder
+* 加 register comparision
+
+第2個stage結束後就可以發現 hazard
+
+### p93
+
+又有 hazard 又有 branch
+
+### p96
+
+上次猜甚麼 猜對還猜錯
+
+### p97
+
+depend on iteration numbers
+

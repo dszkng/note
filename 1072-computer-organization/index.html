@@ -1686,6 +1686,39 @@ A: MUX 需要 input selection (RegDst) ，由 control unit 產生，如果放在
 <li>Static branch prediction: 每次都猜一樣的</li>
 <li>Dynamic branch prediction: 上次猜對還猜錯，猜對了繼續猜同樣的，猜錯了跟個性有關，有猜錯一次就換的，也猜錯多次才換的</li>
 </ul>
+<h3 id="p83">p83</h3>
+<p>偵測 load/use hazard</p>
+<h3 id="p84">p84</h3>
+<p>第2個指令被decode兩次<br>
+第3個指令被fetch兩次</p>
+<h3 id="p85">p85</h3>
+<p>and become nop: stall 一個 cycle<br>
+or 不需要 forward，直接讀</p>
+<h3 id="p86">p86</h3>
+<p>進到 cycle 3: detect load/sw hazards</p>
+<p>IF/ID 紀錄第二個指令，PC只到第三個指令</p>
+<p>第三個指令(or)再cc3讀一次cc4又讀一次<br>
+第二個指令再cc3 decode依次cc4又 decode 依次</p>
+<h3 id="p87">p87</h3>
+<p>hazard detect unit</p>
+<p>control 在發現 hazard 時全部灌 0<br>
+PCWrite = 0，不讓 PC + 4 寫進 PC<br>
+IF/IDWrite = 0，不讓 instruction 寫入</p>
+<h3 id="p89">p89</h3>
+<p>正確的指令在第5個 cycle 進來，前面全部 flush 掉(不keep)</p>
+<h3 id="p90">p90</h3>
+<p>提早發現 branch 跳錯，搬到第2個stage</p>
+<ul>
+<li>加 target address adder</li>
+<li>加 register comparision</li>
+</ul>
+<p>第2個stage結束後就可以發現 hazard</p>
+<h3 id="p93">p93</h3>
+<p>又有 hazard 又有 branch</p>
+<h3 id="p96">p96</h3>
+<p>上次猜甚麼 猜對還猜錯</p>
+<h3 id="p97">p97</h3>
+<p>depend on iteration numbers</p>
 
     </div>
     

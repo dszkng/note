@@ -249,7 +249,7 @@ $$ C_i = \frac{V_i^H \cdot u}{||V_i||^2_2} $$
 
 然後我們就發現了一件事：我們可以把  $e^{j k \Omega_0 n}$ 看成是一個基底，之後再將 $x[n]$ 投影到基底上，如此變可以求得 $X[k]$ 了！
 
-首先，將 $e^{j k \Omega_0 n}$ 看成是基底，證明：
+首先，將 $e^{j k \Omega_0 n}$ 看成是基底：
 
 $$
 \begin{Bmatrix}
@@ -289,7 +289,7 @@ $$
 \end{Bmatrix}_{N \times N}
 $$
 
-而且這個基底還是[正交基底](#正交基底)：
+而且這個基底還是[正交基底](#正交基底)，證明如下：
 
 $$
 \begin{aligned}
@@ -378,6 +378,10 @@ $$
 把 $x(t)$ 投影到基底可以得到 $X[k]$：
 
 $$ x(t) = \sum^{\infin}_{k = -\infin} X[k] e^{j k w_0 t} \xleftrightarrow{FS} X[k] = \frac{1}{T} \int^T_0 x(t) e^{-j k w_0 t} dt $$
+
+Trigonometric Fourier Series:
+
+$$ x(t) = \underbrace{B[0]}_{\text{DC Term}} + \sum^\infin_{k=1} B[k]cos(kw_0t) + A[k]sin(kw_0t) $$
 
 #### DTFT
 
@@ -529,6 +533,265 @@ $$
 $$
 
 ![](2019-05-11-23-57-57.png)
+
+#### FS
+
+##### Periodic signal
+
+Q: 求 $X[k]$ ?
+
+![](2019-05-12-15-21-15.png)
+
+週期：2
+
+基頻：$w_0 = 2\pi / 2 = \pi$
+
+$$
+\begin{aligned}
+    X[k] &= \frac{1}{2} \int_0^2 e^{-2t} e^{-j k \pi t} dt \\
+    &= \frac{1}{2} \int_0^2 e^{-(2 + jk\pi) t} dt \\
+    &= \frac{1 - e^{-4}}{4 + jk2\pi}
+\end{aligned}
+$$
+
+![](2019-05-12-15-26-16.png)
+
+##### Impulse Train
+
+Q: 求 $x(t) = \sum^{\infin}_{l = -\infin} \delta(t - 4l)$ 的 FS？
+
+週期：4
+
+基頻：$w_0 = 2\pi / 4 = \pi / 2$
+
+$$
+\begin{aligned}
+    X[k] &= \frac{1}{4} \int^2_{-2} \delta(t) e^{-jk\frac{\pi}{2}t} dt \\
+    &= \frac{1}{4}
+\end{aligned}
+$$
+
+##### Square Wave
+
+Q: 求 $X[k]$ ?
+
+![](2019-05-12-15-31-32.png)
+
+週期：$T$
+
+基頻：$w_0 = 2\pi / T$
+
+$$
+\begin{aligned}
+    X[k] &= \frac{1}{T} \int^{T/2}_{-T/2} x(t) e^{-jkw_0t} dt \\
+    &= \frac{1}{T} \int^{T_0}_{-T_0} e^{-jkw_0t} dt \\
+    &= \frac{-1}{Tjkw_0} e^{-jkw_0t} |^{T_0}_{-T_0}, k ~\cancel{=}~ 0 \\
+    &= \frac{2}{Tkw_0} (\frac{e^{jkw_0T_0} - e^{-jkw_0T_0}}{2j}), k ~\cancel{=}~ 0 \\
+    &= \frac{2sin(kw_0T_0)}{Tkw_0}, k ~\cancel{=}~ 0
+\end{aligned}
+$$
+
+$$ \text{For k = 0, } X[0] = \frac{1}{T} \int^{T_0}_{-T_0} dt = \frac{2T_0}{T} $$
+
+$k = 0$ 的 case 用羅必達也能得到相同的結果，所以 $X[k] = \frac{2sin(kw_0T_0)}{Tkw_0}$
+
+在這邊我們定義 $sinc(u) = \frac{sin(\pi u)}{\pi u}$，所以 $X[k] = \frac{2T_0}{T} sinc(k \frac{2T_0}{T})$
+
+![sinc(u)](2019-05-12-15-56-28.png)
+
+![X[k]](2019-05-12-16-06-30.png)
+
+若要組合回原本的波形，用 Trigonometric FS 觀察 $X[k]$ 各項的貢獻：
+
+$$ x(t) = B[0] + \sum^\infin_{k=1} B[k]cos(kw_0t) + A[k]sin(kw_0t) $$
+
+因為 $x(t)$ 是偶函數，所以 $A[k]$ 為 0，因此式子變成：
+
+$$ x(t) = B[0] + \sum^\infin_{k=1} B[k]cos(kw_0t) $$
+
+因為 $B[0]$ 也滿足 $B[k]$：
+
+$$ x(t) = \sum^\infin_{k=0} B[k]cos(kw_0t) $$
+
+但現實中不可能有無限大的項，所以我們改寫上界為：
+
+$$ x(t) = \sum^J_{k=0} B[k]cos(kw_0t) $$
+
+![](2019-05-12-16-16-31.png)
+
+觀察上圖，當 J = 99 時，仍無法完美的表示方波，方波兩端有 Overshot
+
+##### RC Circuit
+
+![RC Circuit](2019-05-11-16-38-35.png)
+
+![x(t)](2019-05-12-15-31-32.png)
+
+Q: 求 $y(t)$ 的 FS？
+
+我們已經有系統的 [Frequency Response](#example-rc-circuit) 以及輸入訊號的 [FS](#square-wave-v2)
+
+根據[訊號表示法](#訊號表示法)討論出來的結果：$Y(jw_k) = X(jw_k)H(jw_k)$，我們可以知道在 FS 中：$Y[k] = H(jkw_0) X[k]$
+
+假設 $RC = 0.1, w_0 = 2\pi , T_0/T = 1/4$：
+
+$$ Y[k] = \frac{10}{j2\pi k+10} \frac{sin(k\pi/2)}{k\pi} $$
+
+![](2019-05-12-16-36-08.png)
+
+觀察左上圖，可以發現高頻都被濾掉了，因此 $y(t)$ 是平滑的，沒有 Overshot
+
+#### DTFT
+
+##### Exponential Sequence
+
+Q: 求 $x[n] = \alpha^n u[n]$ 的 DTFT？
+
+$$
+\begin{aligned}
+    X(e^{j\Omega}) &= \sum^\infin_{n=-\infin} \alpha^n u[n] e^{-j \Omega n} \\
+    &= \sum^\infin_{n = 0} (\alpha e^{-j \Omega})^n \\
+    &= \frac{1}{1 - \alpha e^{-j \Omega}}, |\alpha e^{-j \Omega}| \equiv |\alpha| < 1
+\end{aligned}
+$$
+
+![](2019-05-12-17-00-03.png)
+
+##### Rectangular Pulse
+
+![](2019-05-12-17-02-48.png)
+
+Q: 求 DTFT？
+
+$$
+\begin{aligned}
+    X(e^{j\Omega}) &= \sum^{2M}_0 e^{-j\Omega(m-M)} = e^{j\Omega M} \sum^{2M}_0 e^{-j\Omega m} \\
+    &= \begin{cases}
+        e^{j\Omega M} \frac{1 - e^{-j \Omega 2(M+1)}}{1 - e^{-j\Omega}} &, \Omega ~\cancel{=}~ 0, \pm 2\pi, \pm 4\pi... \\
+        2M + 1 &, \Omega = 0, \pm 2\pi, \pm 4\pi...
+    \end{cases}
+\end{aligned}
+$$
+
+上式通過化簡，可以得到：
+
+$$ X(e^{j\Omega}) = \frac{sin(\Omega(2M+1)/2)}{sin(\Omega/2)} $$
+
+![](2019-05-12-17-14-10.png)
+
+##### Rectangular Spectrum
+
+![](2019-05-12-17-19-46.png)
+
+Q: 求 Invert DTFT？
+
+$$
+\begin{aligned}
+    x[n] &= \frac{1}{2\pi} \int^W_{-W} e^{j \Omega n} d\Omega \\
+    &= \frac{1}{2 \pi n j} e^{j \Omega n} |^W_{-W} &, n ~\cancel{=}~ 0 \\
+    &= \frac{1}{\pi n} sin(Wn) &, n ~\cancel{=}~ 0
+\end{aligned}
+$$
+
+$$ \lim_{n \to 0} \frac{1}{n\pi} sin(Wn) = \frac{W}{n} $$
+
+轉成 sinc function 的形式，可以得到：
+
+$$ x[n] = \frac{W}{\pi} sinc(\frac{Wn}{\pi}) $$
+
+![](2019-05-12-17-27-23.png)
+
+##### Unit Impulse
+
+Q: 求 $x[n] = \delta[n]$ 的 DTFT？
+
+$$ X(e^{j\Omega}) = \sum^\infin_{n = -\infin} \delta[n] e^{-j \Omega n} = 1 $$
+
+![](2019-05-12-17-31-09.png)
+
+$$ \delta[n] \xleftrightarrow{DTFT} 1 $$
+
+##### Unit Impulse Spectrum
+
+Q: 求 $X(e^{j\Omega}) = \delta(\Omega), -\pi < \Omega < \pi$ 的 Invert DTFT？
+
+$$ x[n] = \frac{1}{2\pi} \int^\pi_{-\pi} \delta(\Omega) e^{j \Omega n} d\Omega = \frac{1}{2\pi} $$
+
+![](2019-05-12-17-34-21.png)
+
+$$ \frac{1}{2\pi} \xleftrightarrow{DTFT} \delta(\Omega), -\pi < \Omega < \pi $$
+
+#### FT
+
+##### Real Decaying Exponential
+
+Q: 求 $x(t) = e^{-at} u(t), a > 0$ 的 FT？
+
+![](2019-05-12-17-39-39.png)
+
+$$
+\begin{aligned}
+    X(jw) &= \int^{\infin}_{-\infin} e^{-at} u(t) e^{-jwt} dt \\
+    &= \int^{\infin}_0 e^{-(a + jw)t} dt \\
+    &= - \frac{1}{a + jw} e^{-(a+jw)t} |^{\infin}_0 \\
+    &= \frac{1}{a + jw}
+\end{aligned}
+$$
+
+![](2019-05-12-17-42-53.png)
+
+##### Rectangular Pulse
+
+![](2019-05-12-17-45-02.png)
+
+Q: 求 FS？
+
+$$
+\begin{aligned}
+    X(jw) &= \int^{\infin}_{-\infin} x(t) e^{-jwt} dt \\
+    &= \int^{T_0}_{-T_0} e^{-jwt} dt \\
+    &= -\frac{1}{jw} e^{-jwt} |^{T_0}_{-T_0} &, w ~\cancel{=}~ 0 \\
+    &= \frac{2}{w} sin(wT_0) &, w ~\cancel{=}~ 0
+\end{aligned}
+$$
+
+$$ \text{For w = 0, } \lim_{w \to 0} \frac{2}{w} sin(wT_0) = 2T_0 $$
+
+![](2019-05-12-17-49-53.png)
+
+##### Rectangular Spectrum
+
+![](2019-05-12-17-51-03.png)
+
+Q: 求 Invert FS？
+
+$$
+\begin{aligned}
+    x(t) &= \frac{1}{2\pi} \int^W_{-W} e^{jwt} dw \\
+    &= - \frac{1}{j\pi t} e^{jwt} |^W_{-W} &, t ~\cancel{=}~ 0 \\
+    &= \frac{1}{\pi t} sin(Wt) &, t ~\cancel{=}~ 0 \\
+\end{aligned}
+$$
+
+$$ \text{For t = 0, } \lim_{t \to 0} \frac{1}{\pi t} sin(wT) = \frac{W}{\pi} $$
+
+![](2019-05-12-17-55-16.png)
+
+##### Unit Impulse
+
+Q: 求 $x(t) = \delta(t)$ 的 FT？
+
+$$ X(jw) = \int^{\infin}_{-\infin} \delta(t) e^{-jwt} dt = 1 $$
+
+$$ \delta(t) \xleftrightarrow{FT} 1 $$
+
+##### Impulse Spectrum
+
+Q: 求 $X(jw) = 2\pi \delta(w)$ 的 Invert FT？
+
+$$ x(t) = \frac{1}{2\pi} \int^{\infin}_{-\infin} 2\pi \delta(w) e^{jwt} dw = 1 $$
+
+$$ 1 \xleftrightarrow{FT} 2\pi \delta(w) $$
 
 ## 傅立葉表示法對混合信號的應用
 

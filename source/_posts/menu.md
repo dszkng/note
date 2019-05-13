@@ -15,3 +15,6 @@
     * [VLAN](/NCTU-Coursenote/network-associate/layer2/vlan)
     * [VTP](/NCTU-Coursenote/network-associate/layer2/vtp)
     * [STP](/NCTU-Coursenote/network-associate/layer2/stp)
+  * Layer 3
+    * [Routing](/NCTU-Coursenote/network-associate/layer3/routing)
+    * [VLSM](/NCTU-Coursenote/network-associate/layer3/vlsm)

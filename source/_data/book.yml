@@ -1,6 +1,6 @@
 home_page: home.md # filename under /source/_posts/
 menu_page: menu.md # filename under /source/_posts/
 
-lightgallery: true
+lightgallery: false
 disqus_shortname: at881005
 favicon_url: shell.png

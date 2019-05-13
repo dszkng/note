@@ -814,3 +814,20 @@ IF/IDWrite = 0，不讓 instruction 寫入
 
 depend on iteration numbers
 
+### p102
+
+硬體壞掉exception，如果牽涉到CPU外面的hardware就是interrupt
+
+### p103
+
+集中式管理 <= MIPS
+分散式
+
+### p107
+
+把原因複寫到 cause register，包在 Control unit，
+
+加了3條線，IF,ID,EX Flush
+
+### p108
+

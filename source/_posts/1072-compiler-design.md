@@ -1567,3 +1567,46 @@ jump 與 target 做 match
 truelist，一堆goto，當b是true會執行的goto
 falselist，...，當b是false會執行的goto
 
+## Run-Time Environments
+
+### p3
+
+管理 runtime 的資源
+
+* data layout
+* 存取 variable
+* 呼叫 function call 時要做什麼管理
+
+compile time 與 run time 的合約
+
+### p6
+
+變數存在 memory 的位置是靜態還是動態 > static(global or static variables in C) or stack
+
+malloc 管理 heap，哪裡有人使用哪裡沒有
+
+### p7
+
+### p9
+
+spill: 把 reg spill 到 memory
+
+why 要存機器狀態?
+
+### p10
+
+### p11
+
+每個 function 有自己的空間 (disjoint)
+
+```
+main(){
+    foo();
+    bar();
+}
+```
+
+浪費空間，foo bar 原本可以用同一塊空間
+
+### p12
+

@@ -1,6 +1,18 @@
 home_page: home.md # filename under /source/_posts/
 menu_page: menu.md # filename under /source/_posts/
 
-lightgallery: false
-disqus_shortname: at881005
 favicon_url: shell.png
+
+comments:
+  disqus:
+    enable: true
+    shortname: at881005 # your disqus shortname
+  gitalk:
+    enable: false
+    githubID: kaiiiz # your github id
+    repo: NCTU-Coursenote # GitHub repository e.g. kaiiiz.github.io
+    ClientID: b8d2533201593ea953a2 # GitHub Application Client ID
+    ClientSecret: 89bfdbbbaf816ee93cd42f24b8fc4813bae430bf # GitHub Application Client Secret
+    adminUser: kaiiiz # GitHub repository owner and collaborators
+    labels: 'gitalk' # GitHub issue labels
+    distractionFreeMode: true

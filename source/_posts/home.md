@@ -1,5 +1,5 @@
 ---
-disqus: false
+comments: false
 ---
 
 # 首頁

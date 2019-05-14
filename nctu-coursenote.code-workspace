@@ -9,7 +9,7 @@
 		// "pasteImage.path": "${projectRoot}/source/_posts/1072-computer-organization",
 		// "pasteImage.path": "${projectRoot}/source/_posts/1072-compiler-design",
 		// "pasteImage.path": "${projectRoot}/source/_posts/1072-intro-to-formal-language",
-		"pasteImage.path": "${projectRoot}/source/_posts/network-associate/layer3/static-route",
+		"pasteImage.path": "${projectRoot}/source/_posts/network-associate/layer3/vlsm",
 		"pasteImage.insertPattern": "${imageSyntaxPrefix}${imageFileName}${imageSyntaxSuffix}",
 		"editor.minimap.enabled": false,
 	}

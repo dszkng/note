@@ -8,6 +8,7 @@
     * [Instructions: Language of the Computer](/NCTU-Coursenote/1072/computer-organization/2-instructions)
     * [Arithmetic for Computers](/NCTU-Coursenote/1072/computer-organization/3-arithmetic)
     * [The Processor](/NCTU-Coursenote/1072/computer-organization/4-the-processor)
+    * [Exploiting Memory Hierarchy](/NCTU-Coursenote/1072/computer-organization/5-exploiting-memory-hierarchy)
   * [訊號與系統](/NCTU-Coursenote/1072/signals-and-systems/0-courseinfo)
     * [傅立葉表示法](/NCTU-Coursenote/1072/signals-and-systems/1-fourier-representation)
     * [傅立葉表示法的性質](/NCTU-Coursenote/1072/signals-and-systems/2-fourier-representation-properties)

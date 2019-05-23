@@ -493,5 +493,116 @@ depend on iteration numbers
 
 加了3條線，IF,ID,EX Flush
 
-## p108
+## p112
+
+有先後順序選最前面的 exception
+
+## p113
+
+imprecise exceptions: 精簡 hardware，交給 software
+
+當 exception 發生時不能找到是哪個 instruction 發生的，把大致的結果 (cause register)，交給 OS，
+
+simple hardware, complex handler (duty located on OS)
+
+分不清先後順序，無法適用 imprecise exceptions
+
+## p114
+
+ILP: pipeline 就是其中一種
+
+1. 想辦法把 5 stage 提升到 7 stage...: 每一個 Stage 要做的事變少
+
+drawback: 發生 hazard 要停下來的 stage 變多 (flush 越多，做白工越多), exception 
+
+2. 建多條 pipeline
+
+## p116
+
+層次更高的猜
+
+指令還沒執行完，做一個不應該做的事情
+
+有些指令會把值寫到 reg，寫到 memory。其他都能做，就是 write 不能做 (電腦狀態沒變)。
+
+猜錯就是多執行一些 instruction，執行完錯了就不要寫就好。盡可能能執行就執行，順序不一樣也沒關係。對了很好，錯了就rollback執行對的那個指令
+
+## p117
+
+可以執行但不可以 write
+
+```
+beq ...
+add ...
+```
+
+## p118
+
+```
+*ptr = 10; // exception, core dump
+sw $2, 100($4); // ptr = $2; (100($4) 是 ptr 的位置) 理論上不會執行，speculative lw 後移到 ptr 前面，就會變成可以成功執行，但結果是錯的
+```
+
+## p119
+
+把 4 個指令兜成一個虛擬指令
+
+## p122
+
+黑 alu beq
+藍 lw sw
+
+## p123
+
+load-use hazard
+
+e.g.
+
+lw, add, sw
+pipeline: (c1, c3, c4)
+dual: (c1, c3) c3 一次進兩個 instuction
+
+## p124
+
+sw $t0, 4($s1) // 4 要補回 addi 加的值
+
+## p126
+
+```
+Loop:   lw $t0, 0($s1)
+        addu $t0, $t0, $s2
+        sw $t0, 0($s1)
+        addi $s1, $s1,–4
+        bne $s1, $zero, Loop
+```
+
+1. s1 沒有被減 > $t0
+2. s1 - 16 + 12 > $t1
+3. s1 - 16 + 8 > $t2
+4. s1 - 16 + 4 > $t3
+
+t0, t1, t2, t3: register renaming
+
+## p129
+
+reservation station: 收集每個 instruction 的 Input operands
+
+有幾個functional unit就可以同時丟幾個指令
+
+functional unit 有可能無法直接寫到 register，需要inorder的存進去
+
+```
+addi s1, ...
+add s1, ...
+```
+
+add 與 addi 要找順序存到 s1 >>> commit order
+
+## p132
+
+compiler 可以預測的 run-time 不能預測
+
+## p133
+
+兩個 pointer 指到同一個位置，看名字看不出來 (pointer aliasing)
 

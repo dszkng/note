@@ -103,3 +103,57 @@ q 不見得是 p 的 caller，就無法存取 q 的 activation record >> 用 acc
 ## p45
 
 function argument 像是 pointer (run-time 才知道呼叫哪個 function)
+
+## p49
+
+program efficeienvy: data allocated，常用的放在一起
+
+## p52
+
+管理 Data 在 processor 該擺在哪個 register
+
+## p53
+
+把 basic block 放在同個 page : 第一道指令被執行，接下來東西會放到 cache 或 Physical memory
+
+```
+struct {
+    int foo;
+    int bar; // 不常執行
+    int baz;
+}
+```
+
+把 foo baz 擺在鄰近的位置
+
+## p54
+
+互調 i, j
+
+m x n cache miss >> m cache miss
+
+## p61
+
+mark-sweep: heap 滿了之後
+
+## p62
+
+對每個 cell 維護一個 counter，紀錄有幾個 pointer 指向它
+
+## p63
+
+root set: aggregation record or stack (全域變數或是區域變數)
+
+## p64
+
+circular connect: memory leak
+
+## p65
+
+假設所有的 cell 都是 garbage
+
+從 root set 出發，可以到達的地方標示它不是 garbage
+
+剩下沒被標示的都是 garbage
+
+缺點: 回收時機不頻繁

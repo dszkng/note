@@ -1,8 +1,6 @@
-Welcome to [NCTU-Coursenote](https://github.com/kaiiiz/NCTU-Coursenote)
+Hi，這裡是我平常做筆記的地方，原始碼是使用 markdown 撰寫，目前放在 [github](https://github.com/kaiiiz/NCTU-Coursenote) 上，若有錯誤還請多多留言指正 :)
 
 ## 關於本站
-
-本站的主要內容是我在課堂或課後所統整的一些筆記，多半是上課的資料還有再輔上一些我自己的理解，若有錯誤還請多多留言指正 :)
 
 本站使用 [hexo](https://hexo.io/zh-tw/) 做網頁生成及部署。hexo 是一個擴展性高的靜態網頁生成器，支援渲染 markdown 還有許多豐富的外掛。hexo 有完整的文件，想玩玩看的話請參考 hexo 的[官方文件](https://hexo.io/zh-tw/docs/)。
 

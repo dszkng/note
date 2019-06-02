@@ -88,3 +88,23 @@ basic block: single entry singe exit
 
 local: 同一個 basic block
 global: 跨 basic block
+
+## p53
+
+把 dependency 關係畫成 DAG
+
+## p54
+
+ready: 沒有 parent 的 node
+
+## p56
+
+有很多 ready state 要挑哪個?
+
+* 挑到 leaf 最長的 (很有可能是 critical length)
+* 有最多的 child
+
+## p64
+
+constant folding: 把 constant 再 compile time 算完
+

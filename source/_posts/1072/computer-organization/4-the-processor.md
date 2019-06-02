@@ -17,7 +17,7 @@
 
 ## Instructions Datapath
 
-## R-Format
+### R-Format
 
 | 6bits | 5bits | 5bits | 5bits | 5bits | 6bits |
 | ----- | ----- | ----- | ----- | ----- | ----- |
@@ -29,13 +29,13 @@
 * 進 ALU 做運算
 * 把算出來的結果存到 Write Register
 
-## I-Format
+### I-Format
 
 | 6bits | 5bits | 5bits | 16bits    |
 | ----- | ----- | ----- | --------- |
 | op    | rs    | rt    | immediate |
 
-### Load/Store
+#### Load/Store
 
 ![](2019-05-02-23-34-01.png)
 
@@ -43,7 +43,7 @@
 * Load: 讀 Memory 的資料然後更新 Register
 * Store: 將 Register 的資料寫到 Memory
 
-### Branch
+#### Branch
 
 [Conditional Branch](#conditional-branch)
 
@@ -56,7 +56,7 @@
   * 左 shift 2-bits (因為一個 word 4-bits)
   * 加上 PC + 4
 
-## J-Format
+### J-Format
 
 | 6bits | 26bits         |
 | ----- | -------------- |
@@ -68,13 +68,13 @@
 * 26-bits jump address
 * 00
 
-## 組合在一起
+### 組合在一起
 
 ![](2019-05-03-00-34-27.png)
 
 ## Control Unit
 
-## ALU Control
+### ALU Control
 
 | ALU control | Function         |
 | ----------- | ---------------- |
@@ -115,23 +115,23 @@
 | Load/Store  | 35/43 | rs    | rt    |       | address |       |
 | Branch      | 4     | rs    | rt    |       | address |       |
 
-## R-type
+#### R-type
 
 ![](2019-05-03-11-08-03.png)
 
-## Load
+#### Load
 
 ![](2019-05-03-11-08-49.png)
 
-## Branch-on-Equal
+#### Branch-on-Equal
 
 ![](2019-05-03-11-09-40.png)
 
-## Jump
+#### Jump
 
 ![](2019-05-03-11-24-55.png)
 
-## Control Unit Settings
+### Control Unit Settings
 
 | Instruction | RegDst | ALUSrc | MemToReg | RegWrite | MemRead | MemWrite | Branch | ALUOp1 | ALUOp0 |
 | ----------- | :----: | :----: | :------: | :------: | :-----: | :------: | :----: | :----: | :----: |
@@ -140,7 +140,7 @@
 | sw          |   x    |   1    |    x     |    0     |    0    |    1     |   0    |   0    |   0    |
 | beq         |   x    |   0    |    x     |    0     |    0    |    0     |   1    |   0    |   1    |
 
-## First-Level Control
+#### First-Level Control
 
 把 Input 的 op 和 Output 的 Control Signal 找出關係：
 
@@ -164,7 +164,7 @@
 
 ![](2019-05-03-12-16-50.png)
 
-## Second-Level Control
+#### Second-Level Control
 
 將 [ALU Control](#alu-control) 的表格：
 
@@ -220,7 +220,7 @@ $ALUctr0 = ALUop1 \cdot func3' \cdot func2 \cdot func1' \cdot func0 + ALUop1 \cd
 
 ![](2019-05-03-12-36-54.png)
 
-## Performance
+### Performance
 
 * Critical path: load instruction
   * **Instruction memory $\to$ register file $\to$ ALU $\to$ data memory $\to$ register file**
@@ -232,7 +232,7 @@ Parallelism improves performance.
 
 ![](2019-05-08-19-23-57.png)
 
-## MIPS Pipeline
+### MIPS Pipeline
 
 5個 stage 同時執行不同指令
 
@@ -259,7 +259,7 @@ MIPS ISA designed for pipelining:
 * Alignment of memory operands
   * Memory access 只需要 1 個 cycle
 
-## Performance
+### Performance
 
 若所有 stage 都花費同樣時間，則
 
@@ -267,13 +267,13 @@ $$ \text{Time between instructions}_{\text{pipelined}} = \frac{ \text{Time betwe
 
 能 speed up 的原因是因為 [throughput](#response-time-and-throughput) 上升，latency (time for each instruction) 不變
 
-## Hazards
+### Hazards
 
 1. <mark>Structure hazards</mark>: 硬體架構，大家都要用但只有一份resouse，要用就要排隊
 2. <mark>Data hazard</mark>: 前一個指令算完時還讀不到 (前一個指令第5個stage才存，但我第2個stage就要)
 3. <mark>Control hazard</mark>: 下一個clock cycle不知道要執行甚麼指令
 
-## Summary
+### Summary
 
 * pipeline 增加 throughput
   * 一個時間點每個 stage 執行不同指令
@@ -289,7 +289,7 @@ $$ \text{Time between instructions}_{\text{pipelined}} = \frac{ \text{Time betwe
 
 ![](2019-05-08-23-54-38.png)
 
-## Pipeline Register
+### Pipeline Register
 
 ![](2019-05-09-00-03-48.png)
 
@@ -307,24 +307,24 @@ $$ \text{Time between instructions}_{\text{pipelined}} = \frac{ \text{Time betwe
 
 **Solution**: <mark>把 write register pack 起來</mark>，帶著一起走
 
-## Pipeline Operation
+### Pipeline Operation
 
 * single-clock-cycle pipeline diagram: 分析一個 cycle 的 pipeline usage
 * muli-cycle pipline diagram: 分析各 operation 在不同 cycle 的 resource usage
 
-## Single-Cycle diagram
+#### Single-Cycle diagram
 
 pipeline 在某個 cycle 的運作情形
 
 ![](2019-05-09-00-10-41.png)
 
-## Multi-Cycle Diagram
+#### Multi-Cycle Diagram
 
 showing resource usage
 
 ![](2019-05-09-00-09-25.png)
 
-## Pipeline Control
+### Pipeline Control
 
 ![](2019-05-09-00-20-43.png)
 
@@ -369,7 +369,7 @@ RegWrt 要滿足打包的原則，所以會被 pack 到 pipeline regiter
 
 ## Pipeline Hazards
 
-## Data Hazards
+### Data Hazards
 
 * **Solution.1** <mark>bubble(no opertation)</mark>
   * panelty: 50%的使用率 (第一個指令做完 > no operation > no operation > 第二個指令執行完畢)
@@ -381,13 +381,13 @@ RegWrt 要滿足打包的原則，所以會被 pack 到 pipeline regiter
 
 ![](2019-05-08-23-12-35.png)
 
-### Example
+#### Example
 
 ![](2019-05-09-00-48-16.png)
 
 sub 在 cycle 5 才將資料寫回 register，用紅線的 forwarding 解決
 
-## Load-Use Data Hazard
+### Load-Use Data Hazard
 
 ![](2019-05-08-23-17-49.png)
 
@@ -397,11 +397,11 @@ sub 在 cycle 5 才將資料寫回 register，用紅線的 forwarding 解決
 
 **Solution**: <mark>reorder code</mark>，讓 lw 與 add 間隔兩個 cycle
 
-### Example
+#### Example
 
 ![](2019-05-08-23-20-54.png)
 
-## Control Hazards
+### Control Hazards
 
 beq 下一個 Instruction fetch 不確定要執行甚麼指令，不知道該跳還是不要跳 (depend on branch 的結果)
 

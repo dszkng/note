@@ -358,3 +358,65 @@ $$
 ![Before Elimination](2019-05-25-00-16-42.png)
 
 ![After Elimination](2019-05-25-00-17-17.png)
+
+### L-Attributed SDD's
+
+Rule:
+
+* 將有關 noterminal $A$ 的 inherited attributes 的相關計算，放在 $A$ 之前
+* 將有關 production head 的 synthesized attribute 的相關計算，放在 body 最後面
+
+![](2019-05-25-20-02-21.png)
+
+以 $S \to while ( C ) S_1$ 為例：
+
+```
+S1.next:
+  C.code
+  (jump to C.true or C.false)
+C.true:
+  S1.code
+  (jump to S1.next)
+C.false:
+S.next:
+...
+```
+
+* Inherited attributes:
+  * $S.next$: 標記 S 做完之後的位置
+  * $C.true$: 標記 condition C 為 true 後的位置
+  * $C.false$: 標記 condition C 為 false 後的位置
+* Synthesized attributes:
+  * $S.code$: $S$ 的 code，及 jump 到 $S.next$ 
+  * $C.code$: $C$ 的 code，及 jump 到 $C.true$ 或 $C.false$
+
+![](2019-05-25-20-20-03.png)
+
+#### Implementing L-Attributed SDD’s
+
+* Traversing parse Tree:
+  * [Annotated parse tree](#evaluation-orders)
+    * For any **noncircular SDD**
+  * 建 parse tree，加上 actions，以 preorder 執行 actions ([General SDT Implementation](#general-sdt-implementation) + [L-Attributed SDD’s](#l-attributed-sdd-s))
+    * For any **L-attributed SDD**
+* Translation during parsing:
+  * Recursive-descent parser
+  * Generate code on the fly (using recursive-descent parser)
+  * 實作 SDT 在 LL-parser
+  * 實作 SDT 在 LR-parser
+
+#### During Top-Down Parsing
+
+在 recursive-descent parser 中，對所有 nonterminal $A$ 都有對應到一個 function $A$
+
+* function $A$ 的 arguments 為 nonterminal $A$ 的 inherited attributes
+* function $A$ 的 return-value 為 nonterminal $A$ 的 synthesized attributes 的集合
+
+以前面 [while](#l-attributed-sdd-s) 的例子：
+
+![](2019-05-25-22-45-31.png)
+
+在 attribute 裡面再宣告變數放 code 其實沒有必要，直接用 main attribute (synthesized): $S.code$, $C.code$ (<mark>不懂</mark>)
+
+![](2019-05-25-22-44-37.png)
+

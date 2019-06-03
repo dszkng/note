@@ -1,8 +1,3 @@
----
-title: Routing
-lightgallery: false
----
-
 # Routing
 
 路由器在路由表中新增路徑主要有 3 種方式：

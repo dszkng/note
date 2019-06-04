@@ -387,6 +387,50 @@ RegWrt 要滿足打包的原則，所以會被 pack 到 pipeline regiter
 
 sub 在 cycle 5 才將資料寫回 register，用紅線的 forwarding 解決
 
+#### Forwarding Detection
+
+將 register number 也隨 pipeline 傳遞
+
+Data hazard 會發生在:
+
+* EX/MEM.Reg.Rd = ID/EX.Reg.Rs
+* EX/MEM.Reg.Rd = ID/EX.Reg.Rt
+* MEM/WB.Reg.Rd = ID/EX.Reg.Rs
+* MEM/WB.Reg.Rd = ID/EX.Reg.Rt
+
+但只在需要寫回 Reg 時才做 forwarding:
+
+* EX/MEM.RegWrite
+* MEM/WB.RegWrite
+
+且寫回去的值不為 0
+
+* EX/MEM.Reg.Rd != 0
+* MEM/WB.Reg.Rd != 0
+
+![](2019-06-04-12-29-48.png)
+
+* EX hazard
+  * if (EX/MEM.RegWrite and (EX/MEM.Reg.Rd != 0) and (EX/MEM.Reg.Rd = ID/EX.Reg.Rs)) >> ForwardA = 10
+  * if (EX/MEM.RegWrite and (EX/MEM.Reg.Rd != 0) and (EX/MEM.Reg.Rd = ID/EX.Reg.Rt)) >> ForwardB = 10
+* MEM hazard
+  * if (MEM/WB.RegWrite and (MEM/WB.Reg.Rd != 0) and (MEM/WB.Reg.Rd = ID/EX.Reg.Rs)) >> ForwardA = 01
+  * if (MEM/WB.RegWrite and (MEM/WB.Reg.Rd != 0) and (MEM/WB.Reg.Rd = ID/EX.Reg.Rt)) >> ForwardB = 01
+
+#### Double Data Hazard
+
+![](2019-06-04-12-39-09.png)
+
+使用最近算出來的，所以要修改 MEM hazard，如果 EX hazard 非 true 時才做
+
+* MEM hazard
+  * if (MEM/WB.RegWrite and (MEM/WB.Reg.Rd != 0) **and not (EX/MEM.RegWrite and (EX/MEM.Reg.Rd != 0) and (EX/MEM.Reg.Rd = ID/EX.Reg.Rs))** and (MEM/WB.Reg.Rd = ID/EX.Reg.Rs)) >> ForwardA = 01
+  * if (MEM/WB.RegWrite and (MEM/WB.Reg.Rd != 0) **and not (EX/MEM.RegWrite and (EX/MEM.Reg.Rd != 0) and (EX/MEM.Reg.Rd = ID/EX.Reg.Rt))** and (MEM/WB.Reg.Rd = ID/EX.Reg.Rt)) >> ForwardB = 01
+
+#### Datapath
+
+![](2019-06-04-12-44-44.png)
+
 ### Load-Use Data Hazard
 
 ![](2019-05-08-23-17-49.png)
@@ -395,9 +439,40 @@ sub 在 cycle 5 才將資料寫回 register，用紅線的 forwarding 解決
 * lw 在第四個 stage 結束後才將 data 讀出來
 * EX 後是 memory address 不是 data，不能直接拉 EX 後那條
 
-**Solution**: <mark>reorder code</mark>，讓 lw 與 add 間隔兩個 cycle
+**Solution**: <mark>reorder code/bubble</mark>，讓 lw 與 add 間隔兩個 cycle
 
 #### Example
+
+![](2019-06-04-12-59-47.png)
+
+#### Detection
+
+if ID/EX.MemRead and ((ID/EX.Reg.Rt = IF/ID.Reg.Rs) or (ID/EX.Reg.Rt = IF/ID.Reg.Rt)) >> stall and insert bubble
+
+* 將 ID/EX register 中的 Control value 設為 0
+  * EX, MEM, WB do nop
+* PC, IF/ID register 不更新
+  * 下一個 cycle 做同樣的事
+
+![](2019-06-04-13-02-42.png)
+
+* CC3: detect load use hazards，IF/ID 紀錄第二個指令 (and)，PC 指到第三個指令 (or)
+* 第三個指令 (or) 在 CC3 讀一次 CC4 又讀一次
+* 第二個指令 (and) 在 CC3 decode 一次 CC4 又 decode 一次
+
+#### Datapath
+
+![](2019-06-04-13-03-47.png)
+
+hazard detect unit
+
+* control 在發現 hazard 時全部改為 0
+* PCWrite = 0，不讓 PC + 4 寫進 PC
+* IF/IDWrite = 0，不讓 instruction 寫入
+
+#### Reorder code
+
+如果 compiler 夠強，也能在 compile 時 rearrage code
 
 ![](2019-05-08-23-20-54.png)
 
@@ -417,164 +492,210 @@ beq 下一個 Instruction fetch 不確定要執行甚麼指令，不知道該跳
 
 猜不要跳，lw 正要 pipeline instruction fetch (但不應該被執行)，然後發現猜錯了，於是讓 lw 後面都變成 no operation (這邊加上一些硬體的設定直接 flush 掉)，接著跳到 or 繼續執行
 
+#### Detection
+
+![](2019-06-04-19-22-44.png)
+
+提早發現 branch 跳錯，可以在第 2 個 stage
+
+* 加 target address adder
+* 加 register comparision
+
+在第 2 個 stage 結束後就可以發現 hazard
+
+#### Data hazard
+
+如果比較的兩個 register 有 data hazard，至少需要 stall 一個 cycle
+
+![無法直接 forward 解決](2019-06-04-19-25-30.png)
+
+如果 comparision depend 的 register 是 lw，至少需要 stall 兩個 cycle
+
+![](2019-06-04-19-27-11.png)
+
+#### Prediction
+
 有兩種猜的方法：
 
 * Static branch prediction: 每次都猜一樣的
 * Dynamic branch prediction: 上次猜對還猜錯，猜對了繼續猜同樣的，猜錯了跟個性有關，有猜錯一次就換的，也猜錯多次才換的
 
-## p83
+##### 1-Bit Predictor
 
-偵測 load/use hazard
+猜錯就猜另一個，depend on iteration numbers
 
-## p84
+![](2019-06-04-19-31-12.png)
 
-第2個指令被decode兩次
-第3個指令被fetch兩次
+##### 2-Bit Predictor
 
-## p85
+連續猜錯或猜對兩次才換
 
-and become nop: stall 一個 cycle
-or 不需要 forward，直接讀
+![](2019-06-04-19-32-29.png)
 
-## p86
+![Another Scheme](2019-06-04-19-33-44.png)
 
-進到 cycle 3: detect load/sw hazards
+#### Delay Slot
 
-IF/ID 紀錄第二個指令，PC只到第三個指令
+在 branch 後執行不影像 branch 的 code
 
-第三個指令(or)再cc3讀一次cc4又讀一次
-第二個指令再cc3 decode依次cc4又 decode 依次
+![](2019-06-04-19-39-18.png)
 
-## p87
+#### Branch Target Buffer
 
-hazard detect unit
+Cache of target addresses，當 IF 時計算跳過去的 PC，branch 時可以直接跳
 
-control 在發現 hazard 時全部灌 0
-PCWrite = 0，不讓 PC + 4 寫進 PC
-IF/IDWrite = 0，不讓 instruction 寫入
+## Exceptions and Interrupts
 
-## p89
+exception: within CPU
+interrupt: from external I/O controller
 
-正確的指令在第5個 cycle 進來，前面全部 flush 掉(不keep)
+### Handling Exceptions
 
-## p90
+![](2019-06-04-19-50-40.png)
 
-提早發現 branch 跳錯，搬到第2個stage
+MIPS 透過 System Control Coprocessor (CP0) 集中管理，計下發生 exception 的 PC (EPC)
 
-* 加 target address adder
-* 加 register comparision
+### Pipeline
 
-第2個stage結束後就可以發現 hazard
+Consider overflow on add in EX stage: `add $1, $2, $1`
 
-## p93
+* 取消寫入到 $1
+* 把在 pipeline 的指令做完
+* flush add 與接下來的 instruction
+* 保存 Exception cause 與 EPC
+* 傳到 handler
 
-又有 hazard 又有 branch
+![加了3條線，IF Flush, ID Flush, EX Flush](2019-06-04-20-09-58.png)
 
-## p96
+把 Exception cause 複寫到 cause register，包在 control 中
 
-上次猜甚麼 猜對還猜錯
+### Example
 
-## p97
+![add 發生 exception](2019-06-04-20-18-53.png)
 
-depend on iteration numbers
+Handler
 
-## p102
+```
+80000180 sw $25, 1000($0)
+80000184 sw $26, 1004($0)
+...
+```
 
-硬體壞掉exception，如果牽涉到CPU外面的hardware就是interrupt
+![Handler sw](2019-06-04-20-19-39.png)
 
-## p103
+### Multiple Exceptions
 
-集中式管理 <= MIPS
-分散式
+Pipeline 中出現多個 exception，若有先後順序，選最前面的 exception，flush 後面的 instructions
 
-## p107
+### Imprecise Exceptions
 
-把原因複寫到 cause register，包在 Control unit，
-
-加了3條線，IF,ID,EX Flush
-
-## p112
-
-有先後順序選最前面的 exception
-
-## p113
-
-imprecise exceptions: 精簡 hardware，交給 software
-
-當 exception 發生時不能找到是哪個 instruction 發生的，把大致的結果 (cause register)，交給 OS，
+當 exception 發生時不能找到是哪個 instruction 發生的，把大致的結果 (cause register) 交給 OS。
 
 simple hardware, complex handler (duty located on OS)
 
-分不清先後順序，無法適用 imprecise exceptions
+> 若 multiple-issue 的 exceptions 分不清先後順序，無法適用 imprecise exceptions
 
-## p114
+## Instruction-Level Parallelism
 
-ILP: pipeline 就是其中一種
+pipeline 就是其中一種 ILP
 
-1. 想辦法把 5 stage 提升到 7 stage...: 每一個 Stage 要做的事變少
+增加 ILP 的方法：　
 
-drawback: 發生 hazard 要停下來的 stage 變多 (flush 越多，做白工越多), exception 
+* 想辦法把 5 stage 提升到 7 stage...: 每一個 Stage 要做的事變少
+  * drawback: 發生 hazard 要停下來的 stage 變多 (flush 越多，做白工越多), exception 也是
+* 建多條 pipeline
 
-2. 建多條 pipeline
+### Multiple Issue
 
-## p116
+* Static multiple issue
+  * Compiler 將 instruction group 到 issue slot
+  * Compiler detects and avoids hazards
+* Dynamic multiple issue
+  * CPU 讀 instruction stream 並選擇在每個 cycle 需要 issue 的 instruction
+  * Compiler reorder instructions
+  * CPU resolves hazards at run-time
 
-層次更高的猜
+### Speculation
 
-指令還沒執行完，做一個不應該做的事情
+層次更高的<mark>猜</mark>，盡量執行指令
 
-有些指令會把值寫到 reg，寫到 memory。其他都能做，就是 write 不能做 (電腦狀態沒變)。
+* 指令還沒執行完，做一個不應該做的事情
+* 有些指令會把值寫到 reg，寫到 memory。其他都能做，就是 write 不能做 (所以電腦狀態沒變)。
+* 猜錯就是多執行一些 instruction，執行完錯了就不要寫就好。盡可能能執行就執行，順序不一樣也沒關係。
+* 對了繼續執行，錯了就 rollback 執行對的那個指令
 
-猜錯就是多執行一些 instruction，執行完錯了就不要寫就好。盡可能能執行就執行，順序不一樣也沒關係。對了很好，錯了就rollback執行對的那個指令
+Compiler Speculation: Compiler 可以 reorder code 來避免stall，或是寫一些 instruction 來修正做出錯誤的 speculation 的狀況。
 
-## p117
+Hardware Speculation: 硬體可以做 look-ahead，將 instruction 的結果和 exception 都先存在 buffer 裡，直到他們要被用到或是判斷 speculation 正確。如果判斷 speculation 錯誤就把 buffer flush 掉。
 
-可以執行但不可以 write
-
-```
-beq ...
-add ...
-```
-
-## p118
+#### with Exceptions
 
 ```
 *ptr = 10; // exception, core dump
 sw $2, 100($4); // ptr = $2; (100($4) 是 ptr 的位置) 理論上不會執行，speculative lw 後移到 ptr 前面，就會變成可以成功執行，但結果是錯的
 ```
 
-## p119
+* Static Speculation
+  * 增加用來延遲 exception 的 ISA。
+* Dynamic Speculation
+  * buffer exception 直到 instruction 結束
 
-把 4 個指令兜成一個虛擬指令
+### Static Multiple Issue
 
-## p122
+Compiler 把多個指令兜成一個虛擬指令 > Very Long Instruction Word (VLIW)
 
-黑 alu beq
-藍 lw sw
+#### Scheduling
 
-## p123
+* reorder instuction into issue packets
+* packet 中沒有 dependency
+* 必要時加入 nop
 
-load-use hazard
+#### MIPS with Static Dual Issue
 
-e.g.
+ALU/branch + load/store: 64-bits instruction
 
-lw, add, sw
-pipeline: (c1, c3, c4)
-dual: (c1, c3) c3 一次進兩個 instuction
+![](2019-06-04-21-14-59.png)
 
-## p124
+##### Datapath
 
-sw $t0, 4($s1) // 4 要補回 addi 加的值
+![黑 alu beq + 藍 lw sw](2019-06-04-21-15-31.png)
 
-## p126
+##### Harzard
+
+EX data hazard: 在同一個 packets 無法做 forwarding > 分成兩個 packet 執行
+
+load-use hazard: 仍需間隔 1 個 cycle，但現在是 2 個 instructions
+
+##### Example
+
+Schedule:
 
 ```
-Loop:   lw $t0, 0($s1)
-        addu $t0, $t0, $s2
-        sw $t0, 0($s1)
-        addi $s1, $s1,–4
-        bne $s1, $zero, Loop
+Loop: lw $t0, 0($s1)        # $t0=array element
+      addu $t0, $t0, $s2    # add scalar in $s2
+      sw $t0, 0($s1)        # store result
+      addi $s1, $s1,–4      # decrement pointer
+      bne $s1, $zero, Loop  # branch $s1!=0
 ```
+
+![IPC = 5/4 = 1.25](2019-06-04-21-24-37.png)
+
+#### Loop Unrolling
+
+* 重複 loop body
+* register renaming，避免 anti-dependencies (對相同的 register 做 sw > lw)
+
+##### Example
+
+```
+Loop: lw $t0, 0($s1)        # $t0=array element
+      addu $t0, $t0, $s2    # add scalar in $s2
+      sw $t0, 0($s1)        # store result
+      addi $s1, $s1,–4      # decrement pointer
+      bne $s1, $zero, Loop  # branch $s1!=0
+```
+
+![IPC = 14/8 = 1.75](2019-06-04-21-33-15.png)
 
 1. s1 沒有被減 > $t0
 2. s1 - 16 + 12 > $t1
@@ -583,7 +704,31 @@ Loop:   lw $t0, 0($s1)
 
 t0, t1, t2, t3: register renaming
 
-## p129
+### Dynamic Multiple Issue
+
+* Superscalar processors
+  * 讓 processor 在執行的時候選擇多個指令在一個 cycle 中執行
+* CPU 決定每個 cycle 執行的 instruction 數量
+
+#### Why?
+
+compiler 可以預測的 run-time 不能預測
+
+#### Dynamic Pipeline Scheduling
+
+允許 CPU 非順序執行 instruction，來消除 stall
+
+```
+lw $t0, 20($s2)
+(bubble)
+addu $t1, $t0, $t2
+sub $s4, $s4, $t3
+slti $t5, $s4, 20
+```
+
+可以在 lw 與 addu 間執行 sub
+
+![](2019-06-04-21-43-53.png)
 
 reservation station: 收集每個 instruction 的 Input operands
 
@@ -598,11 +743,21 @@ add s1, ...
 
 add 與 addi 要找順序存到 s1 >>> commit order
 
-## p132
+#### Register Renaming
 
-compiler 可以預測的 run-time 不能預測
+Reservation stations and reorder buffer 提供 register renaming
 
-## p133
+#### Speculation
 
-兩個 pointer 指到同一個位置，看名字看不出來 (pointer aliasing)
+預測 branch 並繼續執行，直到 branch 結果出來才寫入
+
+### Summary
+
+沒有想像中優化那麼多:
+
+* Program 有其他 dependency 限制 ILP
+  * e.g. 兩個 pointer 指到同一個位置，看名字看不出來 (pointer aliasing)
+* 有些 instruction 很難做平行化
+* Memory delays
+* limited bandwidth
 

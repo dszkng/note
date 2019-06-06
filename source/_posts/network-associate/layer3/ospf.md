@@ -301,3 +301,4 @@ OSPF 虛擬鏈路支援兩台連接到<mark>相同非骨幹區域的 ABR</mark>�
 
 `show ip ospf neighbor`
 
+## OSPF LSDB

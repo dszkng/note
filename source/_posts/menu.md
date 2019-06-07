@@ -2,6 +2,11 @@
 * 大一
 * 大二
   * [正規語言概論](/NCTU-Coursenote/1072/intro-to-formal-language/0-courseinfo)
+    * [Finite Automata](/NCTU-Coursenote/1072/intro-to-formal-language/1-finite-automata)
+    * [Regular Languages](/NCTU-Coursenote/1072/intro-to-formal-language/2-regular-languages)
+    * [Context-Free Languages](/NCTU-Coursenote/1072/intro-to-formal-language/3-context-free-languages)
+    * [Pushdown Automata](/NCTU-Coursenote/1072/intro-to-formal-language/4-pushdown-automata)
+    * [Turing Machines](/NCTU-Coursenote/1072/intro-to-formal-language/5-turing-machines)
   * [資料庫系統概論](/NCTU-Coursenote/1072/intro-to-dbms/0-courseinfo)
   * [計算機組織](/NCTU-Coursenote/1072/computer-organization/0-courseinfo)
     * [Computer Abstractions and Technology](/NCTU-Coursenote/1072/computer-organization/1-computer-abstractions)

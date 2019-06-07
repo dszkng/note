@@ -5,10 +5,10 @@
 		}
 	],
 	"settings": {
-		// "pasteImage.path": "${projectRoot}/source/_posts/1072/compiler-design/4-syntax-directed-translation",
+		// "pasteImage.path": "${projectRoot}/source/_posts/1072/compiler-design/5-ir",
 		// "pasteImage.path": "${projectRoot}/source/_posts/1072/computer-organization/5-exploiting-memory-hierarchy",
-		// "pasteImage.path": "${projectRoot}/source/_posts/network-associate/layer3/ospf",
-		"pasteImage.path": "${projectRoot}/source/_posts/1072/intro-to-formal-language/5-turing-machines",
+		"pasteImage.path": "${projectRoot}/source/_posts/network-associate/layer3/ospf",
+		// "pasteImage.path": "${projectRoot}/source/_posts/1072/intro-to-formal-language/5-turing-machines",
 		"pasteImage.insertPattern": "${imageSyntaxPrefix}${imageFileName}${imageSyntaxSuffix}",
 		"editor.minimap.enabled": false,
 	}

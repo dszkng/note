@@ -8,7 +8,7 @@
 
 Solutions:
 
-* 用 context-sensitive grammars （貴）
+* 用 context-sensitive grammars (貴)
 * 用 CFG 加上 attributes 及 semantic rules(semantic actions)
   * <mark>Syntax-directed definitions (SDD)</mark>
   * <mark>Syntax-directed translation scheme (SDT)</mark>
@@ -17,10 +17,10 @@ Solutions:
 
 為 identifier 加上一些性質：
 
-* 常數（numbers or strings)
-* 型別（for type checking)
-* scope 的資訊（判斷 local/global）
-* 記憶體位置（local 變數或 function 參數的 frame index）
+* 常數 (numbers or strings)
+* 型別 (for type checking)
+* scope 的資訊 (判斷 local/global)
+* 記憶體位置 (local 變數或 function 參數的 frame index)
 * Intermediate program 表示法
 
 ### Syntax-Directed Translation
@@ -102,13 +102,13 @@ semantic action 會在 term 被 derived 後執行
 
 #### Synthesized Attributes
 
-for nonterminal $A$，如果這個 Node 的 attribute 是透過他自己或是他的 children 得到，則稱作 Synthesized Attributes
+for nonterminal $A$，如果這個 Node 的 attribute 是透過<mark>他自己或是他的 children</mark>得到，則稱作 Synthesized Attributes
 
 ![](2019-05-23-16-41-30.png)
 
 #### Inherited Attributes
 
-for nonterminal $B$，如果這個 Node 的 attribute 是透過他的 parents 或是他的 sibling 得到，則稱作 Inherited Attributes
+for nonterminal $B$，如果這個 Node 的 attribute 是透過<mark>他的 parents 或是他的 sibling</mark>得到，則稱作 Inherited Attributes
 
 ![](2019-05-23-16-43-52.png)
 
@@ -306,14 +306,14 @@ Attribute 在 production 被 parse 的時候會 push 到 stack，reduction 時�
 
 $$ B \to X ~ \{ action \} ~ Y $$
 
-* Bottom-up parsing: action 會在 $X$ 出現在 parsing stack 的 top 時立刻執行
-* Top-down parsing: action 會在嘗試將 Y 展開、檢查 input 之前執行
+* Bottom-up parsing: <mark>action 會在 $X$ 出現在 parsing stack 的 top 時立刻執行</mark>
+* Top-down parsing: <mark>action 會在嘗試將 Y 展開、檢查 input 之前執行</mark>
 
 #### Conflict Problem
 
 ![Infix-to-prefix translation](2019-05-24-16-05-02.png)
 
-parser 在看到 + 與 * 之前，不知道是要 reduce 回 $M_1$ 或是 reduce 回 $M_2$，導致 reduce/reduce conflict
+parser 不知道是要 reduce 回 $M_1$ 或是 reduce 回 $M_2$，導致 reduce/reduce conflict
 
 solution: 對 action 改用 <mark>marker nonterminals</mark>
 
@@ -419,4 +419,6 @@ S.next:
 在 attribute 裡面再宣告變數放 code 其實沒有必要，直接用 main attribute (synthesized): $S.code$, $C.code$ (<mark>不懂</mark>)
 
 ![](2019-05-25-22-44-37.png)
+
+#### During Bottom-Up Parsing
 

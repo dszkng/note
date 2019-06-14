@@ -2,6 +2,8 @@
 
 ## Definition
 
+[YT - Lecture 20/65: PDAs: Pushdown Automata](https://www.youtube.com/watch?v=s5cB_xg9NGg&list=PLbtzT1TYeoMjNOGEiaRmm_vMIwUAidnQz&index=20)
+
 ### Def 7.1
 
 A nondeterministic pushdown accept (npda) is defined by the septuple
@@ -42,5 +44,9 @@ The first of these conditions simply requires that for any given input symbol an
 The second condition is that when a $\lambda$-move is possible for some configuration, no input-consuming alternative is avaliable.
 
 ### Def 7.4
+
+[YT - Lecture 21/65: Equivalence of CFGs and PDAs (part 1)](https://www.youtube.com/watch?v=s9GbXopLSUU&list=PLbtzT1TYeoMjNOGEiaRmm_vMIwUAidnQz&index=21)
+
+[YT - Lecture 22/65: Equivalence of CFGs and PDAs (part 2)](https://www.youtube.com/watch?v=UUXlt2WJ59A&list=PLbtzT1TYeoMjNOGEiaRmm_vMIwUAidnQz&index=22)
 
 A language $L$ is said to be a deterministic context-free language iff there exists a dpda $M$ s.t. $L = L(M)$

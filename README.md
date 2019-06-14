@@ -1,4 +1,4 @@
-Hi，這裡是我平常做筆記的地方，原始碼是使用 markdown 撰寫，目前放在 [github](https://github.com/kaiiiz/NCTU-Coursenote) 上，若有錯誤還請多多留言指正 :)
+Hi，這裡是我平常做筆記的地方，原始碼是使用 markdown 撰寫，目前放在 [github](https://github.com/kaiiiz/note) 上，若有錯誤還請多多留言指正 :)
 
 ## 關於本站
 
@@ -7,7 +7,7 @@ Hi，這裡是我平常做筆記的地方，原始碼是使用 markdown 撰寫�
 ## 維護
 
 * 若網頁有什麼問題或有想要什麼功能，歡迎到 [hexo-theme-book](https://github.com/kaiiiz/hexo-theme-book) 中開 issue
-* 文章內容理解錯誤或是想補充的的歡迎留言或是發 pull request 到 [NCTU-Coursenote](https://github.com/kaiiiz/NCTU-Coursenote)
+* 文章內容理解錯誤或是想補充的的歡迎留言或是發 pull request 到 [kaiiiz/note](https://github.com/kaiiiz/note)
 
 ## 時間軸
 

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+
+    
+      <link rel="icon" href="/note/shell.png">
+    
+
+    <title>
+        
+          kaiiiz/note
+        
+    </title>
+
+    <!-- Spectre.css framework (v0.5.8) -->
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-exp.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-icons.min.css">
+
+    <!-- Noto Sans TC -->
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet">
+
+    <!-- theme css & js -->
+    <link rel="stylesheet" href="/note/css/spectre_custom.css">
+    <link rel="stylesheet" href="/note/css/book.css">
+    <script src="/note/js/book.js"></script>
+
+    <!-- tocbot -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css">
+
+    <!-- highlight.js -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+    <!-- katex -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+</head>
+
+<body>
+
+<div class="container">
+  <div class="book-container">
+    <div class="columns">
+      <div class="column col-2 hide-lg">
+        <div class="book-sidebar">
+  <h4 class="site-meta">
+    <a href="/note/">kaiiiz/note</a>
+  </h4>
+  <div class="sidebar-content">
+    <ul>
+<li><a href="/note">首頁</a></li>
+<li>大一</li>
+<li><a href="/note/1072/sophomore">大二</a></li>
+<li>大三</li>
+<li>大四</li>
+<li>網路相關
+<ul>
+<li><a href="/note/network-associate/landesign">LAN Design</a></li>
+<li>Layer 2
+<ul>
+<li><a href="/note/network-associate/layer2/vlan">VLAN</a></li>
+<li><a href="/note/network-associate/layer2/vtp">VTP</a></li>
+<li><a href="/note/network-associate/layer2/stp">STP</a></li>
+</ul>
+</li>
+<li>Layer 3
+<ul>
+<li><a href="/note/network-associate/layer3/routing">Routing</a></li>
+<li><a href="/note/network-associate/layer3/vlsm">VLSM</a></li>
+<li><a href="/note/network-associate/layer3/ospf">OSPF</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+</div>
+
+<script src="/note/js/book-sidebar.js"></script>
+      </div>
+
+      <div class="column col-8 col-lg-12">
+        <div class="book-content">
+          <div class="book-navbar">
+  <header class="navbar">
+  <section class="navbar-section">
+    <img class="navbar-icon" src="/note/shell.png">
+  </section>
+  <section class="navbar-center">
+    kaiiiz/note
+  </section>
+  <section class="navbar-section">
+    <label class="accordion-header c-hand" for="accordion-sidebar">
+      <i class="icon icon-menu"></i>
+    </label>
+  </section>
+</header>
+
+<div class="accordion">
+  <input type="checkbox" id="accordion-sidebar" name="accordion-checkbox" hidden>
+  <div class="accordion-body">
+    <ul>
+<li><a href="/note">首頁</a></li>
+<li>大一</li>
+<li><a href="/note/1072/sophomore">大二</a></li>
+<li>大三</li>
+<li>大四</li>
+<li>網路相關
+<ul>
+<li><a href="/note/network-associate/landesign">LAN Design</a></li>
+<li>Layer 2
+<ul>
+<li><a href="/note/network-associate/layer2/vlan">VLAN</a></li>
+<li><a href="/note/network-associate/layer2/vtp">VTP</a></li>
+<li><a href="/note/network-associate/layer2/stp">STP</a></li>
+</ul>
+</li>
+<li>Layer 3
+<ul>
+<li><a href="/note/network-associate/layer3/routing">Routing</a></li>
+<li><a href="/note/network-associate/layer3/vlsm">VLSM</a></li>
+<li><a href="/note/network-associate/layer3/ospf">OSPF</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+</div>
+</div>
+
+<div class="book-post">
+  <h1 id="control-flow">Control Flow</h1>
+<h2 id="basic-block">Basic block</h2>
+<p>在同一個 basic block 指令有相同的 execuation condition</p>
+<p>single entry single exit 中間不會跳離</p>
+<ul>
+<li>程式第一道指令一定是 bb</li>
+<li>branch target 一定是 bb</li>
+<li>branch 的下一道指令一定是 bb</li>
+</ul>
+<h2 id="p13">p13</h2>
+<p>Profile-guided opt (PGO)</p>
+<p>profile edge 會執行幾次</p>
+<h2 id="p16">p16</h2>
+<p>自己會 dominate 自己<br>
+x &gt; y, y &gt; z &gt;&gt; x &gt; z<br>
+x &gt; z, y &gt; z &gt;&gt; x &gt; y or y &gt; x</p>
+<p>到現在的 BB 前一定會執行的 BB</p>
+<h2 id="p17">p17</h2>
+<p>右圖: BB6: BB1, BB2</p>
+<h2 id="p19">p19</h2>
+<p>離我最近的 dominator</p>
+<h2 id="p20">p20</h2>
+<p>反過來想 exit</p>
+<h2 id="p28">p28</h2>
+<p>透過 dominate 知道 bakedge 再知道 loop</p>
+<h2 id="p29">p29</h2>
+<p>BB4&gt;BB3: continue</p>
+<h2 id="p32">p32</h2>
+<p>compiler 無法優化</p>
+<h2 id="p36">p36</h2>
+<p>remainder loop</p>
+<h2 id="p37">p37</h2>
+<p>iteration 不 depend on 某個數</p>
+<h2 id="p41">p41</h2>
+<p>把前 p 個指令拿出來</p>
+<p>把不被整除的先拿出來，剩下的可以做 vectorization</p>
+<h2 id="p43">p43</h2>
+<p>目標是減少 branch 數量</p>
+<h2 id="p46">p46</h2>
+<p>branch 與 fall through 都跳到 L2</p>
+<p>跳到 L2 做一些事情，直接搬 L2 的事過來</p>
+<h2 id="p47">p47</h2>
+<p>dead code elimination: dead code 有可能會執行，但執行不影響程式的執行結果</p>
+<p>unreachable code: 不會執行的 code</p>
+<h2 id="p48">p48</h2>
+<p>對最常跑的路徑做 optimization</p>
+<p>考慮 side entrance、side exit</p>
+
+</div>
+
+
+  <div class="book-comments">
+    
+    <div id="disqus_thread"></div>
+    <script>
+    (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://at881005.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+  </div>
+
+
+<script src="/note/js/book-post.js"></script>
+        </div>
+      </div>
+
+      <div class="column col-2 hide-lg">
+        <div class="book-toc">
+  <div class="book-tocbot">
+  </div>
+  <div class="book-tocbot-menu">
+    <a class="book-toc-expand" onclick="expand_toc()">Expand all</a>
+    <a onclick="go_top()">Back to top</a>
+    <a onclick="go_bottom()">Go to bottom</a>
+  </div>
+</div>
+
+<script>
+tocbot.init({
+  tocSelector: '.book-tocbot',
+  contentSelector: '.book-post',
+  headingSelector: 'h1, h2, h3, h4, h5',
+  collapseDepth: 2,
+  orderedList: false,
+  scrollSmooth: false,
+});
+
+function expand_toc(){
+  var b = document.querySelector(".book-toc-expand");
+  tocbot.init({
+    tocSelector: '.book-tocbot',
+    contentSelector: '.book-post',
+    headingSelector: 'h1, h2, h3, h4, h5',
+    collapseDepth: 6,
+    orderedList: false,
+    scrollSmooth: false,
+  });
+  b.setAttribute("onclick", "collapse_toc()");
+  b.innerHTML = "Collapse all"
+}
+
+function collapse_toc(){
+  var b = document.querySelector(".book-toc-expand");
+  tocbot.init({
+    tocSelector: '.book-tocbot',
+    contentSelector: '.book-post',
+    headingSelector: 'h1, h2, h3, h4, h5',
+    collapseDepth: 2,
+    orderedList: false,
+    scrollSmooth: false,
+  });
+  b.setAttribute("onclick", "expand_toc()");
+  b.innerHTML = "Expand all"
+}
+
+function go_top() {
+  window.scrollTo(0, 0);
+}
+
+function go_bottom() {
+  window.scrollTo(0, document.body.scrollHeight);
+}
+
+</script>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

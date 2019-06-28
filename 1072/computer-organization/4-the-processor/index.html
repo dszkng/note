@@ -1,0 +1,1638 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+
+    
+      <link rel="icon" href="/note/shell.png">
+    
+
+    <title>
+        
+          kaiiiz/note
+        
+    </title>
+
+    <!-- Spectre.css framework (v0.5.8) -->
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-exp.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-icons.min.css">
+
+    <!-- Noto Sans TC -->
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet">
+
+    <!-- theme css & js -->
+    <link rel="stylesheet" href="/note/css/spectre_custom.css">
+    <link rel="stylesheet" href="/note/css/book.css">
+    <script src="/note/js/book.js"></script>
+
+    <!-- tocbot -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css">
+
+    <!-- highlight.js -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+    <!-- katex -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+</head>
+
+<body>
+
+<div class="container">
+  <div class="book-container">
+    <div class="columns">
+      <div class="column col-2 hide-lg">
+        <div class="book-sidebar">
+  <h4 class="site-meta">
+    <a href="/note/">kaiiiz/note</a>
+  </h4>
+  <div class="sidebar-content">
+    <ul>
+<li><a href="/note">首頁</a></li>
+<li>大一</li>
+<li><a href="/note/1072/sophomore">大二</a></li>
+<li>大三</li>
+<li>大四</li>
+<li>網路相關
+<ul>
+<li><a href="/note/network-associate/landesign">LAN Design</a></li>
+<li>Layer 2
+<ul>
+<li><a href="/note/network-associate/layer2/vlan">VLAN</a></li>
+<li><a href="/note/network-associate/layer2/vtp">VTP</a></li>
+<li><a href="/note/network-associate/layer2/stp">STP</a></li>
+</ul>
+</li>
+<li>Layer 3
+<ul>
+<li><a href="/note/network-associate/layer3/routing">Routing</a></li>
+<li><a href="/note/network-associate/layer3/vlsm">VLSM</a></li>
+<li><a href="/note/network-associate/layer3/ospf">OSPF</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+</div>
+
+<script src="/note/js/book-sidebar.js"></script>
+      </div>
+
+      <div class="column col-8 col-lg-12">
+        <div class="book-content">
+          <div class="book-navbar">
+  <header class="navbar">
+  <section class="navbar-section">
+    <img class="navbar-icon" src="/note/shell.png">
+  </section>
+  <section class="navbar-center">
+    kaiiiz/note
+  </section>
+  <section class="navbar-section">
+    <label class="accordion-header c-hand" for="accordion-sidebar">
+      <i class="icon icon-menu"></i>
+    </label>
+  </section>
+</header>
+
+<div class="accordion">
+  <input type="checkbox" id="accordion-sidebar" name="accordion-checkbox" hidden>
+  <div class="accordion-body">
+    <ul>
+<li><a href="/note">首頁</a></li>
+<li>大一</li>
+<li><a href="/note/1072/sophomore">大二</a></li>
+<li>大三</li>
+<li>大四</li>
+<li>網路相關
+<ul>
+<li><a href="/note/network-associate/landesign">LAN Design</a></li>
+<li>Layer 2
+<ul>
+<li><a href="/note/network-associate/layer2/vlan">VLAN</a></li>
+<li><a href="/note/network-associate/layer2/vtp">VTP</a></li>
+<li><a href="/note/network-associate/layer2/stp">STP</a></li>
+</ul>
+</li>
+<li>Layer 3
+<ul>
+<li><a href="/note/network-associate/layer3/routing">Routing</a></li>
+<li><a href="/note/network-associate/layer3/vlsm">VLSM</a></li>
+<li><a href="/note/network-associate/layer3/ospf">OSPF</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+</div>
+</div>
+
+<div class="book-post">
+  <h1 id="the-processor">The Processor</h1>
+<h2 id="cpu-overview">CPU Overview</h2>
+<p><img src="2019-05-02-23-18-16.png" alt></p>
+<p>因為不能把很多線接在一起，所以需要 MUX，還需要有 Control Unit 來控制 MUX：</p>
+<p><img src="2019-05-02-23-14-52.png" alt></p>
+<h2 id="instruction-fetch">Instruction Fetch</h2>
+<p><img src="2019-05-02-23-26-42.png" alt></p>
+<ul>
+<li>PC: 32-bits register</li>
+<li>每次執行完指令後將 PC + 4 (1 個 instruction 4 bytes)</li>
+</ul>
+<h2 id="instructions-datapath">Instructions Datapath</h2>
+<h3 id="r-format">R-Format</h3>
+<table>
+<thead>
+<tr>
+<th>6bits</th>
+<th>5bits</th>
+<th>5bits</th>
+<th>5bits</th>
+<th>5bits</th>
+<th>6bits</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>op</td>
+<td>rs</td>
+<td>rt</td>
+<td>rd</td>
+<td>shamt</td>
+<td>funct</td>
+</tr>
+</tbody>
+</table>
+<p><img src="2019-05-02-23-31-53.png" alt></p>
+<ul>
+<li>讀 2 個 input: Read Register 1, 2</li>
+<li>進 ALU 做運算</li>
+<li>把算出來的結果存到 Write Register</li>
+</ul>
+<h3 id="i-format">I-Format</h3>
+<table>
+<thead>
+<tr>
+<th>6bits</th>
+<th>5bits</th>
+<th>5bits</th>
+<th>16bits</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>op</td>
+<td>rs</td>
+<td>rt</td>
+<td>immediate</td>
+</tr>
+</tbody>
+</table>
+<h4 id="load-store">Load/Store</h4>
+<p><img src="2019-05-02-23-34-01.png" alt></p>
+<ul>
+<li>Sign-extend (以 ALU 實做) 用作將 Address 做 16-bits 的 offset (I-type 的後 16-bits 要轉成 32-bits)</li>
+<li>Load: 讀 Memory 的資料然後更新 Register</li>
+<li>Store: 將 Register 的資料寫到 Memory</li>
+</ul>
+<h4 id="branch">Branch</h4>
+<p><a href="#conditional-branch">Conditional Branch</a></p>
+<p><img src="2019-05-02-23-51-53.png" alt></p>
+<ul>
+<li>讀 2 個 Register</li>
+<li>比較兩個 Register (用 ALU 的 Substract 還有 Check Zero output)</li>
+<li>算 Target Address
+<ul>
+<li>Sign-extended</li>
+<li>左 shift 2-bits (因為一個 word 4-bits)</li>
+<li>加上 PC + 4</li>
+</ul>
+</li>
+</ul>
+<h3 id="j-format">J-Format</h3>
+<table>
+<thead>
+<tr>
+<th>6bits</th>
+<th>26bits</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>op</td>
+<td>target address</td>
+</tr>
+</tbody>
+</table>
+<p><a href="#unconditional-branch">Unconditional branch</a></p>
+<ul>
+<li>舊 PC 的前 4-bits</li>
+<li>26-bits jump address</li>
+<li>00</li>
+</ul>
+<h3 id="組合在一起">組合在一起</h3>
+<p><img src="2019-05-03-00-34-27.png" alt></p>
+<h2 id="control-unit">Control Unit</h2>
+<h3 id="alu-control">ALU Control</h3>
+<table>
+<thead>
+<tr>
+<th>ALU control</th>
+<th>Function</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0000</td>
+<td>AND</td>
+</tr>
+<tr>
+<td>0001</td>
+<td>OR</td>
+</tr>
+<tr>
+<td>0010</td>
+<td>add</td>
+</tr>
+<tr>
+<td>0110</td>
+<td>subtract</td>
+</tr>
+<tr>
+<td>0111</td>
+<td>set-on-less-than</td>
+</tr>
+<tr>
+<td>1100</td>
+<td>NOR</td>
+</tr>
+</tbody>
+</table>
+<p>分析一下 Instruction 需要 ALU 做什麼事：</p>
+<ul>
+<li>分 4 類
+<ul>
+<li>Load/Store: add</li>
+<li>Branch: substract</li>
+<li>R-type: depend on funct-field</li>
+</ul>
+</li>
+<li>讀到 10 要再讀 funct field (由 <a href="#second-level-control">second level</a> 產生出 ALU signal)</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>opcode</th>
+<th>ALUOp</th>
+<th>Operation</th>
+<th>funct</th>
+<th>ALU function</th>
+<th>ALU control</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>lw</td>
+<td>00</td>
+<td>load word</td>
+<td>XXXXXX</td>
+<td>add</td>
+<td>0010</td>
+</tr>
+<tr>
+<td>sw</td>
+<td>00</td>
+<td>store word</td>
+<td>XXXXXX</td>
+<td>add</td>
+<td>0010</td>
+</tr>
+<tr>
+<td>beq</td>
+<td>01</td>
+<td>branch equal</td>
+<td>XXXXXX</td>
+<td>subtract</td>
+<td>0110</td>
+</tr>
+<tr>
+<td>R-type</td>
+<td>10</td>
+<td>add</td>
+<td>100000</td>
+<td>add</td>
+<td>0010</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>subtract</td>
+<td>100010</td>
+<td>subtract</td>
+<td>0110</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>AND</td>
+<td>100100</td>
+<td>AND</td>
+<td>0000</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>OR</td>
+<td>100101</td>
+<td>OR</td>
+<td>0001</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>set-on-less-than</td>
+<td>101010</td>
+<td>set-on-less-than</td>
+<td>0111</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>25:21: always read</li>
+<li>20:16: 除了 load 都為 read</li>
+<li>R-type 的 rd, Load 的 rt: write</li>
+<li>address: sign-extended, add</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Instruction</th>
+<th>31:26</th>
+<th>25:21</th>
+<th>20:16</th>
+<th>15:11</th>
+<th>10:6</th>
+<th>5:0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>R-type</td>
+<td>0</td>
+<td>rs</td>
+<td>rt</td>
+<td>rd</td>
+<td>shamt</td>
+<td>funct</td>
+</tr>
+<tr>
+<td>Load/Store</td>
+<td>35/43</td>
+<td>rs</td>
+<td>rt</td>
+<td></td>
+<td>address</td>
+<td></td>
+</tr>
+<tr>
+<td>Branch</td>
+<td>4</td>
+<td>rs</td>
+<td>rt</td>
+<td></td>
+<td>address</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h4 id="r-type">R-type</h4>
+<p><img src="2019-05-03-11-08-03.png" alt></p>
+<h4 id="load">Load</h4>
+<p><img src="2019-05-03-11-08-49.png" alt></p>
+<h4 id="branch-on-equal">Branch-on-Equal</h4>
+<p><img src="2019-05-03-11-09-40.png" alt></p>
+<h4 id="jump">Jump</h4>
+<p><img src="2019-05-03-11-24-55.png" alt></p>
+<h3 id="control-unit-settings">Control Unit Settings</h3>
+<table>
+<thead>
+<tr>
+<th>Instruction</th>
+<th style="text-align:center">RegDst</th>
+<th style="text-align:center">ALUSrc</th>
+<th style="text-align:center">MemToReg</th>
+<th style="text-align:center">RegWrite</th>
+<th style="text-align:center">MemRead</th>
+<th style="text-align:center">MemWrite</th>
+<th style="text-align:center">Branch</th>
+<th style="text-align:center">ALUOp1</th>
+<th style="text-align:center">ALUOp0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>R-format</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+</tr>
+<tr>
+<td>lw</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+</tr>
+<tr>
+<td>sw</td>
+<td style="text-align:center">x</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">x</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+</tr>
+<tr>
+<td>beq</td>
+<td style="text-align:center">x</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">x</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+</tr>
+</tbody>
+</table>
+<h4 id="first-level-control">First-Level Control</h4>
+<p>把 Input 的 op 和 Output 的 Control Signal 找出關係：</p>
+<table>
+<thead>
+<tr>
+<th>Input or output</th>
+<th>Signal name</th>
+<th>R-format</th>
+<th>lw</th>
+<th>sw</th>
+<th>beq</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Inputs</td>
+<td>Op5</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td></td>
+<td>Op4</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td></td>
+<td>Op3</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td></td>
+<td>Op2</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td></td>
+<td>Op1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td></td>
+<td>Op0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Outputs</td>
+<td>RegDst</td>
+<td>1</td>
+<td>0</td>
+<td>X</td>
+<td>X</td>
+</tr>
+<tr>
+<td></td>
+<td>ALUSrc</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td></td>
+<td>MemtoReg</td>
+<td>0</td>
+<td>1</td>
+<td>X</td>
+<td>X</td>
+</tr>
+<tr>
+<td></td>
+<td>RegWrite</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td></td>
+<td>MemRead</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td></td>
+<td>MemWrite</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td></td>
+<td>Branch</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td></td>
+<td>ALUOp1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td></td>
+<td>ALUOp2</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p><img src="2019-05-03-12-16-50.png" alt></p>
+<h4 id="second-level-control">Second-Level Control</h4>
+<p>將 <a href="#alu-control">ALU Control</a> 的表格：</p>
+<table>
+<thead>
+<tr>
+<th>opcode</th>
+<th>ALUOp</th>
+<th>Operation</th>
+<th>funct</th>
+<th>ALU function</th>
+<th>ALU control</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>lw</td>
+<td>00</td>
+<td>load word</td>
+<td>XXXXXX</td>
+<td>add</td>
+<td>0010</td>
+</tr>
+<tr>
+<td>sw</td>
+<td>00</td>
+<td>store word</td>
+<td>XXXXXX</td>
+<td>add</td>
+<td>0010</td>
+</tr>
+<tr>
+<td>beq</td>
+<td>01</td>
+<td>branch equal</td>
+<td>XXXXXX</td>
+<td>subtract</td>
+<td>0110</td>
+</tr>
+<tr>
+<td>R-type</td>
+<td>10</td>
+<td>add</td>
+<td>100000</td>
+<td>add</td>
+<td>0010</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>subtract</td>
+<td>100010</td>
+<td>subtract</td>
+<td>0110</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>AND</td>
+<td>100100</td>
+<td>AND</td>
+<td>0000</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>OR</td>
+<td>100101</td>
+<td>OR</td>
+<td>0001</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>set-on-less-than</td>
+<td>101010</td>
+<td>set-on-less-than</td>
+<td>0111</td>
+</tr>
+</tbody>
+</table>
+<p>整理一下：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">ALUOp1</th>
+<th style="text-align:center">ALUOp0</th>
+<th style="text-align:center">F5</th>
+<th style="text-align:center">F4</th>
+<th style="text-align:center">F3</th>
+<th style="text-align:center">F2</th>
+<th style="text-align:center">F1</th>
+<th style="text-align:center">F0</th>
+<th style="text-align:center">ALU control</th>
+<th style="text-align:center">Operation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">0010</td>
+<td style="text-align:center">lw/sw</td>
+</tr>
+<tr>
+<td style="text-align:center">X</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">0110</td>
+<td style="text-align:center">beq</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0010</td>
+<td style="text-align:center">add</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0110</td>
+<td style="text-align:center">sub</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0000</td>
+<td style="text-align:center">AND</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0001</td>
+<td style="text-align:center">OR</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0111</td>
+<td style="text-align:center">slt</td>
+</tr>
+</tbody>
+</table>
+<p>分析 ALU Control 各 bit 的算式，可以發現有些地方結合後其實就是 Don’t care：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">ALUOp1</th>
+<th style="text-align:center">ALUOp0</th>
+<th style="text-align:center">F5</th>
+<th style="text-align:center">F4</th>
+<th style="text-align:center">F3</th>
+<th style="text-align:center">F2</th>
+<th style="text-align:center">F1</th>
+<th style="text-align:center">F0</th>
+<th style="text-align:center">ALU control</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">X</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">0<mark>1</mark>10</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center"><mark>0</mark></td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0<mark>1</mark>10</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center"><mark>1</mark></td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0<mark>1</mark>11</td>
+</tr>
+</tbody>
+</table>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>A</mi><mi>L</mi><mi>U</mi><mi>c</mi><mi>t</mi><mi>r</mi><mn>2</mn><mo>=</mo><mi>A</mi><mi>L</mi><mi>U</mi><mi>o</mi><mi>p</mi><mn>0</mn><mo>+</mo><mi>A</mi><mi>L</mi><mi>U</mi><mi>o</mi><mi>p</mi><mn>1</mn><mo>⋅</mo><mi>f</mi><mi>u</mi><mi>n</mi><mi>c</mi><msup><mn>2</mn><mo mathvariant="normal">′</mo></msup><mo>⋅</mo><mi>f</mi><mi>u</mi><mi>n</mi><mi>c</mi><mn>1</mn><mo>⋅</mo><mi>f</mi><mi>u</mi><mi>n</mi><mi>c</mi><msup><mn>0</mn><mo mathvariant="normal">′</mo></msup></mrow><annotation encoding="application/x-tex">ALUctr2 = ALUop0 + ALUop1 \cdot func2&#x27; \cdot func1 \cdot func0&#x27;</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault">A</span><span class="mord mathdefault">L</span><span class="mord mathdefault" style="margin-right:0.10903em;">U</span><span class="mord mathdefault">c</span><span class="mord mathdefault">t</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord">2</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8777699999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">A</span><span class="mord mathdefault">L</span><span class="mord mathdefault" style="margin-right:0.10903em;">U</span><span class="mord mathdefault">o</span><span class="mord mathdefault">p</span><span class="mord">0</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8777699999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">A</span><span class="mord mathdefault">L</span><span class="mord mathdefault" style="margin-right:0.10903em;">U</span><span class="mord mathdefault">o</span><span class="mord mathdefault">p</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.946332em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mord mathdefault">u</span><span class="mord mathdefault">n</span><span class="mord mathdefault">c</span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mord mathdefault">u</span><span class="mord mathdefault">n</span><span class="mord mathdefault">c</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.946332em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mord mathdefault">u</span><span class="mord mathdefault">n</span><span class="mord mathdefault">c</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span></span></span></span></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">ALUOp1</th>
+<th style="text-align:center">ALUOp0</th>
+<th style="text-align:center">F5</th>
+<th style="text-align:center">F4</th>
+<th style="text-align:center">F3</th>
+<th style="text-align:center">F2</th>
+<th style="text-align:center">F1</th>
+<th style="text-align:center">F0</th>
+<th style="text-align:center">ALU control</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center"><mark>0</mark></td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">00<mark>1</mark>0</td>
+</tr>
+<tr>
+<td style="text-align:center">X</td>
+<td style="text-align:center"><mark>1</mark></td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">01<mark>1</mark>0</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center"><mark>0</mark></td>
+<td style="text-align:center">0</td>
+<td style="text-align:center"><mark>0</mark></td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">00<mark>1</mark>0</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center"><mark>0</mark></td>
+<td style="text-align:center">0</td>
+<td style="text-align:center"><mark>1</mark></td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">01<mark>1</mark>0</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center"><mark>1</mark></td>
+<td style="text-align:center">0</td>
+<td style="text-align:center"><mark>1</mark></td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">01<mark>1</mark>1</td>
+</tr>
+</tbody>
+</table>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>A</mi><mi>L</mi><mi>U</mi><mi>c</mi><mi>t</mi><mi>r</mi><mn>1</mn><mo>=</mo><mi>A</mi><mi>L</mi><mi>U</mi><mi>o</mi><mi>p</mi><msup><mn>1</mn><mo mathvariant="normal">′</mo></msup><mo>+</mo><mi>A</mi><mi>L</mi><mi>U</mi><mi>o</mi><mi>p</mi><mn>1</mn><mo>⋅</mo><mi>f</mi><mi>u</mi><mi>n</mi><mi>c</mi><msup><mn>2</mn><mo mathvariant="normal">′</mo></msup><mo>⋅</mo><mi>f</mi><mi>u</mi><mi>n</mi><mi>c</mi><msup><mn>0</mn><mo mathvariant="normal">′</mo></msup></mrow><annotation encoding="application/x-tex">ALUctr1 = ALUop1&#x27; + ALUop1 \cdot func2&#x27; \cdot func0&#x27;</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault">A</span><span class="mord mathdefault">L</span><span class="mord mathdefault" style="margin-right:0.10903em;">U</span><span class="mord mathdefault">c</span><span class="mord mathdefault">t</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.946332em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">A</span><span class="mord mathdefault">L</span><span class="mord mathdefault" style="margin-right:0.10903em;">U</span><span class="mord mathdefault">o</span><span class="mord mathdefault">p</span><span class="mord"><span class="mord">1</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8777699999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">A</span><span class="mord mathdefault">L</span><span class="mord mathdefault" style="margin-right:0.10903em;">U</span><span class="mord mathdefault">o</span><span class="mord mathdefault">p</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.946332em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mord mathdefault">u</span><span class="mord mathdefault">n</span><span class="mord mathdefault">c</span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.946332em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mord mathdefault">u</span><span class="mord mathdefault">n</span><span class="mord mathdefault">c</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span></span></span></span></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">ALUOp1</th>
+<th style="text-align:center">ALUOp0</th>
+<th style="text-align:center">F5</th>
+<th style="text-align:center">F4</th>
+<th style="text-align:center">F3</th>
+<th style="text-align:center">F2</th>
+<th style="text-align:center">F1</th>
+<th style="text-align:center">F0</th>
+<th style="text-align:center">ALU control</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">000<mark>1</mark></td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">011<mark>1</mark></td>
+</tr>
+</tbody>
+</table>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>A</mi><mi>L</mi><mi>U</mi><mi>c</mi><mi>t</mi><mi>r</mi><mn>0</mn><mo>=</mo><mi>A</mi><mi>L</mi><mi>U</mi><mi>o</mi><mi>p</mi><mn>1</mn><mo>⋅</mo><mi>f</mi><mi>u</mi><mi>n</mi><mi>c</mi><msup><mn>3</mn><mo mathvariant="normal">′</mo></msup><mo>⋅</mo><mi>f</mi><mi>u</mi><mi>n</mi><mi>c</mi><mn>2</mn><mo>⋅</mo><mi>f</mi><mi>u</mi><mi>n</mi><mi>c</mi><msup><mn>1</mn><mo mathvariant="normal">′</mo></msup><mo>⋅</mo><mi>f</mi><mi>u</mi><mi>n</mi><mi>c</mi><mn>0</mn><mo>+</mo><mi>A</mi><mi>L</mi><mi>U</mi><mi>o</mi><mi>p</mi><mn>1</mn><mo>⋅</mo><mi>f</mi><mi>u</mi><mi>n</mi><mi>c</mi><mn>3</mn><mo>⋅</mo><mi>f</mi><mi>u</mi><mi>n</mi><mi>c</mi><msup><mn>2</mn><mo mathvariant="normal">′</mo></msup><mo>⋅</mo><mi>f</mi><mi>u</mi><mi>n</mi><mi>c</mi><mn>1</mn><mo>⋅</mo><mi>f</mi><mi>u</mi><mi>n</mi><mi>c</mi><msup><mn>0</mn><mo mathvariant="normal">′</mo></msup></mrow><annotation encoding="application/x-tex">ALUctr0 = ALUop1 \cdot func3&#x27; \cdot func2 \cdot func1&#x27; \cdot func0 + ALUop1 \cdot func3 \cdot func2&#x27; \cdot func1 \cdot func0&#x27;</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault">A</span><span class="mord mathdefault">L</span><span class="mord mathdefault" style="margin-right:0.10903em;">U</span><span class="mord mathdefault">c</span><span class="mord mathdefault">t</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord">0</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8777699999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">A</span><span class="mord mathdefault">L</span><span class="mord mathdefault" style="margin-right:0.10903em;">U</span><span class="mord mathdefault">o</span><span class="mord mathdefault">p</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.946332em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mord mathdefault">u</span><span class="mord mathdefault">n</span><span class="mord mathdefault">c</span><span class="mord"><span class="mord">3</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mord mathdefault">u</span><span class="mord mathdefault">n</span><span class="mord mathdefault">c</span><span class="mord">2</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.946332em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mord mathdefault">u</span><span class="mord mathdefault">n</span><span class="mord mathdefault">c</span><span class="mord"><span class="mord">1</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mord mathdefault">u</span><span class="mord mathdefault">n</span><span class="mord mathdefault">c</span><span class="mord">0</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8777699999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">A</span><span class="mord mathdefault">L</span><span class="mord mathdefault" style="margin-right:0.10903em;">U</span><span class="mord mathdefault">o</span><span class="mord mathdefault">p</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mord mathdefault">u</span><span class="mord mathdefault">n</span><span class="mord mathdefault">c</span><span class="mord">3</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.946332em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mord mathdefault">u</span><span class="mord mathdefault">n</span><span class="mord mathdefault">c</span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mord mathdefault">u</span><span class="mord mathdefault">n</span><span class="mord mathdefault">c</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.946332em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mord mathdefault">u</span><span class="mord mathdefault">n</span><span class="mord mathdefault">c</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span></span></span></span></p>
+<p><img src="2019-05-03-12-36-54.png" alt></p>
+<h3 id="performance">Performance</h3>
+<ul>
+<li>Critical path: load instruction
+<ul>
+<li><strong>Instruction memory <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>→</mo></mrow><annotation encoding="application/x-tex">\to</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">→</span></span></span></span> register file <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>→</mo></mrow><annotation encoding="application/x-tex">\to</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">→</span></span></span></span> ALU <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>→</mo></mrow><annotation encoding="application/x-tex">\to</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">→</span></span></span></span> data memory <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>→</mo></mrow><annotation encoding="application/x-tex">\to</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">→</span></span></span></span> register file</strong></li>
+</ul>
+</li>
+<li>Violates design principle: Making the common case fast</li>
+</ul>
+<h2 id="pipeline">Pipeline</h2>
+<p>Parallelism improves performance.</p>
+<p><img src="2019-05-08-19-23-57.png" alt></p>
+<h3 id="mips-pipeline">MIPS Pipeline</h3>
+<p>5個 stage 同時執行不同指令</p>
+<ul>
+<li>IF: Instruction fetch from memory</li>
+<li>ID: Instruction decode &amp; register read</li>
+<li>EX: Execute operation or calculate address</li>
+<li>MEM: Access memory operand</li>
+<li>WB: Write result back to register</li>
+</ul>
+<p>最理想: 一個 cycle 執行完一個指令</p>
+<p><img src="2019-05-09-01-04-36.png" alt="Single-cycle (Tc = 800ps) vs Pipelined (Tc = 200ps)"></p>
+<p>MIPS ISA designed for pipelining:</p>
+<ul>
+<li>所有 instruction 都為 32-bits
+<ul>
+<li>較容易在一個 cycle 中做 fetch 及 decode</li>
+<li>c.f. x86: 1- to 17-byte instructions</li>
+</ul>
+</li>
+<li>Instruction formats 少
+<ul>
+<li>較容易在一個 step 中做 decode 及 read registers</li>
+</ul>
+</li>
+<li>Load/store addressing
+<ul>
+<li>calculate address in <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mn>3</mn><mrow><mi>r</mi><mi>d</mi></mrow></msup></mrow><annotation encoding="application/x-tex">3^{rd}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.849108em;vertical-align:0em;"></span><span class="mord"><span class="mord">3</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.849108em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.02778em;">r</span><span class="mord mathdefault mtight">d</span></span></span></span></span></span></span></span></span></span></span></span> stage</li>
+<li>access memory in <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mn>4</mn><mrow><mi>t</mi><mi>h</mi></mrow></msup></mrow><annotation encoding="application/x-tex">4^{th}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.849108em;vertical-align:0em;"></span><span class="mord"><span class="mord">4</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.849108em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">t</span><span class="mord mathdefault mtight">h</span></span></span></span></span></span></span></span></span></span></span></span> stage</li>
+</ul>
+</li>
+<li>Alignment of memory operands
+<ul>
+<li>Memory access 只需要 1 個 cycle</li>
+</ul>
+</li>
+</ul>
+<h3 id="performance-v2">Performance</h3>
+<p>若所有 stage 都花費同樣時間，則</p>
+<p class="katex-block"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mtext>Time between instructions</mtext><mtext>pipelined</mtext></msub><mo>=</mo><mfrac><msub><mtext>Time between instructions</mtext><mtext>nonpipelined</mtext></msub><mtext>Number of stage</mtext></mfrac></mrow><annotation encoding="application/x-tex">\text{Time between instructions}_{\text{pipelined}} = \frac{ \text{Time between instructions}_{\text{nonpipelined}} }{ \text{Number of stage} } 
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.980548em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord text"><span class="mord">Time between instructions</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361079999999999em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord mtight">pipelined</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.25188em;vertical-align:-0.8804400000000001em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.37144em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord text"><span class="mord">Number of stage</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord text"><span class="mord">Time between instructions</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361079999999999em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord mtight">nonpipelined</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.8804400000000001em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+<p>能 speed up 的原因是因為 <a href="#response-time-and-throughput">throughput</a> 上升，latency (time for each instruction) 不變</p>
+<h3 id="hazards">Hazards</h3>
+<ol>
+<li><mark>Structure hazards</mark>: 硬體架構，大家都要用但只有一份resouse，要用就要排隊</li>
+<li><mark>Data hazard</mark>: 前一個指令算完時還讀不到 (前一個指令第5個stage才存，但我第2個stage就要)</li>
+<li><mark>Control hazard</mark>: 下一個clock cycle不知道要執行甚麼指令</li>
+</ol>
+<h3 id="summary">Summary</h3>
+<ul>
+<li>pipeline 增加 throughput
+<ul>
+<li>一個時間點每個 stage 執行不同指令</li>
+<li>每個 instruction 有相同的 latency</li>
+</ul>
+</li>
+<li>performance 被 hazard 限制</li>
+<li>ISA 影響 pipeline 實做的複雜度</li>
+</ul>
+<h2 id="pipeline-datapath">Pipeline Datapath</h2>
+<p><img src="2019-05-08-23-53-11.png" alt="由右往左的 dataflow 常有 hazard 問題"></p>
+<p>同一條線要怎麼 keep 3 個值？加上 <mark>pipeline register</mark>！以保持指令資訊</p>
+<p><img src="2019-05-08-23-54-38.png" alt></p>
+<h3 id="pipeline-register">Pipeline Register</h3>
+<p><img src="2019-05-09-00-03-48.png" alt></p>
+<p><img src="2019-05-09-00-03-59.png" alt></p>
+<p><img src="2019-05-09-00-04-13.png" alt></p>
+<p><img src="2019-05-09-00-04-26.png" alt></p>
+<p><img src="2019-05-09-00-05-52.png" alt></p>
+<p>寫入的是第 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi><mo>+</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">i + 3</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.74285em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">i</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">3</span></span></span></span> 個 write register，不是第 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span></span></span></span> 個的 write register！</p>
+<p><img src="2019-05-09-00-07-09.png" alt></p>
+<p><strong>Solution</strong>: <mark>把 write register pack 起來</mark>，帶著一起走</p>
+<h3 id="pipeline-operation">Pipeline Operation</h3>
+<ul>
+<li>single-clock-cycle pipeline diagram: 分析一個 cycle 的 pipeline usage</li>
+<li>muli-cycle pipline diagram: 分析各 operation 在不同 cycle 的 resource usage</li>
+</ul>
+<h4 id="single-cycle-diagram">Single-Cycle diagram</h4>
+<p>pipeline 在某個 cycle 的運作情形</p>
+<p><img src="2019-05-09-00-10-41.png" alt></p>
+<h4 id="multi-cycle-diagram">Multi-Cycle Diagram</h4>
+<p>showing resource usage</p>
+<p><img src="2019-05-09-00-09-25.png" alt></p>
+<h3 id="pipeline-control">Pipeline Control</h3>
+<p><img src="2019-05-09-00-20-43.png" alt></p>
+<blockquote>
+<p>Q: 為甚麼不把 RegDst 搬到前面，可以少用 5-bits?<br>
+A: MUX 需要 input selection (RegDst) ，由 control unit 產生，如果放在第二個 stage RegDst 還沒產生</p>
+</blockquote>
+<p>Control values 基本上與 <a href="#alu-control">Single Cycle CPU - ALU Control</a> 沒有什麼區別</p>
+<table>
+<thead>
+<tr>
+<th>opcode</th>
+<th>ALUOp</th>
+<th>Operation</th>
+<th>funct</th>
+<th>ALU function</th>
+<th>ALU control</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>lw</td>
+<td>00</td>
+<td>load word</td>
+<td>XXXXXX</td>
+<td>add</td>
+<td>0010</td>
+</tr>
+<tr>
+<td>sw</td>
+<td>00</td>
+<td>store word</td>
+<td>XXXXXX</td>
+<td>add</td>
+<td>0010</td>
+</tr>
+<tr>
+<td>beq</td>
+<td>01</td>
+<td>branch equal</td>
+<td>XXXXXX</td>
+<td>subtract</td>
+<td>0110</td>
+</tr>
+<tr>
+<td>R-type</td>
+<td>10</td>
+<td>add</td>
+<td>100000</td>
+<td>add</td>
+<td>0010</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>subtract</td>
+<td>100010</td>
+<td>subtract</td>
+<td>0110</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>AND</td>
+<td>100100</td>
+<td>AND</td>
+<td>0000</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>OR</td>
+<td>100101</td>
+<td>OR</td>
+<td>0001</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>set-on-less-than</td>
+<td>101010</td>
+<td>set-on-less-than</td>
+<td>0111</td>
+</tr>
+</tbody>
+</table>
+<p>Recall: <a href="#control-unit-settings">Single Cycle CPU - Control Unit Settings</a>，將不同 stage 的 control signal 整理一下：</p>
+<table>
+<thead>
+<tr>
+<th>Stage</th>
+<th>Instruction</th>
+<th>R-format</th>
+<th>lw</th>
+<th>sw</th>
+<th>beq</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>EX stage</td>
+<td>RegDst</td>
+<td>1</td>
+<td>0</td>
+<td>x</td>
+<td>x</td>
+</tr>
+<tr>
+<td></td>
+<td>ALUOp1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td></td>
+<td>ALUOp0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td></td>
+<td>ALUSrc</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>M stage</td>
+<td>Branch</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td></td>
+<td>MemRead</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td></td>
+<td>MemWrite</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>WB stage</td>
+<td>RegWrite</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td></td>
+<td>MemToReg</td>
+<td>0</td>
+<td>1</td>
+<td>x</td>
+<td>x</td>
+</tr>
+</tbody>
+</table>
+<p>用到的就可以不要了，沒用到的繼續傳下去</p>
+<p><img src="2019-05-09-00-35-32.png" alt></p>
+<p>RegWrt 要滿足打包的原則，所以會被 pack 到 pipeline regiter</p>
+<p><img src="2019-05-09-00-40-36.png" alt></p>
+<h2 id="pipeline-hazards">Pipeline Hazards</h2>
+<h3 id="data-hazards">Data Hazards</h3>
+<ul>
+<li><strong>Solution.1</strong> <mark>bubble(no opertation)</mark>
+<ul>
+<li>panelty: 50%的使用率 (第一個指令做完 &gt; no operation &gt; no operation &gt; 第二個指令執行完畢)</li>
+</ul>
+</li>
+</ul>
+<p><img src="2019-05-08-23-11-26.png" alt></p>
+<ul>
+<li><strong>Solution.2</strong>: <mark>forwarding(bypassing)</mark>
+<ul>
+<li>只要拿到值就開始算，不用等存到 reg 再讀出來</li>
+</ul>
+</li>
+</ul>
+<p><img src="2019-05-08-23-12-35.png" alt></p>
+<h4 id="example">Example</h4>
+<p><img src="2019-05-09-00-48-16.png" alt></p>
+<p>sub 在 cycle 5 才將資料寫回 register，用紅線的 forwarding 解決</p>
+<h4 id="forwarding-detection">Forwarding Detection</h4>
+<p>將 register number 也隨 pipeline 傳遞</p>
+<p>Data hazard 會發生在:</p>
+<ul>
+<li>EX/MEM.Reg.Rd = ID/EX.Reg.Rs</li>
+<li>EX/MEM.Reg.Rd = ID/EX.Reg.Rt</li>
+<li>MEM/WB.Reg.Rd = ID/EX.Reg.Rs</li>
+<li>MEM/WB.Reg.Rd = ID/EX.Reg.Rt</li>
+</ul>
+<p>但只在需要寫回 Reg 時才做 forwarding:</p>
+<ul>
+<li>EX/MEM.RegWrite</li>
+<li>MEM/WB.RegWrite</li>
+</ul>
+<p>且寫回去的值不為 0</p>
+<ul>
+<li>EX/MEM.Reg.Rd != 0</li>
+<li>MEM/WB.Reg.Rd != 0</li>
+</ul>
+<p><img src="2019-06-04-12-29-48.png" alt></p>
+<ul>
+<li>EX hazard
+<ul>
+<li>if (EX/MEM.RegWrite and (EX/MEM.Reg.Rd != 0) and (EX/MEM.Reg.Rd = ID/EX.Reg.Rs)) &gt;&gt; ForwardA = 10</li>
+<li>if (EX/MEM.RegWrite and (EX/MEM.Reg.Rd != 0) and (EX/MEM.Reg.Rd = ID/EX.Reg.Rt)) &gt;&gt; ForwardB = 10</li>
+</ul>
+</li>
+<li>MEM hazard
+<ul>
+<li>if (MEM/WB.RegWrite and (MEM/WB.Reg.Rd != 0) and (MEM/WB.Reg.Rd = ID/EX.Reg.Rs)) &gt;&gt; ForwardA = 01</li>
+<li>if (MEM/WB.RegWrite and (MEM/WB.Reg.Rd != 0) and (MEM/WB.Reg.Rd = ID/EX.Reg.Rt)) &gt;&gt; ForwardB = 01</li>
+</ul>
+</li>
+</ul>
+<h4 id="double-data-hazard">Double Data Hazard</h4>
+<p><img src="2019-06-04-12-39-09.png" alt></p>
+<p>使用最近算出來的，所以要修改 MEM hazard，如果 EX hazard 非 true 時才做</p>
+<ul>
+<li>MEM hazard
+<ul>
+<li>if (MEM/WB.RegWrite and (MEM/WB.Reg.Rd != 0) <strong>and not (EX/MEM.RegWrite and (EX/MEM.Reg.Rd != 0) and (EX/MEM.Reg.Rd = ID/EX.Reg.Rs))</strong> and (MEM/WB.Reg.Rd = ID/EX.Reg.Rs)) &gt;&gt; ForwardA = 01</li>
+<li>if (MEM/WB.RegWrite and (MEM/WB.Reg.Rd != 0) <strong>and not (EX/MEM.RegWrite and (EX/MEM.Reg.Rd != 0) and (EX/MEM.Reg.Rd = ID/EX.Reg.Rt))</strong> and (MEM/WB.Reg.Rd = ID/EX.Reg.Rt)) &gt;&gt; ForwardB = 01</li>
+</ul>
+</li>
+</ul>
+<h4 id="datapath">Datapath</h4>
+<p><img src="2019-06-04-12-44-44.png" alt></p>
+<h3 id="load-use-data-hazard">Load-Use Data Hazard</h3>
+<p><img src="2019-05-08-23-17-49.png" alt></p>
+<ul>
+<li>Load &amp; R-type</li>
+<li>lw 在第四個 stage 結束後才將 data 讀出來</li>
+<li>EX 後是 memory address 不是 data，不能直接拉 EX 後那條</li>
+</ul>
+<p><strong>Solution</strong>: <mark>reorder code/bubble</mark>，讓 lw 與 add 間隔兩個 cycle</p>
+<h4 id="example-v2">Example</h4>
+<p><img src="2019-06-04-12-59-47.png" alt></p>
+<h4 id="detection">Detection</h4>
+<p>if ID/EX.MemRead and ((ID/EX.Reg.Rt = IF/ID.Reg.Rs) or (ID/EX.Reg.Rt = IF/ID.Reg.Rt)) &gt;&gt; stall and insert bubble</p>
+<ul>
+<li>將 ID/EX register 中的 Control value 設為 0
+<ul>
+<li>EX, MEM, WB do nop</li>
+</ul>
+</li>
+<li>PC, IF/ID register 不更新
+<ul>
+<li>下一個 cycle 做同樣的事</li>
+</ul>
+</li>
+</ul>
+<p><img src="2019-06-04-13-02-42.png" alt></p>
+<ul>
+<li>CC3: detect load use hazards，IF/ID 紀錄第二個指令 (and)，PC 指到第三個指令 (or)</li>
+<li>第三個指令 (or) 在 CC3 讀一次 CC4 又讀一次</li>
+<li>第二個指令 (and) 在 CC3 decode 一次 CC4 又 decode 一次</li>
+</ul>
+<h4 id="datapath-v2">Datapath</h4>
+<p><img src="2019-06-04-13-03-47.png" alt></p>
+<p>hazard detect unit</p>
+<ul>
+<li>control 在發現 hazard 時全部改為 0</li>
+<li>PCWrite = 0，不讓 PC + 4 寫進 PC</li>
+<li>IF/IDWrite = 0，不讓 instruction 寫入</li>
+</ul>
+<h4 id="reorder-code">Reorder code</h4>
+<p>如果 compiler 夠強，也能在 compile 時 rearrage code</p>
+<p><img src="2019-05-08-23-20-54.png" alt></p>
+<h3 id="control-hazards">Control Hazards</h3>
+<p>beq 下一個 Instruction fetch 不確定要執行甚麼指令，不知道該跳還是不要跳 (depend on branch 的結果)</p>
+<p><img src="2019-05-08-23-22-43.png" alt></p>
+<p><strong>Solution</strong>: <mark>猜!</mark></p>
+<p><img src="2019-05-08-23-24-23.png" alt></p>
+<p>猜不要跳，猜對了</p>
+<p><img src="2019-05-08-23-34-02.png" alt></p>
+<p>猜不要跳，lw 正要 pipeline instruction fetch (但不應該被執行)，然後發現猜錯了，於是讓 lw 後面都變成 no operation (這邊加上一些硬體的設定直接 flush 掉)，接著跳到 or 繼續執行</p>
+<h4 id="detection-v2">Detection</h4>
+<p><img src="2019-06-04-19-22-44.png" alt></p>
+<p>提早發現 branch 跳錯，可以在第 2 個 stage</p>
+<ul>
+<li>加 target address adder</li>
+<li>加 register comparision</li>
+</ul>
+<p>在第 2 個 stage 結束後就可以發現 hazard</p>
+<h4 id="data-hazard">Data hazard</h4>
+<p>如果比較的兩個 register 有 data hazard，至少需要 stall 一個 cycle</p>
+<p><img src="2019-06-04-19-25-30.png" alt="無法直接 forward 解決"></p>
+<p>如果 comparision depend 的 register 是 lw，至少需要 stall 兩個 cycle</p>
+<p><img src="2019-06-04-19-27-11.png" alt></p>
+<h4 id="prediction">Prediction</h4>
+<p>有兩種猜的方法：</p>
+<ul>
+<li>Static branch prediction: 每次都猜一樣的</li>
+<li>Dynamic branch prediction: 上次猜對還猜錯，猜對了繼續猜同樣的，猜錯了跟個性有關，有猜錯一次就換的，也猜錯多次才換的</li>
+</ul>
+<h5 id="1-bit-predictor">1-Bit Predictor</h5>
+<p>猜錯就猜另一個，depend on iteration numbers</p>
+<p><img src="2019-06-04-19-31-12.png" alt></p>
+<h5 id="2-bit-predictor">2-Bit Predictor</h5>
+<p>連續猜錯或猜對兩次才換</p>
+<p><img src="2019-06-04-19-32-29.png" alt></p>
+<p><img src="2019-06-04-19-33-44.png" alt="Another Scheme"></p>
+<h4 id="delay-slot">Delay Slot</h4>
+<p>在 branch 後執行不影像 branch 的 code</p>
+<p><img src="2019-06-04-19-39-18.png" alt></p>
+<h4 id="branch-target-buffer">Branch Target Buffer</h4>
+<p>Cache of target addresses，當 IF 時計算跳過去的 PC，branch 時可以直接跳</p>
+<h2 id="exceptions-and-interrupts">Exceptions and Interrupts</h2>
+<p>exception: within CPU<br>
+interrupt: from external I/O controller</p>
+<h3 id="handling-exceptions">Handling Exceptions</h3>
+<p><img src="2019-06-04-19-50-40.png" alt></p>
+<p>MIPS 透過 System Control Coprocessor (CP0) 集中管理，計下發生 exception 的 PC (EPC)</p>
+<h3 id="pipeline-v2">Pipeline</h3>
+<p>Consider overflow on add in EX stage: <code>add $1, $2, $1</code></p>
+<ul>
+<li>取消寫入到 $1</li>
+<li>把在 pipeline 的指令做完</li>
+<li>flush add 與接下來的 instruction</li>
+<li>保存 Exception cause 與 EPC</li>
+<li>傳到 handler</li>
+</ul>
+<p><img src="2019-06-04-20-09-58.png" alt="加了3條線，IF Flush, ID Flush, EX Flush"></p>
+<p>把 Exception cause 複寫到 cause register，包在 control 中</p>
+<h3 id="example-v3">Example</h3>
+<p><img src="2019-06-04-20-18-53.png" alt="add 發生 exception"></p>
+<p>Handler</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">80000180 sw $25, 1000($0)</span><br><span class="line">80000184 sw $26, 1004($0)</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p><img src="2019-06-04-20-19-39.png" alt="Handler sw"></p>
+<h3 id="multiple-exceptions">Multiple Exceptions</h3>
+<p>Pipeline 中出現多個 exception，若有先後順序，選最前面的 exception，flush 後面的 instructions</p>
+<h3 id="imprecise-exceptions">Imprecise Exceptions</h3>
+<p>當 exception 發生時不能找到是哪個 instruction 發生的，把大致的結果 (cause register) 交給 OS。</p>
+<p>simple hardware, complex handler (duty located on OS)</p>
+<blockquote>
+<p>若 multiple-issue 的 exceptions 分不清先後順序，無法適用 imprecise exceptions</p>
+</blockquote>
+<h2 id="instruction-level-parallelism">Instruction-Level Parallelism</h2>
+<p>pipeline 就是其中一種 ILP</p>
+<p>增加 ILP 的方法：</p>
+<ul>
+<li>想辦法把 5 stage 提升到 7 stage…: 每一個 Stage 要做的事變少
+<ul>
+<li>drawback: 發生 hazard 要停下來的 stage 變多 (flush 越多，做白工越多), exception 也是</li>
+</ul>
+</li>
+<li>建多條 pipeline</li>
+</ul>
+<h3 id="multiple-issue">Multiple Issue</h3>
+<ul>
+<li>Static multiple issue
+<ul>
+<li>Compiler 將 instruction group 到 issue slot</li>
+<li>Compiler detects and avoids hazards</li>
+</ul>
+</li>
+<li>Dynamic multiple issue
+<ul>
+<li>CPU 讀 instruction stream 並選擇在每個 cycle 需要 issue 的 instruction</li>
+<li>Compiler reorder instructions</li>
+<li>CPU resolves hazards at run-time</li>
+</ul>
+</li>
+</ul>
+<h3 id="speculation">Speculation</h3>
+<p>層次更高的<mark>猜</mark>，盡量執行指令</p>
+<ul>
+<li>指令還沒執行完，做一個不應該做的事情</li>
+<li>有些指令會把值寫到 reg，寫到 memory。其他都能做，就是 write 不能做 (所以電腦狀態沒變)。</li>
+<li>猜錯就是多執行一些 instruction，執行完錯了就不要寫就好。盡可能能執行就執行，順序不一樣也沒關係。</li>
+<li>對了繼續執行，錯了就 rollback 執行對的那個指令</li>
+</ul>
+<p>Compiler Speculation: Compiler 可以 reorder code 來避免stall，或是寫一些 instruction 來修正做出錯誤的 speculation 的狀況。</p>
+<p>Hardware Speculation: 硬體可以做 look-ahead，將 instruction 的結果和 exception 都先存在 buffer 裡，直到他們要被用到或是判斷 speculation 正確。如果判斷 speculation 錯誤就把 buffer flush 掉。</p>
+<h4 id="with-exceptions">with Exceptions</h4>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">*ptr = 10; // exception, core dump</span><br><span class="line">sw $2, 100($4); // ptr = $2; (100($4) 是 ptr 的位置) 理論上不會執行，speculative lw 後移到 ptr 前面，就會變成可以成功執行，但結果是錯的</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Static Speculation
+<ul>
+<li>增加用來延遲 exception 的 ISA。</li>
+</ul>
+</li>
+<li>Dynamic Speculation
+<ul>
+<li>buffer exception 直到 instruction 結束</li>
+</ul>
+</li>
+</ul>
+<h3 id="static-multiple-issue">Static Multiple Issue</h3>
+<p>Compiler 把多個指令兜成一個虛擬指令 &gt; Very Long Instruction Word (VLIW)</p>
+<h4 id="scheduling">Scheduling</h4>
+<ul>
+<li>reorder instuction into issue packets</li>
+<li>packet 中沒有 dependency</li>
+<li>必要時加入 nop</li>
+</ul>
+<h4 id="mips-with-static-dual-issue">MIPS with Static Dual Issue</h4>
+<p>ALU/branch + load/store: 64-bits instruction</p>
+<p><img src="2019-06-04-21-14-59.png" alt></p>
+<h5 id="datapath-v3">Datapath</h5>
+<p><img src="2019-06-04-21-15-31.png" alt="黑 alu beq + 藍 lw sw"></p>
+<h5 id="harzard">Harzard</h5>
+<p>EX data hazard: 在同一個 packets 無法做 forwarding &gt; 分成兩個 packet 執行</p>
+<p>load-use hazard: 仍需間隔 1 個 cycle，但現在是 2 個 instructions</p>
+<h5 id="example-v4">Example</h5>
+<p>Schedule:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Loop: lw $t0, 0($s1)        # $t0=array element</span><br><span class="line">      addu $t0, $t0, $s2    # add scalar in $s2</span><br><span class="line">      sw $t0, 0($s1)        # store result</span><br><span class="line">      addi $s1, $s1,–4      # decrement pointer</span><br><span class="line">      bne $s1, $zero, Loop  # branch $s1!=0</span><br></pre></td></tr></table></figure>
+<p><img src="2019-06-04-21-24-37.png" alt="IPC = 5/4 = 1.25"></p>
+<h4 id="loop-unrolling">Loop Unrolling</h4>
+<ul>
+<li>重複 loop body</li>
+<li>register renaming，避免 anti-dependencies (對相同的 register 做 sw &gt; lw)</li>
+</ul>
+<h5 id="example-v5">Example</h5>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Loop: lw $t0, 0($s1)        # $t0=array element</span><br><span class="line">      addu $t0, $t0, $s2    # add scalar in $s2</span><br><span class="line">      sw $t0, 0($s1)        # store result</span><br><span class="line">      addi $s1, $s1,–4      # decrement pointer</span><br><span class="line">      bne $s1, $zero, Loop  # branch $s1!=0</span><br></pre></td></tr></table></figure>
+<p><img src="2019-06-04-21-33-15.png" alt="IPC = 14/8 = 1.75"></p>
+<ol>
+<li>s1 沒有被減 &gt; $t0</li>
+<li>s1 - 16 + 12 &gt; $t1</li>
+<li>s1 - 16 + 8 &gt; $t2</li>
+<li>s1 - 16 + 4 &gt; $t3</li>
+</ol>
+<p>t0, t1, t2, t3: register renaming</p>
+<h3 id="dynamic-multiple-issue">Dynamic Multiple Issue</h3>
+<ul>
+<li>Superscalar processors
+<ul>
+<li>讓 processor 在執行的時候選擇多個指令在一個 cycle 中執行</li>
+</ul>
+</li>
+<li>CPU 決定每個 cycle 執行的 instruction 數量</li>
+</ul>
+<h4 id="why">Why?</h4>
+<p>compiler 可以預測的 run-time 不能預測</p>
+<h4 id="dynamic-pipeline-scheduling">Dynamic Pipeline Scheduling</h4>
+<p>允許 CPU 非順序執行 instruction，來消除 stall</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">lw $t0, 20($s2)</span><br><span class="line">(bubble)</span><br><span class="line">addu $t1, $t0, $t2</span><br><span class="line">sub $s4, $s4, $t3</span><br><span class="line">slti $t5, $s4, 20</span><br></pre></td></tr></table></figure>
+<p>可以在 lw 與 addu 間執行 sub</p>
+<p><img src="2019-06-04-21-43-53.png" alt></p>
+<p>reservation station: 收集每個 instruction 的 Input operands</p>
+<p>有幾個functional unit就可以同時丟幾個指令</p>
+<p>functional unit 有可能無法直接寫到 register，需要inorder的存進去</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">addi s1, ...</span><br><span class="line">add s1, ...</span><br></pre></td></tr></table></figure>
+<p>add 與 addi 要找順序存到 s1 &gt;&gt;&gt; commit order</p>
+<h4 id="register-renaming">Register Renaming</h4>
+<p>Reservation stations and reorder buffer 提供 register renaming</p>
+<h4 id="speculation-v2">Speculation</h4>
+<p>預測 branch 並繼續執行，直到 branch 結果出來才寫入</p>
+<h3 id="summary-v2">Summary</h3>
+<p>沒有想像中優化那麼多:</p>
+<ul>
+<li>Program 有其他 dependency 限制 ILP
+<ul>
+<li>e.g. 兩個 pointer 指到同一個位置，看名字看不出來 (pointer aliasing)</li>
+</ul>
+</li>
+<li>有些 instruction 很難做平行化</li>
+<li>Memory delays</li>
+<li>limited bandwidth</li>
+</ul>
+
+</div>
+
+
+  <div class="book-comments">
+    
+    <div id="disqus_thread"></div>
+    <script>
+    (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://at881005.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+  </div>
+
+
+<script src="/note/js/book-post.js"></script>
+        </div>
+      </div>
+
+      <div class="column col-2 hide-lg">
+        <div class="book-toc">
+  <div class="book-tocbot">
+  </div>
+  <div class="book-tocbot-menu">
+    <a class="book-toc-expand" onclick="expand_toc()">Expand all</a>
+    <a onclick="go_top()">Back to top</a>
+    <a onclick="go_bottom()">Go to bottom</a>
+  </div>
+</div>
+
+<script>
+tocbot.init({
+  tocSelector: '.book-tocbot',
+  contentSelector: '.book-post',
+  headingSelector: 'h1, h2, h3, h4, h5',
+  collapseDepth: 2,
+  orderedList: false,
+  scrollSmooth: false,
+});
+
+function expand_toc(){
+  var b = document.querySelector(".book-toc-expand");
+  tocbot.init({
+    tocSelector: '.book-tocbot',
+    contentSelector: '.book-post',
+    headingSelector: 'h1, h2, h3, h4, h5',
+    collapseDepth: 6,
+    orderedList: false,
+    scrollSmooth: false,
+  });
+  b.setAttribute("onclick", "collapse_toc()");
+  b.innerHTML = "Collapse all"
+}
+
+function collapse_toc(){
+  var b = document.querySelector(".book-toc-expand");
+  tocbot.init({
+    tocSelector: '.book-tocbot',
+    contentSelector: '.book-post',
+    headingSelector: 'h1, h2, h3, h4, h5',
+    collapseDepth: 2,
+    orderedList: false,
+    scrollSmooth: false,
+  });
+  b.setAttribute("onclick", "expand_toc()");
+  b.innerHTML = "Expand all"
+}
+
+function go_top() {
+  window.scrollTo(0, 0);
+}
+
+function go_bottom() {
+  window.scrollTo(0, document.body.scrollHeight);
+}
+
+</script>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

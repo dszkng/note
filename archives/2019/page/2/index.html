@@ -5,12 +5,12 @@
     <meta charset="UTF-8">
 
     
-      <link rel="icon" href="/NCTU-Coursenote/shell.png">
+      <link rel="icon" href="/note/shell.png">
     
 
     <title>
         
-          NCTU-Coursenote
+          kaiiiz/note
         
     </title>
 
@@ -23,9 +23,9 @@
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet">
 
     <!-- theme css & js -->
-    <link rel="stylesheet" href="/NCTU-Coursenote/css/spectre_custom.css">
-    <link rel="stylesheet" href="/NCTU-Coursenote/css/book.css">
-    <script src="/NCTU-Coursenote/js/book.js"></script>
+    <link rel="stylesheet" href="/note/css/spectre_custom.css">
+    <link rel="stylesheet" href="/note/css/book.css">
+    <script src="/note/js/book.js"></script>
 
     <!-- tocbot -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script>
@@ -35,13 +35,6 @@
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css">
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-
-    <!-- lightgallery.js -->
-    
-      <script src="https://code.jquery.com/jquery-3.4.0.min.js" integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.12/css/lightgallery.min.css">
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.12/js/lightgallery-all.min.js"></script>
-    
     
     <!-- katex -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
@@ -52,53 +45,46 @@
 <div class="container">
   <div class="book-container">
     <div class="columns">
-      <div class="column col-2 book-sidebar">
-          <h4 class="site-meta">
-    <a href="/NCTU-Coursenote/">NCTU-Coursenote</a>
-</h4>
-
-<div class="sidebar-content">
+      <div class="column col-2 hide-lg">
+        <div class="book-sidebar">
+  <h4 class="site-meta">
+    <a href="/note/">kaiiiz/note</a>
+  </h4>
+  <div class="sidebar-content">
     <ul>
-<li><a href="/NCTU-Coursenote">首頁</a></li>
+<li><a href="/note">首頁</a></li>
 <li>大一</li>
-<li>大二
-<ul>
-<li><a href="/NCTU-Coursenote/1072-intro-to-formal-language">正規語言概論</a></li>
-<li><a href="/NCTU-Coursenote/1072-intro-to-dbms">資料庫系統概論</a></li>
-<li><a href="/NCTU-Coursenote/1072-computer-organization">計算機組織</a></li>
-<li><a href="/NCTU-Coursenote/1072-signals-and-systems">訊號與系統</a></li>
-<li><a href="/NCTU-Coursenote/1072-intro-to-music-theory">音樂理論導論</a></li>
-<li><a href="/NCTU-Coursenote/1072-compiler-design">編譯器設計</a></li>
-</ul>
-</li>
+<li><a href="/note/1072/sophomore">大二</a></li>
 <li>大三</li>
 <li>大四</li>
 <li>網路相關
 <ul>
-<li><a href="/NCTU-Coursenote/network-associate/landesign">LAN Design</a></li>
+<li><a href="/note/network-associate/landesign">LAN Design</a></li>
 <li>Layer 2
 <ul>
-<li><a href="/NCTU-Coursenote/network-associate/layer2/vlan">VLAN</a></li>
-<li><a href="/NCTU-Coursenote/network-associate/layer2/vtp">VTP</a></li>
-<li><a href="/NCTU-Coursenote/network-associate/layer2/stp">STP</a></li>
+<li><a href="/note/network-associate/layer2/vlan">VLAN</a></li>
+<li><a href="/note/network-associate/layer2/vtp">VTP</a></li>
+<li><a href="/note/network-associate/layer2/stp">STP</a></li>
+</ul>
+</li>
+<li>Layer 3
+<ul>
+<li><a href="/note/network-associate/layer3/routing">Routing</a></li>
+<li><a href="/note/network-associate/layer3/vlsm">VLSM</a></li>
+<li><a href="/note/network-associate/layer3/ospf">OSPF</a></li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
 
+  </div>
 </div>
 
-<script>
-document.querySelectorAll('.sidebar-content a').forEach(function(item){ 
-    if(item.href === window.location.href || item.href === window.location.href.slice(0, -1)) {
-        item.className = "book-sidebar-current"
-    }
-})
-</script>
+<script src="/note/js/book-sidebar.js"></script>
       </div>
 
-      <div class="column col-10">
+      <div class="column col-8 col-lg-12">
         <div class="book-content">
           <div class="book-archive">
   <!-- Title -->
@@ -116,86 +102,289 @@ document.querySelectorAll('.sidebar-content a').forEach(function(item){
           <ul class="archive-list-item">
           
               <li>
-                <span>2019-05-11</span>
-                <a href="/NCTU-Coursenote/1072-computer-organization/">
-                  計算機組織
+                <span>2019-06-18</span>
+                <a href="/note/1072/computer-organization/4-the-processor/">
+                  Untitled
                 </a>
               </li>
           
               <li>
-                <span>2019-05-11</span>
-                <a href="/NCTU-Coursenote/1072-intro-to-formal-language/">
-                  正規語言概論
+                <span>2019-06-18</span>
+                <a href="/note/1072/signals-and-systems/1-fourier-representation/">
+                  Untitled
                 </a>
               </li>
           
               <li>
-                <span>2019-05-08</span>
-                <a href="/NCTU-Coursenote/1072-compiler-design/">
-                  編譯器設計
+                <span>2019-06-18</span>
+                <a href="/note/network-associate/layer3/vlsm/">
+                  Untitled
                 </a>
               </li>
           
               <li>
-                <span>2019-05-02</span>
-                <a href="/NCTU-Coursenote/network-associate/layer2/vtp/">
+                <span>2019-06-18</span>
+                <a href="/note/network-associate/layer3/routing/">
+                  Untitled
+                </a>
+              </li>
+          
+              <li>
+                <span>2019-06-18</span>
+                <a href="/note/network-associate/layer3/ospf/">
+                  Untitled
+                </a>
+              </li>
+          
+              <li>
+                <span>2019-06-18</span>
+                <a href="/note/1072/sophomore/">
+                  Untitled
+                </a>
+              </li>
+          
+              <li>
+                <span>2019-06-18</span>
+                <a href="/note/menu/">
+                  Untitled
+                </a>
+              </li>
+          
+              <li>
+                <span>2019-06-18</span>
+                <a href="/note/home/">
+                  Untitled
+                </a>
+              </li>
+          
+              <li>
+                <span>2019-06-18</span>
+                <a href="/note/1072/signals-and-systems/3-fourier-representation-with-mixed-signals/">
+                  Untitled
+                </a>
+              </li>
+          
+              <li>
+                <span>2019-06-18</span>
+                <a href="/note/1072/signals-and-systems/2-fourier-representation-properties/">
+                  Untitled
+                </a>
+              </li>
+          
+              <li>
+                <span>2019-06-18</span>
+                <a href="/note/1072/signals-and-systems/0-courseinfo/">
+                  Untitled
+                </a>
+              </li>
+          
+              <li>
+                <span>2019-06-18</span>
+                <a href="/note/1072/intro-to-music-theory/1-note/">
+                  Untitled
+                </a>
+              </li>
+          
+              <li>
+                <span>2019-06-18</span>
+                <a href="/note/1072/intro-to-formal-language/8-computational-complexity/">
+                  Untitled
+                </a>
+              </li>
+          
+              <li>
+                <span>2019-06-18</span>
+                <a href="/note/1072/intro-to-music-theory/0-courseinfo/">
+                  Untitled
+                </a>
+              </li>
+          
+              <li>
+                <span>2019-06-18</span>
+                <a href="/note/1072/intro-to-formal-language/6-hierarchy-of-formal-languages/">
+                  Untitled
+                </a>
+              </li>
+          
+              <li>
+                <span>2019-06-18</span>
+                <a href="/note/1072/intro-to-formal-language/7-limits-of-computation/">
+                  Untitled
+                </a>
+              </li>
+          
+              <li>
+                <span>2019-06-18</span>
+                <a href="/note/1072/intro-to-formal-language/5-turing-machines/">
+                  Untitled
+                </a>
+              </li>
+          
+              <li>
+                <span>2019-06-18</span>
+                <a href="/note/1072/intro-to-formal-language/4-pushdown-automata/">
+                  Untitled
+                </a>
+              </li>
+          
+              <li>
+                <span>2019-06-18</span>
+                <a href="/note/1072/intro-to-formal-language/3-context-free-languages/">
+                  Untitled
+                </a>
+              </li>
+          
+              <li>
+                <span>2019-06-18</span>
+                <a href="/note/1072/intro-to-formal-language/1-finite-automata/">
+                  Untitled
+                </a>
+              </li>
+          
+              <li>
+                <span>2019-06-18</span>
+                <a href="/note/1072/intro-to-formal-language/0-courseinfo/">
+                  Untitled
+                </a>
+              </li>
+          
+              <li>
+                <span>2019-06-18</span>
+                <a href="/note/1072/intro-to-formal-language/2-regular-languages/">
+                  Untitled
+                </a>
+              </li>
+          
+              <li>
+                <span>2019-06-18</span>
+                <a href="/note/1072/computer-organization/5-exploiting-memory-hierarchy/">
+                  Untitled
+                </a>
+              </li>
+          
+              <li>
+                <span>2019-06-18</span>
+                <a href="/note/1072/computer-organization/2-instructions/">
+                  Untitled
+                </a>
+              </li>
+          
+              <li>
+                <span>2019-06-18</span>
+                <a href="/note/1072/computer-organization/3-arithmetic/">
+                  Untitled
+                </a>
+              </li>
+          
+              <li>
+                <span>2019-06-18</span>
+                <a href="/note/1072/computer-organization/1-computer-abstractions/">
+                  Untitled
+                </a>
+              </li>
+          
+              <li>
+                <span>2019-06-18</span>
+                <a href="/note/1072/compiler-design/8-control-flow/">
+                  Untitled
+                </a>
+              </li>
+          
+              <li>
+                <span>2019-06-18</span>
+                <a href="/note/1072/computer-organization/0-courseinfo/">
+                  Untitled
+                </a>
+              </li>
+          
+              <li>
+                <span>2019-06-18</span>
+                <a href="/note/1072/compiler-design/9-dataflow/">
+                  Untitled
+                </a>
+              </li>
+          
+              <li>
+                <span>2019-06-18</span>
+                <a href="/note/1072/compiler-design/7-code-generation/">
+                  Untitled
+                </a>
+              </li>
+          
+              <li>
+                <span>2019-06-18</span>
+                <a href="/note/1072/compiler-design/6-run-time-environments/">
+                  Untitled
+                </a>
+              </li>
+          
+              <li>
+                <span>2019-06-18</span>
+                <a href="/note/1072/compiler-design/5-ir/">
+                  Untitled
+                </a>
+              </li>
+          
+              <li>
+                <span>2019-06-18</span>
+                <a href="/note/1072/compiler-design/4-syntax-directed-translation/">
+                  Untitled
+                </a>
+              </li>
+          
+              <li>
+                <span>2019-06-18</span>
+                <a href="/note/1072/compiler-design/3-syntax-analysis/">
+                  Untitled
+                </a>
+              </li>
+          
+              <li>
+                <span>2019-06-18</span>
+                <a href="/note/1072/compiler-design/2-lexical-analysis/">
+                  Untitled
+                </a>
+              </li>
+          
+              <li>
+                <span>2019-06-18</span>
+                <a href="/note/1072/compiler-design/0-courseinfo/">
+                  Untitled
+                </a>
+              </li>
+          
+              <li>
+                <span>2019-06-18</span>
+                <a href="/note/1072/compiler-design/1-introduction/">
                   Untitled
                 </a>
               </li>
           
               <li>
                 <span>2019-05-02</span>
-                <a href="/NCTU-Coursenote/network-associate/layer2/vlan/">
+                <a href="/note/network-associate/layer2/vtp/">
                   Untitled
                 </a>
               </li>
           
               <li>
                 <span>2019-05-02</span>
-                <a href="/NCTU-Coursenote/network-associate/layer2/stp/">
+                <a href="/note/network-associate/layer2/vlan/">
                   Untitled
                 </a>
               </li>
           
               <li>
                 <span>2019-05-02</span>
-                <a href="/NCTU-Coursenote/network-associate/landesign/">
+                <a href="/note/network-associate/layer2/stp/">
                   Untitled
                 </a>
               </li>
           
               <li>
                 <span>2019-05-02</span>
-                <a href="/NCTU-Coursenote/menu/">
+                <a href="/note/network-associate/landesign/">
                   Untitled
-                </a>
-              </li>
-          
-              <li>
-                <span>2019-05-02</span>
-                <a href="/NCTU-Coursenote/home/">
-                  Untitled
-                </a>
-              </li>
-          
-              <li>
-                <span>2019-05-02</span>
-                <a href="/NCTU-Coursenote/1072-signals-and-systems/">
-                  訊號與系統
-                </a>
-              </li>
-          
-              <li>
-                <span>2019-05-02</span>
-                <a href="/NCTU-Coursenote/1072-intro-to-dbms/">
-                  資料庫系統概論
-                </a>
-              </li>
-          
-              <li>
-                <span>2019-04-28</span>
-                <a href="/NCTU-Coursenote/1072-intro-to-music-theory/">
-                  音樂理論導論
                 </a>
               </li>
           
@@ -206,6 +395,66 @@ document.querySelectorAll('.sidebar-content a').forEach(function(item){
   
 </div>
         </div>
+      </div>
+
+      <div class="column col-2 hide-lg">
+        <div class="book-toc">
+  <div class="book-tocbot">
+  </div>
+  <div class="book-tocbot-menu">
+    <a class="book-toc-expand" onclick="expand_toc()">Expand all</a>
+    <a onclick="go_top()">Back to top</a>
+    <a onclick="go_bottom()">Go to bottom</a>
+  </div>
+</div>
+
+<script>
+tocbot.init({
+  tocSelector: '.book-tocbot',
+  contentSelector: '.book-post',
+  headingSelector: 'h1, h2, h3, h4, h5',
+  collapseDepth: 2,
+  orderedList: false,
+  scrollSmooth: false,
+});
+
+function expand_toc(){
+  var b = document.querySelector(".book-toc-expand");
+  tocbot.init({
+    tocSelector: '.book-tocbot',
+    contentSelector: '.book-post',
+    headingSelector: 'h1, h2, h3, h4, h5',
+    collapseDepth: 6,
+    orderedList: false,
+    scrollSmooth: false,
+  });
+  b.setAttribute("onclick", "collapse_toc()");
+  b.innerHTML = "Collapse all"
+}
+
+function collapse_toc(){
+  var b = document.querySelector(".book-toc-expand");
+  tocbot.init({
+    tocSelector: '.book-tocbot',
+    contentSelector: '.book-post',
+    headingSelector: 'h1, h2, h3, h4, h5',
+    collapseDepth: 2,
+    orderedList: false,
+    scrollSmooth: false,
+  });
+  b.setAttribute("onclick", "expand_toc()");
+  b.innerHTML = "Expand all"
+}
+
+function go_top() {
+  window.scrollTo(0, 0);
+}
+
+function go_bottom() {
+  window.scrollTo(0, document.body.scrollHeight);
+}
+
+</script>
       </div>
     </div>
   </div>

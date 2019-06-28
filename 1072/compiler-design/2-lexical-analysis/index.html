@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+
+    
+      <link rel="icon" href="/note/shell.png">
+    
+
+    <title>
+        
+          kaiiiz/note
+        
+    </title>
+
+    <!-- Spectre.css framework (v0.5.8) -->
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-exp.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-icons.min.css">
+
+    <!-- Noto Sans TC -->
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet">
+
+    <!-- theme css & js -->
+    <link rel="stylesheet" href="/note/css/spectre_custom.css">
+    <link rel="stylesheet" href="/note/css/book.css">
+    <script src="/note/js/book.js"></script>
+
+    <!-- tocbot -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css">
+
+    <!-- highlight.js -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+    <!-- katex -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+</head>
+
+<body>
+
+<div class="container">
+  <div class="book-container">
+    <div class="columns">
+      <div class="column col-2 hide-lg">
+        <div class="book-sidebar">
+  <h4 class="site-meta">
+    <a href="/note/">kaiiiz/note</a>
+  </h4>
+  <div class="sidebar-content">
+    <ul>
+<li><a href="/note">首頁</a></li>
+<li>大一</li>
+<li><a href="/note/1072/sophomore">大二</a></li>
+<li>大三</li>
+<li>大四</li>
+<li>網路相關
+<ul>
+<li><a href="/note/network-associate/landesign">LAN Design</a></li>
+<li>Layer 2
+<ul>
+<li><a href="/note/network-associate/layer2/vlan">VLAN</a></li>
+<li><a href="/note/network-associate/layer2/vtp">VTP</a></li>
+<li><a href="/note/network-associate/layer2/stp">STP</a></li>
+</ul>
+</li>
+<li>Layer 3
+<ul>
+<li><a href="/note/network-associate/layer3/routing">Routing</a></li>
+<li><a href="/note/network-associate/layer3/vlsm">VLSM</a></li>
+<li><a href="/note/network-associate/layer3/ospf">OSPF</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+</div>
+
+<script src="/note/js/book-sidebar.js"></script>
+      </div>
+
+      <div class="column col-8 col-lg-12">
+        <div class="book-content">
+          <div class="book-navbar">
+  <header class="navbar">
+  <section class="navbar-section">
+    <img class="navbar-icon" src="/note/shell.png">
+  </section>
+  <section class="navbar-center">
+    kaiiiz/note
+  </section>
+  <section class="navbar-section">
+    <label class="accordion-header c-hand" for="accordion-sidebar">
+      <i class="icon icon-menu"></i>
+    </label>
+  </section>
+</header>
+
+<div class="accordion">
+  <input type="checkbox" id="accordion-sidebar" name="accordion-checkbox" hidden>
+  <div class="accordion-body">
+    <ul>
+<li><a href="/note">首頁</a></li>
+<li>大一</li>
+<li><a href="/note/1072/sophomore">大二</a></li>
+<li>大三</li>
+<li>大四</li>
+<li>網路相關
+<ul>
+<li><a href="/note/network-associate/landesign">LAN Design</a></li>
+<li>Layer 2
+<ul>
+<li><a href="/note/network-associate/layer2/vlan">VLAN</a></li>
+<li><a href="/note/network-associate/layer2/vtp">VTP</a></li>
+<li><a href="/note/network-associate/layer2/stp">STP</a></li>
+</ul>
+</li>
+<li>Layer 3
+<ul>
+<li><a href="/note/network-associate/layer3/routing">Routing</a></li>
+<li><a href="/note/network-associate/layer3/vlsm">VLSM</a></li>
+<li><a href="/note/network-associate/layer3/ospf">OSPF</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+</div>
+</div>
+
+<div class="book-post">
+  <h1 id="lexical-analysis">Lexical Analysis</h1>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (b == <span class="number">0</span>) a = b;</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>lexeme</th>
+<th>if</th>
+<th>(</th>
+<th>b</th>
+<th>==</th>
+<th>0</th>
+<th>)</th>
+<th>a</th>
+<th>=</th>
+<th>b</th>
+<th>;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>token</td>
+<td>KWif</td>
+<td>(</td>
+<td>ID</td>
+<td>==</td>
+<td>NUM</td>
+<td>)</td>
+<td>ID</td>
+<td>=</td>
+<td>ID</td>
+<td>SEMI</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Transform multi-character input stream to token stream</li>
+<li>Reduce length of program representation (remove spaces)</li>
+</ul>
+<h2 id="tokens-patterns-and-lexemes">Tokens, Patterns and Lexemes</h2>
+<ul>
+<li>Tokens
+<ul>
+<li>Token is a sequence of characters that can be treated as a single logical entity.</li>
+<li>e.g. identifier, keyword, operator</li>
+</ul>
+</li>
+<li>Patterns
+<ul>
+<li>A set of strings in the <strong>input for which the same token is produced as output</strong>. (<strong>regular expression</strong>)</li>
+<li>e.g. [A−Za−z_]</li>
+</ul>
+</li>
+<li>Lexemes (詞位)
+<ul>
+<li>A lexeme is a sequence of characters in the source program that is <strong>matched by the pattern for a token</strong>.</li>
+<li>e.g. x, y; if, else</li>
+</ul>
+</li>
+</ul>
+<h2 id="input-buffering">Input Buffering</h2>
+<p>Sometimes lexical analyzer needs to <strong>look ahead some symbols</strong> to decide about the token to return.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-, =, &lt; could also beginning of a two-character operator like -&gt;, ==, &lt;-</span><br></pre></td></tr></table></figure>
+<h3 id="buffer-pairs">Buffer pairs</h3>
+<p>Use <strong>two-buffer scheme</strong> to handle large lookaheads safely.</p>
+<p><img src="2019-04-13-01-56-05.png" alt="input buffer with buffer pairs"></p>
+<ul>
+<li>a buffer divided into two N-character halves (e.g. N = 1024)</li>
+<li>read N chars into buffer with system read command (v.s. using one system call per character)
+<ul>
+<li>if fewer than N chars, than marks <strong>eof</strong> at the end of the source file</li>
+</ul>
+</li>
+<li>Two-pointers
+<ul>
+<li><strong>lexemeBegin</strong> : marks the begining of the current lexeme</li>
+<li><strong>forward</strong> : scans ahead until a pattern match is found</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>lexeme 找到後 lexemeBegin 移至剛剛找到的 lexeme 後方的字元，forward 移至其右端</p>
+</blockquote>
+<h3 id="sentinels-哨兵">Sentinels (哨兵)</h3>
+<p>Without sentinel, we need two tests for out-of-bound for every forward</p>
+<ul>
+<li>one for the end of the buffer</li>
+<li>one to determine what character is read</li>
+</ul>
+<p>We can combine the buffer-end test with the test for the current character if we <strong>extend each buffer to hold a sentinel character at the end (eof)</strong>.</p>
+<p><img src="2019-04-13-01-57-53.png" alt="input buffer with sentinels"></p>
+<h3 id="comparison">Comparison</h3>
+<p>Input buffering with buffer pairs:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. Check the end of the buffer</span></span><br><span class="line"><span class="keyword">if</span> (forward at the end of first buffer) &#123;</span><br><span class="line">    reload second buffer</span><br><span class="line">    forward += <span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (forward at the end of second buffer) &#123;</span><br><span class="line">    reload first buffer</span><br><span class="line">    forward = begin of first buffer</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line">    forward += <span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. read forward character</span></span><br><span class="line"><span class="keyword">if</span> (*foward == ...) &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Input buffering with sentinels:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">forward += <span class="number">1</span></span><br><span class="line"><span class="keyword">if</span> (*forward == eof) &#123;</span><br><span class="line">    <span class="keyword">if</span> (forward at the end of first buffer) &#123;</span><br><span class="line">        reload second buffer</span><br><span class="line">        forward += <span class="number">1</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (forward at the end of second buffer)&#123;</span><br><span class="line">        reload first buffer</span><br><span class="line">        forward = begin of first buffer</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        terminate lexical analysis</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (*forward == ...) &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Visualized detail: <a href="https://www.slideshare.net/dattatraygandhmal/input-buffering" target="_blank" rel="noopener">https://www.slideshare.net/dattatraygandhmal/input-buffering</a></p>
+<h2 id="regular-expressions">Regular Expressions</h2>
+<p>Use <strong>regular expressions (REs)</strong> to describe programming language tokens</p>
+<p class="katex-block"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">∅</mi><mo>:</mo><mo>{</mo><mo>}</mo><mspace linebreak="newline"></mspace><mi>a</mi><mo>:</mo><mi>o</mi><mi>r</mi><mi>d</mi><mi>i</mi><mi>n</mi><mi>a</mi><mi>r</mi><mi>y</mi><mtext> </mtext><mi>c</mi><mi>h</mi><mi>a</mi><mi>r</mi><mi>a</mi><mi>c</mi><mi>t</mi><mi>e</mi><mi>r</mi><mspace linebreak="newline"></mspace><mi>ε</mi><mo>:</mo><mi>e</mi><mi>m</mi><mi>p</mi><mi>t</mi><mi>y</mi><mtext> </mtext><mi>s</mi><mi>t</mi><mi>r</mi><mi>i</mi><mi>n</mi><mi>g</mi><mspace linebreak="newline"></mspace><mi>R</mi><mi mathvariant="normal">∣</mi><mi>S</mi><mo>:</mo><mi>R</mi><mtext> </mtext><mi>o</mi><mi>r</mi><mtext> </mtext><mi>S</mi><mspace linebreak="newline"></mspace><mi>R</mi><mi>S</mi><mo>:</mo><mi>R</mi><mtext> </mtext><mi>f</mi><mi>o</mi><mi>l</mi><mi>l</mi><mi>o</mi><mi>w</mi><mi>e</mi><mi>d</mi><mtext> </mtext><mi>b</mi><mi>y</mi><mtext> </mtext><mi>S</mi><mspace linebreak="newline"></mspace><mi>R</mi><mo>∗</mo><mo>:</mo><mi>c</mi><mi>o</mi><mi>n</mi><mi>c</mi><mi>a</mi><mi>t</mi><mi>e</mi><mi>n</mi><mi>a</mi><mi>t</mi><mi>i</mi><mi>o</mi><mi>n</mi><mtext> </mtext><mi>o</mi><mi>f</mi><mtext> </mtext><mi>R</mi><mtext> </mtext><mi>z</mi><mi>e</mi><mi>r</mi><mi>o</mi><mtext> </mtext><mi>o</mi><mi>r</mi><mtext> </mtext><mi>m</mi><mi>o</mi><mi>r</mi><mi>e</mi><mtext> </mtext><mi>t</mi><mi>i</mi><mi>m</mi><mi>e</mi></mrow><annotation encoding="application/x-tex">\varnothing : \{\}\\
+a : ordinary\,character\\
+\varepsilon : empty\,string\\
+R|S : R\,or\,S\\
+RS : R\,followed\,by\,S\\
+R* : concatenation\,of\,R\,zero\,or\,more\,time
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.66334em;vertical-align:-0.08167em;"></span><span class="mord amsrm">∅</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">:</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">{</span><span class="mclose">}</span></span><span class="mspace newline"></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">a</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">:</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">d</span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span><span class="mord mathdefault">a</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">c</span><span class="mord mathdefault">h</span><span class="mord mathdefault">a</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">a</span><span class="mord mathdefault">c</span><span class="mord mathdefault">t</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span></span><span class="mspace newline"></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">ε</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">:</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.85396em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">e</span><span class="mord mathdefault">m</span><span class="mord mathdefault">p</span><span class="mord mathdefault">t</span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">s</span><span class="mord mathdefault">t</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span></span><span class="mspace newline"></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="mord">∣</span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">:</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span></span><span class="mspace newline"></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">:</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.02691em;">w</span><span class="mord mathdefault">e</span><span class="mord mathdefault">d</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">b</span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span></span><span class="mspace newline"></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="mord">∗</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">:</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">c</span><span class="mord mathdefault">o</span><span class="mord mathdefault">n</span><span class="mord mathdefault">c</span><span class="mord mathdefault">a</span><span class="mord mathdefault">t</span><span class="mord mathdefault">e</span><span class="mord mathdefault">n</span><span class="mord mathdefault">a</span><span class="mord mathdefault">t</span><span class="mord mathdefault">i</span><span class="mord mathdefault">o</span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">o</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">m</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">e</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">t</span><span class="mord mathdefault">i</span><span class="mord mathdefault">m</span><span class="mord mathdefault">e</span></span></span></span></span></p>
+<h3 id="language">Language</h3>
+<p>A regular expression R describes a <strong>set of strings</strong> of characters denoted <strong>L(R)</strong>, also called a <strong>regular set</strong></p>
+<table>
+<thead>
+<tr>
+<th>Regular Expression, R</th>
+<th>Strings in L(R)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>a</td>
+<td>“a”</td>
+</tr>
+<tr>
+<td>ab</td>
+<td>“ab”</td>
+</tr>
+<tr>
+<td>a|b</td>
+<td>“a”, “b”</td>
+</tr>
+<tr>
+<td>(ab)*</td>
+<td>“”, “ab”, “abab”, …</td>
+</tr>
+<tr>
+<td>(a|ε)b</td>
+<td>“ab”, “b”</td>
+</tr>
+</tbody>
+</table>
+<p>Suppose <strong>r</strong> and <strong>s</strong> are RE denoting <strong>L(r)</strong> and <strong>L(s)</strong></p>
+<ul>
+<li>(r) is a RE denoting L(r)</li>
+<li>(r)|(s) is a RE denoting L(r)∪L(s)</li>
+<li>(r)(s) is a RE denoting L(r)L(s)</li>
+<li>(r) <em>is a RE denoting (L(r))</em></li>
+</ul>
+<h3 id="algebraic-laws-for-res">Algebraic Laws for REs</h3>
+<table>
+<thead>
+<tr>
+<th>LAW</th>
+<th>DESCRIPTION</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>r|s = s|r</td>
+<td>| is commutative</td>
+</tr>
+<tr>
+<td>r|(s|t) = (r|s)|t</td>
+<td>| is associative</td>
+</tr>
+<tr>
+<td>r(st) = (rs)t</td>
+<td>concatenation is associative</td>
+</tr>
+<tr>
+<td>r(s|t) = rs|rt; (s|t)r = sr|tr</td>
+<td>concatenation distributes over |</td>
+</tr>
+<tr>
+<td>εr = rε = r</td>
+<td>ε is the identity for concatenation</td>
+</tr>
+<tr>
+<td>r* = (r|ε)</td>
+<td>ε is contained in *</td>
+</tr>
+<tr>
+<td>r** = r</td>
+<td>* is idempotent (冪等)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="extensions-of-res">Extensions of REs</h3>
+<table>
+<thead>
+<tr>
+<th>REs</th>
+<th>DESCRIPTION</th>
+<th>ALIAS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>R+</td>
+<td>one or more strings of R</td>
+<td>R(R*)</td>
+</tr>
+<tr>
+<td>R?</td>
+<td>optional R</td>
+<td>R|ε</td>
+</tr>
+<tr>
+<td>[abcd]</td>
+<td>one of listed characters</td>
+<td>(a|b|c|d)</td>
+</tr>
+<tr>
+<td>[a-z]</td>
+<td>one character from this range</td>
+<td>(a|b|c|d…|z)</td>
+</tr>
+<tr>
+<td>[^ab]</td>
+<td>anything but one of the listed chars</td>
+<td></td>
+</tr>
+<tr>
+<td>[^a-z]</td>
+<td>one character not from this range</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="regular-definitions">Regular Definitions</h3>
+<p>give <strong>names</strong> to regular expressions</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">name -&gt; regular expression</span><br><span class="line">d1 -&gt; r1</span><br><span class="line">d2 -&gt; r2</span><br><span class="line">...</span><br><span class="line">dn -&gt; rn</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">e.g. digit = [0-9], posint = digit+</span><br></pre></td></tr></table></figure>
+<h3 id="restrictions-on-res">Restrictions on REs</h3>
+<p>Regular expressions are not capable of describing most complete languages.</p>
+<p>They describe languages composed of sets of strings of the form :</p>
+<p class="katex-block"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>S</mi><mo>→</mo><mi>α</mi><mi>B</mi><mspace linebreak="newline"></mspace><mi>w</mi><mi>h</mi><mi>e</mi><mi>r</mi><mi>e</mi><mspace linebreak="newline"></mspace><mi>α</mi><mo>∈</mo><mi>b</mi><mi>a</mi><mi>s</mi><mi>i</mi><mi>c</mi><mtext> </mtext><mi>s</mi><mi>y</mi><mi>m</mi><mi>b</mi><mi>o</mi><mi>l</mi><mspace linebreak="newline"></mspace><mi>B</mi><mtext> </mtext><mi>i</mi><mi>s</mi><mtext> </mtext><mi>a</mi><mtext> </mtext><mi>r</mi><mi>e</mi><mi>g</mi><mi>u</mi><mi>l</mi><mi>a</mi><mi>r</mi><mtext> </mtext><mi>d</mi><mi>e</mi><mi>f</mi><mi>i</mi><mi>n</mi><mi>i</mi><mi>t</mi><mi>i</mi><mi>o</mi><mi>n</mi><mspace linebreak="newline"></mspace><mi>S</mi><mtext> </mtext><mi>i</mi><mi>s</mi><mtext> </mtext><mi>a</mi><mtext> </mtext><mi>r</mi><mi>e</mi><mi>g</mi><mi>u</mi><mi>l</mi><mi>a</mi><mi>r</mi><mtext> </mtext><mi>d</mi><mi>e</mi><mi>f</mi><mi>i</mi><mi>n</mi><mi>i</mi><mi>t</mi><mi>i</mi><mi>o</mi><mi>n</mi><mtext> </mtext><mi>a</mi><mi>n</mi><mi>d</mi><mtext> </mtext><mi>i</mi><mi>s</mi><mtext> </mtext><mi>n</mi><mi>o</mi><mi>t</mi><mtext> </mtext><mi>p</mi><mi>a</mi><mi>r</mi><mi>t</mi><mtext> </mtext><mi>o</mi><mi>f</mi><mtext> </mtext><mi>B</mi><mspace linebreak="newline"></mspace></mrow><annotation encoding="application/x-tex">S\to\alpha B\\
+where\\
+\alpha \in basic\,symbol\\
+B\,is\,a\,regular\,definition\\
+S\,is\,a\,regular\,definition\,and\,is\,not\,part\,of\,B\\
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">→</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.0037em;">α</span><span class="mord mathdefault" style="margin-right:0.05017em;">B</span></span><span class="mspace newline"></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.02691em;">w</span><span class="mord mathdefault">h</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">e</span></span><span class="mspace newline"></span><span class="base"><span class="strut" style="height:0.5782em;vertical-align:-0.0391em;"></span><span class="mord mathdefault" style="margin-right:0.0037em;">α</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">b</span><span class="mord mathdefault">a</span><span class="mord mathdefault">s</span><span class="mord mathdefault">i</span><span class="mord mathdefault">c</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">s</span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mord mathdefault">m</span><span class="mord mathdefault">b</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span></span><span class="mspace newline"></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.05017em;">B</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">i</span><span class="mord mathdefault">s</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">a</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord mathdefault">u</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">a</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span><span class="mord mathdefault">i</span><span class="mord mathdefault">t</span><span class="mord mathdefault">i</span><span class="mord mathdefault">o</span><span class="mord mathdefault">n</span></span><span class="mspace newline"></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">i</span><span class="mord mathdefault">s</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">a</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord mathdefault">u</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">a</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span><span class="mord mathdefault">i</span><span class="mord mathdefault">t</span><span class="mord mathdefault">i</span><span class="mord mathdefault">o</span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">a</span><span class="mord mathdefault">n</span><span class="mord mathdefault">d</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">i</span><span class="mord mathdefault">s</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">n</span><span class="mord mathdefault">o</span><span class="mord mathdefault">t</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">p</span><span class="mord mathdefault">a</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">t</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.05017em;">B</span></span><span class="mspace newline"></span></span></span></span></p>
+<p>They <strong>cannot</strong> describe:</p>
+<ul>
+<li>Balanced nesting constructs
+<ul>
+<li>e.g.  if … then … else …</li>
+</ul>
+</li>
+<li>Repetition of the same string
+<ul>
+<li>e.g.  {wcw | w is a string of a’s and b’s}</li>
+</ul>
+</li>
+<li>Constructs where the number of repetitions is fixed by the value of a part of the string
+<ul>
+<li>e.g.  nHa1a2 …an</li>
+</ul>
+</li>
+</ul>
+<p>Anything that needs to “<strong>memorize</strong>” “<strong>non-constant</strong>” amount of information <strong>happened in the past</strong> cannot be recognized by regular expressions</p>
+<h3 id="chomsky-hierarchy">Chomsky Hierarchy</h3>
+<p><img src="2019-04-13-01-58-21.png" alt></p>
+<ul>
+<li>Unrestricted languages (type 0)
+<ul>
+<li>Turing machines</li>
+</ul>
+</li>
+<li>Context-sensitive languages (type 1)
+<ul>
+<li>Linear bounded automata</li>
+</ul>
+</li>
+<li>Context-free languages (type 2)
+<ul>
+<li>Pushdown automata</li>
+</ul>
+</li>
+<li>Regular languages (type 3)
+<ul>
+<li>Finite automata</li>
+</ul>
+</li>
+</ul>
+<h2 id="interaction-between-scanner-parser">Interaction between Scanner &amp; Parser</h2>
+<p><img src="2019-04-13-01-58-51.png" alt></p>
+<p><strong>Attributes of Tokens</strong></p>
+<table>
+<thead>
+<tr>
+<th>Lexemes</th>
+<th>Token Name</th>
+<th>Attribute Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>if</td>
+<td>if</td>
+<td>-</td>
+</tr>
+<tr>
+<td>then</td>
+<td>then</td>
+<td>-</td>
+</tr>
+<tr>
+<td>else</td>
+<td>else</td>
+<td>-</td>
+</tr>
+<tr>
+<td>id</td>
+<td>id</td>
+<td>Pointer to table entry</td>
+</tr>
+<tr>
+<td>number</td>
+<td>number</td>
+<td>Pointer to table entry (or the value of the number)</td>
+</tr>
+<tr>
+<td>&lt;</td>
+<td>relop</td>
+<td>LT</td>
+</tr>
+<tr>
+<td>&lt;=</td>
+<td>relop</td>
+<td>LE</td>
+</tr>
+<tr>
+<td>=</td>
+<td>relop</td>
+<td>EQ</td>
+</tr>
+<tr>
+<td>&lt;&gt;</td>
+<td>relop</td>
+<td>NE</td>
+</tr>
+<tr>
+<td>&gt;</td>
+<td>relop</td>
+<td>GT</td>
+</tr>
+<tr>
+<td>&gt;=</td>
+<td>relop</td>
+<td>GE</td>
+</tr>
+</tbody>
+</table>
+<h2 id="implementation-of-lexical-analysis">Implementation of Lexical Analysis</h2>
+<p>Use <strong>Transition Diagram</strong></p>
+<p><img src="2019-04-13-01-59-17.png" alt></p>
+<p><strong>Recognizes reserved words</strong></p>
+<p>problem: keyword maybe recognize as an identifier</p>
+<p>Two solutions:</p>
+<ul>
+<li>Install the reserved words in the symbol table initially
+<ul>
+<li>installID() : place identifier in the symbol table if it is <strong>not already there</strong>, and return a pointer to the symbol-table entry for the lexeme found</li>
+<li>getToken() : return token name (either <strong>id</strong> or one of the <strong>keyword</strong> tokens that was initially installed in the table)</li>
+</ul>
+</li>
+</ul>
+<p><img src="2019-04-13-01-59-35.png" alt></p>
+<ul>
+<li>Create separate transition diagrams for each keyword</li>
+</ul>
+<p><img src="2019-04-13-01-59-51.png" alt></p>
+<h3 id="finite-automata">Finite Automata</h3>
+<p>Recognizers which simply say “<strong>yes</strong>” or “<strong>no</strong>” about each possible input string</p>
+<p><img src="2019-04-13-02-00-18.png" alt></p>
+<p><strong>Definition</strong></p>
+<p class="katex-block"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>M</mi><mo>=</mo><mo>(</mo><mi>S</mi><mo separator="true">,</mo><mi mathvariant="normal">Σ</mi><mo separator="true">,</mo><msub><mi>S</mi><mn>0</mn></msub><mo separator="true">,</mo><mi>F</mi><mo separator="true">,</mo><mi>T</mi><mo>)</mo><mspace linebreak="newline"></mspace><mi>S</mi><mo>:</mo><mi>a</mi><mi>l</mi><mi>l</mi><mtext> </mtext><mi>s</mi><mi>t</mi><mi>a</mi><mi>t</mi><mi>e</mi><mtext> </mtext><mi>i</mi><mi>n</mi><mtext> </mtext><mi>t</mi><mi>h</mi><mi>e</mi><mtext> </mtext><mi>F</mi><mi>A</mi><mspace linebreak="newline"></mspace><mi mathvariant="normal">Σ</mi><mo>:</mo><mi>a</mi><mi>l</mi><mi>l</mi><mtext> </mtext><mi>s</mi><mi>i</mi><mi>m</mi><mi>b</mi><mi>o</mi><mi>l</mi><mi>s</mi><mtext> </mtext><mi>a</mi><mi>c</mi><mi>c</mi><mi>e</mi><mi>p</mi><mi>t</mi><mi>e</mi><mi>d</mi><mtext> </mtext><mi>b</mi><mi>y</mi><mtext> </mtext><mi>t</mi><mi>h</mi><mi>e</mi><mtext> </mtext><mi>l</mi><mi>a</mi><mi>n</mi><mi>g</mi><mi>u</mi><mi>a</mi><mi>g</mi><mi>e</mi><mspace linebreak="newline"></mspace><msub><mi>S</mi><mn>0</mn></msub><mo>:</mo><mi>S</mi><mi>t</mi><mi>a</mi><mi>r</mi><mi>t</mi><mtext> </mtext><mi>s</mi><mi>t</mi><mi>a</mi><mi>t</mi><mi>e</mi><mspace linebreak="newline"></mspace><mi>F</mi><mo>:</mo><mi>A</mi><mi>c</mi><mi>c</mi><mi>e</mi><mi>p</mi><mi>t</mi><mi>i</mi><mi>n</mi><mi>g</mi><mtext> </mtext><mi>s</mi><mi>t</mi><mi>a</mi><mi>t</mi><mi>e</mi><mi>s</mi><mspace linebreak="newline"></mspace><mi>T</mi><mo>:</mo><mi>A</mi><mi>l</mi><mi>l</mi><mtext> </mtext><mi>t</mi><mi>r</mi><mi>a</mi><mi>n</mi><mi>s</mi><mi>i</mi><mi>t</mi><mi>i</mi><mi>o</mi><mi>n</mi><mi>s</mi></mrow><annotation encoding="application/x-tex">M = (S, \Sigma, S_0, F, T)\\
+S : all\,state\,in\,the\,FA\\
+\Sigma : all\,simbols\,accepted\,by\,the\,language\\
+S_0 : Start\,state\\
+F : Accepting\,states\\
+T : All\,transitions
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">M</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">Σ</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.05764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">F</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="mclose">)</span></span><span class="mspace newline"></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">:</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">a</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">s</span><span class="mord mathdefault">t</span><span class="mord mathdefault">a</span><span class="mord mathdefault">t</span><span class="mord mathdefault">e</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">t</span><span class="mord mathdefault">h</span><span class="mord mathdefault">e</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">F</span><span class="mord mathdefault">A</span></span><span class="mspace newline"></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord">Σ</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">:</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">a</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">s</span><span class="mord mathdefault">i</span><span class="mord mathdefault">m</span><span class="mord mathdefault">b</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">s</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">a</span><span class="mord mathdefault">c</span><span class="mord mathdefault">c</span><span class="mord mathdefault">e</span><span class="mord mathdefault">p</span><span class="mord mathdefault">t</span><span class="mord mathdefault">e</span><span class="mord mathdefault">d</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">b</span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">t</span><span class="mord mathdefault">h</span><span class="mord mathdefault">e</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">a</span><span class="mord mathdefault">n</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord mathdefault">u</span><span class="mord mathdefault">a</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord mathdefault">e</span></span><span class="mspace newline"></span><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.05764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">:</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="mord mathdefault">t</span><span class="mord mathdefault">a</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">t</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">s</span><span class="mord mathdefault">t</span><span class="mord mathdefault">a</span><span class="mord mathdefault">t</span><span class="mord mathdefault">e</span></span><span class="mspace newline"></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">F</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">:</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8777699999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">A</span><span class="mord mathdefault">c</span><span class="mord mathdefault">c</span><span class="mord mathdefault">e</span><span class="mord mathdefault">p</span><span class="mord mathdefault">t</span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">s</span><span class="mord mathdefault">t</span><span class="mord mathdefault">a</span><span class="mord mathdefault">t</span><span class="mord mathdefault">e</span><span class="mord mathdefault">s</span></span><span class="mspace newline"></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">:</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">A</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">t</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">a</span><span class="mord mathdefault">n</span><span class="mord mathdefault">s</span><span class="mord mathdefault">i</span><span class="mord mathdefault">t</span><span class="mord mathdefault">i</span><span class="mord mathdefault">o</span><span class="mord mathdefault">n</span><span class="mord mathdefault">s</span></span></span></span></span></p>
+<p><strong>Epsilon Moves</strong></p>
+<p>Machine can move from state A to state B without reading input</p>
+<p><img src="2019-04-13-02-00-32.png" alt></p>
+<p><strong>Nondeterministic Finite Automata (NFA)</strong></p>
+<p><img src="2019-04-13-02-00-46.png" alt></p>
+<ul>
+<li>Can have multiple transitions for one input in a given state</li>
+<li>Can have ε-moves</li>
+</ul>
+<p><strong>Deterministic Finite Automata (DFA)</strong></p>
+<p><img src="2019-04-13-02-01-06.png" alt></p>
+<ul>
+<li>One transition per input per state</li>
+<li>No ε-moves</li>
+</ul>
+<p><strong>NFA vs DFA</strong></p>
+<ul>
+<li>DFA
+<ul>
+<li>Action on each input is fully determined</li>
+<li>Easier to implement</li>
+</ul>
+</li>
+<li>NFA
+<ul>
+<li>May have choices at each step</li>
+<li>Accepts string if there is <strong>ANY path to an accepting state</strong></li>
+<li>More complex in implementation
+<ul>
+<li>May need to backtrack</li>
+<li>May end up exploring all the paths in the NFA</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>Transition Table</strong></p>
+<p><img src="2019-04-13-02-01-40.png" alt></p>
+<table>
+<thead>
+<tr>
+<th>State</th>
+<th>a</th>
+<th>b</th>
+<th>ε</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>{0, 1}</td>
+<td>{0}</td>
+<td>∅</td>
+</tr>
+<tr>
+<td>1</td>
+<td>∅</td>
+<td>{2}</td>
+<td>∅</td>
+</tr>
+<tr>
+<td>2</td>
+<td>∅</td>
+<td>{3}</td>
+<td>∅</td>
+</tr>
+<tr>
+<td>3</td>
+<td>∅</td>
+<td>∅</td>
+<td>∅</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Columns are input symbols</li>
+<li>Rows are current states</li>
+<li>Entries are resulting states</li>
+<li>Pros and Cons
+<ul>
+<li>Pro
+<ul>
+<li>easily find the transitions</li>
+</ul>
+</li>
+<li>Con
+<ul>
+<li>take lots of space</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="re-to-automata">RE to Automata</h3>
+<p><img src="2019-04-13-12-09-18.png" alt></p>
+<p><img src="2019-04-13-12-06-45.png" alt="High-level sketch"></p>
+<h3 id="thompson-s-construction">Thompson’s construction</h3>
+<p class="katex-block"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>R</mi><mi>e</mi><mi>g</mi><mi>u</mi><mi>l</mi><mi>a</mi><mi>r</mi><mtext> </mtext><mi>E</mi><mi>x</mi><mi>p</mi><mi>r</mi><mi>e</mi><mi>s</mi><mi>s</mi><mi>i</mi><mi>o</mi><mi>n</mi><mover><mo stretchy="true">→</mo><mtext>Thompson’s Construction</mtext></mover><mi>N</mi><mi>F</mi><mi>A</mi></mrow><annotation encoding="application/x-tex">Regular\,Expression\xrightarrow{\text{Thompson&#x27;s Construction}}NFA
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.3025479999999998em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord mathdefault">u</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">a</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.05764em;">E</span><span class="mord mathdefault">x</span><span class="mord mathdefault">p</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">e</span><span class="mord mathdefault">s</span><span class="mord mathdefault">s</span><span class="mord mathdefault">i</span><span class="mord mathdefault">o</span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel x-arrow"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.1081079999999999em;"><span style="top:-3.322em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight x-arrow-pad"><span class="mord mtight"><span class="mord text mtight"><span class="mord mtight">Thompson’s Construction</span></span></span></span></span><span class="svg-align" style="top:-2.689em;"><span class="pstrut" style="height:2.7em;"></span><span class="hide-tail" style="height:0.522em;min-width:1.469em;"><svg width="400em" height="0.522em" viewbox="0 0 400000 522" preserveaspectratio="xMaxYMin slice"><path d="M0 241v40h399891c-47.3 35.3-84 78-110 128
+-16.7 32-27.7 63.7-33 95 0 1.3-.2 2.7-.5 4-.3 1.3-.5 2.3-.5 3 0 7.3 6.7 11 20
+ 11 8 0 13.2-.8 15.5-2.5 2.3-1.7 4.2-5.5 5.5-11.5 2-13.3 5.7-27 11-41 14.7-44.7
+ 39-84.5 73-119.5s73.7-60.2 119-75.5c6-2 9-5.7 9-11s-3-9-9-11c-45.3-15.3-85
+-40.5-119-75.5s-58.3-74.8-73-119.5c-4.7-14-8.3-27.3-11-40-1.3-6.7-3.2-10.8-5.5
+-12.5-2.3-1.7-7.5-2.5-15.5-2.5-14 0-21 3.7-21 11 0 2 2 10.3 6 25 20.7 83.3 67
+ 151.7 139 205zm0 0v40h399900v-40z"/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.010999999999999899em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="mord mathdefault" style="margin-right:0.13889em;">F</span><span class="mord mathdefault">A</span></span></span></span></span></p>
+<p><img src="2019-04-13-12-19-26.png" alt="For expression ε"></p>
+<p><img src="2019-04-13-12-19-41.png" alt="For any subexpression a in Σ"></p>
+<p>Suppose N(s) and N(t) are NFA’s for RE s and t</p>
+<ul>
+<li>r = s|t</li>
+</ul>
+<p><img src="2019-04-13-12-22-41.png" alt="Alternation"></p>
+<ul>
+<li>r = st</li>
+</ul>
+<p><img src="2019-04-13-12-25-48.png" alt="Concatenation"></p>
+<ul>
+<li>r = s*</li>
+</ul>
+<p><img src="2019-04-13-12-26-22.png" alt="Kleene closure"></p>
+<ul>
+<li>Precedence of Operators
+<ol>
+<li>Kleene closure (*), ?, +</li>
+<li>concatenation</li>
+<li>alternation</li>
+</ol>
+</li>
+<li>All operators are <strong>left associative</strong></li>
+</ul>
+<h3 id="subset-construction">Subset Construction</h3>
+<p class="katex-block"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>N</mi><mi>F</mi><mi>A</mi><mover><mo stretchy="true">→</mo><mtext>Subset Construction</mtext></mover><mi>D</mi><mi>F</mi><mi>A</mi></mrow><annotation encoding="application/x-tex">NFA\xrightarrow{\text{Subset Construction}}DFA
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.119108em;vertical-align:-0.01100000000000012em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="mord mathdefault" style="margin-right:0.13889em;">F</span><span class="mord mathdefault">A</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel x-arrow"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.1081079999999999em;"><span style="top:-3.322em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight x-arrow-pad"><span class="mord mtight"><span class="mord text mtight"><span class="mord mtight">Subset Construction</span></span></span></span></span><span class="svg-align" style="top:-2.689em;"><span class="pstrut" style="height:2.7em;"></span><span class="hide-tail" style="height:0.522em;min-width:1.469em;"><svg width="400em" height="0.522em" viewbox="0 0 400000 522" preserveaspectratio="xMaxYMin slice"><path d="M0 241v40h399891c-47.3 35.3-84 78-110 128
+-16.7 32-27.7 63.7-33 95 0 1.3-.2 2.7-.5 4-.3 1.3-.5 2.3-.5 3 0 7.3 6.7 11 20
+ 11 8 0 13.2-.8 15.5-2.5 2.3-1.7 4.2-5.5 5.5-11.5 2-13.3 5.7-27 11-41 14.7-44.7
+ 39-84.5 73-119.5s73.7-60.2 119-75.5c6-2 9-5.7 9-11s-3-9-9-11c-45.3-15.3-85
+-40.5-119-75.5s-58.3-74.8-73-119.5c-4.7-14-8.3-27.3-11-40-1.3-6.7-3.2-10.8-5.5
+-12.5-2.3-1.7-7.5-2.5-15.5-2.5-14 0-21 3.7-21 11 0 2 2 10.3 6 25 20.7 83.3 67
+ 151.7 139 205zm0 0v40h399900v-40z"/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.01100000000000012em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="mord mathdefault" style="margin-right:0.13889em;">F</span><span class="mord mathdefault">A</span></span></span></span></span></p>
+<ul>
+<li>remove ε-transitions to get a DFA</li>
+</ul>
+<p><img src="2019-04-13-12-47-26.png" alt></p>
+<h3 id="operations-on-nfa-states">Operations on NFA States</h3>
+<ul>
+<li>ε-closure(s)
+<ul>
+<li>s 可以透過 ε-transition 到達的 NFA state 的 set</li>
+</ul>
+</li>
+<li>ε-closure(T)
+<ul>
+<li>在 set T 裡面的 NFA state s 可以透過 ε-transition 到達的 NFA state 的 set</li>
+</ul>
+</li>
+<li>move(T, a)
+<ul>
+<li>在 set T 裡面的 NFA state s 可以透過 input symbol a 到達的 NFA state 的 set</li>
+</ul>
+</li>
+</ul>
+<h3 id="converting-nfa-to-dfa">Converting NFA to DFA</h3>
+<ul>
+<li>Construct the initial state of the DFA
+<ul>
+<li>finding <strong>ε-closure(s0)</strong></li>
+</ul>
+</li>
+<li>From a state <em><strong>T</strong></em> in the DFA, for each input character <em><strong>a</strong></em>
+<ul>
+<li>finding <strong>ε-closure( move(T, a) )</strong>, say U</li>
+<li>make U a state in DFA if it is not there yet
+<ul>
+<li>if U contains at least one final state in NFA, then mark it as a final state in DFA</li>
+</ul>
+</li>
+<li>make <strong>T x a -&gt; U</strong> a transition in DFA</li>
+</ul>
+</li>
+<li>Repeat the step above for all states in DFA that has not been processed yet</li>
+</ul>
+<h3 id="minimized-dfa">Minimized DFA</h3>
+<p>同個 language 可以用不同的 DFA 來表示，所以我們可以找到最少 state 的 DFA 來優化從 NFA 轉過來的 DFA。</p>
+<p><strong>key principle : merge 有相同行為的 state</strong></p>
+<ul>
+<li>final states 與 non-final states 不可 merge</li>
+<li>對所有 x 從 state s 到 t，若所有 acceptance decision 相同，則 s 與 t 有相同的行為</li>
+</ul>
+<p>流程：</p>
+<ul>
+<li>初始化
+<ul>
+<li>將 final state 與 non-final state 區格開</li>
+</ul>
+</li>
+<li>區分不同的群組 G
+<ul>
+<li>對所有 input symbol a，在 G 中的兩個 state s 與 t 可以通過 a 轉到相同的群組，則 s 與 t 屬於同一個群組</li>
+<li>除此之外，將 s 與 t 放至不同群組中</li>
+</ul>
+</li>
+<li>重複直到群組不再變化</li>
+</ul>
+<p>例子：</p>
+<p><img src="2019-04-13-13-33-06.png" alt="before minimize"></p>
+<p>Final-state: {E}<br>
+Non-final-state: {A, B, C, D}</p>
+<ul>
+<li>Try to split {A,B,C,D}
+<ul>
+<li>for input a
+<ul>
+<li>A,B,C,D all go to {A,B,C,D} on a</li>
+</ul>
+</li>
+<li>for input b
+<ul>
+<li>A,B,C go to {A,B,C,D} on b</li>
+<li>D goes to {E} on b</li>
+</ul>
+</li>
+<li>{A,B,C,D} → {A,B,C},{D},{E}</li>
+</ul>
+</li>
+<li>Try to split {A,B,C}
+<ul>
+<li>for input a
+<ul>
+<li>A,B,C all go to {A,B,C} on a</li>
+</ul>
+</li>
+<li>for input b
+<ul>
+<li>A,C go to {A,B,C} on b</li>
+<li>B goes to {D} on b</li>
+</ul>
+</li>
+<li>{A,B,C},{D},{E} → {A,C},{B},{D},{E}</li>
+</ul>
+</li>
+<li>A,C go to the same states on each input</li>
+</ul>
+<p><img src="2019-04-13-13-31-33.png" alt="after minimize"></p>
+<h2 id="implementation-of-lexical-analyzer-generator">Implementation of Lexical Analyzer Generator</h2>
+<p><img src="2019-04-13-13-45-10.png" alt="The structure of the generated analyzer"></p>
+<h2 id="ambiguity-resolution">Ambiguity Resolution</h2>
+<h3 id="longest-match">Longest match</h3>
+<ul>
+<li>match 最長的 pattern</li>
+<li>在 accept 前需要 lookahead</li>
+</ul>
+<p><img src="2019-04-13-14-00-14.png" alt="input: abbbbccd，若 abbbb 後是 ccd 則 accept state 6，否則 accept state 3"></p>
+<h3 id="first-match">First match</h3>
+<ul>
+<li>conflict 時選最先列出的 rule</li>
+</ul>
+<h3 id="lookahead">Lookahead</h3>
+<p>有些情形 longest match 和 first match 無法處理</p>
+<blockquote>
+<p>e.g. In fortran:</p>
+<p>treat IF a keyword: IF (a = b) THEN …<br>
+treat IF a identifier: IF (I, J) = 3 …</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">IF / \( .* \) letter &#123;return IF&#125;</span><br><span class="line">Otherwise, return identifier</span><br></pre></td></tr></table></figure>
+<p>/ 後方可以 match additional pattern 但是不 match lexeme，所以下次的 match 是從 ( 開始，而不是 letter 後方</p>
+<h2 id="lexical-analyzer-generator-lex">Lexical Analyzer Generator: Lex</h2>
+<p><img src="2019-04-13-14-31-53.png" alt="How Does Lex Work?"></p>
+<p>當 RE 能有多個 match 情形時，考慮：</p>
+<ul>
+<li>Longest matching token</li>
+<li>Token specification order</li>
+</ul>
+
+</div>
+
+
+  <div class="book-comments">
+    
+    <div id="disqus_thread"></div>
+    <script>
+    (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://at881005.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+  </div>
+
+
+<script src="/note/js/book-post.js"></script>
+        </div>
+      </div>
+
+      <div class="column col-2 hide-lg">
+        <div class="book-toc">
+  <div class="book-tocbot">
+  </div>
+  <div class="book-tocbot-menu">
+    <a class="book-toc-expand" onclick="expand_toc()">Expand all</a>
+    <a onclick="go_top()">Back to top</a>
+    <a onclick="go_bottom()">Go to bottom</a>
+  </div>
+</div>
+
+<script>
+tocbot.init({
+  tocSelector: '.book-tocbot',
+  contentSelector: '.book-post',
+  headingSelector: 'h1, h2, h3, h4, h5',
+  collapseDepth: 2,
+  orderedList: false,
+  scrollSmooth: false,
+});
+
+function expand_toc(){
+  var b = document.querySelector(".book-toc-expand");
+  tocbot.init({
+    tocSelector: '.book-tocbot',
+    contentSelector: '.book-post',
+    headingSelector: 'h1, h2, h3, h4, h5',
+    collapseDepth: 6,
+    orderedList: false,
+    scrollSmooth: false,
+  });
+  b.setAttribute("onclick", "collapse_toc()");
+  b.innerHTML = "Collapse all"
+}
+
+function collapse_toc(){
+  var b = document.querySelector(".book-toc-expand");
+  tocbot.init({
+    tocSelector: '.book-tocbot',
+    contentSelector: '.book-post',
+    headingSelector: 'h1, h2, h3, h4, h5',
+    collapseDepth: 2,
+    orderedList: false,
+    scrollSmooth: false,
+  });
+  b.setAttribute("onclick", "expand_toc()");
+  b.innerHTML = "Expand all"
+}
+
+function go_top() {
+  window.scrollTo(0, 0);
+}
+
+function go_bottom() {
+  window.scrollTo(0, document.body.scrollHeight);
+}
+
+</script>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

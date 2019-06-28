@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+
+    
+      <link rel="icon" href="/note/shell.png">
+    
+
+    <title>
+        
+          kaiiiz/note
+        
+    </title>
+
+    <!-- Spectre.css framework (v0.5.8) -->
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-exp.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-icons.min.css">
+
+    <!-- Noto Sans TC -->
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet">
+
+    <!-- theme css & js -->
+    <link rel="stylesheet" href="/note/css/spectre_custom.css">
+    <link rel="stylesheet" href="/note/css/book.css">
+    <script src="/note/js/book.js"></script>
+
+    <!-- tocbot -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css">
+
+    <!-- highlight.js -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+    <!-- katex -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+</head>
+
+<body>
+
+<div class="container">
+  <div class="book-container">
+    <div class="columns">
+      <div class="column col-2 hide-lg">
+        <div class="book-sidebar">
+  <h4 class="site-meta">
+    <a href="/note/">kaiiiz/note</a>
+  </h4>
+  <div class="sidebar-content">
+    <ul>
+<li><a href="/note">首頁</a></li>
+<li>大一</li>
+<li><a href="/note/1072/sophomore">大二</a></li>
+<li>大三</li>
+<li>大四</li>
+<li>網路相關
+<ul>
+<li><a href="/note/network-associate/landesign">LAN Design</a></li>
+<li>Layer 2
+<ul>
+<li><a href="/note/network-associate/layer2/vlan">VLAN</a></li>
+<li><a href="/note/network-associate/layer2/vtp">VTP</a></li>
+<li><a href="/note/network-associate/layer2/stp">STP</a></li>
+</ul>
+</li>
+<li>Layer 3
+<ul>
+<li><a href="/note/network-associate/layer3/routing">Routing</a></li>
+<li><a href="/note/network-associate/layer3/vlsm">VLSM</a></li>
+<li><a href="/note/network-associate/layer3/ospf">OSPF</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+</div>
+
+<script src="/note/js/book-sidebar.js"></script>
+      </div>
+
+      <div class="column col-8 col-lg-12">
+        <div class="book-content">
+          <div class="book-navbar">
+  <header class="navbar">
+  <section class="navbar-section">
+    <img class="navbar-icon" src="/note/shell.png">
+  </section>
+  <section class="navbar-center">
+    kaiiiz/note
+  </section>
+  <section class="navbar-section">
+    <label class="accordion-header c-hand" for="accordion-sidebar">
+      <i class="icon icon-menu"></i>
+    </label>
+  </section>
+</header>
+
+<div class="accordion">
+  <input type="checkbox" id="accordion-sidebar" name="accordion-checkbox" hidden>
+  <div class="accordion-body">
+    <ul>
+<li><a href="/note">首頁</a></li>
+<li>大一</li>
+<li><a href="/note/1072/sophomore">大二</a></li>
+<li>大三</li>
+<li>大四</li>
+<li>網路相關
+<ul>
+<li><a href="/note/network-associate/landesign">LAN Design</a></li>
+<li>Layer 2
+<ul>
+<li><a href="/note/network-associate/layer2/vlan">VLAN</a></li>
+<li><a href="/note/network-associate/layer2/vtp">VTP</a></li>
+<li><a href="/note/network-associate/layer2/stp">STP</a></li>
+</ul>
+</li>
+<li>Layer 3
+<ul>
+<li><a href="/note/network-associate/layer3/routing">Routing</a></li>
+<li><a href="/note/network-associate/layer3/vlsm">VLSM</a></li>
+<li><a href="/note/network-associate/layer3/ospf">OSPF</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+</div>
+</div>
+
+<div class="book-post">
+  <h1 id="code-generation">Code Generation</h1>
+<h2 id="p3">p3</h2>
+<ol>
+<li>選擇 instruction 實作 high-level IR</li>
+<li>register 有限 variable 無限，要 register allocation</li>
+<li>對 instruction 順序做排序 (VLIW)</li>
+</ol>
+<h2 id="p5">p5</h2>
+<p>相同的事情可能可以有很多種不同的做法</p>
+<h2 id="p10">p10</h2>
+<p>多種 solution 選 instruction 最少的</p>
+<h2 id="p11">p11</h2>
+<p>產生額外的 load/store，可能有不同的 optimize</p>
+<h2 id="p13">p13</h2>
+<p>pipeline IF/ID/EX/MEM/WB</p>
+<p>s1 與 s5 共用同一個 register: 因為在 pipeline 一個讀一個寫沒有重疊</p>
+<h2 id="p14">p14</h2>
+<p>edges: live range 有 overlap</p>
+<p>相鄰兩個點不能放在同一個 register</p>
+<p>相鄰兩個點不能塗同個顏色</p>
+<h2 id="p17">p17</h2>
+<p>有 k 個顏色，找到一個 node 最多有 k-1 個 edges，把 node 拿掉放到 stack，重複做 reduction 直到圖空了</p>
+<p>從 stack pop 出來的順序圖顏色</p>
+<h2 id="p30">p30</h2>
+<p>不能塗色: 每個 Node 最少有 k 個 edges</p>
+<h2 id="p40">p40</h2>
+<p>register 不夠用了</p>
+<h2 id="p43">p43</h2>
+<p>想辦法挑一個暫時不用的 node spill 出去</p>
+<h2 id="p46">p46</h2>
+<p>sequential code &gt; assembly code</p>
+<p>真正的 schedule: 硬體<br>
+compiler: optimization</p>
+<h2 id="p47">p47</h2>
+<p>compiler: 必要的，產生 parallel machine<br>
+硬體設計簡單，不用做 schdule</p>
+<h2 id="p48">p48</h2>
+<p>hardware binding</p>
+<h2 id="p49">p49</h2>
+<p>compiler binding，再 compile 的時候就決定在哪個時間點執行甚麼指令</p>
+<p>instruction 與 functional unit 是誰來做? hardware or compiler</p>
+<h2 id="p45">p45</h2>
+<p>instruction schedule 不一定必要，做 optimization</p>
+<ul>
+<li>structural hazard: 想要執行兩道乘法，硬體需要有兩個乘法器，判斷是否有足夠硬體資源可以同步執行</li>
+<li>data hazard: operation 有 dependency</li>
+<li>control hazard: 與 control flow 有關係，e.g. conditional branch，要走哪邊 depend on conditional 的值</li>
+</ul>
+<h2 id="p51">p51</h2>
+<p>basic block: single entry singe exit<br>
+_<br>
+–&gt; | | --&gt;</p>
+<p>local: 同一個 basic block<br>
+global: 跨 basic block</p>
+<h2 id="p53">p53</h2>
+<p>把 dependency 關係畫成 DAG</p>
+<h2 id="p54">p54</h2>
+<p>ready: 沒有 parent 的 node</p>
+<h2 id="p56">p56</h2>
+<p>有很多 ready state 要挑哪個?</p>
+<ul>
+<li>挑到 leaf 最長的 (很有可能是 critical length)</li>
+<li>有最多的 child</li>
+</ul>
+<h2 id="p64">p64</h2>
+<p>constant folding: 把 constant 再 compile time 算完</p>
+
+</div>
+
+
+  <div class="book-comments">
+    
+    <div id="disqus_thread"></div>
+    <script>
+    (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://at881005.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+  </div>
+
+
+<script src="/note/js/book-post.js"></script>
+        </div>
+      </div>
+
+      <div class="column col-2 hide-lg">
+        <div class="book-toc">
+  <div class="book-tocbot">
+  </div>
+  <div class="book-tocbot-menu">
+    <a class="book-toc-expand" onclick="expand_toc()">Expand all</a>
+    <a onclick="go_top()">Back to top</a>
+    <a onclick="go_bottom()">Go to bottom</a>
+  </div>
+</div>
+
+<script>
+tocbot.init({
+  tocSelector: '.book-tocbot',
+  contentSelector: '.book-post',
+  headingSelector: 'h1, h2, h3, h4, h5',
+  collapseDepth: 2,
+  orderedList: false,
+  scrollSmooth: false,
+});
+
+function expand_toc(){
+  var b = document.querySelector(".book-toc-expand");
+  tocbot.init({
+    tocSelector: '.book-tocbot',
+    contentSelector: '.book-post',
+    headingSelector: 'h1, h2, h3, h4, h5',
+    collapseDepth: 6,
+    orderedList: false,
+    scrollSmooth: false,
+  });
+  b.setAttribute("onclick", "collapse_toc()");
+  b.innerHTML = "Collapse all"
+}
+
+function collapse_toc(){
+  var b = document.querySelector(".book-toc-expand");
+  tocbot.init({
+    tocSelector: '.book-tocbot',
+    contentSelector: '.book-post',
+    headingSelector: 'h1, h2, h3, h4, h5',
+    collapseDepth: 2,
+    orderedList: false,
+    scrollSmooth: false,
+  });
+  b.setAttribute("onclick", "expand_toc()");
+  b.innerHTML = "Expand all"
+}
+
+function go_top() {
+  window.scrollTo(0, 0);
+}
+
+function go_bottom() {
+  window.scrollTo(0, document.body.scrollHeight);
+}
+
+</script>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

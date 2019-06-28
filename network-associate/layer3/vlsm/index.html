@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+
+    
+      <link rel="icon" href="/note/shell.png">
+    
+
+    <title>
+        
+          kaiiiz/note
+        
+    </title>
+
+    <!-- Spectre.css framework (v0.5.8) -->
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-exp.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-icons.min.css">
+
+    <!-- Noto Sans TC -->
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet">
+
+    <!-- theme css & js -->
+    <link rel="stylesheet" href="/note/css/spectre_custom.css">
+    <link rel="stylesheet" href="/note/css/book.css">
+    <script src="/note/js/book.js"></script>
+
+    <!-- tocbot -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css">
+
+    <!-- highlight.js -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+    <!-- katex -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+</head>
+
+<body>
+
+<div class="container">
+  <div class="book-container">
+    <div class="columns">
+      <div class="column col-2 hide-lg">
+        <div class="book-sidebar">
+  <h4 class="site-meta">
+    <a href="/note/">kaiiiz/note</a>
+  </h4>
+  <div class="sidebar-content">
+    <ul>
+<li><a href="/note">首頁</a></li>
+<li>大一</li>
+<li><a href="/note/1072/sophomore">大二</a></li>
+<li>大三</li>
+<li>大四</li>
+<li>網路相關
+<ul>
+<li><a href="/note/network-associate/landesign">LAN Design</a></li>
+<li>Layer 2
+<ul>
+<li><a href="/note/network-associate/layer2/vlan">VLAN</a></li>
+<li><a href="/note/network-associate/layer2/vtp">VTP</a></li>
+<li><a href="/note/network-associate/layer2/stp">STP</a></li>
+</ul>
+</li>
+<li>Layer 3
+<ul>
+<li><a href="/note/network-associate/layer3/routing">Routing</a></li>
+<li><a href="/note/network-associate/layer3/vlsm">VLSM</a></li>
+<li><a href="/note/network-associate/layer3/ospf">OSPF</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+</div>
+
+<script src="/note/js/book-sidebar.js"></script>
+      </div>
+
+      <div class="column col-8 col-lg-12">
+        <div class="book-content">
+          <div class="book-navbar">
+  <header class="navbar">
+  <section class="navbar-section">
+    <img class="navbar-icon" src="/note/shell.png">
+  </section>
+  <section class="navbar-center">
+    kaiiiz/note
+  </section>
+  <section class="navbar-section">
+    <label class="accordion-header c-hand" for="accordion-sidebar">
+      <i class="icon icon-menu"></i>
+    </label>
+  </section>
+</header>
+
+<div class="accordion">
+  <input type="checkbox" id="accordion-sidebar" name="accordion-checkbox" hidden>
+  <div class="accordion-body">
+    <ul>
+<li><a href="/note">首頁</a></li>
+<li>大一</li>
+<li><a href="/note/1072/sophomore">大二</a></li>
+<li>大三</li>
+<li>大四</li>
+<li>網路相關
+<ul>
+<li><a href="/note/network-associate/landesign">LAN Design</a></li>
+<li>Layer 2
+<ul>
+<li><a href="/note/network-associate/layer2/vlan">VLAN</a></li>
+<li><a href="/note/network-associate/layer2/vtp">VTP</a></li>
+<li><a href="/note/network-associate/layer2/stp">STP</a></li>
+</ul>
+</li>
+<li>Layer 3
+<ul>
+<li><a href="/note/network-associate/layer3/routing">Routing</a></li>
+<li><a href="/note/network-associate/layer3/vlsm">VLSM</a></li>
+<li><a href="/note/network-associate/layer3/ospf">OSPF</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+</div>
+</div>
+
+<div class="book-post">
+  <h1 id="vlsm">VLSM</h1>
+<p>VLSM(Variable Length Subnet Masks)，指的是在<mark><strong>同一個分級式網路</strong></mark>裡使用一個以上的遮罩。</p>
+<h2 id="無級式與分級式路由協定">無級式與分級式路由協定</h2>
+<p>在建立 VLSM 時，需要使用可支援 VLSM 的路由協定 (無級式路由協定)，也就是 RIP-2、EIGRP、OSPF。</p>
+<table>
+<thead>
+<tr>
+<th>協定</th>
+<th>是否為無級式</th>
+<th>傳送的更新包含遮罩</th>
+<th>支援VLSM</th>
+<th>支援手動路徑彙整</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RIP-1</td>
+<td>否</td>
+<td>否</td>
+<td>否</td>
+<td>否</td>
+</tr>
+<tr>
+<td>IGRP</td>
+<td>否</td>
+<td>否</td>
+<td>否</td>
+<td>否</td>
+</tr>
+<tr>
+<td>RIP-2</td>
+<td>是</td>
+<td>是</td>
+<td>是</td>
+<td>是</td>
+</tr>
+<tr>
+<td>EIGRP</td>
+<td>是</td>
+<td>是</td>
+<td>是</td>
+<td>是</td>
+</tr>
+<tr>
+<td>OSPF</td>
+<td>是</td>
+<td>是</td>
+<td>是</td>
+<td>是</td>
+</tr>
+</tbody>
+</table>
+<h2 id="vlsm-設定">VLSM 設定</h2>
+<p>Cisco 路由器無法直接設定啟用或停用 VLSM，從設定的角度來看，VLSM 純粹是 <code>ip address</code> 的附加效果。具體來說，路由器是透過集中設定每個 IP 位址使用不同的遮罩來產生 VLSM 的效果，前提是這些 IP 位址必須屬於相同的分級式網路。</p>
+<h2 id="找出網段重疊的部分">找出網段重疊的部分</h2>
+<ol>
+<li>計算每個子網路的範圍 (Network ID ~ Broadcast IP)</li>
+<li>依數字順序列出 Network ID</li>
+<li>檢查相鄰項目是否有子網路範圍有重疊</li>
+</ol>
+<p>舉例來說</p>
+<p><img src="2019-05-14-23-37-10.png" alt></p>
+<table>
+<thead>
+<tr>
+<th>子網路</th>
+<th>Network ID</th>
+<th>Broadcast ID</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>R1 LAN</td>
+<td>172.16.2.0</td>
+<td>172.16.3.255</td>
+</tr>
+<tr>
+<td>R2 LAN</td>
+<td>172.16.4.0</td>
+<td>172.16.5.255</td>
+</tr>
+<tr>
+<td>R3 LAN</td>
+<td>172.16.5.0</td>
+<td>172.16.5.255</td>
+</tr>
+<tr>
+<td>R1-R2 直連</td>
+<td>172.16.9.0</td>
+<td>172.16.9.3</td>
+</tr>
+<tr>
+<td>R1-R3 直連</td>
+<td>172.16.9.4</td>
+<td>172.16.9.7</td>
+</tr>
+</tbody>
+</table>
+<p>可以發現 R2 LAN 與 R3 LAN 重疊了</p>
+<h2 id="加入新子網路到現有架構">加入新子網路到現有架構</h2>
+<ol>
+<li>按設計的要求替新子網路算出合適的 Netmask</li>
+<li>計算分級式網路的所有子網路編號</li>
+<li>列出現有網段的清單</li>
+<li>將重疊的網段排除在外</li>
+<li>從剩餘的網段中選擇</li>
+</ol>
+<p>舉例來說，將一段 /23 的子網路加入：</p>
+<p><img src="2019-05-15-00-42-36.png" alt></p>
+<p>至少列出前 5 個可能的子網路：</p>
+<table>
+<thead>
+<tr>
+<th>子網路</th>
+<th>Network ID</th>
+<th>Broadcast ID</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>第1個(零子網路)</td>
+<td>172.16.0.0</td>
+<td>172.16.1.255</td>
+</tr>
+<tr>
+<td>第2個</td>
+<td>172.16.2.0</td>
+<td>172.16.3.255</td>
+</tr>
+<tr>
+<td>第3個</td>
+<td>172.16.4.0</td>
+<td>172.16.5.255</td>
+</tr>
+<tr>
+<td>第4個</td>
+<td>172.16.6.0</td>
+<td>172.16.7.255</td>
+</tr>
+<tr>
+<td>第5個</td>
+<td>172.16.8.0</td>
+<td>172.16.9.255</td>
+</tr>
+</tbody>
+</table>
+<p>列出現有網段的清單</p>
+<table>
+<thead>
+<tr>
+<th>子網路</th>
+<th>Network ID</th>
+<th>Broadcast ID</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>R1 LAN</td>
+<td>172.16.2.0</td>
+<td>172.16.3.255</td>
+</tr>
+<tr>
+<td>R2 LAN</td>
+<td>172.16.4.0</td>
+<td>172.16.5.255</td>
+</tr>
+<tr>
+<td>R3 LAN</td>
+<td>172.16.5.0</td>
+<td>172.16.5.255</td>
+</tr>
+<tr>
+<td>R1-R2 直連</td>
+<td>172.16.9.0</td>
+<td>172.16.9.3</td>
+</tr>
+<tr>
+<td>R1-R3 直連</td>
+<td>172.16.9.4</td>
+<td>172.16.9.7</td>
+</tr>
+</tbody>
+</table>
+<p>比對兩張表，發現第2.3.5個子網路有重疊，因此不考慮使用這些子網路</p>
+<h2 id="子網路切割計畫">子網路切割計畫</h2>
+<ol>
+<li>選擇合適的 VLSM 遮罩</li>
+<li>首先分配最大的網段，避免小子網路的不當分配產生重疊</li>
+<li>進一步劃分大網段，分配給小網段</li>
+<li>每個遮罩都不斷重複步驟2</li>
+</ol>
+
+</div>
+
+
+  <div class="book-comments">
+    
+    <div id="disqus_thread"></div>
+    <script>
+    (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://at881005.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+  </div>
+
+
+<script src="/note/js/book-post.js"></script>
+        </div>
+      </div>
+
+      <div class="column col-2 hide-lg">
+        <div class="book-toc">
+  <div class="book-tocbot">
+  </div>
+  <div class="book-tocbot-menu">
+    <a class="book-toc-expand" onclick="expand_toc()">Expand all</a>
+    <a onclick="go_top()">Back to top</a>
+    <a onclick="go_bottom()">Go to bottom</a>
+  </div>
+</div>
+
+<script>
+tocbot.init({
+  tocSelector: '.book-tocbot',
+  contentSelector: '.book-post',
+  headingSelector: 'h1, h2, h3, h4, h5',
+  collapseDepth: 2,
+  orderedList: false,
+  scrollSmooth: false,
+});
+
+function expand_toc(){
+  var b = document.querySelector(".book-toc-expand");
+  tocbot.init({
+    tocSelector: '.book-tocbot',
+    contentSelector: '.book-post',
+    headingSelector: 'h1, h2, h3, h4, h5',
+    collapseDepth: 6,
+    orderedList: false,
+    scrollSmooth: false,
+  });
+  b.setAttribute("onclick", "collapse_toc()");
+  b.innerHTML = "Collapse all"
+}
+
+function collapse_toc(){
+  var b = document.querySelector(".book-toc-expand");
+  tocbot.init({
+    tocSelector: '.book-tocbot',
+    contentSelector: '.book-post',
+    headingSelector: 'h1, h2, h3, h4, h5',
+    collapseDepth: 2,
+    orderedList: false,
+    scrollSmooth: false,
+  });
+  b.setAttribute("onclick", "expand_toc()");
+  b.innerHTML = "Expand all"
+}
+
+function go_top() {
+  window.scrollTo(0, 0);
+}
+
+function go_bottom() {
+  window.scrollTo(0, document.body.scrollHeight);
+}
+
+</script>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

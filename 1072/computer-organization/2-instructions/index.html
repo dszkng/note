@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+
+    
+      <link rel="icon" href="/note/shell.png">
+    
+
+    <title>
+        
+          kaiiiz/note
+        
+    </title>
+
+    <!-- Spectre.css framework (v0.5.8) -->
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-exp.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-icons.min.css">
+
+    <!-- Noto Sans TC -->
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet">
+
+    <!-- theme css & js -->
+    <link rel="stylesheet" href="/note/css/spectre_custom.css">
+    <link rel="stylesheet" href="/note/css/book.css">
+    <script src="/note/js/book.js"></script>
+
+    <!-- tocbot -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css">
+
+    <!-- highlight.js -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+    <!-- katex -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+</head>
+
+<body>
+
+<div class="container">
+  <div class="book-container">
+    <div class="columns">
+      <div class="column col-2 hide-lg">
+        <div class="book-sidebar">
+  <h4 class="site-meta">
+    <a href="/note/">kaiiiz/note</a>
+  </h4>
+  <div class="sidebar-content">
+    <ul>
+<li><a href="/note">首頁</a></li>
+<li>大一</li>
+<li><a href="/note/1072/sophomore">大二</a></li>
+<li>大三</li>
+<li>大四</li>
+<li>網路相關
+<ul>
+<li><a href="/note/network-associate/landesign">LAN Design</a></li>
+<li>Layer 2
+<ul>
+<li><a href="/note/network-associate/layer2/vlan">VLAN</a></li>
+<li><a href="/note/network-associate/layer2/vtp">VTP</a></li>
+<li><a href="/note/network-associate/layer2/stp">STP</a></li>
+</ul>
+</li>
+<li>Layer 3
+<ul>
+<li><a href="/note/network-associate/layer3/routing">Routing</a></li>
+<li><a href="/note/network-associate/layer3/vlsm">VLSM</a></li>
+<li><a href="/note/network-associate/layer3/ospf">OSPF</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+</div>
+
+<script src="/note/js/book-sidebar.js"></script>
+      </div>
+
+      <div class="column col-8 col-lg-12">
+        <div class="book-content">
+          <div class="book-navbar">
+  <header class="navbar">
+  <section class="navbar-section">
+    <img class="navbar-icon" src="/note/shell.png">
+  </section>
+  <section class="navbar-center">
+    kaiiiz/note
+  </section>
+  <section class="navbar-section">
+    <label class="accordion-header c-hand" for="accordion-sidebar">
+      <i class="icon icon-menu"></i>
+    </label>
+  </section>
+</header>
+
+<div class="accordion">
+  <input type="checkbox" id="accordion-sidebar" name="accordion-checkbox" hidden>
+  <div class="accordion-body">
+    <ul>
+<li><a href="/note">首頁</a></li>
+<li>大一</li>
+<li><a href="/note/1072/sophomore">大二</a></li>
+<li>大三</li>
+<li>大四</li>
+<li>網路相關
+<ul>
+<li><a href="/note/network-associate/landesign">LAN Design</a></li>
+<li>Layer 2
+<ul>
+<li><a href="/note/network-associate/layer2/vlan">VLAN</a></li>
+<li><a href="/note/network-associate/layer2/vtp">VTP</a></li>
+<li><a href="/note/network-associate/layer2/stp">STP</a></li>
+</ul>
+</li>
+<li>Layer 3
+<ul>
+<li><a href="/note/network-associate/layer3/routing">Routing</a></li>
+<li><a href="/note/network-associate/layer3/vlsm">VLSM</a></li>
+<li><a href="/note/network-associate/layer3/ospf">OSPF</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+</div>
+</div>
+
+<div class="book-post">
+  <h1 id="instructions-language-of-the-computer">Instructions: Language of the Computer</h1>
+<p>以下皆以 MIPS Instruction Set 為例子</p>
+<h2 id="design-principle">Design Principle</h2>
+<ol>
+<li>Simplicity favours regularity（MIPS Instruction 的 Format 都相近）</li>
+<li>Smaller is faster（越少 Register 就越少電路）</li>
+<li>Make the common case fast（e.g. addi vs add，減少 Load instruction)</li>
+<li>Good design demands good compromises（根據需求有不同的format，但都是32bit且各個format盡量相似）</li>
+</ol>
+<h2 id="register-usage">Register Usage</h2>
+<table>
+<thead>
+<tr>
+<th>Register Number</th>
+<th>Conventional Name</th>
+<th>Usage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$0</td>
+<td>$zero</td>
+<td>Hard-wired to 0</td>
+</tr>
+<tr>
+<td>$1</td>
+<td>$at</td>
+<td>Reserved for pseudo-instructions</td>
+</tr>
+<tr>
+<td>$2 - $3</td>
+<td>$v0, $v1</td>
+<td>Return values from functions</td>
+</tr>
+<tr>
+<td>$4 - $7</td>
+<td>$a0 - $a3</td>
+<td>Arguments to functions - not preserved by subprograms</td>
+</tr>
+<tr>
+<td><strong>$8 - $15</strong></td>
+<td><strong>$t0 - $t7</strong></td>
+<td>Temporary data, not preserved by subprograms</td>
+</tr>
+<tr>
+<td><strong>$16 - $23</strong></td>
+<td><strong>$s0 - $s7</strong></td>
+<td>Saved registers, preserved by subprograms</td>
+</tr>
+<tr>
+<td><strong>$24 - $25</strong></td>
+<td><strong>$t8 - $t9</strong></td>
+<td>More temporary registers, not preserved by subprograms</td>
+</tr>
+<tr>
+<td>$26 - $27</td>
+<td>$k0 - $k1</td>
+<td>Reserved for kernel. Do not use.</td>
+</tr>
+<tr>
+<td>$28</td>
+<td>$gp</td>
+<td>Global Area Pointer (base of global data segment)</td>
+</tr>
+<tr>
+<td><strong>$29</strong></td>
+<td><strong>$sp</strong></td>
+<td>Stack Pointer</td>
+</tr>
+<tr>
+<td><strong>$30</strong></td>
+<td><strong>$fp</strong></td>
+<td>Frame Pointer</td>
+</tr>
+<tr>
+<td><strong>$31</strong></td>
+<td><strong>$ra</strong></td>
+<td>Return Address</td>
+</tr>
+<tr>
+<td>$f0 - $f3</td>
+<td>-</td>
+<td>Floating point return values</td>
+</tr>
+<tr>
+<td>$f4 - $f10</td>
+<td>-</td>
+<td>Temporary registers, not preserved by subprograms</td>
+</tr>
+<tr>
+<td>$f12 - $f14</td>
+<td>-</td>
+<td>First two arguments to subprograms, not preserved by subprograms</td>
+</tr>
+<tr>
+<td>$f16 - $f18</td>
+<td>-</td>
+<td>More temporary registers, not preserved by subprograms</td>
+</tr>
+<tr>
+<td>$f20 - $f31</td>
+<td>-</td>
+<td>Saved registers, preserved by subprograms</td>
+</tr>
+</tbody>
+</table>
+<h2 id="format">Format</h2>
+<h3 id="r-format-register">R-format (Register)</h3>
+<table>
+<thead>
+<tr>
+<th>op</th>
+<th>rs</th>
+<th>rt</th>
+<th>rd</th>
+<th>shamt</th>
+<th>funct</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>6 bits</td>
+<td>5 bits</td>
+<td>5 bits</td>
+<td>5 bits</td>
+<td>5 bits</td>
+<td>6 bits</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>op: operation code (opcode)</li>
+<li>rs: first source register number</li>
+<li>rt: second source register number</li>
+<li>rd: destination register number</li>
+<li>shamt: shift amount (00000 for now)</li>
+<li>funct: function code (extends opcode)</li>
+</ul>
+<p>example) add $t0, $s1, $s2</p>
+<table>
+<thead>
+<tr>
+<th>op</th>
+<th>rs</th>
+<th>rt</th>
+<th>rd</th>
+<th>shamt</th>
+<th>funct</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>special</td>
+<td>$s1</td>
+<td>$s2</td>
+<td>$t0</td>
+<td>0</td>
+<td>add</td>
+</tr>
+<tr>
+<td>0</td>
+<td>17</td>
+<td>18</td>
+<td>8</td>
+<td>0</td>
+<td>32</td>
+</tr>
+<tr>
+<td>000000</td>
+<td>10001</td>
+<td>10010</td>
+<td>01000</td>
+<td>00000</td>
+<td>100000</td>
+</tr>
+</tbody>
+</table>
+<p class="katex-block"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>000000</mn><mi mathvariant="normal">∣</mi><mn>10001</mn><mi mathvariant="normal">∣</mi><mn>10010</mn><mi mathvariant="normal">∣</mi><mn>01000</mn><mi mathvariant="normal">∣</mi><mn>00000</mn><mi mathvariant="normal">∣</mi><mn>10000</mn><msub><mn>0</mn><mn>2</mn></msub><mo>=</mo><mn>0232402</mn><msub><mn>0</mn><mn>16</mn></msub></mrow><annotation encoding="application/x-tex">000000|10001|10010|01000|00000|100000_2 = 02324020_{16}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">0</span><span class="mord">0</span><span class="mord">0</span><span class="mord">0</span><span class="mord">0</span><span class="mord">0</span><span class="mord">∣</span><span class="mord">1</span><span class="mord">0</span><span class="mord">0</span><span class="mord">0</span><span class="mord">1</span><span class="mord">∣</span><span class="mord">1</span><span class="mord">0</span><span class="mord">0</span><span class="mord">1</span><span class="mord">0</span><span class="mord">∣</span><span class="mord">0</span><span class="mord">1</span><span class="mord">0</span><span class="mord">0</span><span class="mord">0</span><span class="mord">∣</span><span class="mord">0</span><span class="mord">0</span><span class="mord">0</span><span class="mord">0</span><span class="mord">0</span><span class="mord">∣</span><span class="mord">1</span><span class="mord">0</span><span class="mord">0</span><span class="mord">0</span><span class="mord">0</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.79444em;vertical-align:-0.15em;"></span><span class="mord">0</span><span class="mord">2</span><span class="mord">3</span><span class="mord">2</span><span class="mord">4</span><span class="mord">0</span><span class="mord">2</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mtight">6</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span></p>
+<h3 id="i-format-immediate">I-format (Immediate)</h3>
+<table>
+<thead>
+<tr>
+<th>op</th>
+<th>rs</th>
+<th>rt</th>
+<th>constant or address</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>6 bits</td>
+<td>5 bits</td>
+<td>5 bits</td>
+<td>16 bits</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Immediate arithmetic and load/store instructions</li>
+<li>rt: Target Register</li>
+<li>Constant: <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>−</mo><msup><mn>2</mn><mn>15</mn></msup><mtext> </mtext><mo>+</mo><msup><mn>2</mn><mn>15</mn></msup><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">-2^{15} ~ +2^{15} - 1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.897438em;vertical-align:-0.08333em;"></span><span class="mord">−</span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mtight">5</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mspace nobreak"> </span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.897438em;vertical-align:-0.08333em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mtight">5</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span></li>
+<li>Address: offset added to base address in rs</li>
+</ul>
+<p>example) addi $t0, $s1, -50</p>
+<table>
+<thead>
+<tr>
+<th>op</th>
+<th>rs</th>
+<th>rt</th>
+<th>constant or address</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>8</td>
+<td>$s1</td>
+<td>$t0</td>
+<td>-50</td>
+</tr>
+<tr>
+<td>8</td>
+<td>17</td>
+<td>8</td>
+<td>-50</td>
+</tr>
+<tr>
+<td>001000</td>
+<td>10001</td>
+<td>01000</td>
+<td>11111111 11001110</td>
+</tr>
+</tbody>
+</table>
+<p class="katex-block"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>001000</mn><mi mathvariant="normal">∣</mi><mn>10001</mn><mi mathvariant="normal">∣</mi><mn>01000</mn><mi mathvariant="normal">∣</mi><mn>111111111100111</mn><msub><mn>0</mn><mn>2</mn></msub></mrow><annotation encoding="application/x-tex">001000|10001|01000|1111111111001110_2
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">0</span><span class="mord">0</span><span class="mord">1</span><span class="mord">0</span><span class="mord">0</span><span class="mord">0</span><span class="mord">∣</span><span class="mord">1</span><span class="mord">0</span><span class="mord">0</span><span class="mord">0</span><span class="mord">1</span><span class="mord">∣</span><span class="mord">0</span><span class="mord">1</span><span class="mord">0</span><span class="mord">0</span><span class="mord">0</span><span class="mord">∣</span><span class="mord">1</span><span class="mord">1</span><span class="mord">1</span><span class="mord">1</span><span class="mord">1</span><span class="mord">1</span><span class="mord">1</span><span class="mord">1</span><span class="mord">1</span><span class="mord">1</span><span class="mord">0</span><span class="mord">0</span><span class="mord">1</span><span class="mord">1</span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span></p>
+<h3 id="j-format-jump">J-format (Jump)</h3>
+<table>
+<thead>
+<tr>
+<th>op</th>
+<th>address</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>6 bits</td>
+<td>26 bits</td>
+</tr>
+</tbody>
+</table>
+<h2 id="addressing">Addressing</h2>
+<h3 id="immediate-addressing">Immediate Addressing</h3>
+<p>運算元是常數,且包裝在指令內部</p>
+<p><img src="2019-04-18-02-14-12.png" alt></p>
+<h3 id="register-addressing">Register Addressing</h3>
+<p>運算元是暫存器</p>
+<p><img src="2019-04-18-02-11-37.png" alt></p>
+<h3 id="base-addressing">Base Addressing</h3>
+<p>運算元存放在記憶體中,而位址本身是暫存器和指令中常數的和</p>
+<p><img src="2019-04-18-02-12-16.png" alt></p>
+<h3 id="pc-relative-addressing">PC-relative Addressing</h3>
+<p>位址是 PC 和指令中常數的加總</p>
+<p><img src="2019-04-18-02-13-43.png" alt></p>
+<h3 id="pseduodirect-addressing">Pseduodirect Addressing</h3>
+<p>跳躍位址是指令的 26 位元再加上 PC 較高的位元</p>
+<p><img src="2019-04-18-02-13-19.png" alt></p>
+<h2 id="branch-addressing">Branch Addressing</h2>
+<p>PC: Program Counter</p>
+<p>See: <a href="https://www.youtube.com/watch?v=1bP6alXjDrw" target="_blank" rel="noopener">ISA 2.4 MIPS: Addresses in branches and jumps</a></p>
+<h3 id="conditional-branch">Conditional Branch</h3>
+<p>根據比較結果改變程式流向，用 I-format (e.g. beq rs, rt, imm)</p>
+<p>由於所有指令在記憶體中都是 4bytes 對齊的（一定都是 4 的倍數），最後 2 個 bit 沒有必要存，所以都是 0</p>
+<p><img src="2019-04-18-02-03-58.png" alt></p>
+<h3 id="unconditional-branch">Unconditional Branch</h3>
+<p>直接 jump 到指定的 Address 上</p>
+<p><img src="2019-04-18-02-05-12.png" alt></p>
+<h2 id="procedure-call">Procedure Call</h2>
+<h3 id="leaf-procedure">Leaf Procedure</h3>
+<p>See:</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=NjWZxz0GqFM" target="_blank" rel="noopener">ISA 2.7 MIPS: Procedures and jal</a></li>
+<li><a href="https://www.youtube.com/watch?v=xPx5qdMaK9k" target="_blank" rel="noopener">ISA 2.8 MIPS Procedure call in detail (example)</a></li>
+</ul>
+<h3 id="non-leaf-procedure">Non-Leaf Procedure</h3>
+<p>Using stack to restore back registers</p>
+<p>See:</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=y9Wv1RVbbNA" target="_blank" rel="noopener">ISA 2.9 MIPS: Saving and restoring registers to the stack</a></li>
+<li><a href="https://www.youtube.com/watch?v=gbHagOGOfLc" target="_blank" rel="noopener">ISA 2.10 Procedure Calls: Saving Registers (example 1)</a></li>
+<li><a href="https://www.youtube.com/watch?v=iST9dQolhHE" target="_blank" rel="noopener">ISA 2.11 Procedure Calls: Saving registers (example 2)</a></li>
+<li><a href="https://www.youtube.com/watch?v=TYSYDrE4moE" target="_blank" rel="noopener">ISA 2.12 Procedure call summary</a></li>
+</ul>
+<h2 id="synchronization">Synchronization</h2>
+<p>兩個 procedure 對同一個 share variable 讀取寫入時，需要一個機制來協調兩者</p>
+<p>See:</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=QPpTBjf4Yrk" target="_blank" rel="noopener">計算機組織 Chapter 2.10 Synchronization - Load link &amp; Store conditional instructions - 朱宗賢老師</a></li>
+</ul>
+
+</div>
+
+
+  <div class="book-comments">
+    
+    <div id="disqus_thread"></div>
+    <script>
+    (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://at881005.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+  </div>
+
+
+<script src="/note/js/book-post.js"></script>
+        </div>
+      </div>
+
+      <div class="column col-2 hide-lg">
+        <div class="book-toc">
+  <div class="book-tocbot">
+  </div>
+  <div class="book-tocbot-menu">
+    <a class="book-toc-expand" onclick="expand_toc()">Expand all</a>
+    <a onclick="go_top()">Back to top</a>
+    <a onclick="go_bottom()">Go to bottom</a>
+  </div>
+</div>
+
+<script>
+tocbot.init({
+  tocSelector: '.book-tocbot',
+  contentSelector: '.book-post',
+  headingSelector: 'h1, h2, h3, h4, h5',
+  collapseDepth: 2,
+  orderedList: false,
+  scrollSmooth: false,
+});
+
+function expand_toc(){
+  var b = document.querySelector(".book-toc-expand");
+  tocbot.init({
+    tocSelector: '.book-tocbot',
+    contentSelector: '.book-post',
+    headingSelector: 'h1, h2, h3, h4, h5',
+    collapseDepth: 6,
+    orderedList: false,
+    scrollSmooth: false,
+  });
+  b.setAttribute("onclick", "collapse_toc()");
+  b.innerHTML = "Collapse all"
+}
+
+function collapse_toc(){
+  var b = document.querySelector(".book-toc-expand");
+  tocbot.init({
+    tocSelector: '.book-tocbot',
+    contentSelector: '.book-post',
+    headingSelector: 'h1, h2, h3, h4, h5',
+    collapseDepth: 2,
+    orderedList: false,
+    scrollSmooth: false,
+  });
+  b.setAttribute("onclick", "expand_toc()");
+  b.innerHTML = "Expand all"
+}
+
+function go_top() {
+  window.scrollTo(0, 0);
+}
+
+function go_bottom() {
+  window.scrollTo(0, document.body.scrollHeight);
+}
+
+</script>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+
+    
+      <link rel="icon" href="/note/shell.png">
+    
+
+    <title>
+        
+          kaiiiz/note
+        
+    </title>
+
+    <!-- Spectre.css framework (v0.5.8) -->
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-exp.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-icons.min.css">
+
+    <!-- Noto Sans TC -->
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet">
+
+    <!-- theme css & js -->
+    <link rel="stylesheet" href="/note/css/spectre_custom.css">
+    <link rel="stylesheet" href="/note/css/book.css">
+    <script src="/note/js/book.js"></script>
+
+    <!-- tocbot -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css">
+
+    <!-- highlight.js -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+    <!-- katex -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+</head>
+
+<body>
+
+<div class="container">
+  <div class="book-container">
+    <div class="columns">
+      <div class="column col-2 hide-lg">
+        <div class="book-sidebar">
+  <h4 class="site-meta">
+    <a href="/note/">kaiiiz/note</a>
+  </h4>
+  <div class="sidebar-content">
+    <ul>
+<li><a href="/note">首頁</a></li>
+<li>大一</li>
+<li><a href="/note/1072/sophomore">大二</a></li>
+<li>大三</li>
+<li>大四</li>
+<li>網路相關
+<ul>
+<li><a href="/note/network-associate/landesign">LAN Design</a></li>
+<li>Layer 2
+<ul>
+<li><a href="/note/network-associate/layer2/vlan">VLAN</a></li>
+<li><a href="/note/network-associate/layer2/vtp">VTP</a></li>
+<li><a href="/note/network-associate/layer2/stp">STP</a></li>
+</ul>
+</li>
+<li>Layer 3
+<ul>
+<li><a href="/note/network-associate/layer3/routing">Routing</a></li>
+<li><a href="/note/network-associate/layer3/vlsm">VLSM</a></li>
+<li><a href="/note/network-associate/layer3/ospf">OSPF</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+</div>
+
+<script src="/note/js/book-sidebar.js"></script>
+      </div>
+
+      <div class="column col-8 col-lg-12">
+        <div class="book-content">
+          <div class="book-navbar">
+  <header class="navbar">
+  <section class="navbar-section">
+    <img class="navbar-icon" src="/note/shell.png">
+  </section>
+  <section class="navbar-center">
+    kaiiiz/note
+  </section>
+  <section class="navbar-section">
+    <label class="accordion-header c-hand" for="accordion-sidebar">
+      <i class="icon icon-menu"></i>
+    </label>
+  </section>
+</header>
+
+<div class="accordion">
+  <input type="checkbox" id="accordion-sidebar" name="accordion-checkbox" hidden>
+  <div class="accordion-body">
+    <ul>
+<li><a href="/note">首頁</a></li>
+<li>大一</li>
+<li><a href="/note/1072/sophomore">大二</a></li>
+<li>大三</li>
+<li>大四</li>
+<li>網路相關
+<ul>
+<li><a href="/note/network-associate/landesign">LAN Design</a></li>
+<li>Layer 2
+<ul>
+<li><a href="/note/network-associate/layer2/vlan">VLAN</a></li>
+<li><a href="/note/network-associate/layer2/vtp">VTP</a></li>
+<li><a href="/note/network-associate/layer2/stp">STP</a></li>
+</ul>
+</li>
+<li>Layer 3
+<ul>
+<li><a href="/note/network-associate/layer3/routing">Routing</a></li>
+<li><a href="/note/network-associate/layer3/vlsm">VLSM</a></li>
+<li><a href="/note/network-associate/layer3/ospf">OSPF</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+</div>
+</div>
+
+<div class="book-post">
+  <h1 id="run-time-environments">Run-Time Environments</h1>
+<h2 id="p3">p3</h2>
+<p>管理 runtime 的資源</p>
+<ul>
+<li>data layout</li>
+<li>存取 variable</li>
+<li>呼叫 function call 時要做什麼管理</li>
+</ul>
+<p>compile time 與 run time 的合約</p>
+<h2 id="p6">p6</h2>
+<p>變數存在 memory 的位置是靜態還是動態 &gt; static(global or static variables in C) or stack</p>
+<p>malloc 管理 heap，哪裡有人使用哪裡沒有</p>
+<h2 id="p7">p7</h2>
+<h2 id="p9">p9</h2>
+<p>機器狀態</p>
+<p>local variables</p>
+<p>spill: 把 reg spill 到 memory</p>
+<p>why 要存機器狀態?</p>
+<h2 id="p10">p10</h2>
+<h2 id="p11">p11</h2>
+<p>每個 function 有自己的空間 (disjoint)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">main()&#123;</span><br><span class="line">    foo();</span><br><span class="line">    bar();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>浪費空間，有些 function 可能不需要同時存在，foo bar 原本可以用同一塊空間</p>
+<p>不支援遞迴</p>
+<h2 id="p20">p20</h2>
+<p>call: preorder<br>
+return: postorder</p>
+<h2 id="p25">p25</h2>
+<p>access link: static link: 指向另一個 activation record 的pointer (當我要access 另外一個人的local variable)<br>
+control link: dynamic link</p>
+<p>function 內再宣告 function</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">foo()&#123;</span><br><span class="line">    int x;</span><br><span class="line">    bar()&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>return value: 有些存在 Register 不存在 Memory(速度較快) e.g. ARM R0</p>
+<p>actural parameters: e.g. ARM R0~R3</p>
+<h2 id="p26">p26</h2>
+<p>擺放位置也有道理</p>
+<p>caller 可以直接拿 return value</p>
+<p>top_sp: 放在 saved machine statuc 與 Local data 間，方便存取 local variables</p>
+<h2 id="p28">p28</h2>
+<p>盡可能安插 sequence 在 callee，減少重複的 sequence</p>
+<h2 id="p35">p35</h2>
+<p>about access link</p>
+<h2 id="p37">p37</h2>
+<p>q 不見得是 p 的 caller，就無法存取 q 的 activation record &gt;&gt; 用 access link 存</p>
+<h2 id="p42">p42</h2>
+<p>存離最近的 parent 的 activation record</p>
+<p>從 p 跳 np-nq 次</p>
+<h2 id="p44">p44</h2>
+<p>透過深度計算該指向誰</p>
+<h2 id="p45">p45</h2>
+<p>function argument 像是 pointer (run-time 才知道呼叫哪個 function)</p>
+<h2 id="p49">p49</h2>
+<p>program efficeienvy: data allocated，常用的放在一起</p>
+<h2 id="p52">p52</h2>
+<p>管理 Data 在 processor 該擺在哪個 register</p>
+<h2 id="p53">p53</h2>
+<p>把 basic block 放在同個 page : 第一道指令被執行，接下來東西會放到 cache 或 Physical memory</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">struct &#123;</span><br><span class="line">    int foo;</span><br><span class="line">    int bar; // 不常執行</span><br><span class="line">    int baz;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>把 foo baz 擺在鄰近的位置</p>
+<h2 id="p54">p54</h2>
+<p>互調 i, j</p>
+<p>m x n cache miss &gt;&gt; m cache miss</p>
+<h2 id="p61">p61</h2>
+<p>mark-sweep: heap 滿了之後</p>
+<h2 id="p62">p62</h2>
+<p>對每個 cell 維護一個 counter，紀錄有幾個 pointer 指向它</p>
+<h2 id="p63">p63</h2>
+<p>root set: aggregation record or stack (全域變數或是區域變數)</p>
+<h2 id="p64">p64</h2>
+<p>circular connect: memory leak</p>
+<h2 id="p65">p65</h2>
+<p>假設所有的 cell 都是 garbage</p>
+<p>從 root set 出發，可以到達的地方標示它不是 garbage</p>
+<p>剩下沒被標示的都是 garbage</p>
+<p>缺點: 回收時機不頻繁</p>
+
+</div>
+
+
+  <div class="book-comments">
+    
+    <div id="disqus_thread"></div>
+    <script>
+    (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://at881005.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+  </div>
+
+
+<script src="/note/js/book-post.js"></script>
+        </div>
+      </div>
+
+      <div class="column col-2 hide-lg">
+        <div class="book-toc">
+  <div class="book-tocbot">
+  </div>
+  <div class="book-tocbot-menu">
+    <a class="book-toc-expand" onclick="expand_toc()">Expand all</a>
+    <a onclick="go_top()">Back to top</a>
+    <a onclick="go_bottom()">Go to bottom</a>
+  </div>
+</div>
+
+<script>
+tocbot.init({
+  tocSelector: '.book-tocbot',
+  contentSelector: '.book-post',
+  headingSelector: 'h1, h2, h3, h4, h5',
+  collapseDepth: 2,
+  orderedList: false,
+  scrollSmooth: false,
+});
+
+function expand_toc(){
+  var b = document.querySelector(".book-toc-expand");
+  tocbot.init({
+    tocSelector: '.book-tocbot',
+    contentSelector: '.book-post',
+    headingSelector: 'h1, h2, h3, h4, h5',
+    collapseDepth: 6,
+    orderedList: false,
+    scrollSmooth: false,
+  });
+  b.setAttribute("onclick", "collapse_toc()");
+  b.innerHTML = "Collapse all"
+}
+
+function collapse_toc(){
+  var b = document.querySelector(".book-toc-expand");
+  tocbot.init({
+    tocSelector: '.book-tocbot',
+    contentSelector: '.book-post',
+    headingSelector: 'h1, h2, h3, h4, h5',
+    collapseDepth: 2,
+    orderedList: false,
+    scrollSmooth: false,
+  });
+  b.setAttribute("onclick", "expand_toc()");
+  b.innerHTML = "Expand all"
+}
+
+function go_top() {
+  window.scrollTo(0, 0);
+}
+
+function go_bottom() {
+  window.scrollTo(0, document.body.scrollHeight);
+}
+
+</script>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

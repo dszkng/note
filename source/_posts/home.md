@@ -17,5 +17,6 @@ Hi，這裡是我平常做筆記的地方，原始碼是使用 markdown 撰寫�
 
 ## 時間軸
 
+* 2019/07/03 — 主題提交到 [hexo 官方](https://hexo.io/themes/) ([pr#986](https://github.com/hexojs/site/pull/986))
 * 2019/04/28 — 因為擴充性問題，從 hugo 轉至 hexo，並自製了一個主題以符合做筆記的需求 ([hexo-theme-book](https://github.com/kaiiiz/hexo-theme-book))
 * 2019/04/12 — 本站成立

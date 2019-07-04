@@ -618,3 +618,233 @@ OSPF 根據下列公式來計算介面的預設成本：<mark>成本 = 參照頻
 #### 直接設定成本
 
 `ip ospf cost [value]`
+
+## 路徑篩選
+
+防止網路某部份的主機傳送封包到另一個地方、減少路由表大小、CPU資源，讓封包的轉送執行的更順暢。
+
+### 區域內/區域間路徑計算
+
+* 區域內透過第一型、第二型 LSA 拼湊出拓樸，執行 SPF 尋找每個子網路可能路徑
+* 區域間的路徑計算透過本身抵達 ABR 的權值，加上 ABR 通告目的地子網路子網路的權值，因此不需要 SPF 計算，就能找出所有子網路的區域間路徑
+
+### 區域內/區域間路徑篩選
+
+OSPF 不是通告路徑，是通告 LSA，因此路徑篩選做的事就是在過濾特定 LSA
+
+* OSPF 不允許過濾同一區域內的 LSA，特別是描述區域拓樸的第一型與第二型的 LSA
+  * 因為同一區域內的所有路由器都要有相同的 LSDB 才能進行 SPF 計算，否則可能造成迴圈
+* <mark>只能設定 ABR 過濾第三型 LSA 來達到路徑篩選</mark> (或是 ASBR 過濾第五型 LSA)
+
+### 過濾第三型LSA
+
+告訴 ABR 要過濾某些 LSA 通告
+
+舉例來說，計畫使區域1的所有封包到達不了子網路3，且僅可透過 ABR1 到達子網路2
+
+![](2019-07-03-16-09-15.png)
+
+* 在 ABR1 過濾子網路 3 的通告
+* 在 ABR2 過濾子網路 2,3 的通告
+
+設定：`router ospf` 後 `area {number} filter-list prefix {name} {in|out}`
+
+* in: 過濾的是建立並洪泛到設定區域(number)的prefix-list(name)
+* out: 過濾的是從區域(number)離開的prefix-list(name)
+
+![](2019-07-03-16-13-53.png)
+
+### 過濾OSPF路徑防止新增到路由表
+
+如果同一個區域中有20台路由器，只想在其中5台路由器中過濾路徑，就無法使用過濾第三型 LSA，因為過濾第三型 LSA 只能防止該 LSA 洪泛到整個區域。
+
+利用 `distribute-list prefix {name} {in|out}` 讓個別的路由器過濾特定的 OSPF 路徑，防止將某條 SPF 計算完後的路徑加入到路由表中。
+
+![](2019-07-03-16-41-47.png)
+
+* <mark>只有 `in` 可以達到過濾路徑的效用</mark>
+* 設定必須參找到 ACL，只有符合 permit 才會被加到路由表
+
+檢查：
+
+* `show ip route ospf | include {ip}`
+* `show ip ospf database | include {ip}`
+
+## 路徑彙整
+
+目的：減輕路由協定和封包轉送的負擔
+
+* OSPF 僅支援在 ABR 和 ASBR 做路徑彙整
+  * 因為區域內的所有路由器都有相同的 LSDB，如果有彙整的需求，應該在區域邊界做彙整，之後洪泛至區域內所有的路由器
+* 想在相同區域的某些路由器彙整特定路徑，無法使用 OSPF 達到
+
+### ABR的手動彙整
+
+若區域內的子網路編號正好在同一範圍內，且沒有一個子網路是出現在其他 OSPF 區域裡，在連接該區域的 ABR 上便適合建立路徑彙整。
+
+`area {area-id} range {ip-address} {mask} [cost {cost}]`
+
+* `area-id` 為該子網路所在的區域，<mark>彙整路徑會被通告到其他所有連結 ABR 的路由器</mark>
+* ABR 會比較彙整路徑與所有來源區域內的 OSPF 路徑，如果至少存在一個位於彙整路徑範圍的子網路(**次級子網路**)，則 ABR 會通告此彙整路徑的第三型 LSA
+  * ABR 不會通告次級子網路的 LSA
+  * 次級子網路如果不存在則不會通告此彙整路徑
+* ABR 預設會將所有次級子網路的<mark>最佳權值</mark>指派給彙整路徑的第三型 LSA 權值(因為封包到 ABR 後會走最佳路徑)
+  * `area range` 的指令也可明確指定權值
+
+![](2019-07-03-17-20-34.png)
+
+可以設定 ABR R1 與 R2 將 10.16.1.0/24、10.16.2.0/24、10.16.3.0/24 彙整成 10.16.0.0/22。並使用 `area 0 range 10.16.0.0 255.255.252.0` 來通告此彙整路徑。
+
+### ASBR的手動彙整
+
+ASBR 替每個重分配的子網路建立第五型 LSA，並在 LSA 裡將子網路編號列為 LSID，及遮罩列為欄位之一。第五型 LSA 的運作方式與第三型 LSA 運作方式非常類似。
+
+`summary-address {prefix mask}`
+
+* 建立第五型 LSA 彙整外部路徑，取代次級子網路的第五型 LSA。如果有任何次級子網路存在，則 ASBR 會執行路徑彙整。
+* 與 ABR 手動彙整的差異：<mark>無法手動設定彙整路徑的權值</mark>
+
+## 預設路徑
+
+使用情境：
+
+* 讓網路邊緣的所有封包傳送到網路核心，因為核心路由器知道更確切的目的地位置
+* 為所有目的地為 Internet 的流量，最終都導向連接 Internet 的路由器
+
+![](2019-07-03-18-20-52.png)
+
+ASBR 彙整右方 BGP 學習到的路徑，並將路徑彙整為 0.0.0.0/0，洪泛第五型 LSA 到整個區域中。
+
+> 換句話說，當封包目的為 Internet，所有 OSPF 路由器都會選擇預設路徑，將封包傳給 ASBR，再傳送到 Internet 中。
+
+兩種實現方式：
+
+* ABR可以使用 `area range` 將預設路徑洪泛到同一區域中
+  * 以上圖為例，在 ABR1 上下 `area 0 range 0.0.0.0 0.0.0.0` 會通告預設路徑到區域1內，且不會通告任何其他從區域0學習到的第三型 LSA
+  * 對於封包要前往未知的目的地位址，區域1內的路由器都會使用預設路徑往 ABR，ABR 再決定接下來的路徑
+* 除了 `area range` 與 `summary-address`，通常工程師會使用 `default-information originate` 將預設路徑洪泛到整個 OSPF 領域
+
+### default-information originate
+
+用來告訴 OSPF 去建立預設路徑的<mark>第五型 LSA (用於通告外部路徑)</mark>，換句話說，這個第五型 LSA 會包含預設路徑 (0.0.0.0/0) 的資訊，並洪泛到整個 OSPF 領域，讓所有的路由器都學到了預設路徑
+
+![](2019-07-03-21-27-24.png)
+
+舉例來說，工程師想要使用預設路徑，讓所有路由器傳送封包到 ASBR1 或 ASBR2
+
+> 前提是 ASBR 的路由表中已經有存在一條預設路徑(靜態路由/從ISP學到的)
+
+* 當所有路由器運作正常，路由器會通過 ASBR2 將流量轉送到 Internet (權值較小)
+* 當 ISP1 不再以 BGP 通告預設路徑，或是 ASBR2 與 ISP1 間的 BGP 出現問題，那麼 ASBR2 會移除它的預設路徑，讓 ASBR1 成為 OSPF 領域中的預設路徑 (原先為備援路徑)
+
+`default-information originate [always] [metric metric-value] [metric-type type-value] [route-map map-name]`
+
+* 使用預設參數，且路由表存在預設路徑，OSPF 會通告 External 第二型的預設路徑(權值為1的第五型LSA)至 OSPF 網路中
+* `always`：即使路由表不存在預設路徑，仍會通告預設路徑
+* `metric`：定義預設路徑的權值(預設1)
+* `metric-type`：LSA 為 External 第一型或 External 第二型(預設為第二型)
+* `route-map`：根據符合 route map 參照的允許動作，來決定何時通告預設路徑何時移除預設路徑
+
+### 末梢型區域
+
+<mark>使用預設路徑將末梢區域往未知目的地的封包都轉送到 ABR</mark>，因為 LSDB 裡有的 LSA 較少，因此使用預設路徑可以減少記憶體、CPU消耗。
+
+4種類型：
+
+* 末梢 (stub)
+* 完全末梢 (totally stub)
+* 半末梢 (not-so-stubby areas, NSSA)
+* 完全半末梢 (totally NSSA)
+
+細節：
+
+* 4種類型都會過濾第五型LSA
+* 對於名稱有「完全」的種類，還會再過濾第三型LSA
+* NSSA 可以將外部路徑重分配到區域裡
+
+#### 設定
+
+末梢：區域中的每台路由器都要設定 `area {area-id} stub`
+
+完全末梢：ABR需要設定 `area {area-id} stub no-summary`，區域中的其他路由器必須設定 `area {area-id} stub`
+
+配置權值：`area {area-id} default-cost {metric}`，預設為1
+
+#### 檢驗
+
+`show ip ospf`：確認區域為末梢區域
+
+`show ip ospf database summary 0.0.0.0`：列出所有具有 0.0.0.0 的第三型 LSA
+
+`show ip ospf database database-summary`：列出 LSDB 中 LSA 的類型與數量統計，檢查第五型與第三型 LSA 的數量。
+
+#### 例子
+
+![區域34設定為末梢區域](2019-07-05-00-12-20.png)
+
+* ABR 會過濾掉外部路徑(11.11, 11.12, 11.13)，因此這三條路徑不會出現在區域34的LSDB中
+* ABR 會通告區域間路徑(10.16.11, 10.16.12, 10.16.13)
+
+![區域5設定為完全末梢區域](2019-07-05-00-15-50.png)
+
+* ABR 會過濾掉外部路徑(11.11, 11.12, 11.13)，因此這三條路徑不會出現在區域5的LSDB中
+* ABR 會過濾掉區域間路徑(10.16.11, 10.16.12, 10.16.13)，因此這三條路徑也不會出現在區域5的LSDB中
+
+### 半末梢區域
+
+根據定義可以知道：
+
+* 末梢型區域永遠學不會第五型 LSA
+* 外部路徑加入到 OSPF 會被視為第五型 LSA
+
+<mark>由此可知 ASBR 無法以正常方式將外部路徑通告到末梢型區域</mark>
+
+由於末梢區域不支援第五型 LSA，於是定義了第七型 LSA，第七型 LSA 用途與第五型 LSA 相同，但僅限在 NSSA 中傳送外部路徑。
+
+![](2019-07-05-00-29-38.png)
+
+1. ASBR R3 學到 R9 的外部路徑
+2. `redistribue` 指定路徑重分配，因此從 R9 學到的 EIGRP 路徑會被重分配到 OSPF 中
+3. R3 將第七型 LSA 洪泛到整個 NSSA(區域34)
+4. ABR R1, R2 根據第七型 LSA 建立第五型 LSA，並洪泛第五型 LSA 到其他區域中
+
+#### 設定
+
+NSSA：`area {area-id} nssa`，ABR 需設定為 `area {area-id} nssa default-information-originate`
+
+完全 NSSA：`area {area-id} nssa no-summary`
+
+## OSPFv3
+
+支援 IPv6
+
+### v2 vs v3
+
+改名的LSA：
+
+1. 第三型LSA > ABR的區域間首碼LSA (Interarea prefix LSA for ABR)
+2. 第四型LSA > ASBR的區域間首碼LSA (Interarea prefix LSA for ASBR)
+
+新的LSA：
+
+1. 第八型LSA (Link LSA)，僅存在本地鏈路上，利用它來通告路由器的鏈路區域位址給相同鏈路上的所有其他路由器
+2. 第九型LSA (Intra-Area Prefix LSA)，能夠傳遞有關連接路由器的 IPv6 網路資訊 (類似第一型LSA)，此外也能傳送區域內 IPv6 傳輸網路區段的資訊 (類似第二型LSA)
+
+### OSPFv3 傳統設定
+
+1. 啟用 IPv6 單點傳播路由：`ipv6 unicast-routing`，或是針對 IPv6 使用 `ipv6 cef` 啟用 CEF，可以提供更有效的路由查詢
+2. `ipv6 router ospf {process-id}`
+3. (Optional) `router-id {rid}` 設定路由器ID，不設會動態指定一個 IPv4 當作路由器ID
+4. `ipv6 ospf {process-id} area {area_number}` 指定一個以上的介面參與 OSPF
+
+檢驗：將檢驗 OSPFv2 的指定中的 `ip` 換成 `ipv6`
+
+### OSPFv3 位址家族設定
+
+位址家族 (Address family) 可以在 OSPF 程序下同時支援 IPv4 與 IPv6。有了這個設定，一個 LSDB 即可同時維護 IPv4 與 IPv6 的網路資訊。
+
+1. `router ospfv3 {process-id}`
+2. (optional) `router-id {rid}`
+3. `address-family {ipv4|ipv6}`
+4. 進入希望參與OSPF的介面，`ospfv3 {process-id} {ipv4|ipv6} area {area_number}`
+

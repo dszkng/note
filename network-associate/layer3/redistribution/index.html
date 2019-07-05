@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+
+    
+      <link rel="icon" href="/note/shell.png">
+    
+
+    <title>
+        
+          Redistribution - kaiiiz/note
+        
+    </title>
+
+    <!-- Spectre.css framework (v0.5.8) -->
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-exp.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-icons.min.css">
+
+    <!-- Noto Sans TC -->
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet">
+
+    <!-- theme css & js -->
+    <link rel="stylesheet" href="/note/css/spectre_custom.css">
+    <link rel="stylesheet" href="/note/css/book.css">
+    <script src="/note/js/book.js"></script>
+
+    <!-- tocbot -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css">
+
+    <!-- highlight.js -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+    <!-- katex -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+</head>
+
+<body>
+
+<div class="container">
+  <div class="book-container">
+    <div class="columns">
+      <div class="column col-2 hide-lg">
+        <div class="book-sidebar">
+  <h4 class="site-meta">
+    <a href="/note/">kaiiiz/note</a>
+  </h4>
+  <div class="sidebar-content">
+    <ul>
+<li><a href="/note">首頁</a></li>
+<li>大一</li>
+<li><a href="/note/1072/sophomore">大二</a></li>
+<li>大三</li>
+<li>大四</li>
+<li>網路相關
+<ul>
+<li><a href="/note/network-associate/landesign">LAN Design</a></li>
+<li>Layer 2
+<ul>
+<li><a href="/note/network-associate/layer2/vlan">VLAN</a></li>
+<li><a href="/note/network-associate/layer2/vtp">VTP</a></li>
+<li><a href="/note/network-associate/layer2/stp">STP</a></li>
+</ul>
+</li>
+<li>Layer 3
+<ul>
+<li><a href="/note/network-associate/layer3/routing">Routing</a></li>
+<li><a href="/note/network-associate/layer3/vlsm">VLSM</a></li>
+<li><a href="/note/network-associate/layer3/ospf">OSPF</a></li>
+<li><a href="/note/network-associate/layer3/redistribution">Redistribution</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+</div>
+
+<script src="/note/js/book-sidebar.js"></script>
+      </div>
+
+      <div class="column col-8 col-lg-12">
+        <div class="book-content">
+          <div class="book-navbar">
+  <header class="navbar">
+  <section class="navbar-section">
+    <img class="navbar-icon" src="/note/shell.png">
+  </section>
+  <section class="navbar-center">
+    kaiiiz/note
+  </section>
+  <section class="navbar-section">
+    <label class="accordion-header c-hand" for="accordion-sidebar">
+      <i class="icon icon-menu"></i>
+    </label>
+  </section>
+</header>
+
+<div class="accordion">
+  <input type="checkbox" id="accordion-sidebar" name="accordion-checkbox" hidden>
+  <div class="accordion-body">
+    <ul>
+<li><a href="/note">首頁</a></li>
+<li>大一</li>
+<li><a href="/note/1072/sophomore">大二</a></li>
+<li>大三</li>
+<li>大四</li>
+<li>網路相關
+<ul>
+<li><a href="/note/network-associate/landesign">LAN Design</a></li>
+<li>Layer 2
+<ul>
+<li><a href="/note/network-associate/layer2/vlan">VLAN</a></li>
+<li><a href="/note/network-associate/layer2/vtp">VTP</a></li>
+<li><a href="/note/network-associate/layer2/stp">STP</a></li>
+</ul>
+</li>
+<li>Layer 3
+<ul>
+<li><a href="/note/network-associate/layer3/routing">Routing</a></li>
+<li><a href="/note/network-associate/layer3/vlsm">VLSM</a></li>
+<li><a href="/note/network-associate/layer3/ospf">OSPF</a></li>
+<li><a href="/note/network-associate/layer3/redistribution">Redistribution</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+</div>
+</div>
+
+<div class="book-post">
+  <h1 id="redistribution">Redistribution</h1>
+<p>路徑重分配的使用時機：<mark>使用超過一種以上的路由協定</mark>或<mark>同一個路由協定的不同Instance</mark>時</p>
+<p><img src="2019-07-05-02-12-45.png" alt></p>
+<ul>
+<li>大部分互連網路只能使用一種<mark>內部閘道協定(interior gateway protocol, IGP)</mark>來通告IP路徑，並學到IP路徑。</li>
+<li>當擁有超過一個以上的路由協定，IGP學到的路徑必須以<mark>邊界閘道協定(Border gateway protocol, BGP)</mark>進行同告。</li>
+</ul>
+<p><img src="2019-07-05-02-22-01.png" alt></p>
+<h2 id="觀念與程序">觀念與程序</h2>
+<p>重分配需要滿足：</p>
+<ul>
+<li>每個路由領域間至少有一條實體鏈路正常工作</li>
+<li>每個路由領域均有路由協定在正常工作</li>
+<li>每個路由領域<mark>必須另外設定重分配</mark>，告訴路由器取出某個路由協定學到的路徑，通告到其他地方</li>
+</ul>
+<p>細節：</p>
+<ul>
+<li>每個路由協定實作內容不同，故不可能使用協定特定的拓樸資訊進行重分配</li>
+<li>採用雙方路由協定所能瞭解的表格：<mark>IP路由表</mark></li>
+</ul>
+<p>當 <code>redistribute</code> 指定另一個路由來源的 IGP 時，該指令是在告訴路由器重分配：</p>
+<ul>
+<li>路由表中透過該路由協定<mark>學到的路徑</mark></li>
+<li>啟用該路由協定之介面上的<mark>所有直連路徑</mark></li>
+</ul>
+<p>以下有個簡單的例子，目標使 EIGRP 通告子網路 11,12,13，OSPF通告子網路 1,2,3</p>
+<p><img src="2019-07-05-02-32-32.png" alt></p>
+<ul>
+<li>在 EIGRP 列出 <code>redistribute ospf 2</code>，告訴 RD1 查詢路由表，將 OSPF 2 學到的路徑加到 EIGRP 的拓樸表裡</li>
+<li>相反的，在 OSPF 列出 <code>redistribute eigrp 1</code>，告訴 RD1 查詢路由表，將 EIGRP 1 學到的路徑加到 OSPF 的拓樸表裡</li>
+</ul>
+<p>根據不同路由協定，redistribute 也會以不同的方式處理資料，以 OSPF 為例：</p>
+<ul>
+<li>OSPF 將重分配的路徑視為外部路徑，OSPF 會替每個重分配的子網路建立第五型 LSA (當重分配到 NSSA 則為第七型 LSA)</li>
+<li>OSPF 需要將整體權值指派給外部路徑的 LSA</li>
+<li>重分配設定需要包含 OSPF 成本，可能也可能不會與路由表中的權值相符</li>
+</ul>
+<h2 id="eigrp-ospf">EIGRP &lt; OSPF</h2>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redistribute &#123;protocol&#125; [&#123;process-id&#125;|&#123;as-number&#125;] [metric &#123;bw&#125; &#123;delay&#125; &#123;reliability&#125; &#123;load&#125; &#123;mtu&#125;] [match &#123;internal|nssa-internal|external 1|external 2&#125;] [tag &#123;tag-value&#125;] [route-map &#123;name&#125;]</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>redistribute ospf [{process-id}|{as-number}] metric ...</code></li>
+<li>需設定權值才能夠正常運作，因為重分配後沒有 EIGRP 權值元件預設值可以使用
+<ul>
+<li>default-metric：涵蓋所有 redistribute 指令</li>
+<li>redistribute … metric：涵蓋該 redistribute 指令</li>
+<li>redistribute … route-map：涵蓋 route-map 匹配到的路徑</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>若外部路徑來自另一個 EIGRP，會有一個預設的權值設定</p>
+</blockquote>
+<h3 id="檢驗">檢驗</h3>
+<p><code>show ip eigrp topology</code>：觀察 via redistributed</p>
+<h2 id="ospf-eigrp">OSPF &lt; EIGRP</h2>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redistribute &#123;protocol&#125; [&#123;process-id&#125;|&#123;as-number&#125;] [metric &#123;metric-value&#125;] [metric-type &#123;type-value&#125;] [match &#123;internal|nssa-internal|external 1|external 2&#125;] [tag &#123;tag-value&#125;] [route-map &#123;name&#125;] [subnets]</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>redistribute eigrp ...</code></li>
+<li>權值設定
+<ul>
+<li>default-metric：涵蓋所有 redistribute 指令</li>
+<li>redistribute … metric：涵蓋該 redistribute 指令</li>
+<li>redistribute … route-map：涵蓋 route-map 匹配到的路徑</li>
+</ul>
+</li>
+<li>若未定義，OSPF 會使用預設 metric
+<ul>
+<li>從 BGP 取得路徑：1</li>
+<li>從其他來源取得路徑：20</li>
+</ul>
+</li>
+<li>重分配到 NSSA，建立第七型LSA；其餘則建立第五型LSA</li>
+<li>預設使用外部路徑權值類型2 (簡稱E2)</li>
+<li>預設僅通告分級式網路，除非使用 <strong>subnets</strong> option</li>
+</ul>
+<h3 id="e2路徑">E2路徑</h3>
+<p>依照定義，執行重分配到 OSPF 的路由器必須是 ASBR，且會建立該子網路的第五型 LSA，欄位如下：</p>
+<ul>
+<li>LSID：子網路編號</li>
+<li>Mask：子網路遮罩</li>
+<li>Advertising Router：負責通告路徑的 ASBR 之 RID</li>
+<li>Metric：由 ASBR 設定的權值</li>
+<li>External Metric Type：外部路徑權值類行為1或2</li>
+</ul>
+<p>建立第五型 LSA 後，ASBR 會洪泛整個區域。如果有 ABR 存在，則會再繼續將該第五型 LSA 洪泛到非末梢區域中。</p>
+<p><img src="2019-07-05-03-47-35.png" alt></p>
+<h4 id="區域內">區域內</h4>
+<p>若路由器有多條到達相同目的子網路之 E2 路徑時，會<mark>根據到達 ASBR (通告E2權值最低的)最低成本的路徑來選出最佳路徑</mark>。</p>
+<ol>
+<li>先比 metric (預設為20)，根據 metric 選擇最佳路徑 (忽略內部路徑成本)</li>
+<li>metric 一樣則使用內部成本選擇最佳路徑</li>
+</ol>
+<p>以上圖為例 R4 有兩條路徑可以到達 ASBR RD1，R4 會選擇成本最低的最佳路徑，因為成本皆為預設的 20，所以比較內部路徑成本。</p>
+<p><img src="2019-07-05-03-53-31.png" alt></p>
+<h4 id="區域間">區域間</h4>
+<p>建立第四型 LSA 提供 ABR to ASBR 的 cost</p>
+<ol>
+<li>先比 metric (預設為20)，根據 metric 選擇最佳路徑 (忽略內部路徑成本)</li>
+<li>metric 一樣則使用內部成本 + 第四型 LSA 的成本選擇最佳路徑</li>
+</ol>
+<blockquote>
+<p>第四型 LSA 會列出 ASBR 的 RID、建立並洪泛第四型 LSA 的 ABR 之 RID，也會列出 ABR 到達 ASBR 的成本。</p>
+</blockquote>
+<ol>
+<li>ABR 將第五型 LSA 轉送到區域時，會先查看建立第五型 LSA 的 ASBR 之 RID</li>
+<li>ABR 建立第四型 LSA，其中列出該 ASBR 的 RID 以及到達該 ASBR 的成本</li>
+<li>洪泛第四型 LSA 到相鄰的區域</li>
+</ol>
+<p><img src="2019-07-05-04-01-10.png" alt></p>
+<ol>
+<li>R3 建立並洪泛第四型 LSA 到區域1</li>
+<li>該 LSA 列出 ASBR 1.1.1.1、ABR 3.3.3.3 以及 R3 到達 RD1 的成本 1</li>
+<li>R4 也會做相同的事</li>
+<li>將本身抵達 ABR 的內部成本加上第四型 LSA 列出的成本來計算路徑的總成本</li>
+<li>因為 R5 的外部路徑權直接為 20，所以選擇經過 R3 的路徑</li>
+</ol>
+<h3 id="e1路徑">E1路徑</h3>
+<ul>
+<li>E2 會忽略內部 OSPF 成本，僅根據外部路徑權值來挑選成本最低的路徑</li>
+<li>E1 是將外部路徑權值累加路徑中每個出口介面的成本，再進行權值的比較</li>
+</ul>
+<p>區域間的計算要再加上抵達 ABR 到 ASBR 的成本，整體來看需要：</p>
+<ol>
+<li>抵達 ABR 的最佳區域內部成本 (區域內的 LSDB)</li>
+<li>ABR 到 ASBR 的成本 (第四型 LSA)</li>
+<li>外部路徑的成本 (第五型 LSA)</li>
+</ol>
+<p>其餘邏輯與E2相似</p>
+<h3 id="e1-vs-e2">E1 vs E2</h3>
+<p>對 E1 而言，外部與內部路徑成本皆與最佳路徑的選擇有關。E2 則只有外部路徑成本左右最佳路徑的選擇 (除非 metric 相同)。</p>
+<p>depend on 規劃：永遠透過某台路由器傳送 / load-balance</p>
+<h3 id="nssa的外部路徑">NSSA的外部路徑</h3>
+<p>重分配時使用第七型 LSA，轉送到其他區域時再轉為第五型 LSA</p>
+<p><img src="2019-07-05-04-34-52.png" alt></p>
+<p>詳細參考<a href="/note/network-associate/layer3/ospf/#%E5%8D%8A%E6%9C%AB%E6%A2%A2%E5%8D%80%E5%9F%9F">半末梢區域</a></p>
+<h2 id="route-map-重分配路徑">Route-map 重分配路徑</h2>
+<p>使用情境：需要根據不同路徑而設定不同的權值，或是有些設計只有一部份的路徑需要重分配</p>
+<p><code>redistribute match {internal|external 1|external 2|nssa-external} route-map {map-name}</code></p>
+<p>route-map 中的 match 子明令：</p>
+<p><img src="2019-07-05-12-19-19.png" alt></p>
+<ul>
+<li>如果在 route-map 是 permit，路徑便會重分配</li>
+<li>如果在 route-map 是 deny，路徑就會被過濾</li>
+</ul>
+<p>對於未經 route-map 過濾的路徑，可以用 <code>set</code> 設定其他值：</p>
+<p><img src="2019-07-05-12-21-37.png" alt></p>
+<p>route-map 有兩種比對路徑的方案：</p>
+<ul>
+<li><code>option1</code>：比對具有 deny 動作的 <mark>Extended IP ACL</mark> 來篩選路徑。</li>
+<li><code>option2</code>：以含有 permit 動作的 <mark>IP prefix-list</mark> 比對允許的路徑。</li>
+</ul>
+<p>ip access-list 與 ip prefix-list：都有一個隱性的 <code>deny all</code></p>
+<h3 id="權值設定">權值設定</h3>
+<p>route-map 中的 <code>set metric</code> 子命令，可以設定頻寬、延遲、可靠度、覆載、MTU</p>
+<blockquote>
+<p>在重分配到 OSPF 時需要完整的五個參數</p>
+</blockquote>
+<h3 id="外部路徑類型設定">外部路徑類型設定</h3>
+<p>route-map 中的 <code>set metric-type {type-1|type-2}</code> 可以將類型設定為 E1 或是 E2</p>
+<blockquote>
+<p>預設為 E2</p>
+</blockquote>
+<h3 id="distribute-list">distribute-list</h3>
+<p>如果只需要在重分配時進行路徑過濾，不需要其他的功能，可以直接用 <code>distribute-list</code></p>
+<p><code>distribute-list {ACL|Prefix-list} out {protocol} {AS-number|...}</code></p>
+<ul>
+<li>參照單一的 ACL 或是 Prefix-list</li>
+<li><mark>必須使用 out</mark></li>
+</ul>
+<h2 id="多個重分配點問題">多個重分配點問題</h2>
+<p>單的分配點，如果設備故障，會導致不同領域的多個主機跟著故障。若重分配不可或缺，會使用至少兩個路由器進行多個重分配。</p>
+<p>多重分配點有可能導致「領域迴圈」的問題，問題在於一個領域內的路徑會通告給另一個領域，然後又回到原來的領域</p>
+<p><img src="2019-07-05-12-46-06.png" alt="領域迴圈"></p>
+<ul>
+<li>RD2 將子網路 X 通告到到路由領域 1</li>
+<li>RD1 將子網路 X 再通告回路由領域 2</li>
+<li>當子網路 X 帶著較低權值回到最初領域時問題就發生了，因為二次重分配的路徑比在領域2內部通告的路徑權值更佳</li>
+</ul>
+<h3 id="調整權值">調整權值</h3>
+<p>並根據不同路由協定設定內部路徑權值小於外部路徑，比如說在重分配路徑時刻意指派較高的權值。</p>
+<p><img src="2019-07-05-12-52-21.png" alt></p>
+<h3 id="調整管理距離">調整管理距離</h3>
+<p>每一條路徑被加入到路由表時，就會有其對應的管理距離 (Administrative distance, AD)，當必須同時考慮多條路徑時，第一個考慮的項目不是權值而是 AD 值。AD 越低，路徑越佳。</p>
+<blockquote>
+<p>AD 為路由器內部定義，不通告</p>
+</blockquote>
+<p><img src="2019-07-05-13-03-26.png" alt="預設AD值"></p>
+<p>EIGRP 能夠以預設路徑 AD 值預防</p>
+<p><img src="2019-07-05-13-05-53.png" alt></p>
+<ul>
+<li>RD2 將 EIGRP 視為最佳路徑，將該路徑加到路由表中</li>
+<li>RD2 沒有子網路 X 的 OSPF 路徑，故 RD2 不會重分配子網路 X 的路徑到 EIGRP
+<ul>
+<li>因為路徑重分配時必須存在在路由表中，子網路 X 列為 EIGRP 路徑而非 OSPF 到 EIGRP 的重分配路徑</li>
+</ul>
+</li>
+</ul>
+<h4 id="設定">設定</h4>
+<p><img src="2019-07-05-13-03-58.png" alt></p>
+<h3 id="多種路由協定下的情況">多種路由協定下的情況</h3>
+<p><img src="2019-07-05-13-12-33.png" alt></p>
+<ul>
+<li>設定路徑優先度
+<ul>
+<li>metric</li>
+<li>AD 值</li>
+</ul>
+</li>
+<li>過濾反向 redistribute 的路徑
+<ul>
+<li>利用 route map 直接過濾該段路由</li>
+<li>設定 route tag 並使用 route map 過濾</li>
+</ul>
+</li>
+</ul>
+<h4 id="路徑標籤">路徑標籤</h4>
+<p>一個 32 位元整數，可以指派給任一給定的路徑。</p>
+<ul>
+<li>設定使用 route map 中的 set 子命令：<code>set tag {tag-num}</code></li>
+<li>之後在指定的 route map 進行過濾：<code>match tag {tag-num}</code></li>
+</ul>
+<p><img src="2019-07-05-13-18-43.png" alt></p>
+<p>防止領域迴圈採取的策略如下：</p>
+<ul>
+<li>在來自 X 通告到 Y 的路徑設定 tag</li>
+<li>在反向重分配 (Y 往 X)，比對標籤值並過濾帶有該標籤值的路徑</li>
+</ul>
+<p><img src="2019-07-05-13-20-51.png" alt></p>
+
+</div>
+
+
+  <div class="book-comments">
+    
+    <div id="disqus_thread"></div>
+    <script>
+    (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://at881005.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+  </div>
+
+
+<script src="/note/js/book-post.js"></script>
+        </div>
+      </div>
+
+      <div class="column col-2 hide-lg">
+        <div class="book-toc">
+  <div class="book-tocbot">
+  </div>
+  <div class="book-tocbot-menu">
+    <a class="book-toc-expand" onclick="expand_toc()">Expand all</a>
+    <a onclick="go_top()">Back to top</a>
+    <a onclick="go_bottom()">Go to bottom</a>
+  </div>
+</div>
+
+<script>
+tocbot.init({
+  tocSelector: '.book-tocbot',
+  contentSelector: '.book-post',
+  headingSelector: 'h1, h2, h3, h4, h5',
+  collapseDepth: 2,
+  orderedList: false,
+  scrollSmooth: false,
+});
+
+function expand_toc(){
+  var b = document.querySelector(".book-toc-expand");
+  tocbot.init({
+    tocSelector: '.book-tocbot',
+    contentSelector: '.book-post',
+    headingSelector: 'h1, h2, h3, h4, h5',
+    collapseDepth: 6,
+    orderedList: false,
+    scrollSmooth: false,
+  });
+  b.setAttribute("onclick", "collapse_toc()");
+  b.innerHTML = "Collapse all"
+}
+
+function collapse_toc(){
+  var b = document.querySelector(".book-toc-expand");
+  tocbot.init({
+    tocSelector: '.book-tocbot',
+    contentSelector: '.book-post',
+    headingSelector: 'h1, h2, h3, h4, h5',
+    collapseDepth: 2,
+    orderedList: false,
+    scrollSmooth: false,
+  });
+  b.setAttribute("onclick", "expand_toc()");
+  b.innerHTML = "Expand all"
+}
+
+function go_top() {
+  window.scrollTo(0, 0);
+}
+
+function go_bottom() {
+  window.scrollTo(0, document.body.scrollHeight);
+}
+
+</script>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

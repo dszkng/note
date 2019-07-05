@@ -13,3 +13,4 @@
     * [Routing](/note/network-associate/layer3/routing)
     * [VLSM](/note/network-associate/layer3/vlsm)
     * [OSPF](/note/network-associate/layer3/ospf)
+    * [Redistribution](/note/network-associate/layer3/redistribution)

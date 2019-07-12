@@ -5,9 +5,7 @@
 		}
 	],
 	"settings": {
-		// "pasteImage.path": "${projectRoot}/source/_posts/1072/compiler-design/5-ir",
-		// "pasteImage.path": "${projectRoot}/source/_posts/1072/computer-organization/5-exploiting-memory-hierarchy",
-		"pasteImage.path": "${projectRoot}/source/_posts/network-associate/layer3/redistribution",
+		"pasteImage.path": "${projectRoot}/source/_posts/network-associate/layer3/vrf",
 		"pasteImage.insertPattern": "${imageSyntaxPrefix}${imageFileName}${imageSyntaxSuffix}",
 		"editor.minimap.enabled": false,
 	}

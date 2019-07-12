@@ -14,3 +14,6 @@
     * [VLSM](/note/network-associate/layer3/vlsm)
     * [OSPF](/note/network-associate/layer3/ospf)
     * [Redistribution](/note/network-associate/layer3/redistribution)
+    * [Packet Switching](/note/network-associate/layer3/packet-switching)
+    * [PBR](/note/network-associate/layer3/pbr)
+    * [VRF](/note/network-associate/layer3/vrf)

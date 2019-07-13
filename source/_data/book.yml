@@ -2,6 +2,7 @@ home_page: home.md # filename under /source/_posts/
 menu_page: menu.md # filename under /source/_posts/
 
 favicon_url: shell.png
+google_analytics: UA-112717568-2 # UA-XXXXX-Y
 
 comments:
   disqus:

@@ -11,7 +11,7 @@
 
     <title>
         
-          kaiiiz/note
+          VRF - kaiiiz/note
         
     </title>
 
@@ -159,30 +159,16 @@ ga('send', 'pageview');
 </div>
 
 <div class="book-post">
-  <h1 id="data-flow-analysis">Data-Flow Analysis</h1>
-<p>知道程式中的某個時間點，我想要的資訊是什麼</p>
-<h2 id="p7">p7</h2>
-<p>y 這個變數已經被定義了，待會要使用他</p>
-<p>看每個 bb y 在使用前沒有被重新定義 &gt;&gt; live</p>
-<p>如果被重新定義，離開 bb &gt;&gt; not live</p>
-<p>一個變數定義之後，在使用之前就是 live，最後一次使用後變成 dead</p>
-<h2 id="p8">p8</h2>
-<p>r6 最上面的 assignment 是 dead code，不影響程式結果</p>
-<h2 id="p10">p10</h2>
-<p>DEF set : LHS variables</p>
-<p>USE set : 在 BB 有用但在 BB 中沒有被重新定義</p>
-<h2 id="p12">p12</h2>
-<p>|A|<br>
-/ <br>
-B C</p>
-<p>out{A} = in{B} U in{C}</p>
-<p>IN = USE (用到但沒有重新定義) + (OUT - DEF) (扣掉被重新定義的)</p>
-<h2 id="p28">p28</h2>
-<p>any path: union<br>
-all path: intersaction</p>
-<h2 id="p30">p30</h2>
-<p>只要有一條可以過來就是 reach<br>
-兩邊都有到的是 avaliable</p>
+  <h1 id="vrf">VRF</h1>
+<p>企業網路需要隔離各種應用程式類型，使資料流量保持獨立。可以採用 Cisco 虛擬路由與轉送 (Virtual Routing and Forwarding, VRF)，VRF 讓單一實體的路由器扮演多個路由器的腳色。這些虛擬路由器的邏輯各自獨立，並擁有各自的路由表。</p>
+<h2 id="設定">設定</h2>
+<p><code>ip vrf {vrf-name}</code></p>
+<p><code>ip vrf forwarding {vrf-name}</code>：介面或子介面的子命令，用來指派介面或子介面給 VRF 執行個體</p>
+<p><code>router ospf {process-id} vrf {vrf-name}</code></p>
+<h2 id="檢驗">檢驗</h2>
+<p><code>show ip vrf</code></p>
+<p><code>show ip route vrf {vrf-name}</code></p>
+<p><code>ping vrf {vrf-name} {destination-ip}</code></p>
 
 </div>
 

@@ -11,7 +11,7 @@
 
     <title>
         
-          kaiiiz/note
+          Packet Switching - kaiiiz/note
         
     </title>
 
@@ -159,30 +159,52 @@ ga('send', 'pageview');
 </div>
 
 <div class="book-post">
-  <h1 id="data-flow-analysis">Data-Flow Analysis</h1>
-<p>知道程式中的某個時間點，我想要的資訊是什麼</p>
-<h2 id="p7">p7</h2>
-<p>y 這個變數已經被定義了，待會要使用他</p>
-<p>看每個 bb y 在使用前沒有被重新定義 &gt;&gt; live</p>
-<p>如果被重新定義，離開 bb &gt;&gt; not live</p>
-<p>一個變數定義之後，在使用之前就是 live，最後一次使用後變成 dead</p>
-<h2 id="p8">p8</h2>
-<p>r6 最上面的 assignment 是 dead code，不影響程式結果</p>
-<h2 id="p10">p10</h2>
-<p>DEF set : LHS variables</p>
-<p>USE set : 在 BB 有用但在 BB 中沒有被重新定義</p>
-<h2 id="p12">p12</h2>
-<p>|A|<br>
-/ <br>
-B C</p>
-<p>out{A} = in{B} U in{C}</p>
-<p>IN = USE (用到但沒有重新定義) + (OUT - DEF) (扣掉被重新定義的)</p>
-<h2 id="p28">p28</h2>
-<p>any path: union<br>
-all path: intersaction</p>
-<h2 id="p30">p30</h2>
-<p>只要有一條可以過來就是 reach<br>
-兩邊都有到的是 avaliable</p>
+  <h1 id="packet-switching">Packet Switching</h1>
+<p>多數路由器會將功能分為三個不同層面</p>
+<ul>
+<li>管理層：與設備管理有關。如利用 ssh 透過其中一條 vty 連到設備</li>
+<li>控制層：與封包轉送決策有關。如遶送協定的運作</li>
+<li>資料層：與通過路由器傳送資料有關。如使用者的資料流從 PC 轉送到不同 Web Server</li>
+</ul>
+<p>控制層與資料層會直接影響到路由器傳送封包的速率</p>
+<p>Cisco 路由器支援以下三種封包交換模式：</p>
+<ol>
+<li>程序交換 (Process Switching)</li>
+<li>快速交換 (Fast Switching)</li>
+<li>Cisco快速轉送 (Cisco Express Forwarding, CEF)</li>
+</ol>
+<h2 id="程序交換">程序交換</h2>
+<p>路由器遶送封包時，會移除 L2 標頭，檢查 L3 的位址，決定如何轉送封包後，重寫 L2 標頭 (可能修改目的地的 MAC Address、計算新的 CRC)，將封包往合適的介面轉送出去。</p>
+<p><img src="2019-07-12-00-18-25.png" alt="路由器的 CPU 直接參與封包交換的決策"></p>
+<p>關閉快速交換，使用程序交換：<code>no ip route-cache</code></p>
+<h2 id="快速交換">快速交換</h2>
+<p>採用資料層所維護的一種<strong>快速快取(fast cache)</strong>。包含不同資料流量如何轉送的資訊，相同資料流的後續封包可以根據這些資訊進行轉送，降低 CPU 使用率。</p>
+<p><img src="2019-07-12-00-22-31.png" alt></p>
+<p><code>ip route-cache</code></p>
+<h2 id="cisco-快速轉送">Cisco 快速轉送</h2>
+<p>CEF 在資料層維護兩種資料表：</p>
+<ul>
+<li>轉送訊息資料庫 (Forwarding Information Base，FIB)
+<ul>
+<li>維護 L3 的轉送資訊</li>
+</ul>
+</li>
+<li>相鄰表 (Adjacency table)
+<ul>
+<li>維護 FIB 列舉的下一站之 L2 轉送資訊</li>
+</ul>
+</li>
+</ul>
+<p>轉送資訊來自 Routing table 與 ARP table</p>
+<blockquote>
+<p>不同於快速交換，CEF 不需要資料流的第一個封包經過程序交換，整個資料流即可在資料層被轉送</p>
+</blockquote>
+<p><img src="2019-07-12-00-24-31.png" alt></p>
+<p><code>ip route-cache cef</code></p>
+<p>檢驗：</p>
+<p><code>show ip interface {interface-id}</code></p>
+<p><code>show ip cef</code>，顯示 FIB 的內容 (‘attached’：路由器的直連網路，‘receive’：路由器介面上的一個IP)</p>
+<p><code>show adjacency [ detail ]</code>，顯示 FIB 中關於如何到達特定相鄰鄰居的資訊</p>
 
 </div>
 

@@ -18,3 +18,5 @@
     * [Packet Switching](/note/network-associate/layer3/packet-switching)
     * [PBR](/note/network-associate/layer3/pbr)
     * [VRF](/note/network-associate/layer3/vrf)
+  * HA
+    * [Layer 2 HA](/note/network-associate/ha/l2ha)

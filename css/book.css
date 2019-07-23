@@ -145,6 +145,8 @@ img {
     display: block;
     margin-left: auto;
     margin-right: auto; }
+  .book-post iframe {
+    width: 100%; }
   .book-post figure.highlight {
     margin: 24px 0;
     padding: 0;

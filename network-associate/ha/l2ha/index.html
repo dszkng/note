@@ -11,7 +11,7 @@
 
     <title>
         
-          kaiiiz/note
+          Layer 2 HA - kaiiiz/note
         
     </title>
 
@@ -177,52 +177,108 @@ ga('send', 'pageview');
 </div>
 
 <div class="book-post">
-  <h1 id="vlan">VLAN</h1>
-<h2 id="區域網路">區域網路?</h2>
-<p><mark>區域網路中的所有網路設備都在同樣的廣播領域中</mark>，也就是說當這些設備送出一個廣播封包時，在廣播領域中的其他設備也都會收到這個廣播。</p>
-<h2 id="虛擬區域網路">虛擬區域網路</h2>
-<p>如果沒有 VLAN，Switch 就會將它所有的介面視為相同的廣播網域。有了 VLAN 後，就能將特定的介面設定在同一個廣播領域中，這時在同一個 Switch 就會有多個廣播領域產生。</p>
-<p><img src="2019-04-30-23-33-51.png" alt></p>
-<h2 id="trunk-link">Trunk link</h2>
-<p>現在考慮一個問題：如果要在不同 Switch 中用相同的 VLAN 怎麼辦？在兩個 Switch 相連的 Interface 上要設定什麼 VLAN？</p>
-<p>為了解決這個問題，便需要使用 Trunk link。目前主流的網路傳輸標準有 Cisco 制定的 ISL，及 IEEE 802.1Q。<mark>這些標準的原理是透過在傳送的訊框中加上 VLAN 標頭 (包含VLAN ID)</mark>，讓 Trunk 接收端的 Switch 能夠知道訊框是來自哪個 VLAN，這時接收端的 Switch 就能將訊框轉送到相應的 VLAN 中。</p>
-<p><img src="2019-04-30-23-41-25.png" alt></p>
-<h3 id="isl-inter-switch-link">ISL (Inter-Switch Link)</h3>
-<p>ISL 將原始的乙太網路訊框完整的封裝在 ISL 標頭和標尾之間，<strong>不會修改原始的乙太網路訊框</strong>，DA 與 SA 分別是傳送端和接收端 Switch 的 MAC Address。</p>
-<p><img src="2019-04-30-23-46-30.png" alt></p>
-<h3 id="ieee-802-1q">IEEE 802.1Q</h3>
-<p><strong>將額外的 4 個位元組的 VLAN 標頭插入到原始訊框的標頭中</strong>。和 ISL 不同的地方在於，802.1Q 修改過的訊框仍保有和原始訊框相同的 MAC Address。</p>
-<p>由於標頭變長的緣故，封裝時會強制乙太網路訊框標尾的原始訊框檢查碼(FCS, Frame Check Sequence)必須根據整個訊框的內容來重新計算。</p>
-<p><img src="2019-04-30-23-48-37.png" alt></p>
-<h3 id="isl-vs-802-1q">ISL vs 802.1Q</h3>
-<ol>
-<li>皆可設定 4094 個 VLAN (2<sup>12</sup> - 兩個保留值(0, 4095))
+  <h1 id="layer-2-ha">Layer 2 HA</h1>
+<h2 id="etherchannel">EtherChannel</h2>
+<p>使多台交換器扮演一台邏輯交換器</p>
+<h3 id="典型備援網路設計">典型備援網路設計</h3>
+<p>STP 會將某些備援鏈路進入 Blocking 模式，以防止迴圈。雖然這樣的網路保有備援性質，但並非啟用了所有的備援鏈路來轉送流量</p>
+<p><img src="2019-07-23-14-07-53.png" alt></p>
+<blockquote>
+<p>成對的交換器雖然提供彼此交換的備援性，可是<mark>僅在分散層與核心層才有</mark>，成對的存取層交換器彼此並未提供備援。</p>
+</blockquote>
+<p>獨立的存取層交換器間通常沒有直連的鏈路存在，因此每一台存取層交換器應該要替終端使用者支援不同的 VLAN</p>
+<h3 id="存取層邏輯交換器">存取層邏輯交換器</h3>
+<p>將兩台備援的實體交換器變成一台邏輯的交換器。將數條備援鏈路組成一個 EtherChannel，擺脫 STP 防止迴圈與封鎖鏈路的依賴</p>
+<p><img src="2019-07-23-14-45-17.png" alt></p>
+<p>一台邏輯存取層交換器也允許使用單一的 VLAN 來支援使用者</p>
+<h3 id="分散層邏輯交換器">分散層邏輯交換器</h3>
+<p>網路架構已經簡化成兩台邏輯交換器，中間使用一條 EtherChannel 連接，所有鏈路都可以同時使用，即使有一條以上的鏈路失敗，還有其他的 EtherChannel 可以提供服務</p>
+<p><img src="2019-07-23-14-48-10.png" alt></p>
+<h3 id="核心層邏輯交換器">核心層邏輯交換器</h3>
+<p><img src="2019-07-23-14-53-46.png" alt="Before"></p>
+<p><img src="2019-07-23-14-54-01.png" alt="After"></p>
+<h3 id="建立邏輯交換器">建立邏輯交換器</h3>
+<h4 id="stackwise">StackWise</h4>
+<p>為了建立邏輯交換器，每個實體交換器必須採用特殊的堆疊線來連接彼此。<mark>每台交換器支援兩個堆疊埠</mark>，以「菊鍊」的方式一台連接著一台，最後一台將這個「鍊子」圍起來。菊鍊最多可以將 9 台實體交換器連結成一個封閉環狀</p>
+<p><img src="2019-07-23-14-58-27.png" alt></p>
 <ul>
-<li>VLAN ID 1 ~ 1005: 標準範圍</li>
-<li>VLAN ID &gt; 1005: 延伸範圍</li>
+<li>個別交換器加入或抽離，不會破壞交換器之間的路徑，換句話說，改變了堆疊也不會中斷連線</li>
+<li>當形成堆疊時，每個交換器仍維持著交換功能，但僅有一台交換器會成為堆疊主機並執行所有的管理功能，當主機故障時，其他的交換器才會接替其角色</li>
+</ul>
+<h4 id="虛擬交換系統">虛擬交換系統</h4>
+<p>Cisco 的機箱式交換器包含多個交換模組的插槽，可以設定兩個一樣的機箱來擔任一台邏輯交換器，其中一個機箱的監控模組負責控制邏輯交換器的運作，該系統稱為「虛擬交換系統」(Virtual Switching System, VSS)，通常簡稱為「VSS配對」</p>
+<p>為了建立邏輯交換器，兩個機箱必須透過設定為<mark>虛擬交換器鏈路(VSL)</mark>的多重介面連接在一起</p>
+<p><img src="2019-07-23-15-12-10.png" alt></p>
+<h2 id="備援交換器監控模組">備援交換器監控模組</h2>
+<p>在某些交換器平台中，可以在同一個機箱中安裝兩個監控模組(supervise module)。最先啟動的監控模組成為 active 角色，另一個則為 standby 角色，以防 active 監控模組出現問題。</p>
+<ul>
+<li>active 模組永遠都是啟動的狀態、完全的初始化，並具備所有功能。所有交換功能都是由 active 監控模組提供。</li>
+<li>standby 模組可以啟動，<mark>但是只能初始化到某種程度</mark>，active 故障時，standby 將初始化其他功能，並接手 active 的角色</li>
+</ul>
+<h3 id="備援模式">備援模式</h3>
+<p><img src="2019-07-23-15-31-30.png" alt></p>
+<p>備援模式決定了這兩個監控模組如何交握與同步資訊，也決定了 standby 的準備就緒程度。standby 準備就緒程度越高，所需的初始化和故障切換時間就越快：</p>
+<ul>
+<li>路由處理器備援 (RPR, Router Processor Redundency)
+<ul>
+<li>備援模組沒有完全啟動與初始化</li>
+<li>active 故障時，standby 需重啟其他所有模組，然後初始化所有監控模組</li>
 </ul>
 </li>
-<li>皆可針對不同 VLAN 支援獨立的 <strong>擴展樹通信協定</strong> (<a href="/NCTU-Coursenote/network-associate/layer2/stp">STP</a>)
+<li>增強型路由處理器備援 (RPR+, RPR Plus)
 <ul>
-<li>不同 VLAN 在 Switch 間的溝通可以走不同路徑，最大化網路的使用</li>
+<li>備援模組已經啟動</li>
+<li>允許監控模組和路由引擎進行初始化，但尚未啟用 L2 與 L3 功能</li>
+<li>active 故障時，無須重啟其他交換器模組，standby 模組就能完成初始化，讓交換埠保持原來的狀態</li>
 </ul>
 </li>
-<li><mark>IEEE 802.1Q 支援 <strong>原生VLAN</strong> (native VLAN)</mark>
+<li>有狀態故障切換 (SSO, Stateful Switchover)
 <ul>
-<li>預設，802.1Q 在每個 Trunking 上定義了一個原生 VLAN (VLAN 1)，在原生 VLAN 傳送的訓框 <strong>不會</strong> 被加入 802.1Q 的標頭</li>
-<li>這時會有兩種情形，Trunk 另一端的 Switch：
-<ol>
-<li>支援 802.1Q：當收到一個沒有 VLAN 標頭的訊框時，就知道這個是原生 VLAN 的訊框，於是就將訊框往指定的 VLAN 轉送 (當然首先兩個 Switch 間必須先協商哪個 VLAN 才是原生 VLAN)</li>
-<li>不支援 802.1Q：因為沒有加上 VLAN 標頭，所以 Switch 仍然可以辨識這個訊框</li>
-</ol>
-</li>
-<li>原生 VLAN 的功能就是要讓 Switch 至少可以在一個 VLAN 裡傳送訊框</li>
+<li>備援模組完全啟動與初始化</li>
+<li>startup config 與 running config 在監控模組之間同步</li>
+<li>兩者都維護 L2 的資訊</li>
 </ul>
 </li>
-</ol>
-<h2 id="ip-subnet-與-vlan">IP Subnet 與 VLAN</h2>
-<p><mark>在同一個 VLAN 的設備最好在相同的 Subnet 下</mark>，如果一個 VLAN 有包含多個 Subnet，表示不同 Subnet 間可以不用上 Router 或 Firewall 就可以進行溝通，可能會有安全性的疑慮，除此之外也會造成更多廣播的流量。</p>
-<p><img src="2019-05-01-00-18-20.png" alt="不同 Subnet 下還是一定要上 Router"></p>
+</ul>
+<table>
+<thead>
+<tr>
+<th>備援模式</th>
+<th>故障切換時間</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RPR</td>
+<td>&gt;2min</td>
+</tr>
+<tr>
+<td>RPR+</td>
+<td>&gt;30s</td>
+</tr>
+<tr>
+<td>SSO</td>
+<td>&gt;1s</td>
+</tr>
+</tbody>
+</table>
+<h3 id="設定">設定</h3>
+<p><code>redundancy</code> &gt; <code>mode {rpr | rpr-plus | sso}</code></p>
+<ul>
+<li>首次設定，必須在兩個監控模組上輸入上述指令。</li>
+<li>備援模式啟用後，只須在 active 監控模組上設定，standby 會自動同步組態</li>
+</ul>
+<p>檢驗：</p>
+<p><code>show redundancy status</code></p>
+<p>設定同步資訊</p>
+<p><code>redundancy</code> &gt; <code>main-cpu</code> &gt; <code>auto-sync {startup-config | config-register | bootvar}</code></p>
+<p>恢復預設值：<code>auto-sync standard</code></p>
+<h3 id="不間斷轉送">不間斷轉送</h3>
+<p>使用 SSO 時，可以啟用另一項備援功能：<mark>不間斷轉送(NSF, Non-Stop Forwarding)</mark>。</p>
+<p>不間斷轉送是一種互動方法，旨在切換監控模組後快速重建路徑資訊資料庫(RIB)，RIB 用於產生供 CEF 使用的轉送訊息資料庫(FIB)，然後 FIB 被下載到能夠執行 Cisco 快速轉送 (CEF) 的所有交換器模組或硬體中。(詳參：<a href="/note/network-associate/layer3/packet-switching/#cisco-%E5%BF%AB%E9%80%9F%E8%BD%89%E9%80%81">CEF</a>)</p>
+<p>路由器可以使用 NSF 來獲得其他支援 NSF 鄰居的協助。<mark>鄰居將路徑資訊提供給 standby 模組，不必等待路徑收斂與重建 FIB，使得路由表可以快速建立。</mark></p>
+<p>常見的路由協定都支援 NSF：</p>
+<p><img src="2019-07-23-15-45-28.png" alt></p>
 
 </div>
 

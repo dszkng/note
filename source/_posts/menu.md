@@ -20,3 +20,4 @@
     * [VRF](/note/network-associate/layer3/vrf)
   * HA
     * [Layer 2 HA](/note/network-associate/ha/l2ha)
+    * [Layer 3 HA](/note/network-associate/ha/l3ha)

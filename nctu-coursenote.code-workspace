@@ -5,7 +5,7 @@
 		}
 	],
 	"settings": {
-		"pasteImage.path": "${projectRoot}/source/_posts/network-associate/ha/l2ha",
+		"pasteImage.path": "${projectRoot}/source/_posts/network-associate/ha/l3ha",
 		"pasteImage.insertPattern": "${imageSyntaxPrefix}${imageFileName}${imageSyntaxSuffix}",
 		"editor.minimap.enabled": false,
 	}
